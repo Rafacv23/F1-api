@@ -14,7 +14,10 @@ export default function Page() {
           <SiGoogledocs />
           <span>Docs</span>
         </Link>
-        <Link href="/docs" className="flex gap-2 items-center text-blue-500">
+        <Link
+          href="https://github.com/Rafacv23/F1-api"
+          className="flex gap-2 items-center text-blue-500"
+        >
           <FaGithub />
           <span>Github</span>
         </Link>
