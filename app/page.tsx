@@ -10,13 +10,16 @@ export default function Page() {
         Your free F1 API. Ready for development.
       </p>
       <section className="flex gap-4">
-        <Link href="/docs" className="flex gap-2 items-center text-blue-500">
+        <Link
+          href="/docs"
+          className="flex gap-2 items-center hover:text-blue-500 hover:transition-colors"
+        >
           <SiGoogledocs />
           <span>Docs</span>
         </Link>
         <Link
           href="https://github.com/Rafacv23/F1-api"
-          className="flex gap-2 items-center text-blue-500"
+          className="flex gap-2 items-center hover:text-blue-500 hover:transition-colors"
         >
           <FaGithub />
           <span>Github</span>
