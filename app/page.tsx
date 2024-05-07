@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button"
+
 export default async function Page() {
-  return <main>Hello</main>
+  return <Button>Hello</Button>
 }
