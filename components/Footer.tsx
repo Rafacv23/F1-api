@@ -47,7 +47,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="https://ninjapath.vercel.app/portfolio"
                   rel="noreferrer"
                   target="_blank"
@@ -55,7 +55,7 @@ export default function Footer() {
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                 >
                   <MdOutlineWebAsset />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
