@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/constants"
 
 export default function Terms() {
   return (
-    <main className="max-w-3xl mx-auto p-6">
+    <main className="max-w-3xl mx-auto p-6 md:h-screen flex flex-col justify-center items-center">
       <h1 className="text-3xl font-bold mb-4">Terms & Conditions</h1>
       <p>
         {SITE_NAME} is an experimental web service that provides a historical
