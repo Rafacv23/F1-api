@@ -8,7 +8,10 @@ export default function Footer() {
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="text-teal-600 dark:text-teal-300">F1 Connect</div>
+            <div className="text-teal-600 dark:text-teal-300 flex gap-2 items-center">
+              <img src="/logo.avif" width={60} />
+              F1 Connect
+            </div>
 
             <p className="mt-4 max-w-xs text-gray-500 dark:text-gray-400">
               F1 Connect Api. Your free API, ready for development.
