@@ -9,7 +9,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="text-teal-600 dark:text-teal-300 flex gap-2 items-center">
-              <img src="/logo.avif" width={60} />
+              <img
+                src="/logo.avif"
+                width={60}
+                alt="f1 connect logo"
+                loading="lazy"
+              />
               F1 Connect
             </div>
 
