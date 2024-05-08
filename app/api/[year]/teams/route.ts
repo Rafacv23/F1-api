@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server"
 import { client } from "@/app/lib/turso.js"
+import { SITE_NAME } from "@/lib/constants"
 
 export async function GET(request: Request, context: any) {
   const { year } = context.params
+  const limit = 30
 
   const sql = `
     SELECT DISTINCT Teams.*
@@ -32,6 +34,11 @@ export async function GET(request: Request, context: any) {
   })
 
   return NextResponse.json({
+    api: SITE_NAME,
+    url: request.url,
+    limit: limit,
+    total: processedData.length,
+    season: year,
     teams: processedData,
   })
 }
