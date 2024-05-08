@@ -1,6 +1,7 @@
 import React from "react"
 import { SITE_NAME } from "@/lib/constants"
 import TermsList from "@/components/TermList"
+import Link from "next/link"
 
 export default function Terms() {
   return (
@@ -13,6 +14,11 @@ export default function Terms() {
       <p>By using this API, you agree to the following terms and conditions:</p>
       <h2 className="text-xl font-bold mb-2 mt-4">Terms Of Use</h2>
       <TermsList />
+      <div className="mt-8">
+        <Link href="/" className="text-blue-500 hover:underline">
+          ← Back to Home
+        </Link>
+      </div>
     </main>
   )
 }
