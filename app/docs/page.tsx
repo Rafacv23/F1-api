@@ -9,8 +9,6 @@ import {
 import { SITE_URL } from "@/lib/constants"
 import EndpointsList from "@/components/EndpointsList"
 
-//TODO separar en diferentes componentes y dejar este archivo limpio
-
 export default function Docs() {
   return (
     <main className="max-w-3xl mx-auto p-6">
