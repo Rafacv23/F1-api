@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server"
 import { client } from "@/app/lib/turso.js"
+import { SITE_URL } from "@/lib/constants"
 
 export async function GET(request: Request, context: any) {
   const { teamId } = context.params // Captura el parámetro teamId de la URL
+  const limit = 1
 
   const data = await client.execute({
     sql: "SELECT * FROM Teams WHERE Team_Id = ?",
@@ -23,6 +25,10 @@ export async function GET(request: Request, context: any) {
   })
 
   return NextResponse.json({
+    api: SITE_URL,
+    url: request.url,
+    limit: limit,
+    total: processedData.length,
     team: processedData,
   })
 }

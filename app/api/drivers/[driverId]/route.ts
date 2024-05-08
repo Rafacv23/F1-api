@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server"
 import { client } from "@/app/lib/turso.js"
+import { SITE_URL } from "@/lib/constants"
 
 export async function GET(request: Request, context: any) {
   const { driverId } = context.params // Captura el parámetro driverId de la URL
+  const sql = "SELECT * FROM Drivers WHERE Driver_Id = ? LIMIT ?"
+  const limit = 1
 
   const data = await client.execute({
-    sql: "SELECT * FROM Drivers WHERE Driver_Id = ?",
-    args: [driverId],
+    sql: sql,
+    args: [driverId, limit],
   })
 
   // Procesamos los datos
@@ -24,6 +27,10 @@ export async function GET(request: Request, context: any) {
   })
 
   return NextResponse.json({
+    api: SITE_URL,
+    url: request.url,
+    limit: limit,
+    total: processedData.length,
     driver: processedData,
   })
 }

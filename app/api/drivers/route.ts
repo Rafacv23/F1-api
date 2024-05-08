@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server"
 import { client } from "@/app/lib/turso.js"
+import { SITE_URL } from "@/lib/constants"
 
-export async function GET() {
-  const data = await client.execute("SELECT * FROM drivers")
+export async function GET(request: Request) {
+  const limit = 30
+  const sql = "SELECT * FROM drivers LIMIT ?"
+  const data = await client.execute({ sql: sql, args: [limit] })
 
   // Procesamos los datos
   const processedData = data.rows.map((row) => {
@@ -19,6 +22,10 @@ export async function GET() {
   })
 
   return NextResponse.json({
+    api: SITE_URL,
+    url: request.url,
+    limit: limit,
+    total: processedData.length,
     drivers: processedData,
   })
 }
