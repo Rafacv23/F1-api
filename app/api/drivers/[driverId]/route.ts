@@ -34,7 +34,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json({
       api: SITE_URL,
-      url: request.url,
+      // url: request.url,
       limit: limit,
       total: processedData.length,
       driver: processedData,
