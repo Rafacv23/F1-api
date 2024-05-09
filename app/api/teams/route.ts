@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
 
-export async function getServerSideProps(request: Request) {
+export async function GET(request: Request) {
   try {
     const queryParams = new URL(request.url).searchParams
     const limit = queryParams.get("limit") || 30
