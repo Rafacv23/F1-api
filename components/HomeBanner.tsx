@@ -6,7 +6,7 @@ import { SiGoogledocs } from "react-icons/si"
 export default function HomeBanner() {
   return (
     <>
-      <img src="/logo.avif" width={200} />
+      <img src="/logo.avif" width={200} alt="F1 Connect Api Logo" />
       <section className=" text-white ">
         <div className="mx-auto max-w-screen-xl px-4 lg:flex lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
