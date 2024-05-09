@@ -12,7 +12,6 @@ export default function Terms() {
         record of motor racing data for non-commercial purposes.
       </p>
       <p>By using this API, you agree to the following terms and conditions:</p>
-      <h2 className="text-xl font-bold mb-2 mt-4">Terms Of Use</h2>
       <TermsList />
       <div className="mt-8">
         <Link href="/" className="text-blue-500 hover:underline">
