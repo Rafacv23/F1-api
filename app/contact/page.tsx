@@ -1,4 +1,11 @@
 import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 export default function ContactPage() {
   return (
@@ -11,50 +18,56 @@ export default function ContactPage() {
             Reach out to us using one of the following methods:
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="bg-gray-800 rounded-lg shadow-md p-4">
-              <h2 className="text-xl font-semibold mb-2">Email</h2>
-              <p className="mb-2">
-                Send us an email at{" "}
-                <a
-                  href="mailto:rafacv23@gmail.com"
-                  title="Send us an email"
-                  className="text-blue-500 hover:underline"
-                >
-                  rafacv23@gmail.com
-                </a>{" "}
-                and well get back to you as soon as possible.
-              </p>
-            </div>
-            <div className="bg-gray-800 rounded-lg shadow-md p-4">
-              <h2 className="text-xl font-semibold mb-2">Social Media</h2>
-              <p className="mb-2">
-                Follow us on social media for updates and announcements:
-              </p>
-              <ul className="list-disc ml-6">
-                <li>
-                  <Link
-                    href="https://ninjapath.vercel.app/f1-api-github"
-                    title="F1 connect api github repository"
-                    className="text-blue-500 hover:underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Github
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://ninjapath.vercel.app/linkedin"
-                    title="Rafa Canosa Linkedin"
-                    className="text-blue-500 hover:underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Linkedin
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <ul className="flex flex-col gap-4">
+              <li className="h-[max-content]">
+                <Card className="w-[350px]">
+                  <CardHeader>
+                    <CardTitle>Email</CardTitle>
+                    <CardDescription>
+                      Send us an email at{" "}
+                      <Link
+                        href="mailto:rafacv23@gmail.com"
+                        title="Send us an email"
+                        className="text-blue-500 hover:underline"
+                      >
+                        rafacv23@gmail.com
+                      </Link>{" "}
+                      and well get back to you as soon as possible.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </li>
+              <li>
+                <Card className="w-[350px]">
+                  <CardHeader>
+                    <CardTitle>Social Media</CardTitle>
+                    <CardDescription>
+                      Follow us on social media for updates and announcements:
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-4">
+                    <Link
+                      href="https://ninjapath.vercel.app/linkedin"
+                      title="Rafa Canosa Linkedin"
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Linkedin
+                    </Link>
+                    <Link
+                      href="https://ninjapath.vercel.app/f1-api-github"
+                      title="F1 connect api github repository"
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Github
+                    </Link>
+                  </CardContent>
+                </Card>
+              </li>
+            </ul>
           </div>
           <div className="mt-8">
             <Link href="/" className="text-blue-500 hover:underline">

@@ -1,12 +1,20 @@
 import React from "react"
 import type { TermType } from "@/lib/definitions"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 const Term: React.FC<TermType> = ({ title, description }) => {
   return (
-    <li>
-      <h2 className="text-xl font-bold mb-2 mt-4">{title}</h2>
-      <p className="mb-2">{description}</p>
-    </li>
+    <Card>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+    </Card>
   )
 }
 
