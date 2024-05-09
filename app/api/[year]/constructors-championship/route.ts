@@ -6,7 +6,8 @@ import { executeQuery } from "@/lib/executeQuery"
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
-    const limit = 20
+    const queryParams = new URL(request.url).searchParams
+    const limit = queryParams.get("limit") || 30
     const sql = `SELECT Constructors_Classifications.*, Teams.*
     FROM Constructors_Classifications
     JOIN Championships ON Constructors_Classifications.Championship_ID = Championships.Championship_ID

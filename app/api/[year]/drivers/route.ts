@@ -5,8 +5,8 @@ import { SITE_URL } from "@/lib/constants"
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
-    const limit = 30
-
+    const queryParams = new URL(request.url).searchParams
+    const limit = queryParams.get("limit") || 30
     const sql = `
       SELECT DISTINCT Drivers.*
       FROM Drivers

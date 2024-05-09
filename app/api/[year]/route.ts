@@ -6,7 +6,7 @@ import { apiNotFound } from "@/lib/utils"
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
-    const limit = 30
+    const limit = 1
     const sql = `SELECT Races.*, Circuits.*
     FROM Races
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID

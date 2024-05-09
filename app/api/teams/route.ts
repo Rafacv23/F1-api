@@ -5,7 +5,8 @@ import { apiNotFound } from "@/lib/utils"
 
 export async function GET(request: Request) {
   try {
-    const limit = 30
+    const queryParams = new URL(request.url).searchParams
+    const limit = queryParams.get("limit") || 30
     const sql = "SELECT * FROM teams LIMIT ?;"
     const data = await executeQuery(sql, [limit])
 
