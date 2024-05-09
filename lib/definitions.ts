@@ -2,6 +2,8 @@ export type EndpointType = {
   url: string
   title: string
   description: string
+  params: string
+  example: number
 }
 
 export type FaqType = {
