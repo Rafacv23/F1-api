@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
+import { apiNotFound } from "@/lib/utils"
 
 export async function GET(request: Request) {
   try {
@@ -10,11 +11,7 @@ export async function GET(request: Request) {
 
     // Verificar si se encontraron datos
     if (data.length === 0) {
-      return NextResponse.json({
-        api: SITE_URL,
-        url: request.url,
-        message: "No teams found.",
-      })
+      return apiNotFound(request, "No teams found.")
     }
 
     // Procesamos los datos
