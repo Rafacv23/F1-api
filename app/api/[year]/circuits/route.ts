@@ -8,7 +8,6 @@ export async function GET(request: Request, context: any) {
   const limit = queryParams.get("limit") || 30
   try {
     const { year } = context.params
-    // const limit = 30
     const sql = `
       SELECT DISTINCT Circuits.*
       FROM Circuits
@@ -47,7 +46,7 @@ export async function GET(request: Request, context: any) {
     return NextResponse.json({
       api: SITE_NAME,
       url: request.url,
-      // limit: limit,
+      limit: limit,
       total: processedData.length,
       season: year,
       circuits: processedData,

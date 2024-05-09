@@ -8,7 +8,6 @@ export async function GET(request: Request, context: any) {
   const limit = queryParams.get("limit") || 30
   try {
     const { year, round } = context.params
-    // const limit = 30
     const sql = `
       SELECT Classifications.*, Races.*, Drivers.*, Teams.*, Circuits.*
       FROM Classifications
@@ -80,7 +79,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json({
       api: SITE_URL,
-      // url: request.url,
+      url: request.url,
       limit: limit,
       total: data.length,
       RaceTable: {

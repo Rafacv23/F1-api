@@ -7,7 +7,6 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 30
   try {
-    // const limit = 30
     const sql = "SELECT * FROM teams LIMIT ?;"
     const data = await executeQuery(sql, [limit])
 
@@ -30,7 +29,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       api: SITE_URL,
-      //url: request.url,
+      url: request.url,
       limit: limit,
       total: processedData.length,
       teams: processedData,

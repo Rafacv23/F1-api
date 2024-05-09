@@ -8,7 +8,6 @@ export async function GET(request: Request, context: any) {
   const limit = queryParams.get("limit") || 30
   try {
     const { year } = context.params
-    // const limit = 30
     const sql = `SELECT Driver_Classifications.*, Drivers.*, Teams.*
     FROM Driver_Classifications
     JOIN Championships ON Driver_Classifications.Championship_ID = Championships.Championship_ID
@@ -62,7 +61,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json({
       api: SITE_NAME,
-      // url: request.url,
+      url: request.url,
       limit: limit,
       total: processedData.length,
       season: year,
