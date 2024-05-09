@@ -1,79 +1,77 @@
-{
-  "endpoints": [
-    {
-      "url": "/api/seasons",
-      "title": "/api/seasons",
-      "description": "Retrieve a list of all F1 Seasons, since the first one (1950) to the latest."
-    },
-    {
-      "url": "/api/drivers",
-      "title": "/api/drivers",
-      "description": "Retrieve a list of all the Drivers who at least race one F1 race."
-    },
-    {
-      "url": "/api/teams",
-      "title": "/api/teams",
-      "description": "Retrieve a list of all the teams that participated in Formula 1 races."
-    },
-    {
-      "url": "/api/circuits",
-      "title": "/api/circuits",
-      "description": "Retrieve the list of all the F1 circuits."
-    },
-    {
-      "url": "/api/drivers/alonso",
-      "title": "/api/drivers/[driverId]",
-      "description": "Retrieve a driver using his id."
-    },
-    {
-      "url": "/api/teams/ferrari",
-      "title": "/api/teams/[teamId]",
-      "description": "Retrieve a team using his id."
-    },
-    {
-      "url": "/api/2024",
-      "title": "/api/[year]",
-      "description": "Retrieve the races of the specific year."
-    },
-    {
-      "url": "/api/2024/1",
-      "title": "/api/[year]/[round]",
-      "description": "Retrieve the information of a race based on the year and the round. "
-    },
-    {
-      "url": "/api/2024/1/qualy",
-      "title": "/api/[year]/[round]/qualy",
-      "description": "Retrieve the information of the qualy of a race based on the year and the round."
-    },
-    {
-      "url": "/api/2024/1/race",
-      "title": "/api/[year]/[round]/race",
-      "description": "Retrieve the information of a specific race based on the year and the round."
-    },
-    {
-      "url": "/api/2024/circuits",
-      "title": "/api/[year]/circuits",
-      "description": "Retrieve a list of the circuits of the specific F1 season."
-    },
-    {
-      "url": "/api/2024/drivers",
-      "title": "/api/[year]/drivers",
-      "description": "Retrieve a list of the F1 drivers of the specific season."
-    },
-    {
-      "url": "/api/2024/teams",
-      "title": "/api/[year]/teams",
-      "description": "Retrieve a list of the F1 Teams of the specific season."
-    },
-    {
-      "url": "/api/2024/drivers-championship",
-      "title": "/api/[year]/drivers-championship",
-      "description": "Retrieve the drivers championship standing of the specific season."
-    },
-    {
-      "url": "/api/2024/constructors-championship",
-      "title": "/api/[year]/constructors-championship",
-      "description": "Retrieve the constructors championship standing of the specific season."
-    }
-  ]
-}
+[
+  {
+    "url": "/api/seasons",
+    "title": "/api/seasons",
+    "description": "Retrieve a list of all F1 Seasons, since the first one (1950) to the latest."
+  },
+  {
+    "url": "/api/drivers",
+    "title": "/api/drivers",
+    "description": "Retrieve a list of all the Drivers who at least race one F1 race."
+  },
+  {
+    "url": "/api/teams",
+    "title": "/api/teams",
+    "description": "Retrieve a list of all the teams that participated in Formula 1 races."
+  },
+  {
+    "url": "/api/circuits",
+    "title": "/api/circuits",
+    "description": "Retrieve the list of all the F1 circuits."
+  },
+  {
+    "url": "/api/drivers/alonso",
+    "title": "/api/drivers/[driverId]",
+    "description": "Retrieve a driver using his id."
+  },
+  {
+    "url": "/api/teams/ferrari",
+    "title": "/api/teams/[teamId]",
+    "description": "Retrieve a team using his id."
+  },
+  {
+    "url": "/api/2024",
+    "title": "/api/[year]",
+    "description": "Retrieve the races of the specific year."
+  },
+  {
+    "url": "/api/2024/1",
+    "title": "/api/[year]/[round]",
+    "description": "Retrieve the information of a race based on the year and the round. "
+  },
+  {
+    "url": "/api/2024/1/qualy",
+    "title": "/api/[year]/[round]/qualy",
+    "description": "Retrieve the information of the qualy of a race based on the year and the round."
+  },
+  {
+    "url": "/api/2024/1/race",
+    "title": "/api/[year]/[round]/race",
+    "description": "Retrieve the information of a specific race based on the year and the round."
+  },
+  {
+    "url": "/api/2024/circuits",
+    "title": "/api/[year]/circuits",
+    "description": "Retrieve a list of the circuits of the specific F1 season."
+  },
+  {
+    "url": "/api/2024/drivers",
+    "title": "/api/[year]/drivers",
+    "description": "Retrieve a list of the F1 drivers of the specific season."
+  },
+  {
+    "url": "/api/2024/teams",
+    "title": "/api/[year]/teams",
+    "description": "Retrieve a list of the F1 Teams of the specific season."
+  },
+  {
+    "url": "/api/2024/drivers-championship",
+    "title": "/api/[year]/drivers-championship",
+    "description": "Retrieve the drivers championship standing of the specific season."
+  },
+  {
+    "url": "/api/2024/constructors-championship",
+    "title": "/api/[year]/constructors-championship",
+    "description": "Retrieve the constructors championship standing of the specific season."
+  }
+]
