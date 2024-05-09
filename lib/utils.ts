@@ -17,3 +17,9 @@ export function apiNotFound(request: Request, message: string) {
     message: message,
   })
 }
+
+export function copyUrlToClipboard(url: string) {
+  const urlActual = window.location.href
+  const destination = urlActual + "/" + url
+  navigator.clipboard.writeText(destination)
+}
