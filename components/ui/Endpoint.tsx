@@ -1,13 +1,8 @@
 import Link from "next/link"
 import React from "react"
+import type { EndpointType } from "@/lib/definitions"
 
-interface FaqProps {
-  url: string
-  title: string
-  description: string
-}
-
-const Faq: React.FC<FaqProps> = ({ url, title, description }) => {
+const Faq: React.FC<EndpointType> = ({ url, title, description }) => {
   return (
     <li key={title} className="mb-2">
       <Link href={url} title={title} className="text-blue-500">

@@ -1,11 +1,7 @@
 import React from "react"
+import type { TermType } from "@/lib/definitions"
 
-interface FaqProps {
-  title: string
-  description: string
-}
-
-const Faq: React.FC<FaqProps> = ({ title, description }) => {
+const Faq: React.FC<TermType> = ({ title, description }) => {
   return (
     <li>
       <h2 className="text-xl font-bold mb-2 mt-4">{title}</h2>
