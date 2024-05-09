@@ -9,12 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import Link from "next/link"
 
 export default function EndpointsList() {
   return (
     <>
       <h2 className="text-2xl font-bold mb-2">Endpoints</h2>
-      <Table>
+      <Table className="mb-8">
         <TableCaption>A list of all the API endpoints.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -30,7 +31,15 @@ export default function EndpointsList() {
             <TableRow key={endpoint.url}>
               <TableCell className="font-medium">{endpoint.title}</TableCell>
               <TableCell>{endpoint.description}</TableCell>
-              <TableCell>{endpoint.url}</TableCell>
+              <TableCell>
+                <Link
+                  href={endpoint.url}
+                  title={endpoint.url}
+                  className="hover:text-blue-500 hover:transition-colors hover:underline"
+                >
+                  {endpoint.url}
+                </Link>
+              </TableCell>
               <TableCell>{endpoint.params}</TableCell>
               <TableCell>{endpoint.default}</TableCell>
             </TableRow>
