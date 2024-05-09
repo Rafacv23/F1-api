@@ -2,24 +2,20 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { Client } from "@libsql/client"
-import { client } from "@/app/lib/turso"
 
 export async function GET(request: Request) {
   try {
     const queryParams = new URL(request.url).searchParams
     const limit = queryParams.get("limit") || 30
     const sql = "SELECT * FROM teams LIMIT ?;"
-    const data = await client.execute({ sql: sql, args: [limit] })
-
-    const sentence = data.rows
+    const data = await executeQuery(sql, [limit])
 
     // Verificar si se encontraron datos
-    if (sentence.length === 0) {
+    if (data.length === 0) {
       return apiNotFound(request, "No teams found.")
     }
     // Procesamos los datos
-    const processedData = sentence.map((row) => {
+    const processedData = data.map((row) => {
       return {
         Team_ID: row[0],
         Team_Name: row[1],
@@ -33,7 +29,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       api: SITE_URL,
-      url: request.url,
       limit: limit,
       total: processedData.length,
       teams: processedData,
