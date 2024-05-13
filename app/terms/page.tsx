@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function Terms() {
   return (
-    <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
+    <main className="max-w-3xl mx-auto p-6 md:h-screen flex flex-col justify-center items-center">
       <section className="mb-8">
         <h1 className="text-3xl font-bold mb-4">Terms & Conditions</h1>
         <p>
