@@ -86,6 +86,16 @@ export default function Footer() {
                     Docs{" "}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/demo"
+                    title="Live demo"
+                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  >
+                    {" "}
+                    Demo{" "}
+                  </Link>
+                </li>
               </ul>
             </div>
 
