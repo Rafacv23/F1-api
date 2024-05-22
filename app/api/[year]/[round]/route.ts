@@ -27,11 +27,11 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Race_ID: row[0],
-        Championship_ID: row[1],
-        Race_Name: row[2],
-        Race_Date: row[3],
-        Circuit: {
+        raceId: row[0],
+        championshipId: row[1],
+        raceName: row[2],
+        raceDate: row[3],
+        circuit: {
           // Circuit info
           circuitId: row[10],
           circuitName: row[11],
@@ -46,11 +46,11 @@ export async function GET(request: Request, context: any) {
           fastestLapYear: row[20],
           url: row[21],
         },
-        Laps: row[5],
-        Winner_ID: row[6],
-        Team_Winner_ID: row[7],
-        URL: row[8],
-        Round: row[9],
+        laps: row[5],
+        winnerId: row[6],
+        teamWinnerId: row[7],
+        url: row[8],
+        round: row[9],
       }
     })
 
