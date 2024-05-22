@@ -56,18 +56,18 @@ export default async function Round({
                     </TableCell>
                     <TableCell>
                       <a
-                        href={`/demo/drivers/${result.Driver.driverId}`}
-                        title={`${result.Driver.name} ${result.Driver.surname}`}
+                        href={`/demo/drivers/${result.driver.driverId}`}
+                        title={`${result.driver.name} ${result.driver.surname}`}
                       >
-                        {`${result.Driver.name} ${result.Driver.surname}`}
+                        {`${result.driver.name} ${result.driver.surname}`}
                       </a>
                     </TableCell>
                     <TableCell>
                       <a
-                        href={`/demo/teams/${result.Constructor.constructorId}`}
-                        title={result.Constructor.name}
+                        href={`/demo/teams/${result.team.teamId}`}
+                        title={result.team.teamName}
                       >
-                        {result.Constructor.name}
+                        {result.team.teamName}
                       </a>
                     </TableCell>
                     <TableCell className="text-right">
@@ -77,8 +77,8 @@ export default async function Round({
                     <TableCell className="text-right">{result.time}</TableCell>
                     <TableCell className="text-right">
                       <a
-                        href={result.Driver.url}
-                        title={result.Driver.url}
+                        href={result.driver.url}
+                        title={result.driver.url}
                         target="_blank"
                         rel="noreferrer"
                       >{`wiki`}</a>
