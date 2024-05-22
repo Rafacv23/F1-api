@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 import { Race } from "@/lib/definitions"
 
 export default async function Round({
@@ -14,7 +15,7 @@ export default async function Round({
 }: {
   params: { year: number; round: number }
 }) {
-  const url = `http://localhost:3000/api/${params.year}/${params.round}/qualy`
+  const url = `${SITE_URL_API}${params.year}/${params.round}/qualy`
 
   const res = await fetch(url)
 

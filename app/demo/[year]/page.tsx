@@ -7,11 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 
 import type { Race } from "@/lib/definitions"
 
 export default async function Year({ params }: { params: { year: number } }) {
-  const url = `http://localhost:3000/api/${params.year}`
+  const url = `${SITE_URL_API}${params.year}`
   const res = await fetch(url)
 
   const data = await res.json()

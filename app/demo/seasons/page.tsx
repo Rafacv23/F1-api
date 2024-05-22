@@ -7,10 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 import type { Championship } from "@/lib/definitions"
 
 export default async function Seasons() {
-  const url = `http://localhost:3000/api/seasons`
+  const url = `${SITE_URL_API}/seasons`
 
   const res = await fetch(url)
 

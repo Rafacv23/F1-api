@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 
 export default async function Drivers() {
-  const url = `http://localhost:3000/api/drivers`
+  const url = `${SITE_URL_API}drivers`
 
   const res = await fetch(url)
 

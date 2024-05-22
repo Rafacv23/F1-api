@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 
 import type { Circuit } from "@/lib/definitions"
 
@@ -15,7 +16,7 @@ export default async function Circuits({
 }: {
   params: { circuitId: string }
 }) {
-  const url = `http://localhost:3000/api/circuits/${params.circuitId}`
+  const url = `${SITE_URL_API}circuits/${params.circuitId}`
 
   const res = await fetch(url)
 

@@ -7,13 +7,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 
 import type { Race } from "@/lib/definitions"
-import { title } from "process"
 
 export default async function Demo() {
   const currentYear = new Date().getFullYear()
-  const url = `http://localhost:3000/api/${currentYear}`
+  const url = `${SITE_URL_API}${currentYear}`
 
   interface ApiResponse {
     api: string

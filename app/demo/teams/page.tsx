@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { SITE_URL_API } from "@/lib/constants"
 
 export default async function Teams() {
-  const url = "http://localhost:3000/api/teams"
+  const url = `${SITE_URL_API}teams`
 
   const res = await fetch(url)
 
