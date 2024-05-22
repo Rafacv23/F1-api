@@ -32,6 +32,8 @@ export default async function Demo() {
 
   const data: ApiResponse = await res.json()
 
+  console.log(data)
+
   return (
     <Table>
       <TableCaption>
@@ -62,22 +64,19 @@ export default async function Demo() {
                       {race.raceName}
                     </a>
                   </TableCell>
-                  <TableCell>{race.circuit.country}</TableCell>
+                  <TableCell>{}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">
-                    <a
-                      href={`/demo/drivers/${race.winner.driverId}`}
-                      title={`${race.winner.driverId}`}
-                    >
-                      {`${race.winner.name} ${race.winner.surname}`}
+                    <a href={`/demo/drivers/${race}`} title={`${race.winner}`}>
+                      {`${race.winner} ${race.winner}`}
                     </a>
                   </TableCell>
                   <TableCell className="text-right">
                     <a
-                      href={`/demo/teams/${race.teamWinner.teamId}`}
-                      title={`${race.teamWinner.teamId}`}
+                      href={`/demo/teams/${race.teamWinner}`}
+                      title={`${race.teamWinner}`}
                     >
-                      {`${race.teamWinner.teamName}`}
+                      {`${race.teamWinner}`}
                     </a>
                   </TableCell>
                   <TableCell className="text-right">
