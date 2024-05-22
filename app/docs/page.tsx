@@ -37,7 +37,11 @@ export default function Docs() {
       <p className="mb-6">
         You can check the{" "}
         <strong>
-          <Link href={"/demo"} title="Live demo">
+          <Link
+            href={"/demo"}
+            title="Live demo"
+            className="hover:text-blue-500"
+          >
             Live Demo
           </Link>
         </strong>
