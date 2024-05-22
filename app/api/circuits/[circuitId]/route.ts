@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
+import { executeQuery } from "@/lib/executeQuery"
 
-export async function GET(request: Request) {
-  const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+export async function GET(request: Request, context: any) {
   try {
-    // const limit = 30
-    const sql = `SELECT * FROM Circuits LIMIT ?`
-    const data = await executeQuery(sql, [limit])
+    const { circuitId } = context.params // Captura el parámetro driverId de la URL
+    const sql = "SELECT * FROM Circuits WHERE Circuit_ID = ? LIMIT ?"
+    const limit = 1
+
+    const data = await executeQuery(sql, [circuitId, limit])
 
     if (data.length === 0) {
-      return apiNotFound(request, "No circuits found.")
+      return apiNotFound(
+        request,
+        "No driver found for this id, try with other one."
+      )
     }
 
     // Procesamos los datos

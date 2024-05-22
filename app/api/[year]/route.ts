@@ -6,15 +6,16 @@ import { apiNotFound } from "@/lib/utils"
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
-    const limit = 1
-    const sql = `SELECT Races.*, Circuits.*
+    const limit = 30
+    const sql = `SELECT Races.*, Circuits.*, Drivers.*, Teams.*
     FROM Races
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
     JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
+    JOIN Drivers ON Races.Winner_ID = Drivers.Driver_ID
+    JOIN Teams ON Races.Team_Winner_ID = Teams.Team_ID
     WHERE Championships.Year = ?
     ORDER BY Races.Round ASC
-    LIMIT ?;
-    `
+    LIMIT ?;`
 
     const data = await executeQuery(sql, [year, limit])
 
@@ -42,17 +43,38 @@ export async function GET(request: Request, context: any) {
         url: row[21],
       }
 
+      const driverData = {
+        driverId: row[22],
+        name: row[23],
+        surname: row[24],
+        country: row[25],
+        birthday: row[26],
+        number: row[27],
+        shortName: row[28],
+        url: row[29],
+      }
+
+      const teamData = {
+        teamId: row[30],
+        name: row[31],
+        nationality: row[32],
+        firstAppareance: row[33],
+        constructorsChampionships: row[34],
+        driversChampionships: row[35],
+        url: row[36],
+      }
+
       return {
-        Race_ID: row[0],
-        Championship_ID: row[1],
-        Race_Name: row[2],
-        Race_Date: row[3],
-        Circuit: circuitData,
-        Laps: row[5],
-        Winner_ID: row[6],
-        Team_Winner_ID: row[7],
-        URL: row[8],
-        Round: row[9],
+        raceId: row[0],
+        championshipId: row[1],
+        raceName: row[2],
+        raceDate: row[3],
+        circuit: circuitData,
+        laps: row[5],
+        winner: driverData,
+        teamWinner: teamData,
+        url: row[8],
+        round: row[9],
       }
     })
 

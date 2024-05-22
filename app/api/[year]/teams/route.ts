@@ -29,13 +29,13 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Team_ID: row[0],
-        Team_Name: row[1],
-        Team_Nationality: row[2],
-        First_Appareance: row[3],
-        Constructors_Championships: row[4],
-        Drivers_Championships: row[5],
-        URL: row[6],
+        teamId: row[0],
+        teamName: row[1],
+        country: row[2],
+        firstAppareance: row[3],
+        constructorsChampionships: row[4],
+        driversChampionships: row[5],
+        url: row[6],
       }
     })
 

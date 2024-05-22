@@ -40,7 +40,7 @@ export async function GET(request: Request, context: any) {
           circuitLength: row[14] + "km",
           lapRecord: row[15],
           firstParticipationYear: row[16],
-          numberOfCorners: row[17],
+          corners: row[17],
           fastestLapDriverId: row[18],
           fastestLapTeamId: row[19],
           fastestLapYear: row[20],

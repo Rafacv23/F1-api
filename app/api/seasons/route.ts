@@ -18,10 +18,10 @@ export async function GET(request: Request) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Championship_ID: row[0],
-        Championship_Name: row[1],
-        Url: row[2],
-        Year: row[3],
+        championshipId: row[0],
+        championshipName: row[1],
+        url: row[2],
+        year: row[3],
       }
     })
 
@@ -30,9 +30,7 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       total: processedData.length,
-      ChampionshipTable: {
-        Championships: processedData,
-      },
+      championships: processedData,
     })
   } catch (error) {
     console.log(error)

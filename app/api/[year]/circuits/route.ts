@@ -28,18 +28,18 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Circuit_ID: row[0],
-        Circuit_Name: row[1],
-        Country: row[2],
-        City: row[3],
-        Circuit_Length: row[4],
-        Lap_Record: row[5],
-        First_Participation_Year: row[6],
-        Number_of_Corners: row[7],
-        Fastest_Lap_Driver_ID: row[8],
-        Fastest_Lap_Team_ID: row[9],
-        Fastest_Lap_Year: row[10],
-        Url: row[11],
+        circuitId: row[0],
+        circuitName: row[1],
+        country: row[2],
+        city: row[3],
+        circuitLength: row[4],
+        lapRecord: row[5],
+        firstParticipationYear: row[6],
+        corners: row[7],
+        fastestLapDriverId: row[8],
+        fastestLapTeamId: row[9],
+        fastestLapYear: row[10],
+        url: row[11],
       }
     })
 

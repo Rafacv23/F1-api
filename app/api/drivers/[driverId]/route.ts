@@ -21,14 +21,14 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Driver_ID: row[0],
-        Name: row[1],
-        Surname: row[2],
-        Nationality: row[3],
-        Birthday: row[4],
-        Number: row[5],
-        Short_Name: row[6],
-        URL: row[7],
+        driverId: row[0],
+        name: row[1],
+        surname: row[2],
+        country: row[3],
+        birthday: row[4],
+        number: row[5],
+        shortName: row[6],
+        url: row[7],
       }
     })
 
