@@ -43,7 +43,7 @@ export async function GET(request: Request, context: any) {
       Driver: {
         driverId: row[2],
         number: row[23],
-        teamName: row[19],
+        name: row[19],
         surname: row[20],
         shortName: row[24],
         url: row[25],
@@ -52,7 +52,7 @@ export async function GET(request: Request, context: any) {
       },
       Team: {
         teamId: row[26],
-        name: row[27],
+        teamName: row[27],
         nationality: row[28],
         firstAppareance: row[29],
         constructorsChampionships: row[30],
