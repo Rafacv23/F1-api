@@ -13,7 +13,7 @@ import type { Race } from "@/lib/definitions"
 
 export default async function Demo() {
   const currentYear = new Date().getFullYear()
-  const url = `http://localhost:3000/api/${currentYear}`
+  const url = `${SITE_URL_API}${currentYear}`
 
   interface ApiResponse {
     api: string
