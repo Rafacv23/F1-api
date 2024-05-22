@@ -58,20 +58,10 @@ export default async function Demo() {
                   <TableCell>{race.circuit.country}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">
-                    <a
-                      href={`/demo/drivers/${race.winner.driverId}`}
-                      title={`${race.winner.url}`}
-                    >
-                      {`${race.winner.name} ${race.winner.surname}`}
-                    </a>
+                    {`${race.winner.name} ${race.winner.surname}`}
                   </TableCell>
                   <TableCell className="text-right">
-                    <a
-                      href={`/demo/teams/${race.teamWinner.teamId}`}
-                      title={`${race.teamWinner.teamName}`}
-                    >
-                      {`${race.teamWinner.teamName}`}
-                    </a>
+                    {`${race.teamWinner.teamName}`}
                   </TableCell>
                   <TableCell className="text-right">
                     <a
