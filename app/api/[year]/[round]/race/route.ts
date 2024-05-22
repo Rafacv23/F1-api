@@ -47,7 +47,7 @@ export async function GET(request: Request, context: any) {
       },
       Constructor: {
         constructorId: row[3],
-        name: row[28],
+        teamName: row[28],
         nationality: row[29],
         firstAppareance: row[30],
         constructorsChampionships: row[31],
