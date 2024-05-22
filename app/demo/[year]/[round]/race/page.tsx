@@ -33,14 +33,7 @@ export default async function Round({
           <TableHead>Driver</TableHead>
           <TableHead>Constructor</TableHead>
           <TableHead className="text-right">Points</TableHead>
-          <TableHead className="text-right">
-            <a
-              href={`/demo/${params.year}/${params.round}/qualy`}
-              title="Qualy Reults"
-            >
-              Grid
-            </a>
-          </TableHead>
+          <TableHead className="text-right">Grid</TableHead>
           <TableHead className="text-right">Time</TableHead>
           <TableHead className="text-right">Wiki</TableHead>
         </TableRow>

@@ -8,7 +8,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { SITE_URL_API } from "@/lib/constants"
-import { Race } from "@/lib/definitions"
 
 export default async function Round({
   params,

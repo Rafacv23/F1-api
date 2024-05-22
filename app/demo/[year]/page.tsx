@@ -38,14 +38,7 @@ export default async function Year({ params }: { params: { year: number } }) {
               <TableBody>
                 <TableRow key={race.raceId}>
                   <TableCell className="font-medium">{race.round}</TableCell>
-                  <TableCell>
-                    <a
-                      href={`/demo/${params.year}/${race.round}/race`}
-                      title={race.raceName}
-                    >
-                      {race.raceName}
-                    </a>
-                  </TableCell>
+                  <TableCell>{race.raceName}</TableCell>
                   <TableCell>{race.circuit.country}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">

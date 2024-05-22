@@ -32,8 +32,6 @@ export default async function Demo() {
 
   const data: ApiResponse = await res.json()
 
-  console.log(data)
-
   return (
     <Table>
       <TableCaption>
@@ -56,15 +54,8 @@ export default async function Demo() {
               <TableBody>
                 <TableRow key={race.raceId}>
                   <TableCell className="font-medium">{race.round}</TableCell>
-                  <TableCell>
-                    <a
-                      href={`/demo/${currentYear}/${race.round}/race`}
-                      title={race.raceName}
-                    >
-                      {race.raceName}
-                    </a>
-                  </TableCell>
-                  <TableCell>{}</TableCell>
+                  <TableCell>{race.raceName}</TableCell>
+                  <TableCell>{race.circuit.country}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">
                     <a
