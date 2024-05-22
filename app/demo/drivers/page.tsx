@@ -21,6 +21,8 @@ export default async function Drivers() {
 
   const data = await res.json()
 
+  console.log(data)
+
   return (
     <Table>
       <TableCaption>A list of all F1 Drivers.</TableCaption>

@@ -13,7 +13,7 @@ import type { Race } from "@/lib/definitions"
 
 export default async function Demo() {
   const currentYear = new Date().getFullYear()
-  const url = `${SITE_URL_API}${currentYear}`
+  const url = `http://localhost:3000/api/${currentYear}`
 
   interface ApiResponse {
     api: string
@@ -67,16 +67,19 @@ export default async function Demo() {
                   <TableCell>{}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">
-                    <a href={`/demo/drivers/${race}`} title={`${race.winner}`}>
-                      {`${race.winner} ${race.winner}`}
+                    <a
+                      href={`/demo/drivers/${race.winner.driverId}`}
+                      title={`${race.winner.url}`}
+                    >
+                      {`${race.winner.name} ${race.winner.surname}`}
                     </a>
                   </TableCell>
                   <TableCell className="text-right">
                     <a
-                      href={`/demo/teams/${race.teamWinner}`}
-                      title={`${race.teamWinner}`}
+                      href={`/demo/teams/${race.teamWinner.teamId}`}
+                      title={`${race.teamWinner.teamName}`}
                     >
-                      {`${race.teamWinner}`}
+                      {`${race.teamWinner.teamName}`}
                     </a>
                   </TableCell>
                   <TableCell className="text-right">
