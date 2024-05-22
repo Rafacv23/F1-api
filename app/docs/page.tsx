@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { SITE_URL } from "@/lib/constants"
 import EndpointsList from "@/components/EndpointsList"
+import Link from "next/link"
 
 export default function Docs() {
   return (
@@ -32,6 +33,15 @@ export default function Docs() {
       <p className="mb-6">
         All the data its provided in JSON format and its ready to use. Simply
         fetch {SITE_URL} with the endpoint that you like.
+      </p>
+      <p className="mb-6">
+        You can check the{" "}
+        <strong>
+          <Link href={"/demo"} title="Live demo">
+            Live Demo
+          </Link>
+        </strong>
+        .
       </p>
       <EndpointsList />
     </main>
