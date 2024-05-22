@@ -35,7 +35,7 @@ export async function GET(request: Request, context: any) {
     const processedData = data.map((row) => ({
       position: row[4],
       points: row[8],
-      Driver: {
+      driver: {
         driverId: row[2],
         number: row[24],
         shortName: row[25],
@@ -45,8 +45,8 @@ export async function GET(request: Request, context: any) {
         nationality: row[22],
         birthday: row[23],
       },
-      Constructor: {
-        constructorId: row[3],
+      team: {
+        teamId: row[3],
         teamName: row[28],
         nationality: row[29],
         firstAppareance: row[30],

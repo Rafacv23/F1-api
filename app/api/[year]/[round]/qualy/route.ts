@@ -40,7 +40,7 @@ export async function GET(request: Request, context: any) {
       Q2_Time: row[5],
       Q3_Time: row[6],
       Grid_Position: row[7],
-      Driver: {
+      driver: {
         driverId: row[2],
         number: row[23],
         name: row[19],
@@ -50,7 +50,7 @@ export async function GET(request: Request, context: any) {
         nationality: row[21],
         birthday: row[22],
       },
-      Team: {
+      team: {
         teamId: row[26],
         teamName: row[27],
         nationality: row[28],
