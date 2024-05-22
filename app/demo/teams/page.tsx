@@ -36,12 +36,7 @@ export default async function Teams() {
               <TableBody>
                 <TableRow key={team.teamId}>
                   <TableCell className="font-medium">
-                    <a
-                      href={`/demo/teams/${team.teamId}`}
-                      title={team.teamName}
-                    >
-                      {`${team.teamName}`}
-                    </a>
+                    {`${team.teamName}`}
                   </TableCell>
                   <TableCell className="font-medium">
                     {`${team.country}`}

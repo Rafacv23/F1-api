@@ -41,12 +41,7 @@ export default async function Drivers() {
               <TableBody>
                 <TableRow key={driver.driverId}>
                   <TableCell className="font-medium">
-                    <a
-                      href={`/demo/drivers/${driver.driverId}`}
-                      title={`${driver.name} ${driver.surname}`}
-                    >
-                      {`${driver.name} ${driver.surname}`}
-                    </a>
+                    {`${driver.name} ${driver.surname}`}
                   </TableCell>
                   <TableCell className="font-medium">
                     {`${driver.country}`}

@@ -42,20 +42,10 @@ export default async function Year({ params }: { params: { year: number } }) {
                   <TableCell>{race.circuit.country}</TableCell>
                   <TableCell className="text-right">{race.laps}</TableCell>
                   <TableCell className="text-right">
-                    <a
-                      href={`/demo/drivers/${race.winner.driverId}`}
-                      title={`${race.winner.driverId}`}
-                    >
-                      {`${race.winner.name} ${race.winner.surname}`}
-                    </a>
+                    {`${race.winner.name} ${race.winner.surname}`}
                   </TableCell>
                   <TableCell className="text-right">
-                    <a
-                      href={`/demo/teams/${race.teamWinner.teamId}`}
-                      title={`${race.teamWinner.teamId}`}
-                    >
-                      {`${race.teamWinner.teamName}`}
-                    </a>
+                    {`${race.teamWinner.teamName}`}
                   </TableCell>
                   <TableCell className="text-right">
                     <a
