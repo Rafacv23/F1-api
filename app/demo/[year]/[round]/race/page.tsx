@@ -45,10 +45,10 @@ export default async function Round({
         </TableRow>
       </TableHeader>
       {data
-        ? data.RaceTable.Races.map((race: Race) => (
+        ? data.RaceTable.Races.map((race: any) => (
             <>
               <TableBody key={race.round}>
-                {race.Results.map((result, index) => (
+                {race.Results.map((result: any, index: any) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium">
                       {result.position}
