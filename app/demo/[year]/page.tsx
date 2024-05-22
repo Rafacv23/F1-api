@@ -60,7 +60,7 @@ export default async function Year({ params }: { params: { year: number } }) {
                       href={`/demo/teams/${race.teamWinner.teamId}`}
                       title={`${race.teamWinner.teamId}`}
                     >
-                      {`${race.teamWinner.name}`}
+                      {`${race.teamWinner.teamName}`}
                     </a>
                   </TableCell>
                   <TableCell className="text-right">

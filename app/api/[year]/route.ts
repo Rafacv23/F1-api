@@ -56,7 +56,7 @@ export async function GET(request: Request, context: any) {
 
       const teamData = {
         teamId: row[30],
-        name: row[31],
+        teamName: row[31],
         nationality: row[32],
         firstAppareance: row[33],
         constructorsChampionships: row[34],

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table"
 
 import type { Race } from "@/lib/definitions"
+import { title } from "process"
 
 export default async function Demo() {
   const currentYear = new Date().getFullYear()
@@ -65,7 +66,12 @@ export default async function Demo() {
                     </a>
                   </TableCell>
                   <TableCell className="text-right">
-                    {`${race.teamWinner.name}`}
+                    <a
+                      href={`/demo/teams/${race.teamWinner.teamId}`}
+                      title={`${race.teamWinner.teamId}`}
+                    >
+                      {`${race.teamWinner.teamName}`}
+                    </a>
                   </TableCell>
                   <TableCell className="text-right">
                     <a
