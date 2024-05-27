@@ -3,6 +3,8 @@ import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
 
+export const revalidate = 60
+
 export async function GET(request: Request, context: any) {
   try {
     const { teamId } = context.params // Captura el parámetro teamId de la URL

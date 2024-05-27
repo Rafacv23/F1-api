@@ -3,6 +3,8 @@ import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
 
+export const revalidate = 60
+
 export async function GET(request: Request, context: any) {
   try {
     const { driverId } = context.params // Captura el parámetro driverId de la URL
