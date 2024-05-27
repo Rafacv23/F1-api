@@ -3,6 +3,8 @@ import { SITE_NAME } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
 
+export const revalidate = 0
+
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 30
