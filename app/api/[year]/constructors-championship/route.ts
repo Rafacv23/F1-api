@@ -30,7 +30,7 @@ export async function GET(request: Request, context: any) {
     const processedData = data.map((row) => {
       return {
         classificationId: row[0],
-        ChampionchampionshipId: row[1],
+        championshipId: row[1],
         teamId: row[2],
         points: row[3],
         position: row[4],
