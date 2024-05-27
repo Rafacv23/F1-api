@@ -46,7 +46,7 @@ export async function GET(request: Request, context: any) {
           short_name: row[12],
           url: row[13],
         },
-        Team: {
+        team: {
           // Aquí obtienes la información del equipo
           teamId: row[14],
           name: row[15],
