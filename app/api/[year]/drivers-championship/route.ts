@@ -29,13 +29,13 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Classification_ID: row[0],
-        Championship_ID: row[1],
-        Driver_ID: row[2],
-        Team_ID: row[3],
-        Points: row[4],
-        Position: row[5],
-        Driver: {
+        classificationId: row[0],
+        championshipId: row[1],
+        driverId: row[2],
+        teamId: row[3],
+        points: row[4],
+        position: row[5],
+        driver: {
           // Aquí obtienes la información del piloto
           driverId: row[3],
           name: row[7],

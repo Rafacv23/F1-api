@@ -29,12 +29,12 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       return {
-        Classification_ID: row[0],
-        Championship_ID: row[1],
-        Team_ID: row[2],
-        Points: row[3],
-        Position: row[4],
-        Team: {
+        classificationId: row[0],
+        ChampionchampionshipId: row[1],
+        teamId: row[2],
+        points: row[3],
+        position: row[4],
+        team: {
           // Aquí obtienes la información del equipo
           teamId: row[5],
           name: row[6],
