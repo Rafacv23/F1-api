@@ -30,7 +30,7 @@ export async function GET(request: Request, context: any) {
     if (data.length === 0) {
       return apiNotFound(
         request,
-        "No race results found for this round. Try with other one."
+        "No sprint race results found for this round. Try with other one."
       )
     }
 
