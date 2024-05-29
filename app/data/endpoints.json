@@ -43,7 +43,15 @@
     "url": "/api/2024",
     "title": "/api/[year]",
     "description": "Retrieve the races of the specific year.",
-    "params": "-"
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current",
+    "title": "/api/current",
+    "description": "Retrieve the races of the current year.",
+    "params": "limit",
+    "default": 30
   },
   {
     "url": "/api/2024/1",
@@ -64,6 +72,27 @@
     "description": "Retrieve the information of a specific race based on the year and the round.",
     "params": "limit",
     "default": 30
+  },
+  {
+    "url": "/api/current/last",
+    "title": "/api/current/last",
+    "description": "Retrieve the information of the last race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/results",
+    "title": "/api/current/last/results",
+    "description": "Retrieve the results of the last race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/next",
+    "title": "/api/current/next",
+    "description": "Retrieve the information of the next race of the current year.",
+    "params": "limit",
+    "default": 20
   },
   {
     "url": "/api/2024/circuits",
