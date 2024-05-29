@@ -6,10 +6,10 @@ import { apiNotFound, getDay, getYear } from "@/lib/utils"
 export const revalidate = 60
 
 export async function GET(request: Request) {
+  const year = getYear()
+  const today = getDay()
+  const limit = 1
   try {
-    const year = getYear()
-    const today = getDay()
-    const limit = 1
     const sql = `SELECT Races.*, Circuits.*
     FROM Races
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
@@ -60,7 +60,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       api: SITE_URL,
-      //url: request.url,
+      url: request.url,
       limit: limit,
       total: processedData.length,
       race: processedData,

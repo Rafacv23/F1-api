@@ -7,9 +7,9 @@ import { getYear } from "@/lib/utils"
 export const revalidate = 60
 
 export async function GET(request: Request) {
+  const year = getYear()
+  const limit = 30
   try {
-    const year = getYear()
-    const limit = 30
     const sql = `SELECT Races.*, Circuits.*, Drivers.*, Teams.*
     FROM Races
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
