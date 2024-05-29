@@ -22,3 +22,8 @@ export function copyUrlToClipboard(url: string) {
   const destination = SITE_URL + "/" + url
   navigator.clipboard.writeText(destination)
 }
+
+export function getYear(): number {
+  const year = new Date().getFullYear()
+  return year
+}
