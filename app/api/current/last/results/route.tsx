@@ -10,8 +10,8 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 20
   try {
-    const year = new Date().getFullYear()
-    const today = new Date().toISOString().split("T")[0]
+    const year = getYear()
+    const today = getDay()
 
     const sql = `
       SELECT Results.*, Races.*, Drivers.*, Teams.*, Circuits.*

@@ -6,8 +6,8 @@ import { apiNotFound, getDay, getYear } from "@/lib/utils"
 export const revalidate = 60
 
 export async function GET(request: Request) {
-  const year = new Date().getFullYear()
-  const today = new Date().toISOString().split("T")[0]
+  const year = getYear()
+  const today = getDay()
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 1
   try {
