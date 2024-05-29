@@ -1,4 +1,4 @@
 {
-  "announce": "Added new endpoints to retrieve data of the current season.",
+  "announce": "Added new endpoints to retrieve data of the current season. Check more in the docs",
   "link": "http://f1-connect-api.vercel.app/api/current"
 }
