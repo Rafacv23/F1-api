@@ -27,3 +27,8 @@ export function getYear(): number {
   const year = new Date().getFullYear()
   return year
 }
+
+export function getDay(): string {
+  const today = new Date().toISOString().split("T")[0] // Fecha actual en formato YYYY-MM-DD
+  return today
+}
