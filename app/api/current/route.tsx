@@ -7,7 +7,7 @@ import { getYear } from "@/lib/utils"
 export const revalidate = 60
 
 export async function GET(request: Request) {
-  const year = getYear()
+  const year = new Date().getFullYear()
   const limit = 30
   try {
     const sql = `SELECT Races.*, Circuits.*, Drivers.*, Teams.*

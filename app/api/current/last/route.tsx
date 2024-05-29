@@ -6,8 +6,8 @@ import { apiNotFound, getDay, getYear } from "@/lib/utils"
 export const revalidate = 60
 
 export async function GET(request: Request) {
-  const year = getYear()
-  const today = getDay()
+  const year = new Date().getFullYear()
+  const today = new Date().toISOString().split("T")[0]
   const limit = 1
   try {
     const sql = `SELECT Races.*, Circuits.*
