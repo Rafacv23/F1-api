@@ -8,7 +8,8 @@ export const revalidate = 60
 
 export async function GET(request: Request) {
   const year = new Date().getFullYear()
-  const limit = 30
+  const queryParams = new URL(request.url).searchParams
+  const limit = queryParams.get("limit") || 30
   try {
     const sql = `SELECT Races.*, Circuits.*, Drivers.*, Teams.*
     FROM Races
