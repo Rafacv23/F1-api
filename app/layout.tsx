@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description: SITE_META_DESCRIPTION,
   creator: "Rafa Canosa",
   metadataBase: new URL(SITE_URL),
+  verification: { google: "8Ssu9wyMqGLnOHp01rAbY2QJAKTU4XkqTq9OPShpeOc" },
   alternates: {
     canonical: "/",
   },
