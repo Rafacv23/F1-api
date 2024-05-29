@@ -5,7 +5,7 @@ import { apiNotFound, getDay, getYear } from "@/lib/utils"
 
 export const revalidate = 60
 
-export async function GET(request: Request, context: any) {
+export async function GET(request: Request) {
   try {
     const year = getYear()
     const today = getDay()
