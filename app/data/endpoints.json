@@ -60,6 +60,20 @@
     "params": "-"
   },
   {
+    "url": "/api/2024/5/sprint/qualy",
+    "title": "/api/[year]/[round]/sprint/qualy",
+    "description": "Retrieve the information of a sprint qualy (if exist) based on the year and the round. ",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/2024/5/sprint/race",
+    "title": "/api/[year]/[round]/sprint/race",
+    "description": "Retrieve the information of a sprint race (if exist) based on the year and the round.",
+    "params": "limit",
+    "default": 20
+  },
+  {
     "url": "/api/2024/1/qualy",
     "title": "/api/[year]/[round]/qualy",
     "description": "Retrieve the information of the qualy of a race based on the year and the round.",
@@ -84,6 +98,20 @@
     "url": "/api/current/last/results",
     "title": "/api/current/last/results",
     "description": "Retrieve the results of the last race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/sprint/qualy",
+    "title": "/api/current/last/sprint/qualy",
+    "description": "Retrieve the information of a sprint qualy (if exist) based on the year and the round. ",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/sprint/race",
+    "title": "/api/current/last/sprint/race",
+    "description": "Retrieve the information of a sprint race (if exist) based on the year and the round.",
     "params": "limit",
     "default": 20
   },
