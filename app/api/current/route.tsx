@@ -15,8 +15,8 @@ export async function GET(request: Request) {
     FROM Races
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
     JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-    JOIN Drivers ON Races.Winner_ID = Drivers.Driver_ID
-    JOIN Teams ON Races.Team_Winner_ID = Teams.Team_ID
+    LEFT JOIN Drivers ON Races.Winner_ID = Drivers.Driver_ID
+    LEFT JOIN Teams ON Races.Team_Winner_ID = Teams.Team_ID
     WHERE Championships.Year = ?
     ORDER BY Races.Round ASC
     LIMIT ?;`
