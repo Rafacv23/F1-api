@@ -47,26 +47,30 @@ export async function GET(request: Request) {
         url: row[21],
       }
 
-      const driverData = {
-        driverId: row[22],
-        name: row[23],
-        surname: row[24],
-        country: row[25],
-        birthday: row[26],
-        number: row[27],
-        shortName: row[28],
-        url: row[29],
-      }
+      const driverData = row[22]
+        ? {
+            driverId: row[22],
+            name: row[23],
+            surname: row[24],
+            country: row[25],
+            birthday: row[26],
+            number: row[27],
+            shortName: row[28],
+            url: row[29],
+          }
+        : "Not raced"
 
-      const teamData = {
-        teamId: row[30],
-        teamName: row[31],
-        nationality: row[32],
-        firstAppareance: row[33],
-        constructorsChampionships: row[34],
-        driversChampionships: row[35],
-        url: row[36],
-      }
+      const teamData = row[30]
+        ? {
+            teamId: row[30],
+            teamName: row[31],
+            nationality: row[32],
+            firstAppareance: row[33],
+            constructorsChampionships: row[34],
+            driversChampionships: row[35],
+            url: row[36],
+          }
+        : "Not raced"
 
       return {
         raceId: row[0],
@@ -75,8 +79,8 @@ export async function GET(request: Request) {
         raceDate: row[3],
         circuit: circuitData,
         laps: row[5],
-        winner: driverData,
-        teamWinner: teamData,
+        winner: driverData ? driverData : "Not raced",
+        teamWinner: teamData ? teamData : "Not raced",
         url: row[8],
         round: row[9],
       }
