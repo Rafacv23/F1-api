@@ -74,6 +74,27 @@
     "default": 20
   },
   {
+    "url": "/api/2024/1/fp1",
+    "title": "/api/[year]/[round]/fp1",
+    "description": "Retrieve the information of the free practice 1 of a race based on the year and the round.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/2024/1/fp2",
+    "title": "/api/[year]/[round]/fp2",
+    "description": "Retrieve the information of the free practice 2 of a race based on the year and the round.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/2024/1/fp3",
+    "title": "/api/[year]/[round]/fp3",
+    "description": "Retrieve the information of the free practice 3 of a race based on the year and the round.",
+    "params": "limit",
+    "default": 30
+  },
+  {
     "url": "/api/2024/1/qualy",
     "title": "/api/[year]/[round]/qualy",
     "description": "Retrieve the information of the qualy of a race based on the year and the round.",
