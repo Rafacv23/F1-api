@@ -33,39 +33,39 @@ export async function GET(request: Request) {
     // Procesamos los datos
     const processedData = data.map((row) => {
       const circuitData = {
-        circuitId: row[10],
-        circuitName: row[11],
-        country: row[12],
-        city: row[13],
-        circuitLength: row[14] + "km",
-        lapRecord: row[15],
-        firstParticipationYear: row[16],
-        numberOfCorners: row[17],
-        fastestLapDriverId: row[18],
-        fastestLapTeamId: row[19],
-        fastestLapYear: row[20],
-        url: row[21],
+        circuitId: row[23],
+        circuitName: row[24],
+        country: row[25],
+        city: row[26],
+        circuitLength: row[27] + "km",
+        lapRecord: row[28],
+        firstParticipationYear: row[29],
+        numberOfCorners: row[30],
+        fastestLapDriverId: row[31],
+        fastestLapTeamId: row[32],
+        fastestLapYear: row[33],
+        url: row[34],
       }
 
       const driverData = {
-        driverId: row[22],
-        name: row[23],
-        surname: row[24],
-        country: row[25],
-        birthday: row[26],
-        number: row[27],
-        shortName: row[28],
-        url: row[29],
+        driverId: row[35],
+        name: row[36],
+        surname: row[37],
+        country: row[38],
+        birthday: row[39],
+        number: row[40],
+        shortName: row[41],
+        url: row[42],
       }
 
       const teamData = {
-        teamId: row[30],
-        teamName: row[31],
-        nationality: row[32],
-        firstAppareance: row[33],
-        constructorsChampionships: row[34],
-        driversChampionships: row[35],
-        url: row[36],
+        teamId: row[43],
+        teamName: row[44],
+        nationality: row[45],
+        firstAppareance: row[46],
+        constructorsChampionships: row[47],
+        driversChampionships: row[48],
+        url: row[49],
       }
 
       return {
@@ -73,12 +73,13 @@ export async function GET(request: Request) {
         championshipId: row[1],
         raceName: row[2],
         raceDate: row[3],
-        circuit: circuitData,
+        raceTime: row[10],
+        round: row[9],
+        url: row[8],
         laps: row[5],
+        circuit: circuitData,
         winner: driverData,
         teamWinner: teamData,
-        url: row[8],
-        round: row[9],
       }
     })
 

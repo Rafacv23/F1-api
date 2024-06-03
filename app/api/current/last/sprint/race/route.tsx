@@ -11,6 +11,7 @@ export async function GET(request: Request, context: any) {
   try {
     const year = getYear()
     const today = getDay()
+    //const today = 5 testing endpoint
 
     const sql = `
     SELECT Sprint_Race.*, Results.*, Drivers.*, Teams.*, Circuits.*
@@ -41,23 +42,23 @@ export async function GET(request: Request, context: any) {
       position: row[4],
       points: row[9],
       driver: {
-        driverId: row[20],
-        number: row[25],
-        shortName: row[26],
-        url: row[27],
-        name: row[21],
-        surname: row[22],
-        nationality: row[23],
-        birthday: row[24],
+        driverId: row[19],
+        number: row[24],
+        shortName: row[25],
+        url: row[26],
+        name: row[20],
+        surname: row[21],
+        nationality: row[22],
+        birthday: row[23],
       },
       team: {
-        teamId: row[28],
-        teamName: row[29],
-        nationality: row[30],
-        firstAppareance: row[31],
-        constructorsChampionships: row[32],
-        driversChampionships: row[33],
-        url: row[34],
+        teamId: row[27],
+        teamName: row[28],
+        nationality: row[29],
+        firstAppareance: row[30],
+        constructorsChampionships: row[31],
+        driversChampionships: row[32],
+        url: row[33],
       },
       grid: row[5],
       laps: row[6],
@@ -69,18 +70,18 @@ export async function GET(request: Request, context: any) {
 
     // Obtener los datos del circuito
     const circuitData = {
-      circuitId: data[0][35],
-      circuitName: data[0][36],
-      country: data[0][37],
-      city: data[0][38],
-      circuitLength: data[0][39] + "km",
-      lapRecord: data[0][40],
-      firstParticipationYear: data[0][41],
-      corners: data[0][42],
-      fastestLapDriverId: data[0][43],
-      fastestLapTeamId: data[0][44],
-      fastestLapYear: data[0][45],
-      url: data[0][46],
+      circuitId: data[0][34],
+      circuitName: data[0][35],
+      country: data[0][36],
+      city: data[0][37],
+      circuitLength: data[0][38] + "km",
+      lapRecord: data[0][39],
+      firstParticipationYear: data[0][40],
+      corners: data[0][41],
+      fastestLapDriverId: data[0][42],
+      fastestLapTeamId: data[0][43],
+      fastestLapYear: data[0][44],
+      url: data[0][45],
     }
 
     return NextResponse.json({

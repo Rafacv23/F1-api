@@ -12,7 +12,8 @@ export async function GET(request: Request, context: any) {
   const limit = queryParams.get("limit") || 20
   try {
     const year = getYear()
-    const today = getDay()
+    //const today = getDay()
+    const today = 5
     const sql = `
       SELECT Sprint_Qualy.*, Races.*, Drivers.*, Teams.*, Circuits.*
       FROM Sprint_Qualy
@@ -47,39 +48,39 @@ export async function GET(request: Request, context: any) {
       Grid_Position: row[7],
       driver: {
         driverId: row[2],
-        number: row[23],
-        name: row[19],
-        surname: row[20],
-        shortName: row[24],
-        url: row[25],
-        nationality: row[21],
-        birthday: row[22],
+        number: row[36],
+        name: row[32],
+        surname: row[33],
+        shortName: row[37],
+        url: row[38],
+        nationality: row[34],
+        birthday: row[35],
       },
       team: {
-        teamId: row[26],
-        teamName: row[27],
-        nationality: row[28],
-        firstAppareance: row[29],
-        constructorsChampionships: row[30],
-        driversChampionships: row[31],
-        url: row[32],
+        teamId: row[39],
+        teamName: row[40],
+        nationality: row[41],
+        firstAppareance: row[42],
+        constructorsChampionships: row[43],
+        driversChampionships: row[44],
+        url: row[45],
       },
     }))
 
     // Obtener el circuito correspondiente a la carrera
     const circuitData = {
-      circuitId: data[0][33],
-      circuitName: data[0][34],
-      country: data[0][35],
-      city: data[0][36],
-      circuitLength: data[0][37] + "km",
-      lapRecord: data[0][38],
-      firstParticipationYear: data[0][39],
-      corners: data[0][40],
-      fastestLapDriverId: data[0][41],
-      fastestLapTeamId: data[0][42],
-      fastestLapYear: data[0][43],
-      url: data[0][44],
+      circuitId: data[0][46],
+      circuitName: data[0][47],
+      country: data[0][48],
+      city: data[0][49],
+      circuitLength: data[0][50] + "km",
+      lapRecord: data[0][51],
+      firstParticipationYear: data[0][52],
+      corners: data[0][53],
+      fastestLapDriverId: data[0][54],
+      fastestLapTeamId: data[0][55],
+      fastestLapYear: data[0][56],
+      url: data[0][57],
     }
 
     return NextResponse.json({
@@ -89,13 +90,14 @@ export async function GET(request: Request, context: any) {
       total: data.length,
       RaceTable: {
         season: year,
+        raceId: data[0][1],
+        url: data[0][16],
+        raceName: data[0][10],
         Races: [
           {
-            season: year,
-            url: data[0][16],
-            raceName: data[0][10],
             Circuit: circuitData,
-            date: data[0][11],
+            date: data[0][23],
+            time: data[0][29],
             Results: processedData,
           },
         ],
