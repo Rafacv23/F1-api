@@ -93,7 +93,7 @@ export async function GET(request: Request, context: any) {
             url: data[0][13],
             raceName: data[0][7],
             Circuit: circuitData,
-            FP1_Results: processedData,
+            FP2_Results: processedData,
           },
         ],
       },
