@@ -12,8 +12,8 @@ export async function GET(request: Request, context: any) {
   const limit = queryParams.get("limit") || 20
   try {
     const year = getYear()
-    //const today = getDay()
-    const today = 5
+    const today = getDay()
+    //const today = 5 testing endpoint
     const sql = `
       SELECT Sprint_Qualy.*, Races.*, Drivers.*, Teams.*, Circuits.*
       FROM Sprint_Qualy
