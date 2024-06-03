@@ -116,8 +116,8 @@
     "default": 20
   },
   {
-    "url": "/api/current/last/results",
-    "title": "/api/current/last/results",
+    "url": "/api/current/last/race",
+    "title": "/api/current/last/race",
     "description": "Retrieve the results of the last race of the current year.",
     "params": "limit",
     "default": 20
