@@ -1,4 +1,4 @@
 {
-  "announce": "Added new endpoints to retrieve data of the current season. Check more in the docs",
-  "link": "http://f1-connect-api.vercel.app/api/current"
+  "announce": "Added new endpoints to retrieve data of the free practices sessions. Check more in the docs",
+  "link": "http://f1-connect-api.vercel.app/api/2024/1/fp1"
 }
