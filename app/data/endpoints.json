@@ -116,6 +116,34 @@
     "default": 20
   },
   {
+    "url": "/api/current/last/fp1",
+    "title": "/api/current/last/fp1",
+    "description": "Retrieve the information of the last free practice 1 of a race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/fp2",
+    "title": "/api/current/last/fp2",
+    "description": "Retrieve the information of the last free practice 2 of a race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/fp3",
+    "title": "/api/current/last/fp3",
+    "description": "Retrieve the information of the last free practice 3 of a race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
+    "url": "/api/current/last/qualy",
+    "title": "/api/current/last/qualy",
+    "description": "Retrieve the information of the last qualy of a race of the current year.",
+    "params": "limit",
+    "default": 20
+  },
+  {
     "url": "/api/current/last/race",
     "title": "/api/current/last/race",
     "description": "Retrieve the results of the last race of the current year.",
