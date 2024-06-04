@@ -21,6 +21,13 @@
     "default": 30
   },
   {
+    "url": "/api/teams/mercedes",
+    "title": "/api/teams/[teamId]",
+    "description": "Retrieve a list of a team based on his id.",
+    "params": "limit",
+    "default": 1
+  },
+  {
     "url": "/api/circuits",
     "title": "/api/circuits",
     "description": "Retrieve the list of all the F1 circuits.",
@@ -61,6 +68,27 @@
     "default": 30
   },
   {
+    "url": "/api/2024/teams",
+    "title": "/api/[year]/teams",
+    "description": "Retrieve the list of the teams of the specific year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/2024/teams/aston_martin",
+    "title": "/api/[year]/teams/[teamId]",
+    "description": "Retrieve the data of a team based on his id and the specific year.",
+    "params": "limit",
+    "default": 1
+  },
+  {
+    "url": "/api/2024/teams/ferrari/drivers",
+    "title": "/api/[year]/teams/[teamId]/drivers",
+    "description": "Retrieve a list of all the drivers of a team based on the teamId and the specific year.",
+    "params": "limit",
+    "default": 4
+  },
+  {
     "url": "/api/current",
     "title": "/api/current",
     "description": "Retrieve the races of the current year.",
@@ -80,6 +108,27 @@
     "description": "Retrieve the results of the specific driver of the current year.",
     "params": "limit",
     "default": 30
+  },
+  {
+    "url": "/api/current/teams",
+    "title": "/api/current/teams",
+    "description": "Retrieve the list of the teams of the current year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current/teams/aston_martin",
+    "title": "/api/current/teams/[teamId]",
+    "description": "Retrieve the data of a team based on his id and the current year.",
+    "params": "limit",
+    "default": 1
+  },
+  {
+    "url": "/api/current/teams/ferrari/drivers",
+    "title": "/api/current/teams/[teamId]/drivers",
+    "description": "Retrieve a list of all the drivers of a team based on the teamId and the current year.",
+    "params": "limit",
+    "default": 4
   },
   {
     "url": "/api/2024/1",
