@@ -96,6 +96,16 @@ export default function Footer() {
                     Demo{" "}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/referrals"
+                    title="Referrals"
+                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  >
+                    {" "}
+                    Referrals{" "}
+                  </Link>
+                </li>
               </ul>
             </div>
 
