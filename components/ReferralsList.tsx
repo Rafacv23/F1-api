@@ -32,6 +32,7 @@ export default function ReferralsList() {
             <TableRow key={referral.url}>
               <TableCell>
                 <img
+                  className="rounded"
                   src={referral.img}
                   alt={`${referral.name} logo`}
                   width={100}
