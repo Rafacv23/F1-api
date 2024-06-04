@@ -12,21 +12,25 @@ export async function GET(request: Request, context: any) {
     const year = getYear()
     const { driverId } = context.params // Captura los parámetros year y driverId de la URL
     const sql = `
-      SELECT Results.*, Races.*, Drivers.*, Teams.*, Circuits.*
-      FROM Results
-      JOIN Races ON Results.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      JOIN Drivers ON Results.Driver_ID = Drivers.Driver_ID
-      JOIN Teams ON Results.Team_ID = Teams.Team_ID
-      JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-      WHERE Championships.Year = ? AND Drivers.Driver_ID = ?
-      ORDER BY Races.Round ASC
-      LIMIT ?;
+    SELECT Results.*, Races.*, Drivers.*, Teams.*, Circuits.*,         
+    Sprint_Race.Finishing_Position AS Sprint_Finishing_Position,
+    Sprint_Race.Points_Obtained AS Sprint_Points_Obtained,
+    Sprint_Race.Race_Time AS Sprint_Race_Time_Final,
+    Sprint_Race.Grid_Position AS Sprint_Grid_Position,
+    Sprint_Race.Retired AS Sprint_Retired
+    FROM Results
+    JOIN Races ON Results.Race_ID = Races.Race_ID
+    LEFT JOIN Sprint_Race ON Results.Race_ID = Sprint_Race.Race_ID AND Results.Driver_ID = Sprint_Race.Driver_ID
+    JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
+    JOIN Drivers ON Results.Driver_ID = Drivers.Driver_ID
+    JOIN Teams ON Results.Team_ID = Teams.Team_ID
+    JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
+    WHERE Championships.Year = ? AND Drivers.Driver_ID = ?
+    ORDER BY Races.Round ASC
+    LIMIT ?;
     `
 
     const data = await executeQuery(sql, [year, driverId, limit])
-
-    console.log(data)
 
     if (data.length === 0) {
       return apiNotFound(
@@ -80,6 +84,16 @@ export async function GET(request: Request, context: any) {
           pointsObtained: row.Points_Obtained,
           retired: row.Retired,
         },
+        sprintResult:
+          row.Sprint_Finishing_Position != null
+            ? {
+                finishingPosition: row.Sprint_Finishing_Position,
+                gridPosition: row.Sprint_Grid_Position,
+                raceTime: row.Sprint_Race_Time_Final,
+                pointsObtained: row.Sprint_Points_Obtained,
+                retired: row.Sprint_Retired,
+              }
+            : null,
         championship: {
           championshipId: row.Championship_ID,
           year: row.Year,
