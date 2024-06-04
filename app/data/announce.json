@@ -1,4 +1,4 @@
 {
-  "announce": "Added new endpoints to retrieve data of the free practices sessions. Check more in the docs",
-  "link": "http://f1-connect-api.vercel.app/api/2024/1/fp1"
+  "announce": "Added new endpoints to retrieve results of a specific driver. Check more in the docs",
+  "link": "http://f1-connect-api.vercel.app/api/2024/drivers/norris"
 }
