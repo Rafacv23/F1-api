@@ -47,9 +47,37 @@
     "default": 30
   },
   {
+    "url": "/api/2024/drivers",
+    "title": "/api/[year]/drivers",
+    "description": "Retrieve the list of the drivers of the specific year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/2024/drivers/norris",
+    "title": "/api/[year]/drivers/[driverId]",
+    "description": "Retrieve the results of the specific driver of the specific year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
     "url": "/api/current",
     "title": "/api/current",
     "description": "Retrieve the races of the current year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current/drivers",
+    "title": "/api/current/drivers",
+    "description": "Retrieve the list of the drivers of the current year.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current/drivers/norris",
+    "title": "/api/current/drivers/[driverId]",
+    "description": "Retrieve the results of the specific driver of the current year.",
     "params": "limit",
     "default": 30
   },
@@ -203,6 +231,20 @@
     "url": "/api/2024/constructors-championship",
     "title": "/api/[year]/constructors-championship",
     "description": "Retrieve the constructors championship standing of the specific season.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current/drivers-championship",
+    "title": "/api/current/drivers-championship",
+    "description": "Retrieve the drivers championship standing of the current season.",
+    "params": "limit",
+    "default": 30
+  },
+  {
+    "url": "/api/current/constructors-championship",
+    "title": "/api/current/constructors-championship",
+    "description": "Retrieve the constructors championship standing of the current season.",
     "params": "limit",
     "default": 30
   }
