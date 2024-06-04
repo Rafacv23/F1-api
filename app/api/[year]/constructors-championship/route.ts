@@ -36,15 +36,16 @@ export async function GET(request: Request, context: any) {
         teamId: row[2],
         points: row[3],
         position: row[4],
+        wins: row[5],
         team: {
           // Aquí obtienes la información del equipo
-          teamId: row[5],
-          name: row[6],
-          nationality: row[7],
-          firstAppareance: row[8],
-          constructorsChampionships: row[9],
-          driversChampionships: row[10],
-          url: row[11],
+          teamId: row[6],
+          name: row[7],
+          nationality: row[8],
+          firstAppareance: row[9],
+          constructorsChampionships: row[10],
+          driversChampionships: row[11],
+          url: row[12],
         },
       }
     })
