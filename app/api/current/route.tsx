@@ -72,8 +72,36 @@ export async function GET(request: Request) {
         raceId: row[0],
         championshipId: row[1],
         raceName: row[2],
-        raceDate: row[3],
-        raceTime: row[10],
+        schedule: {
+          race: {
+            date: row[3],
+            time: row[10],
+          },
+          qualy: {
+            date: row[11],
+            time: row[17],
+          },
+          fp1: {
+            date: row[12],
+            time: row[18],
+          },
+          fp2: {
+            date: row[13],
+            time: row[19],
+          },
+          fp3: {
+            date: row[14],
+            time: row[20],
+          },
+          sprintQualy: {
+            date: row[15],
+            time: row[21],
+          },
+          sprintRace: {
+            date: row[16],
+            time: row[22],
+          },
+        },
         round: row[9],
         url: row[8],
         laps: row[5],
