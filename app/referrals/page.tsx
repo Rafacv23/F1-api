@@ -11,7 +11,7 @@ import ReferralsList from "@/components/ReferralsList"
 
 export default function Referral() {
   return (
-    <main className="max-w-3xl mx-auto p-6">
+    <main className="max-w-3xl mx-auto p-6 h-screen">
       <h1 className="text-3xl font-bold mb-4">Referrals</h1>
       <Breadcrumb>
         <BreadcrumbList>
