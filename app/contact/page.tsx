@@ -67,6 +67,27 @@ export default function ContactPage() {
                   </CardContent>
                 </Card>
               </li>
+              <li>
+                <Card className="w-[350px]">
+                  <CardHeader>
+                    <CardTitle>Support me</CardTitle>
+                    <CardDescription>
+                      If you like my work, you can buy me a coffee.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-4">
+                    <Link
+                      href="https://ko-fi.com/rafacanosa"
+                      title="Buy me a coffee"
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Ko-fi
+                    </Link>
+                  </CardContent>
+                </Card>
+              </li>
             </ul>
           </div>
           <div className="mt-8">
