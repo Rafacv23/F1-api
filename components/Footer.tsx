@@ -101,16 +101,6 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/demo"
-                    title="Live demo"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {" "}
-                    Demo{" "}
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/referrals"
                     title="Referrals"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
