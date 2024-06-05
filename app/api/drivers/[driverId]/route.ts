@@ -2,8 +2,18 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
+import {
+  BaseApiResponse,
+  Driver,
+  Drivers,
+  ProcessedDrivers,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResonse extends BaseApiResponse {
+  driver: ProcessedDrivers
+}
 
 export async function GET(request: Request, context: any) {
   try {
@@ -11,7 +21,7 @@ export async function GET(request: Request, context: any) {
     const sql = "SELECT * FROM Drivers WHERE Driver_Id = ? LIMIT ?"
     const limit = 1
 
-    const data = await executeQuery(sql, [driverId, limit])
+    const data: Drivers = await executeQuery(sql, [driverId, limit])
 
     if (data.length === 0) {
       return apiNotFound(
@@ -21,26 +31,28 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Driver) => {
       return {
-        driverId: row[0],
-        name: row[1],
-        surname: row[2],
-        country: row[3],
-        birthday: row[4],
-        number: row[5],
-        shortName: row[6],
-        url: row[7],
+        driverId: row.Driver_ID,
+        name: row.Name,
+        surname: row.Surname,
+        country: row.Nationality,
+        birthday: row.Birthday,
+        number: row.Number,
+        shortName: row.Short_Name,
+        url: row.URL,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResonse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
       driver: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

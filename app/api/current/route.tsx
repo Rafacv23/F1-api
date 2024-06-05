@@ -3,8 +3,21 @@ import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
 import { getYear } from "@/lib/utils"
+import {
+  BaseApiResponse,
+  ProcessedCircuit,
+  ProcessedDriver,
+  ProcessedTeam,
+  Race,
+  Races,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  races: Race[]
+}
 
 export async function GET(request: Request) {
   const year = getYear()
@@ -31,94 +44,85 @@ export async function GET(request: Request) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
-      const circuitData = {
-        circuitId: row[23],
-        circuitName: row[24],
-        country: row[25],
-        city: row[26],
-        circuitLength: row[27] + "km",
-        lapRecord: row[28],
-        firstParticipationYear: row[29],
-        numberOfCorners: row[30],
-        fastestLapDriverId: row[31],
-        fastestLapTeamId: row[32],
-        fastestLapYear: row[33],
-        url: row[34],
+    const processedData: Races = data.map((row: any) => {
+      const circuitData: ProcessedCircuit = {
+        circuitId: row.Circuit_ID,
+        circuitName: row.Circuit_Name,
+        country: row.Country,
+        city: row.City,
+        circuitLength: row.Circuit_Length + "km",
+        lapRecord: row.Lap_Record,
+        firstParticipationYear: row.First_Participation_Year,
+        corners: row.Number_Of_Corners,
+        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
+        fastestLapTeamId: row.Fastest_Lap_Team_ID,
+        fastestLapYear: row.Fastest_Lap_Year,
+        url: row.Circuit_URL,
       }
 
-      const driverData = {
-        driverId: row[35],
-        name: row[36],
-        surname: row[37],
-        country: row[38],
-        birthday: row[39],
-        number: row[40],
-        shortName: row[41],
-        url: row[42],
-      }
+      const driverData: ProcessedDriver | null = row.Driver_ID
+        ? {
+            driverId: row.Driver_ID,
+            name: row.Name,
+            surname: row.Surname,
+            country: row.Country,
+            birthday: row.Birthday,
+            number: row.Number,
+            shortName: row.Short_Name,
+            url: row.URL,
+          }
+        : null
 
-      const teamData = {
-        teamId: row[43],
-        teamName: row[44],
-        nationality: row[45],
-        firstAppareance: row[46],
-        constructorsChampionships: row[47],
-        driversChampionships: row[48],
-        url: row[49],
-      }
+      const teamData: ProcessedTeam | null = row.Team_ID
+        ? {
+            teamId: row.Team_ID,
+            teamName: row.Team_Name,
+            country: row.Team_Nationality,
+            firstAppareance: row.First_Appareance,
+            constructorsChampionships: row.Constructors_Championships,
+            driversChampionships: row.Drivers_Championships,
+            url: row.Team_URL,
+          }
+        : null
 
       return {
-        raceId: row[0],
-        championshipId: row[1],
-        raceName: row[2],
+        raceId: row.Race_ID,
+        championshipId: row.Championship_ID,
+        raceName: row.Race_Name,
         schedule: {
-          race: {
-            date: row[3],
-            time: row[10],
-          },
-          qualy: {
-            date: row[11],
-            time: row[17],
-          },
-          fp1: {
-            date: row[12],
-            time: row[18],
-          },
-          fp2: {
-            date: row[13],
-            time: row[19],
-          },
-          fp3: {
-            date: row[14],
-            time: row[20],
-          },
+          race: { date: row.Race_Date, time: row.Race_Time },
+          qualy: { date: row.Qualy_Date, time: row.Qualy_Time },
+          fp1: { date: row.FP1_Date, time: row.FP1_Time },
+          fp2: { date: row.FP2_Date, time: row.FP2_Time },
+          fp3: { date: row.FP3_Date, time: row.FP3_Time },
           sprintQualy: {
-            date: row[15],
-            time: row[21],
+            date: row.Sprint_Qualy_Date,
+            time: row.Sprint_Qualy_Time,
           },
           sprintRace: {
-            date: row[16],
-            time: row[22],
+            date: row.Sprint_Race_Date,
+            time: row.Sprint_Race_Time,
           },
         },
-        round: row[9],
-        url: row[8],
-        laps: row[5],
+        laps: row.Laps,
+        round: row.Round,
+        url: row.Url,
         circuit: circuitData,
         winner: driverData,
         teamWinner: teamData,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
       season: year,
       races: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

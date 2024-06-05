@@ -2,8 +2,18 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
+import {
+  BaseApiResponse,
+  Driver,
+  Drivers,
+  ProcessedDrivers,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  drivers: ProcessedDrivers
+}
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
@@ -11,33 +21,35 @@ export async function GET(request: Request) {
   try {
     const sql = "SELECT * FROM drivers LIMIT ?"
 
-    const data = await executeQuery(sql, [limit])
+    const data: Drivers = await executeQuery(sql, [limit])
 
     if (data.length === 0) {
       return apiNotFound(request, "No drivers found.")
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Driver) => {
       return {
-        driverId: row[0],
-        name: row[1],
-        surname: row[2],
-        country: row[3],
-        birthday: row[4],
-        number: row[5],
-        shortName: row[6],
-        url: row[7],
+        driverId: row.Driver_ID,
+        name: row.Name,
+        surname: row.Surname,
+        country: row.Nationality,
+        birthday: row.Birthday,
+        number: row.Number,
+        shortName: row.Short_Name,
+        url: row.URL,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
       drivers: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

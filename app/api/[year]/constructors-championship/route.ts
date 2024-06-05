@@ -2,8 +2,14 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
+import { BaseApiResponse, ConstructorsChampionship } from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: string | number
+  constructors_championship: any
+}
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
@@ -29,35 +35,36 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData: ConstructorsChampionship[] = data.map((row: any) => {
       return {
-        classificationId: row[0],
-        championshipId: row[1],
-        teamId: row[2],
-        points: row[3],
-        position: row[4],
-        wins: row[5],
+        classificationId: row.Classification_ID,
+        championshipId: row.Championship_ID,
+        teamId: row.Team_ID,
+        points: row.Points,
+        position: row.Position,
+        wins: row.Wins,
         team: {
-          // Aquí obtienes la información del equipo
-          teamId: row[6],
-          name: row[7],
-          nationality: row[8],
-          firstAppareance: row[9],
-          constructorsChampionships: row[10],
-          driversChampionships: row[11],
-          url: row[12],
+          teamId: row.Team_ID,
+          name: row.Team_Name,
+          nationality: row.Team_Nationality,
+          firstAppareance: row.First_Appareance,
+          constructorsChampionships: row.Constructors_Championships,
+          driversChampionships: row.Drivers_Championships,
+          url: row.URL,
         },
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
+      total: data.length,
       season: year,
       constructors_championship: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

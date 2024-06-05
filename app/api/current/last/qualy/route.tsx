@@ -2,10 +2,16 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound, getDay, getYear } from "@/lib/utils"
+import { BaseApiResponse, Circuit } from "@/lib/definitions"
 
 //revalidate
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  races: any
+}
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
@@ -36,7 +42,7 @@ export async function GET(request: Request) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => ({
+    const processedData = data.map((row: any) => ({
       Qualification_ID: row[0],
       Race_ID: row[1],
       Driver_ID: row[2],
@@ -67,40 +73,41 @@ export async function GET(request: Request) {
     }))
 
     // Obtener el circuito correspondiente a la carrera
-    const circuitData = {
-      circuitId: data[0][46],
-      circuitName: data[0][47],
-      country: data[0][48],
-      city: data[0][49],
-      circuitLength: data[0][50] + "km",
-      lapRecord: data[0][51],
-      firstParticipationYear: data[0][52],
-      corners: data[0][53],
-      fastestLapDriverId: data[0][54],
-      fastestLapTeamId: data[0][55],
-      fastestLapYear: data[0][56],
-      url: data[0][57],
-    }
+    const circuitData = data.map((row: Circuit) => {
+      return {
+        circuitId: row.Circuit_ID,
+        circuitName: row.Circuit_Name,
+        country: row.Country,
+        city: row.City,
+        circuitLength: row.Circuit_Length + "km",
+        lapRecord: row.Lap_Record,
+        firstParticipationYear: row.First_Participation_Year,
+        corners: row.Number_of_Corners,
+        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
+        fastestLapTeamId: row.Fastest_Lap_Team_ID,
+        fastestLapYear: row.Fastest_Lap_Year,
+        url: row.Url,
+      }
+    })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: data.length,
-      RaceTable: {
-        season: year,
+      season: year,
+      races: {
         date: data[0][19],
         time: data[0][25],
-        Races: [
-          {
-            url: data[0][16],
-            raceName: data[0][10],
-            Circuit: circuitData,
-            Results: processedData,
-          },
-        ],
+        url: data[0][16],
+        raceId: data[0][1],
+        raceName: data[0][10],
+        circuit: circuitData[0],
+        qualyResults: processedData,
       },
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

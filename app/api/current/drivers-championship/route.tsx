@@ -2,10 +2,16 @@ import { NextResponse } from "next/server"
 import { SITE_NAME } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound, getYear } from "@/lib/utils"
+import { BaseApiResponse, DriverChampionship } from "@/lib/definitions"
 
 export const revalidate = 60
 
-export async function GET(request: Request, context: any) {
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  drivers_championship: any
+}
+
+export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 30
   try {
@@ -29,47 +35,51 @@ export async function GET(request: Request, context: any) {
       )
     }
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData: DriverChampionship[] = data.map((row: any) => {
+      const driver = {
+        driverId: row.Driver_ID,
+        name: row.Name,
+        surname: row.Surname,
+        nationality: row.Nationality,
+        birthday: row.Birthday,
+        number: row.Number,
+        shortName: row.Short_Name,
+        url: row.URL,
+      }
+
+      const team = {
+        teamId: row.Team_ID,
+        teamName: row.Team_Name,
+        country: row.Team_Nationality,
+        firstAppareance: row.First_Appareance,
+        constructorsChampionships: row.Constructors_Championships,
+        driversChampionships: row.Drivers_Championships,
+        url: row.Team_URL,
+      }
+
       return {
-        classificationId: row[0],
-        championshipId: row[1],
-        driverId: row[2],
-        teamId: row[3],
-        points: row[4],
-        position: row[5],
-        wins: row[6],
-        driver: {
-          // Aquí obtienes la información del piloto
-          driverId: row[7],
-          name: row[8],
-          surname: row[9],
-          nationality: row[10],
-          birthday: row[11],
-          number: row[12],
-          short_name: row[13],
-          url: row[14],
-        },
-        team: {
-          // Aquí obtienes la información del equipo
-          teamId: row[15],
-          name: row[16],
-          nationality: row[17],
-          firstAppareance: row[18],
-          constructorsChampionships: row[19],
-          driversChampionships: row[20],
-          url: row[21],
-        },
+        classificationId: row.Classification_ID,
+        championshipId: row.Championship_ID,
+        driverId: row.Driver_ID,
+        teamId: row.Team_ID,
+        points: row.Points,
+        position: row.Position,
+        wins: row.Wins,
+        driver: driver,
+        team: team,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_NAME,
       url: request.url,
       limit: limit,
       total: processedData.length,
       season: year,
       drivers_championship: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

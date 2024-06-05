@@ -2,8 +2,14 @@ import { NextResponse } from "next/server"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
 import { SITE_URL } from "@/lib/constants"
+import { BaseApiResponse, Driver, ProcessedDrivers } from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: string | number
+  drivers: ProcessedDrivers
+}
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 30
@@ -28,27 +34,29 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Driver) => {
       return {
-        driverId: row[0],
-        name: row[1],
-        surname: row[2],
-        country: row[3],
-        birthday: row[4],
-        number: row[5],
-        shortName: row[6],
-        url: row[7],
+        driverId: row.Driver_ID,
+        name: row.Name,
+        surname: row.Surname,
+        country: row.Nationality,
+        birthday: row.Birthday,
+        number: row.Number,
+        shortName: row.Short_Name,
+        url: row.URL,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
       season: year,
       drivers: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

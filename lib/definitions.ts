@@ -17,6 +17,23 @@ export type TermType = {
 }
 
 export interface Circuit {
+  Circuit_ID: string
+  Circuit_Name: string
+  Country: string
+  City: string
+  Circuit_Length: string
+  Lap_Record: string
+  First_Participation_Year: number
+  Number_of_Corners: number
+  Fastest_Lap_Driver_ID: string
+  Fastest_Lap_Team_ID: string
+  Fastest_Lap_Year: number
+  Url: string
+}
+
+export type Circuits = Circuit[]
+
+export interface ProcessedCircuit {
   circuitId: string
   circuitName: string
   country: string
@@ -31,18 +48,33 @@ export interface Circuit {
   url: string
 }
 
+export type ProcessedCircuits = ProcessedCircuit[]
+
 export interface Driver {
+  Driver_ID: string
+  Name: string
+  Surname: string
+  Nationality: string
+  Birthday: string
+  Number?: number
+  Short_Name: string
+  URL: string
+}
+
+export type Drivers = Driver[]
+
+export interface ProcessedDriver {
   driverId: string
   name: string
   surname: string
   country: string
   birthday: string
-  number: number
+  number?: number
   shortName: string
   url: string
 }
 
-export type Drivers = Driver[]
+export type ProcessedDrivers = ProcessedDriver[]
 
 export interface Team {
   Team_ID: string
@@ -95,11 +127,78 @@ export interface Race {
 
 export type Races = Race[]
 
+export interface ProcessedRace {
+  Race_ID: string
+  Championship_ID: string
+  Race_Name: string
+  Race_Date: string
+  Circuit: string
+  Laps: number
+  Winner_ID: string
+  Team_Winner_ID: string
+  Url: string
+  Round: number
+  Race_Time: string
+  Qualy_Date: string
+  Qualy_Time: string
+  FP1_Date: string
+  FP1_Time: string
+  FP2_Date?: string
+  FP2_Time?: string
+  FP3_Date?: string
+  FP3_Time?: string
+  Sprint_Race_Date?: string
+  Sprint_Race_Time?: string
+  Sprint_Qualy_Date?: string
+  Sprint_Qualy_Time?: string
+  circuit?: Circuit
+}
+
+export type ProcessedRaces = ProcessedRace[]
+
 export interface Championship {
+  Championship_ID: string
+  Championship_Name: string
+  Url: string
+  Year: number
+}
+
+export type Championships = Championship[]
+
+export interface ProcessedChampionship {
   championshipId: string
   championshipName: string
   url: string
   year: number
 }
 
-export type Championships = Championship[]
+export type ProcessedChampionships = ProcessedChampionship[]
+
+export interface BaseApiResponse {
+  api: string
+  url: string
+  limit: string | number
+  total: number
+}
+
+export interface DriverChampionship {
+  classificationId: string
+  championshipId: string
+  driverId: string
+  teamId: string
+  points: number
+  position: number
+  wins: number
+  driver: Driver
+  team: Team
+}
+
+export interface ConstructorsChampionship {
+  classificationId: string
+  championshipId: string
+  teamId: string
+  points: number
+  position: number
+  wins: number
+  team: Team
+}

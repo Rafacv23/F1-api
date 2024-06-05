@@ -2,8 +2,22 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound, getYear } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
+import {
+  BaseApiResponse,
+  Driver,
+  Drivers,
+  Team,
+  Teams,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: string | number
+  driver: Drivers
+  team: Teams
+  results: any
+}
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
@@ -39,8 +53,31 @@ export async function GET(request: Request, context: any) {
       )
     }
 
+    const driver = data.map((row: Driver) => {
+      return {
+        driverId: row.Driver_ID,
+        name: `${row.Name} ${row.Surname}`,
+        nationality: row.Nationality,
+        birthday: row.Birthday,
+        number: row.Number,
+        shortName: row.Short_Name,
+        url: row.URL,
+      }
+    })
+
+    const team = data.map((row: Team) => {
+      return {
+        teamId: row.Team_ID,
+        name: row.Team_Name,
+        nationality: row.Team_Nationality,
+        firstAppearance: row.First_Appareance,
+        constructorsChampionships: row.Constructors_Championships,
+        driversChampionships: row.Drivers_Championships,
+      }
+    })
+
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: any) => {
       return {
         race: {
           raceId: row.Race_ID,
@@ -59,23 +96,6 @@ export async function GET(request: Request, context: any) {
             fastestLapTeamId: row.Fastest_Lap_Team_ID,
             fastestLapYear: row.Fastest_Lap_Year,
           },
-        },
-        driver: {
-          driverId: row.Driver_ID,
-          name: `${row.Name} ${row.Surname}`,
-          nationality: row.Nationality,
-          birthday: row.Birthday,
-          number: row.Number,
-          shortName: row.Short_Name,
-          url: row.URL,
-        },
-        team: {
-          teamId: row.Team_ID,
-          name: row.Team_Name,
-          nationality: row.Team_Nationality,
-          firstAppearance: row.First_Appeareance,
-          constructorsChampionships: row.Constructors_Championships,
-          driversChampionships: row.Drivers_Championships,
         },
         result: {
           finishingPosition: row.Finishing_Position,
@@ -102,12 +122,18 @@ export async function GET(request: Request, context: any) {
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      total: processedData.length,
+      limit: limit,
+      total: data.length,
+      season: year,
+      driver: driver[0],
+      team: team[0],
       results: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

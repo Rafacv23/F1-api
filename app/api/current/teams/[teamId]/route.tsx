@@ -2,8 +2,14 @@ import { NextResponse } from "next/server"
 import { SITE_NAME } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound, getYear } from "@/lib/utils"
+import { BaseApiResponse, ProcessedTeams, Team, Teams } from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  team: ProcessedTeams
+}
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
@@ -20,36 +26,38 @@ export async function GET(request: Request, context: any) {
       WHERE Championships.Year = ? AND Teams.Team_ID = ? LIMIT ?;
     `
 
-    const data = await executeQuery(sql, [year, teamId, limit])
+    const data: Teams = await executeQuery(sql, [year, teamId, limit])
 
     if (data.length === 0) {
       return apiNotFound(
         request,
-        "No teams found for this year, try with other one."
+        "No teams found for this year or id, try with other one."
       )
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Team) => {
       return {
-        teamId: row[0],
-        teamName: row[1],
-        country: row[2],
-        firstAppareance: row[3],
-        constructorsChampionships: row[4],
-        driversChampionships: row[5],
-        url: row[6],
+        teamId: row.Team_ID,
+        teamName: row.Team_Name,
+        country: row.Team_Nationality,
+        firstAppareance: row.First_Appareance,
+        constructorsChampionships: row.Constructors_Championships,
+        driversChampionships: row.Drivers_Championships,
+        url: row.URL,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_NAME,
       url: request.url,
       limit: limit,
       total: processedData.length,
       season: year,
-      teams: processedData,
-    })
+      team: processedData,
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

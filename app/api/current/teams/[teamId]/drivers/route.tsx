@@ -2,8 +2,22 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound, getYear } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
+import {
+  BaseApiResponse,
+  Driver,
+  ProcessedDrivers,
+  ProcessedTeams,
+  Team,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  teamId: string
+  team: ProcessedTeams[0]
+  drivers: ProcessedDrivers
+}
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
@@ -42,7 +56,7 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Driver) => {
       return {
         driver: {
           driverId: row.Driver_ID,
@@ -57,19 +71,19 @@ export async function GET(request: Request, context: any) {
       }
     })
 
-    const teamData = data.map((row) => {
+    const teamData = data.map((row: Team) => {
       return {
         teamId: row.Team_ID,
         teamName: row.Team_Name,
         country: row.Team_Nationality,
-        firstAppareance: row.First_Appeareance,
+        firstAppareance: row.First_Appareance,
         constructorsChampionships: row.Constructors_Championships,
         driversChampionships: row.Drivers_Championships,
-        url: row[9],
+        url: row.URL,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       total: processedData.length,
@@ -78,7 +92,9 @@ export async function GET(request: Request, context: any) {
       teamId: teamId,
       team: teamData[0],
       drivers: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

@@ -2,15 +2,11 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { ProcessedTeam, Team, Teams } from "@/lib/definitions"
+import { BaseApiResponse, ProcessedTeam, Team, Teams } from "@/lib/definitions"
 
 export const revalidate = 60
 
-interface ApiResponse {
-  api: string
-  url: string
-  limit: string | number
-  total: number
+interface ApiResponse extends BaseApiResponse {
   teams: ProcessedTeam[]
 }
 

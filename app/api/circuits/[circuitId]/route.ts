@@ -2,8 +2,13 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
+import { BaseApiResponse, Circuit, ProcessedCircuits } from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  circuit: ProcessedCircuits
+}
 
 export async function GET(request: Request, context: any) {
   try {
@@ -21,30 +26,32 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Circuit) => {
       return {
-        circuitId: row[0],
-        circuitName: row[1],
-        country: row[2],
-        city: row[3],
-        circuitLength: row[4],
-        lapRecord: row[5],
-        firstParticipationYear: row[6],
-        corners: row[7],
-        fastestLapDriverId: row[8],
-        fastestLapTeamId: row[9],
-        fastestLapYear: row[10],
-        url: row[11],
+        circuitId: row.Circuit_ID,
+        circuitName: row.Circuit_Name,
+        country: row.Country,
+        city: row.City,
+        circuitLength: row.Circuit_Length,
+        lapRecord: row.Lap_Record,
+        firstParticipationYear: row.First_Participation_Year,
+        corners: row.Number_of_Corners,
+        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
+        fastestLapTeamId: row.Fastest_Lap_Team_ID,
+        fastestLapYear: row.Fastest_Lap_Year,
+        url: row.Url,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
-      circuits: processedData,
-    })
+      circuit: processedData,
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

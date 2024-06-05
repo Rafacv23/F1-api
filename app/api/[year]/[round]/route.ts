@@ -2,8 +2,20 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
+import {
+  BaseApiResponse,
+  ProcessedRace,
+  ProcessedRaces,
+  Race,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  season: number | string
+  round: number | string
+  race: ProcessedRaces
+}
 
 export async function GET(request: Request, context: any) {
   try {
@@ -27,65 +39,64 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: any) => {
       return {
-        raceId: row[0],
-        championshipId: row[1],
-        raceName: row[2],
+        raceId: row.Race_ID,
+        championshipId: row.Championship_ID,
+        raceName: row.Race_Name,
         schedule: {
           race: {
-            date: row[3],
-            time: row[10],
+            date: row.Race_Date,
+            time: row.Race_Time,
           },
           qualy: {
-            date: row[11],
-            time: row[17],
+            date: row.Qualy_Date,
+            time: row.Qualy_Time,
           },
           fp1: {
-            date: row[12],
-            time: row[18],
+            date: row.FP1_Date,
+            time: row.FP1_Time,
           },
           fp2: {
-            date: row[13],
-            time: row[19],
+            date: row.FP2_Date,
+            time: row.FP2_Time,
           },
           fp3: {
-            date: row[14],
-            time: row[20],
+            date: row.FP3_Date,
+            time: row.FP3_Time,
           },
           sprintQualy: {
-            date: row[15],
-            time: row[21],
+            date: row.Sprint_Qualy_Date,
+            time: row.Sprint_Qualy_Time,
           },
           sprintRace: {
-            date: row[16],
-            time: row[22],
+            date: row.Sprint_Race_Date,
+            time: row.Sprint_Race_Time,
           },
         },
         circuit: {
-          // Circuit info
-          circuitId: row[23],
-          circuitName: row[24],
-          country: row[25],
-          city: row[26],
-          circuitLength: row[27] + "km",
-          lapRecord: row[28],
-          firstParticipationYear: row[29],
-          corners: row[30],
-          fastestLapDriverId: row[31],
-          fastestLapTeamId: row[32],
-          fastestLapYear: row[33],
-          url: row[34],
+          circuitId: row.Circuit_ID,
+          circuitName: row.Circuit_Name,
+          country: row.Country,
+          city: row.City,
+          circuitLength: row.Circuit_Length + "km",
+          lapRecord: row.Lap_Record,
+          firstParticipationYear: row.First_Participation_Year,
+          corners: row.Number_of_Corners,
+          fastestLapDriverId: row.Fastest_Lap_Driver_ID,
+          fastestLapTeamId: row.Fastest_Lap_Team_ID,
+          fastestLapYear: row.Fastest_Lap_Year,
+          url: row.Url,
         },
-        laps: row[5],
-        winnerId: row[6],
-        teamWinnerId: row[7],
-        url: row[8],
-        round: row[9],
+        laps: row.Laps,
+        winnerId: row.Winner_ID,
+        teamWinnerId: row.Team_Winner_ID,
+        url: row.Url,
+        round: row.Round,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
@@ -93,7 +104,9 @@ export async function GET(request: Request, context: any) {
       season: year,
       round: round,
       race: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()

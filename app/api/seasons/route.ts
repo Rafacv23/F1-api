@@ -2,8 +2,18 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
+import {
+  BaseApiResponse,
+  Championship,
+  Championships,
+  ProcessedChampionships,
+} from "@/lib/definitions"
 
 export const revalidate = 60
+
+interface ApiResponse extends BaseApiResponse {
+  championships: ProcessedChampionships
+}
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
@@ -11,29 +21,31 @@ export async function GET(request: Request) {
   try {
     const sql = `SELECT * FROM Championships LIMIT ?;`
 
-    const data = await executeQuery(sql, [limit])
+    const data: Championships = await executeQuery(sql, [limit])
 
     if (data.length === 0) {
       return apiNotFound(request, "No seasons found.")
     }
 
     // Procesamos los datos
-    const processedData = data.map((row) => {
+    const processedData = data.map((row: Championship) => {
       return {
-        championshipId: row[0],
-        championshipName: row[1],
-        url: row[2],
-        year: row[3],
+        championshipId: row.Championship_ID,
+        championshipName: row.Championship_Name,
+        url: row.Url,
+        year: row.Year,
       }
     })
 
-    return NextResponse.json({
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       total: processedData.length,
       championships: processedData,
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.log(error)
     return NextResponse.error()
