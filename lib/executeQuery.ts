@@ -1,6 +1,9 @@
 // Función para ejecutar una consulta SQL con parámetros preparados
 import { client } from "@/app/lib/turso"
-export async function executeQuery(sql: string, args: any[] = []) {
+export async function executeQuery(
+  sql: string,
+  args: any[] = []
+): Promise<any> {
   try {
     const data = await client.execute({ sql: sql, args: args })
     return data.rows
