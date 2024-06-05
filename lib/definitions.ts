@@ -45,14 +45,27 @@ export interface Driver {
 export type Drivers = Driver[]
 
 export interface Team {
+  Team_ID: string
+  Team_Name: string
+  Team_Nationality: string
+  First_Appareance: number
+  Constructors_Championships?: number
+  Drivers_Championships?: number
+  URL: string
+}
+
+export type Teams = Team[]
+export interface ProcessedTeam {
   teamId: string
   teamName: string
   country: string
   firstAppareance: number
-  constructorsChampionships: number
-  driversChampionships: number
+  constructorsChampionships?: number
+  driversChampionships?: number
   url: string
 }
+
+export type ProcessedTeams = ProcessedTeam[]
 
 export interface Race {
   raceId: string
@@ -65,7 +78,22 @@ export interface Race {
   teamWinner: Team
   url: string
   round: number
+  raceTime: string
+  qualyDate: string
+  qualyTime: string
+  fp1Date: string
+  fp1Time: string
+  fp2Date?: string
+  fp2Time?: string
+  fp3Date?: string
+  fp3Time?: string
+  sprintRaceDate?: string
+  sprintRaceTime?: string
+  sprintQualyDate?: string
+  sprintQualyTime?: string
 }
+
+export type Races = Race[]
 
 export interface Championship {
   championshipId: string
