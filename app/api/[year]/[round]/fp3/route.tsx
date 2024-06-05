@@ -42,7 +42,7 @@ export async function GET(request: Request, context: any) {
 
     // Procesamos los datos
     const processedData = data.map((row: any) => ({
-      fp1Id: row[0],
+      fp3Id: row[0],
       raceId: row[1],
       driverId: row[2],
       teamId: row[3],
