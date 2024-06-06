@@ -42,7 +42,7 @@ export async function GET(request: Request) {
         teamId: row.Team_ID,
         points: row.Points,
         position: row.Position,
-        wins: row.Wins,
+        wins: row.wins,
         team: {
           teamId: row.Team_ID,
           name: row.Team_Name,
