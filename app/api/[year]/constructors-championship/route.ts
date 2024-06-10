@@ -45,7 +45,7 @@ export async function GET(request: Request, context: any) {
         wins: row.wins,
         team: {
           teamId: row.Team_ID,
-          name: row.Team_Name,
+          teamName: row.Team_Name,
           nationality: row.Team_Nationality,
           firstAppareance: row.First_Appareance,
           constructorsChampionships: row.Constructors_Championships,
