@@ -46,7 +46,7 @@ export async function GET(request: Request) {
         team: {
           teamId: row.Team_ID,
           teamName: row.Team_Name,
-          nationality: row.Team_Nationality,
+          country: row.Team_Nationality,
           firstAppareance: row.First_Appareance,
           constructorsChampionships: row.Constructors_Championships,
           driversChampionships: row.Drivers_Championships,
