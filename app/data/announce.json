@@ -1,4 +1,4 @@
 {
-  "announce": "Added new endpoints to retrieve results of a specific driver. Check more in the docs",
-  "link": "http://f1-connect-api.vercel.app/api/2024/drivers/norris"
+  "announce": "Data updated after the 2024 Canada GP. Check more in the docs",
+  "link": "http://f1-connect-api.vercel.app/api/2024/9/race"
 }
