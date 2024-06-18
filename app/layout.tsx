@@ -39,13 +39,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
-    other: [
-      {
-        rel: "icon",
-        type: "image/png",
-        href: "/logo.avif",
-      },
-    ],
   },
   robots: "index, follow",
   twitter: {
