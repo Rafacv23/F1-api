@@ -18,7 +18,7 @@ export async function GET(request: Request, context: any) {
     const { year, round } = context.params
 
     const sql = `
-    SELECT Sprint_Race.*, Races.*, Drivers.*, Teams.*, Circuits.*
+    SELECT Sprint_Race.*, Races.*, Results.*, Drivers.*, Teams.*, Circuits.*
     FROM Sprint_Race
     JOIN Races ON Sprint_Race.Race_ID = Races.Race_ID
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
@@ -27,7 +27,7 @@ export async function GET(request: Request, context: any) {
     JOIN Teams ON Sprint_Race.Team_ID = Teams.Team_ID
     JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
     WHERE Championships.Year = ? AND Races.Round = ?
-    ORDER BY Sprint_Race.Finishing_Position ASC
+    ORDER BY Results.Finishing_Position ASC
     LIMIT ?;
     `
 
