@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "mbhusty",
+      "name": "Artem Anisimov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7149699?v=4",
+      "profile": "https://github.com/mbhusty",
+      "contributions": [
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "F1-api",
+  "projectOwner": "Rafacv23"
+}
