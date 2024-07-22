@@ -6,6 +6,10 @@ import {
 } from "@/lib/constants"
 import "./globals.css"
 import Footer from "@/components/Footer"
+import initTranslations from "../i18n"
+import TranslationsProvider from "@/components/TranslationsProvider"
+
+const i18nNamespaces = ["home"]
 
 export const metadata: Metadata = {
   title: SITE_META_NAME,
@@ -56,16 +60,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode
+  params: {
+    locale: string
+  }
 }>) {
+  const { t, resources } = await initTranslations(params.locale, i18nNamespaces)
+
   return (
-    <html lang="en">
+    <html lang={params.locale}>
       <body className={"dark"}>
-        {children}
-        <Footer />
+        <TranslationsProvider
+          namespaces={i18nNamespaces}
+          locale={params.locale}
+          resources={resources}
+        >
+          {children}
+          <Footer locale={params.locale} />
+        </TranslationsProvider>
       </body>
     </html>
   )

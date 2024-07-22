@@ -10,20 +10,23 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Link from "next/link"
+import initTranslations from "@/app/i18n"
 
-export default function EndpointsList() {
+export default async function EndpointsList({ locale }: { locale: string }) {
+  const { t } = await initTranslations(locale, ["docs"])
+
   return (
     <>
       <h2 className="text-2xl font-bold mb-2">Endpoints</h2>
       <Table className="mb-8">
-        <TableCaption>A list of all the API endpoints.</TableCaption>
+        <TableCaption>{t("table-caption")}</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Endpoint</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Example</TableHead>
-            <TableHead className="text-right">Params</TableHead>
-            <TableHead className="text-right">Default</TableHead>
+            <TableHead>{t("description")}</TableHead>
+            <TableHead>{t("example")}</TableHead>
+            <TableHead className="text-right">{t("params")}</TableHead>
+            <TableHead className="text-right">{t("default")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

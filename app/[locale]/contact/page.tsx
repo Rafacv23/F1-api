@@ -6,25 +6,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import initTranslations from "@/app/i18n"
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: { locale: string }
+}) {
+  const { t } = await initTranslations(params.locale, ["contact"])
+
   return (
     <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
       <section className="text-white">
         <div className="max-w-screen-lg mx-auto">
-          <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
-          <p className="mb-8">
-            Have questions, suggestions, or feedback? Wed love to hear from you!
-            Reach out to us using one of the following methods:
-          </p>
+          <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
+          <p className="mb-8">{t("subtitle")}</p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <ul className="flex flex-col gap-4">
               <li className="h-[max-content]">
                 <Card className="w-[350px]">
                   <CardHeader>
-                    <CardTitle>Email</CardTitle>
+                    <CardTitle>{t("email")}</CardTitle>
                     <CardDescription>
-                      Send us an email at{" "}
+                      {t("email1")}{" "}
                       <Link
                         href="mailto:rafacv23@gmail.com"
                         title="Send us an email"
@@ -32,7 +36,7 @@ export default function ContactPage() {
                       >
                         rafacv23@gmail.com
                       </Link>{" "}
-                      and well get back to you as soon as possible.
+                      {t("email2")}
                     </CardDescription>
                   </CardHeader>
                 </Card>
@@ -40,10 +44,8 @@ export default function ContactPage() {
               <li>
                 <Card className="w-[350px]">
                   <CardHeader>
-                    <CardTitle>Social Media</CardTitle>
-                    <CardDescription>
-                      Follow us on social media for updates and announcements:
-                    </CardDescription>
+                    <CardTitle>{t("social")}</CardTitle>
+                    <CardDescription>{t("social-description")}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col gap-4">
                     <Link
@@ -70,9 +72,9 @@ export default function ContactPage() {
               <li>
                 <Card className="w-[350px]">
                   <CardHeader>
-                    <CardTitle>Support me</CardTitle>
+                    <CardTitle>{t("support")}</CardTitle>
                     <CardDescription>
-                      If you like my work, you can buy me a coffee.
+                      {t("support-description")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col gap-4">
@@ -92,7 +94,7 @@ export default function ContactPage() {
           </div>
           <div className="mt-8">
             <Link href="/" className="text-blue-500 hover:underline">
-              ← Back to Home
+              {t("back")}
             </Link>
           </div>
         </div>

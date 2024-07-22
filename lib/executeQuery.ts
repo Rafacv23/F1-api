@@ -1,5 +1,5 @@
 // Función para ejecutar una consulta SQL con parámetros preparados
-import { client } from "@/app/lib/turso"
+import { client } from "@/lib/turso"
 export async function executeQuery(
   sql: string,
   args: any[] = []

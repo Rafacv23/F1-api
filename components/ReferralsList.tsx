@@ -10,32 +10,36 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Link from "next/link"
-import { SITE_NAME } from "@/lib/constants"
+import initTranslations from "@/app/i18n"
+import Image from "next/image"
 
-export default function ReferralsList() {
+export default async function ReferralsList({ locale }: { locale: string }) {
+  const { t } = await initTranslations(locale, ["referrals"])
+
   return (
     <>
-      <h2 className="text-2xl font-bold mb-2">Referrals</h2>
+      <h2 className="text-2xl font-bold mb-2">{t("title")}</h2>
       <Table className="mb-8">
-        <TableCaption>A list of all the Friends of {SITE_NAME}.</TableCaption>
+        <TableCaption>{t("table-caption")}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Logo</TableHead>
-            <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Author</TableHead>
-            <TableHead>Link</TableHead>
+            <TableHead className="w-[100px]">{t("logo")}</TableHead>
+            <TableHead className="w-[100px]">{t("name")}</TableHead>
+            <TableHead>{t("descriptiob")}</TableHead>
+            <TableHead>{t("author")}</TableHead>
+            <TableHead>{t("link")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {referrals.map((referral) => (
             <TableRow key={referral.url}>
               <TableCell>
-                <img
+                <Image
                   className="rounded"
                   src={referral.img}
                   alt={`${referral.name} logo`}
                   width={100}
+                  height={100}
                   loading="lazy"
                 />
               </TableCell>
@@ -46,6 +50,8 @@ export default function ReferralsList() {
                 <Link
                   href={referral.url}
                   title={referral.url}
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-blue-500 hover:transition-colors hover:underline"
                 >
                   {referral.url}

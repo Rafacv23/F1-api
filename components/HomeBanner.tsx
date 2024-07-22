@@ -2,20 +2,29 @@ import React from "react"
 import Link from "next/link"
 import { FaGithub } from "react-icons/fa"
 import { SiGoogledocs } from "react-icons/si"
+import initTranslations from "@/app/i18n"
+import { SITE_TITLE } from "@/lib/constants"
+import Image from "next/image"
 
-export default function HomeBanner() {
+export default async function HomeBanner({ locale }: { locale: string }) {
+  const { t } = await initTranslations(locale, ["home"])
   return (
     <>
-      <img src="/logo.avif" width={200} alt="F1 Connect Api Logo" />
+      <Image
+        src="/logo.avif"
+        width={200}
+        height={300}
+        alt="F1 Connect Api Logo"
+      />
       <section className=" text-white ">
         <div className="mx-auto max-w-screen-xl px-4 lg:flex lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-              F1 Connect Api.
+              {SITE_TITLE}
             </h1>
 
             <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-              Your free F1 API. Ready for development.
+              {t("subtitle")}
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">

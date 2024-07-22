@@ -1,26 +1,33 @@
 import { FaGithub, FaLinkedin, FaHeart } from "react-icons/fa"
 import { MdOutlineWebAsset } from "react-icons/md"
 import { SiKofi } from "react-icons/si"
+import LanguageChanger from "@/components/LanguageChanger"
 import Link from "next/link"
+import Image from "next/image"
+import initTranslations from "@/app/i18n"
+import { SITE_NAME } from "@/lib/constants"
 
-export default function Footer() {
+export default async function Footer({ locale }: { locale: string }) {
+  const { t } = await initTranslations(locale, ["footer"])
+
   return (
     <footer className="bg-dark dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="text-teal-600 dark:text-teal-300 flex gap-2 items-center">
-              <img
+              <Image
                 src="/logo.avif"
                 width={60}
+                height={60}
                 alt="f1 connect logo"
                 loading="lazy"
               />
-              F1 Connect
+              {SITE_NAME}
             </div>
 
             <p className="mt-4 max-w-xs text-gray-500 dark:text-gray-400">
-              F1 Connect Api. Your free API, ready for development.
+              {t("description")}
             </p>
 
             <ul className="mt-8 flex gap-6">
@@ -75,7 +82,9 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
             <div>
-              <p className="font-medium text-gray-900 dark:text-white">Pages</p>
+              <p className="font-medium text-gray-900 dark:text-white">
+                {t("pages")}
+              </p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
@@ -84,8 +93,7 @@ export default function Footer() {
                     title="Home page"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    Home{" "}
+                    {t("home")}
                   </Link>
                 </li>
 
@@ -95,8 +103,7 @@ export default function Footer() {
                     title="Api Documentation"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    Docs{" "}
+                    {t("docs")}
                   </Link>
                 </li>
                 <li>
@@ -105,8 +112,7 @@ export default function Footer() {
                     title="Referrals"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    Referrals{" "}
+                    {t("referrals")}
                   </Link>
                 </li>
               </ul>
@@ -122,8 +128,7 @@ export default function Footer() {
                     title="/api/seasons"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    /api/seasons{" "}
+                    /api/seasons
                   </Link>
                 </li>
 
@@ -133,8 +138,7 @@ export default function Footer() {
                     title="/api/drivers"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    /api/drivers{" "}
+                    /api/drivers
                   </Link>
                 </li>
 
@@ -144,8 +148,7 @@ export default function Footer() {
                     title="/api/teams"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    /api/teams{" "}
+                    /api/teams
                   </Link>
                 </li>
 
@@ -155,8 +158,7 @@ export default function Footer() {
                     title="/api/circuits"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    /api/circuits{" "}
+                    /api/circuits
                   </Link>
                 </li>
               </ul>
@@ -164,7 +166,7 @@ export default function Footer() {
 
             <div>
               <p className="font-medium text-gray-900 dark:text-white">
-                Helpful Links
+                {t("help")}
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
@@ -174,8 +176,7 @@ export default function Footer() {
                     title="Contact"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    Contact{" "}
+                    {t("contact")}
                   </Link>
                 </li>
 
@@ -185,8 +186,7 @@ export default function Footer() {
                     title="FAQs"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    FAQs{" "}
+                    {t("faqs")}
                   </Link>
                 </li>
 
@@ -196,14 +196,14 @@ export default function Footer() {
                     title="Terms & Conditions"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {" "}
-                    Terms & Conditions{" "}
+                    {t("terms")}
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        <LanguageChanger />
         <p className="text-xs text-gray-500 dark:text-gray-400 flex gap-2 items-center">
           Made with <FaHeart /> by Rafa Canosa.
         </p>
