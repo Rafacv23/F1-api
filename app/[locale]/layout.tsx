@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     languages: {
       en: "/",
       es: "/es",
+      ru: "/ru",
     },
   },
   keywords: ["F1", "Public API", "Formula 1"],
