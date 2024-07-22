@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   title: SITE_META_NAME,
   description: SITE_META_DESCRIPTION,
   creator: "Rafa Canosa",
+  authors: { name: "Rafa Canosa" },
   metadataBase: new URL(SITE_URL),
+  category: "formula one",
   verification: { google: "8Ssu9wyMqGLnOHp01rAbY2QJAKTU4XkqTq9OPShpeOc" },
   openGraph: {
     type: "website",
@@ -34,6 +36,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      es: "/es",
+    },
   },
   keywords: ["F1", "Public API", "Formula 1"],
   referrer: "origin-when-cross-origin",
@@ -44,7 +50,14 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   twitter: {
     card: "summary_large_image",
     site: "@yourTwitterHandle",
