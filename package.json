@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "insert": "cd lib && node insert.js"
   },
   "dependencies": {
     "@libsql/client": "^0.6.0",
