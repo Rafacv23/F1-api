@@ -8,6 +8,7 @@ import {
   Drivers,
   ProcessedDrivers,
 } from "@/lib/definitions"
+import { DatabaseZap } from "lucide-react"
 
 export const revalidate = 60
 
@@ -45,7 +46,7 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
+      total: data.length,
       drivers: processedData,
     }
 
