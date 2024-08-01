@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "insert": "cd lib/insert && node index.js"
+    "insert": "cd lib/insert && node index.js",
+    "scrap": "cd lib && node scraper.js"
   },
   "dependencies": {
     "@libsql/client": "^0.6.0",
