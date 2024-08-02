@@ -1,6 +1,6 @@
 {
   "name": "f1-api",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "insert": "cd lib/insert && node index.js",
-    "scrap": "cd lib && node scraper.js"
+    "scrap": "cd lib/scrap && node index.js"
   },
   "dependencies": {
     "@libsql/client": "^0.6.0",
