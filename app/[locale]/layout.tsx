@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import {
   SITE_META_NAME,
   SITE_META_DESCRIPTION,
@@ -97,6 +98,7 @@ export default async function RootLayout({
           <Footer locale={params.locale} />
         </TranslationsProvider>
       </body>
+      <GoogleAnalytics gaId="G-BSF96MBRJC" />
     </html>
   )
 }
