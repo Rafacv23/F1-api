@@ -1,4 +1,18 @@
 {
+  "terms": [
+    {
+      "title": "Términos de Uso",
+      "description": "Puedes usar esta API para aplicaciones y servicios personales y no comerciales, incluidos fines educativos e investigaciones. Se permite el uso por parte de sitios web y aplicaciones respaldados por publicidad. Sin embargo, no debes cobrar por ninguna aplicación o servicio que utilice esta API o por cualquier dato obtenido de ella."
+    },
+    {
+      "title": "Atribución",
+      "description": "No estás obligado a atribuir este sitio en aplicaciones o servicios que utilicen esta API. Sin embargo, se agradecería una atribución al dirigirse a una audiencia técnica. Una referencia a “F1 Connect API” con un enlace a: https://f1-connect-api.vercel.app/ es ideal."
+    },
+    {
+      "title": "Descargo de Responsabilidad",
+      "description": "El autor renuncia a toda responsabilidad por cualquier pérdida o daño derivado del uso de esta API. El autor no puede garantizar la disponibilidad continua de la API ni la precisión de los datos."
+    }
+  ],
   "title": "Términos y condiciones",
   "subtitle": "F1 Connect es una servicio web que provee de datos actuales e históricos sobre F1. No tenemos ningún tipo de objetivo comercial. Utilizando la API estás aceptando los siguientes términos y condiciones: ",
   "back": "← Volver al inicio"

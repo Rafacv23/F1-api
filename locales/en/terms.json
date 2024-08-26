@@ -1,4 +1,18 @@
 {
+  "terms": [
+    {
+      "title": "Terms Of Use",
+      "description": "You may use this API for personal, non-commercial applications and services, including educational and research purposes. Use by websites and applications supported by advertising is permitted. However, you must not charge for any application or service that uses this API or for any data obtained from it."
+    },
+    {
+      "title": "Attribution",
+      "description": "You are not required to attribute this site in applications or services using this API. However, an attribution would be appreciated when addressing a technical audience. A reference to the “F1 Connect API” with a link to: https://f1-connect-api.vercel.app/ is ideal."
+    },
+    {
+      "title": "Disclaimer",
+      "description": "The author disclaims all responsibility for any loss or damage arising from the use of this API. The author cannot guarantee the continuing availability of the API or the accuracy of the data."
+    }
+  ],
   "title": "Terms & Conditions",
   "subtitle": "F1 Connect is an experimental web service that provides a historical record of motor racing data for non-commercial purposes. By using this API, you agree to the following terms and conditions:",
   "back": "← Back to Home"
