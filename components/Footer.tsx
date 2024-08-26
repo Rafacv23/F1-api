@@ -11,7 +11,7 @@ import {
   help,
   api,
 } from "@/components/footer/footerLinks.js"
-import { List } from "./footer/list"
+import { List } from "./footer/List"
 
 export default async function Footer({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["footer"])
