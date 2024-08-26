@@ -1,12 +1,17 @@
-import { FaGithub, FaLinkedin, FaHeart } from "react-icons/fa"
-import { MdOutlineWebAsset } from "react-icons/md"
-import { SiKofi } from "react-icons/si"
+import { FaHeart } from "react-icons/fa"
 import LanguageChanger from "@/components/LanguageChanger"
 import Link from "next/link"
 import Image from "next/image"
 import initTranslations from "@/app/i18n"
 import { SITE_NAME } from "@/lib/constants"
 import ThemeToggle from "./ThemeToggle"
+import {
+  contactLinks,
+  pages,
+  help,
+  api,
+} from "@/components/footer/footerLinks.js"
+import { List } from "./footer/list"
 
 export default async function Footer({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["footer"])
@@ -26,186 +31,35 @@ export default async function Footer({ locale }: { locale: string }) {
               />
               {SITE_NAME}
             </div>
-
             <p className="mt-4 max-w-xs text-gray-500 dark:text-gray-400">
               {t("description")}
             </p>
-
             <ul className="mt-8 flex gap-6">
-              <li>
-                <Link
-                  href="https://ninjapath.vercel.app/linkedin"
-                  rel="noreferrer"
-                  target="_blank"
-                  title="Rafa Canosa Linkedin"
-                  className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                >
-                  <FaLinkedin />
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="https://ko-fi.com/rafacanosa"
-                  rel="noreferrer"
-                  target="_blank"
-                  title="Buy me a coffee"
-                  className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                >
-                  <SiKofi />
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="https://ninjapath.vercel.app/github"
-                  rel="noreferrer"
-                  target="_blank"
-                  title="Rafa Canosa Github"
-                  className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                >
-                  <FaGithub />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://ninjapath.vercel.app/portfolio"
-                  rel="noreferrer"
-                  target="_blank"
-                  title="Rafa Canosa Portfolio"
-                  className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                >
-                  <MdOutlineWebAsset />
-                </Link>
-              </li>
+              {contactLinks.map((link) => (
+                <li key={link.title}>
+                  <Link
+                    href={link.href}
+                    title={link.title}
+                    rel="noreferrer"
+                    target="_blank"
+                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+                  >
+                    {link.icon}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
-            <div>
-              <p className="font-medium text-gray-900 dark:text-white">
-                {t("pages")}
-              </p>
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <li>
-                  <Link
-                    href="/"
-                    title="Home page"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("home")}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/docs"
-                    title="Api Documentation"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("docs")}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/referrals"
-                    title="Referrals"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("referrals")}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-medium text-gray-900 dark:text-white">API</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <li>
-                  <Link
-                    href="/api/seasons"
-                    title="/api/seasons"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    /api/seasons
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/api/drivers"
-                    title="/api/drivers"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    /api/drivers
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/api/teams"
-                    title="/api/teams"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    /api/teams
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/api/circuits"
-                    title="/api/circuits"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    /api/circuits
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-medium text-gray-900 dark:text-white">
-                {t("help")}
-              </p>
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <li>
-                  <Link
-                    href="/contact"
-                    title="Contact"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("contact")}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/faq"
-                    title="FAQs"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("faqs")}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/terms"
-                    title="Terms & Conditions"
-                    className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
-                  >
-                    {t("terms")}
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <List title={t("pages")} array={pages} locale={locale} />
+            <List title="API" array={api} locale={locale} />
+            <List title={t("help")} array={help} locale={locale} />
           </div>
         </div>
-        <LanguageChanger />
-        <ThemeToggle locale={locale} />
+        <div className="flex gap-2">
+          <LanguageChanger />
+          <ThemeToggle locale={locale} />
+        </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 flex gap-2 items-center">
           Made with <FaHeart /> by Rafa Canosa.
         </p>
