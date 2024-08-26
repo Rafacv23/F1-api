@@ -14,9 +14,10 @@
   "dependencies": {
     "@libsql/client": "^0.6.0",
     "@next/third-parties": "^14.2.5",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-select": "^2.1.1",
-    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "i18next": "^23.12.2",
