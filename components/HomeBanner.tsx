@@ -20,7 +20,7 @@ export default async function HomeBanner({ locale }: { locale: string }) {
       <section>
         <div className="mx-auto max-w-screen-xl px-4 lg:flex lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-3xl font-extrabold text-transparent sm:text-5xl text-f1">
+            <h1 className="text-3xl font-extrabold text-transparent sm:text-5xl ">
               {SITE_TITLE}
             </h1>
 
