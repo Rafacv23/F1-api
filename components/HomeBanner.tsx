@@ -5,6 +5,7 @@ import { SiGoogledocs } from "react-icons/si"
 import initTranslations from "@/app/i18n"
 import { SITE_TITLE } from "@/lib/constants"
 import Image from "next/image"
+import { Button } from "./ui/button"
 
 export default async function HomeBanner({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["home"])
@@ -19,7 +20,7 @@ export default async function HomeBanner({ locale }: { locale: string }) {
       <section>
         <div className="mx-auto max-w-screen-xl px-4 lg:flex lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
+            <h1 className="text-3xl font-extrabold text-transparent sm:text-5xl text-f1">
               {SITE_TITLE}
             </h1>
 
@@ -28,21 +29,21 @@ export default async function HomeBanner({ locale }: { locale: string }) {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/docs"
-                className="flex gap-2 items-center justify-center w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium hover:bg-transparent focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-              >
-                <SiGoogledocs />
-                <span>Docs</span>
+              <Link href="/docs">
+                <Button className="flex gap-2">
+                  <SiGoogledocs />
+                  <span>Docs</span>
+                </Button>
               </Link>
               <Link
                 target="_blank"
                 rel="noreferrer"
                 href="https://ninjapath.vercel.app/f1-api-github"
-                className="flex gap-2 items-center w-full justify-center rounded border border-blue-600 px-12 py-3 text-sm font-medium hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
               >
-                <FaGithub />
-                <span>Github</span>
+                <Button className="flex gap-2" variant="ghost">
+                  <FaGithub />
+                  <span>Github</span>
+                </Button>
               </Link>
             </div>
           </div>

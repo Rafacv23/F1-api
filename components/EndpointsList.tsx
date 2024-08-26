@@ -38,7 +38,7 @@ export default async function EndpointsList({ locale }: { locale: string }) {
                 <Link
                   href={endpoint.url}
                   title={endpoint.url}
-                  className="hover:text-blue-500 hover:transition-colors hover:underline"
+                  className="hover:text-f1 hover:transition-colors hover:underline"
                 >
                   {endpoint.url}
                 </Link>

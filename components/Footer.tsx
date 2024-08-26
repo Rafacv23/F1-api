@@ -17,11 +17,11 @@ export default async function Footer({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["footer"])
 
   return (
-    <footer className="bg-dark dark:bg-gray-900">
+    <footer className=" border-t-2 border-f1">
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="text-teal-600 dark:text-teal-300 flex gap-2 items-center">
+            <div className=" flex gap-2 items-center">
               <Image
                 src="/logo.avif"
                 width={60}

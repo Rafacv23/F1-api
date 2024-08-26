@@ -33,7 +33,7 @@ export default async function ContactPage({
                       <Link
                         href="mailto:rafacv23@gmail.com"
                         title="Send us an email"
-                        className="text-blue-500 hover:underline"
+                        className="text-f1 hover:underline"
                       >
                         rafacv23@gmail.com
                       </Link>{" "}
@@ -52,7 +52,7 @@ export default async function ContactPage({
                     <Link
                       href="https://ninjapath.vercel.app/linkedin"
                       title="Rafa Canosa Linkedin"
-                      className="text-blue-500 hover:underline"
+                      className="text-f1 hover:underline"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -61,7 +61,7 @@ export default async function ContactPage({
                     <Link
                       href="https://ninjapath.vercel.app/f1-api-github"
                       title="F1 connect api github repository"
-                      className="text-blue-500 hover:underline"
+                      className="text-f1 hover:underline"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -82,7 +82,7 @@ export default async function ContactPage({
                     <Link
                       href="https://ko-fi.com/rafacanosa"
                       title="Buy me a coffee"
-                      className="text-blue-500 hover:underline"
+                      className="text-f1 hover:underline"
                       target="_blank"
                       rel="noreferrer"
                     >
