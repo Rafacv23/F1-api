@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import initTranslations from "@/app/i18n"
+import { BackBtn } from "@/components/BackBtn"
 
 export default async function ContactPage({
   params,
@@ -92,11 +93,7 @@ export default async function ContactPage({
               </li>
             </ul>
           </div>
-          <div className="mt-8">
-            <Link href="/" className="text-blue-500 hover:underline">
-              {t("back")}
-            </Link>
-          </div>
+          <BackBtn locale={params.locale} />
         </div>
       </section>
     </main>

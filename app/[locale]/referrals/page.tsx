@@ -10,6 +10,7 @@ import {
 import ReferralsList from "@/components/ReferralsList"
 import initTranslations from "@/app/i18n"
 import Link from "next/link"
+import { BackBtn } from "@/components/BackBtn"
 
 export default async function Referral({
   params,
@@ -33,11 +34,7 @@ export default async function Referral({
       </Breadcrumb>
       <p className="mb-6">{t("subtitle")}</p>
       <ReferralsList locale={params.locale} />
-      <div className="mt-8">
-        <Link href="/" className="text-blue-500 hover:underline">
-          {t("back")}
-        </Link>
-      </div>
+      <BackBtn locale={params.locale} />
     </main>
   )
 }

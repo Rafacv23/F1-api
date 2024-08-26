@@ -2,6 +2,7 @@ import React from "react"
 import TermsList from "@/components/TermList"
 import Link from "next/link"
 import initTranslations from "@/app/i18n"
+import { BackBtn } from "@/components/BackBtn"
 
 export default async function Terms({
   params,
@@ -17,11 +18,7 @@ export default async function Terms({
         <p>{t("subtitle")}</p>
       </section>
       <TermsList locale={params.locale} />
-      <div className="mt-8">
-        <Link href="/" className="text-blue-500 hover:underline">
-          {t("back")}
-        </Link>
-      </div>
+      <BackBtn locale={params.locale} />
     </main>
   )
 }

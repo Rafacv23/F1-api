@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import EndpointsList from "@/components/EndpointsList"
 import initTranslations from "@/app/i18n"
+import { BackBtn } from "@/components/BackBtn"
 
 export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
@@ -29,6 +30,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
       <p className="mb-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
       <EndpointsList locale={params.locale} />
+      <BackBtn locale={params.locale} />
     </main>
   )
 }
