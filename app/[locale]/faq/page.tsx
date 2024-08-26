@@ -11,7 +11,7 @@ export default async function FAQs({ params }: { params: { locale: string } }) {
       <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
-          <FaqsList />
+          <FaqsList locale={params.locale} />
           <div className="mt-8">
             <Link
               title="Back to home page"

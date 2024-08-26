@@ -16,7 +16,7 @@ export default async function Terms({
         <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
         <p>{t("subtitle")}</p>
       </section>
-      <TermsList />
+      <TermsList locale={params.locale} />
       <div className="mt-8">
         <Link href="/" className="text-blue-500 hover:underline">
           {t("back")}
