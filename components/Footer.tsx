@@ -6,6 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import initTranslations from "@/app/i18n"
 import { SITE_NAME } from "@/lib/constants"
+import ThemeToggle from "./ThemeToggle"
 
 export default async function Footer({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["footer"])
@@ -204,6 +205,7 @@ export default async function Footer({ locale }: { locale: string }) {
           </div>
         </div>
         <LanguageChanger />
+        <ThemeToggle locale={locale} />
         <p className="text-xs text-gray-500 dark:text-gray-400 flex gap-2 items-center">
           Made with <FaHeart /> by Rafa Canosa.
         </p>
