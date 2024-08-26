@@ -1,0 +1,11 @@
+{
+  "title": "Documentation de l'API F1",
+  "home": "Accueil",
+  "p1": "Bienvenue sur l'API de Formule 1 ! Cette API donne accès à une richesse de données liées aux courses de Formule 1, aux pilotes, aux équipes, aux circuits et plus encore.",
+  "p2": "Toutes les données sont fournies en format JSON et prêtes à l'emploi. Il suffit de récupérer https://f1connectapi.com avec le point de terminaison que vous souhaitez.",
+  "description": "Description",
+  "example": "Exemple",
+  "params": "Paramètres",
+  "default": "Défaut",
+  "table-caption": "Une liste de tous les points de terminaison de l'API."
+}

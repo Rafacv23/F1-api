@@ -1,0 +1,26 @@
+{
+  "faqs": [
+    {
+      "question": "Qu'est-ce que l'API F1 Connect ?",
+      "answer": "L'API F1 Connect est un service API gratuit fournissant des données liées à la course de Formule 1."
+    },
+    {
+      "question": "Comment accéder à l'API ?",
+      "answer": "Vous pouvez accéder à l'API en faisant des requêtes HTTP aux points de terminaison fournis. Consultez la documentation pour plus d'informations."
+    },
+    {
+      "question": "L'API est-elle gratuite à utiliser ?",
+      "answer": "Oui, l'API F1 Connect est complètement gratuite pour les projets personnels."
+    },
+    {
+      "question": "Depuis quelle saison les informations sont-elles disponibles ?",
+      "answer": "Nous avons des données de toutes les saisons de Formule 1 depuis la première en 1950 jusqu'à la dernière."
+    },
+    {
+      "question": "Combien de temps faut-il pour mettre à jour les informations après chaque course ?",
+      "answer": "Les informations sont généralement mises à jour dans les 24 à 48 heures suivant la fin de chaque course."
+    }
+  ],
+  "title": "Questions fréquemment posées",
+  "back": "← Retour à l'accueil"
+}
