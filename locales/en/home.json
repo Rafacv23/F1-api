@@ -1,3 +1,6 @@
 {
-  "subtitle": "Your free F1 API. Ready for development."
+  "subtitle": "Your free F1 API. Ready for development.",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System"
 }

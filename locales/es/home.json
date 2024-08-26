@@ -1,3 +1,6 @@
 {
-  "subtitle": "Api de F1 gratis. Lista para desarrollar."
+  "subtitle": "Api de F1 gratis. Lista para desarrollar.",
+  "light": "Claro",
+  "dark": "Oscuro",
+  "system": "Sistema"
 }
