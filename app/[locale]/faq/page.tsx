@@ -8,7 +8,7 @@ export default async function FAQs({ params }: { params: { locale: string } }) {
 
   return (
     <main className="max-w-3xl mx-auto p-6 md:h-screen flex flex-col justify-center items-center">
-      <section className="text-white">
+      <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
           <FaqsList />

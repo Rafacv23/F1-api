@@ -17,7 +17,7 @@ export default async function ContactPage({
 
   return (
     <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
-      <section className="text-white">
+      <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
           <p className="mb-8">{t("subtitle")}</p>
