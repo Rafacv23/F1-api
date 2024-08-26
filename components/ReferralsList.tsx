@@ -25,7 +25,7 @@ export default async function ReferralsList({ locale }: { locale: string }) {
           <TableRow>
             <TableHead className="w-[100px]">{t("logo")}</TableHead>
             <TableHead className="w-[100px]">{t("name")}</TableHead>
-            <TableHead>{t("descriptiob")}</TableHead>
+            <TableHead>{t("description")}</TableHead>
             <TableHead>{t("author")}</TableHead>
             <TableHead>{t("link")}</TableHead>
           </TableRow>
