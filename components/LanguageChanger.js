@@ -49,6 +49,12 @@ export default function LanguageChanger() {
         <SelectItem value="en">English</SelectItem>
         <SelectItem value="es">Español</SelectItem>
         <SelectItem value="ru">Russian</SelectItem>
+        <SelectItem value="fr">French</SelectItem>
+        <SelectItem value="de">German</SelectItem>
+        <SelectItem value="it">Italian</SelectItem>
+        <SelectItem value="pt">Portuguese</SelectItem>
+        <SelectItem value="jp">Japanese</SelectItem>
+        <SelectItem value="ch">Chinese</SelectItem>
       </SelectContent>
     </Select>
   )
