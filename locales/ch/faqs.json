@@ -1,0 +1,26 @@
+{
+  "faqs": [
+    {
+      "question": "什么是 F1 Connect API？",
+      "answer": "F1 Connect API 是一个免费 API 服务，提供与 F1 比赛相关的数据。"
+    },
+    {
+      "question": "我如何访问 API？",
+      "answer": "您可以通过向提供的端点发送 HTTP 请求来访问 API。有关更多信息，请参阅文档。"
+    },
+    {
+      "question": "API 使用是免费的？",
+      "answer": "是的，F1 Connect API 对个人项目完全免费。"
+    },
+    {
+      "question": "信息从哪个赛季开始提供？",
+      "answer": "我们提供从 1950 年第一赛季到最新赛季的所有 F1 数据。"
+    },
+    {
+      "question": "每场比赛后信息更新需要多长时间？",
+      "answer": "信息通常会在每场比赛结束后的 24-48 小时内更新。"
+    }
+  ],
+  "title": "常见问题",
+  "back": "← 返回主页"
+}

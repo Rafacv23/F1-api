@@ -1,0 +1,11 @@
+{
+  "title": "F1 API 文档",
+  "home": "首页",
+  "p1": "欢迎使用 F1 API！该 API 提供与 F1 比赛、车手、车队、赛道等相关的大量数据。",
+  "p2": "所有数据均以 JSON 格式提供，准备好使用。只需通过 https://f1connectapi.com 访问您喜欢的端点即可。",
+  "description": "描述",
+  "example": "示例",
+  "params": "参数",
+  "default": "默认",
+  "table-caption": "所有 API 端点的列表。"
+}
