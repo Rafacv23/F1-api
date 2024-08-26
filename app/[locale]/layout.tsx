@@ -1,5 +1,6 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { GoogleAnalytics } from "@next/third-parties/google"
+import { Inter } from "next/font/google"
 import {
   SITE_META_NAME,
   SITE_META_DESCRIPTION,
@@ -9,6 +10,9 @@ import "./globals.css"
 import Footer from "@/components/Footer"
 import initTranslations from "../i18n"
 import TranslationsProvider from "@/components/TranslationsProvider"
+import { Providers } from "@/components/Providers"
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 const i18nNamespaces = ["home"]
 
@@ -45,9 +49,6 @@ export const metadata: Metadata = {
   },
   keywords: ["F1", "Public API", "Formula 1"],
   referrer: "origin-when-cross-origin",
-  themeColor: "#000000", // Para los navegadores móviles
-  colorScheme: "dark", // Para temas oscuros
-  viewport: "width=device-width, initial-scale=1.0",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -75,6 +76,13 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-schema: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -88,14 +96,16 @@ export default async function RootLayout({
 
   return (
     <html lang={params.locale}>
-      <body className={"dark"}>
+      <body className={inter.variable}>
         <TranslationsProvider
           namespaces={i18nNamespaces}
           locale={params.locale}
           resources={resources}
         >
-          {children}
-          <Footer locale={params.locale} />
+          <Providers>
+            {children}
+            <Footer locale={params.locale} />
+          </Providers>
         </TranslationsProvider>
       </body>
       <GoogleAnalytics gaId="G-BSF96MBRJC" />
