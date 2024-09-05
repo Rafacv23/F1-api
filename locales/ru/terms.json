@@ -1,16 +1,16 @@
 {
   "terms": [
     {
-      "title": "Terms Of Use",
-      "description": "You may use this API for personal, non-commercial applications and services, including educational and research purposes. Use by websites and applications supported by advertising is permitted. However, you must not charge for any application or service that uses this API or for any data obtained from it."
+      "title": "Условия использования",
+      "description": "Вы можете использовать этот API для личных, некоммерческих приложений и сервисов, включая образовательные и исследовательские цели. Разрешено использование веб-сайтами и приложениями, поддерживаемыми рекламой. Однако вы не должны взимать плату за любое приложение или услугу, использующие этот API, или за любые данные, полученные с его помощью."
     },
     {
-      "title": "Attribution",
-      "description": "You are not required to attribute this site in applications or services using this API. However, an attribution would be appreciated when addressing a technical audience. A reference to the “F1 Connect API” with a link to: https://f1-connect-api.vercel.app/ is ideal."
+      "title": "Указание авторства",
+      "description": "От вас не требуется указывать этот сайт в приложениях или сервисах, использующих этот API. Однако при обращении к технической аудитории было бы желательно указать его авторство. Ссылки на “F1 Connect API” (https://f1-connect-api.vercel.app/) будет достаточно."
     },
     {
-      "title": "Disclaimer",
-      "description": "The author disclaims all responsibility for any loss or damage arising from the use of this API. The author cannot guarantee the continuing availability of the API or the accuracy of the data."
+      "title": "Отказ от ответственности",
+      "description": "Автор не несет никакой ответственности за любые убытки или ущерб, возникшие в результате использования этого API. Автор не может гарантировать постоянную доступность API или точность данных."
     }
   ],
   "title": "Условия использования",
