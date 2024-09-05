@@ -91,6 +91,11 @@ export async function GET(request: Request) {
         teamWinnerId: row.Team_Winner_ID,
         url: row.Url,
         round: row.Round,
+        fast_lap: {
+          fast_lap: row.fast_lap,
+          driverId: row.fast_lap_driver_id,
+          teamId: row.fast_lap_team_id,
+        },
       }
     })
 

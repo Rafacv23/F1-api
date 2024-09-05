@@ -6,6 +6,7 @@ import {
   BaseApiResponse,
   ProcessedCircuit,
   ProcessedDriver,
+  ProcessedFastLap,
   ProcessedTeam,
   Race,
   Races,
@@ -59,6 +60,12 @@ export async function GET(request: Request, context: any) {
         url: row.Circuit_URL,
       }
 
+      const fastLapData: ProcessedFastLap = {
+        fast_lap: row.fast_lap,
+        fast_lap_driver_id: row.fast_lap_driver_id,
+        fast_lap_team_id: row.fast_lap_team_id,
+      }
+
       const driverData: ProcessedDriver | null = row.Driver_ID
         ? {
             driverId: row.Driver_ID,
@@ -105,6 +112,7 @@ export async function GET(request: Request, context: any) {
         },
         laps: row.Laps,
         round: row.Round,
+        fast_lap: fastLapData,
         url: row.Url,
         circuit: circuitData,
         winner: driverData,
