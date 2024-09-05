@@ -6,6 +6,12 @@ export type EndpointType = {
   example: number
 }
 
+export type ProcessedFastLap = {
+  fast_lap: string
+  fast_lap_driver_id: string
+  fast_lap_team_id: string
+}
+
 export type FaqType = {
   question: string
   answer: string
