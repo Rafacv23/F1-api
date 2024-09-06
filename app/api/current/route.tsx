@@ -72,7 +72,7 @@ export async function GET(request: Request) {
             driverId: row.Driver_ID,
             name: row.Name,
             surname: row.Surname,
-            country: row.Country,
+            country: row.Nationality,
             birthday: row.Birthday,
             number: row.Number,
             shortName: row.Short_Name,

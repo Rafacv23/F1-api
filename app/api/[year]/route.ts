@@ -71,7 +71,7 @@ export async function GET(request: Request, context: any) {
             driverId: row.Driver_ID,
             name: row.Name,
             surname: row.Surname,
-            country: row.Country,
+            country: row.Nationality,
             birthday: row.Birthday,
             number: row.Number,
             shortName: row.Short_Name,
@@ -87,7 +87,7 @@ export async function GET(request: Request, context: any) {
             firstAppareance: row.First_Appareance,
             constructorsChampionships: row.Constructors_Championships,
             driversChampionships: row.Drivers_Championships,
-            url: row.Team_URL,
+            url: row.Team_Url,
           }
         : null
 
