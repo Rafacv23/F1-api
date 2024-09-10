@@ -184,7 +184,7 @@ export interface BaseApiResponse {
   api: string
   url: string
   limit: string | number
-  total: number
+  total?: number
 }
 
 export interface DriverChampionship {
