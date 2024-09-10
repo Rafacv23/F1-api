@@ -2,12 +2,7 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import {
-  BaseApiResponse,
-  ProcessedRace,
-  ProcessedRaces,
-  Race,
-} from "@/lib/definitions"
+import { BaseApiResponse, ProcessedRaces } from "@/lib/definitions"
 
 export const revalidate = 60
 
