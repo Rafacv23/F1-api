@@ -14,6 +14,12 @@
     "default": 30
   },
   {
+    "url": "/api/2024/compare/leclerc/sainz",
+    "title": "/api/${year}/compare/${driverId1}/${driverId2}",
+    "description": "Compare the head to head between two drivers in a season.",
+    "params": "-"
+  },
+  {
     "url": "/api/teams",
     "title": "/api/teams",
     "description": "Retrieve a list of all the teams that participated in Formula 1 races.",
