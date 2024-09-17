@@ -4,7 +4,7 @@ import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
 import { BaseApiResponse, ConstructorsChampionship } from "@/lib/definitions"
 
-export const revalidate = 60
+export const revalidate = 10
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number
