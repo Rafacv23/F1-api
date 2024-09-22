@@ -1,7 +1,12 @@
 # 🏎️ F1 Connect API | Your free api, ready for development
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+[![Star on GitHub](https://img.shields.io/github/stars/rafacv23/F1-api?style=social)](https://github.com/rafacv23/F1-api) [![Fork on GitHub](https://img.shields.io/github/forks/rafacv23/F1-api?style=social)](https://github.com/rafacv23/F1-api/fork)
 
 Project made with Next.js and Turso to take all the data about the Formula 1 Championship.
 
