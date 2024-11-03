@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
   "announce": "Data updated after the 2024 Brazilian GP. More in the docs",
   "link": "http://f1-connect-api.vercel.app/api/2024/21/race"
+=======
+  "announce": "Data updated after the 2024 Mexican GP. More in the docs",
+  "link": "http://f1-connect-api.vercel.app/api/2024/20/race"
+>>>>>>> b519636d220f6b261bde493c0dc8f686915d0c41
 }
