@@ -18,20 +18,21 @@ export async function GET(request: Request, context: any) {
     const { year, round } = context.params
 
     const sql = `
-    SELECT Sprint_Race.*, Results.*, Drivers.*, Teams.*, Circuits.*
+    SELECT Sprint_Race.*, Races.*, Drivers.*, Teams.*, Circuits.*
     FROM Sprint_Race
     JOIN Races ON Sprint_Race.Race_ID = Races.Race_ID
     JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-    JOIN Results ON Sprint_Race.Race_ID = Results.Race_ID
     JOIN Drivers ON Sprint_Race.Driver_ID = Drivers.Driver_ID
     JOIN Teams ON Sprint_Race.Team_ID = Teams.Team_ID
     JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
     WHERE Championships.Year = ? AND Races.Round = ?
-    ORDER BY Results.Finishing_Position ASC
+    ORDER BY Sprint_Race.Finishing_Position ASC
     LIMIT ?;
     `
 
     const data = await executeQuery(sql, [year, round, limit])
+
+    console.log(data)
 
     if (data.length === 0) {
       return apiNotFound(
@@ -46,23 +47,23 @@ export async function GET(request: Request, context: any) {
       position: row[4],
       points: row[9],
       driver: {
-        driverId: row[19],
-        number: row[24],
-        shortName: row[25],
-        url: row[26],
-        name: row[20],
-        surname: row[21],
-        nationality: row[22],
-        birthday: row[23],
+        driverId: row[2],
+        number: row[41],
+        shortName: row[42],
+        url: row[43],
+        name: row[37],
+        surname: row[38],
+        nationality: row[39],
+        birthday: row[40],
       },
       team: {
-        teamId: row[27],
-        teamName: row[28],
-        nationality: row[29],
-        firstAppareance: row[30],
-        constructorsChampionships: row[31],
-        driversChampionships: row[32],
-        url: row[33],
+        teamId: row[44],
+        teamName: row[45],
+        nationality: row[46],
+        firstAppareance: row[47],
+        constructorsChampionships: row[48],
+        driversChampionships: row[49],
+        url: row[50],
       },
       grid: row[5],
       laps: row[6],
@@ -98,7 +99,11 @@ export async function GET(request: Request, context: any) {
       season: year,
       races: {
         round: round,
+        date: data[0][13],
+        time: data[0][32],
+        url: data[0][18],
         raceId: data[0][1],
+        raceName: data[0][12],
         circuit: circuitData[0],
         sprintRaceResults: processedData,
       },
