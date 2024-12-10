@@ -2,7 +2,7 @@
 name: 🐞 Bug Report
 about: Report a bug in the project
 title: "[BUG] Your title here"
-labels: 🐞 Bug
+labels: 🐞 Bug, 👀 Unread
 assignees: rafacv23
 ---
 
