@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound } from "@/lib/utils"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { circuits } from "@/db/migrations/schema"
@@ -16,13 +16,8 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.has("limit")
-    ? parseInt(queryParams.get("limit") || "30", 10)
-    : 30
 
-  const offset = queryParams.has("offset")
-    ? parseInt(queryParams.get("offset") || "0", 10)
-    : 0
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const circuitsData = await db
       .select()
