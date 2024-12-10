@@ -1,39 +1,40 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
-import {
-  BaseApiResponse,
-  Championship,
-  Championships,
-  ProcessedChampionships,
-} from "@/lib/definitions"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { championships } from "@/db/migrations/schema"
+import { InferModel, desc } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Championship = InferModel<typeof championships>
+
 interface ApiResponse extends BaseApiResponse {
-  championships: ProcessedChampionships
+  championships: Championship[]
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const sql = `SELECT * FROM Championships LIMIT ?;`
+    const seasonsData = await db
+      .select()
+      .from(championships)
+      .limit(limit)
+      .offset(offset)
+      .orderBy(desc(championships.championshipId))
 
-    const data: Championships = await executeQuery(sql, [limit])
-
-    if (data.length === 0) {
+    if (seasonsData.length === 0) {
       return apiNotFound(request, "No seasons found.")
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Championship) => {
+    seasonsData.forEach((season) => {
       return {
-        championshipId: row.Championship_ID,
-        championshipName: row.Championship_Name,
-        url: row.Url,
-        year: row.Year,
+        championshipId: season.championshipId,
+        championshipName: season.championshipName,
+        url: season.url,
+        year: season.year,
       }
     })
 
@@ -41,8 +42,9 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
-      championships: processedData,
+      offset: offset,
+      total: seasonsData.length,
+      championships: seasonsData,
     }
 
     return NextResponse.json(response)

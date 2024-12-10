@@ -1,46 +1,50 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { BaseApiResponse, ProcessedTeam, Team, Teams } from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { teams } from "@/db/migrations/schema"
+import { eq, InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Team = InferModel<typeof teams>
+
 interface ApiResponse extends BaseApiResponse {
-  team: ProcessedTeam[]
+  team: Team[]
 }
 
 export async function GET(request: Request, context: any) {
   try {
-    const { teamId } = context.params // Captura el parámetro teamId de la URL
+    const { teamId } = context.params
     const limit = 1
-    const sql = "SELECT * FROM Teams WHERE Team_Id = ? LIMIT ?"
+    const teamData = await db
+      .select()
+      .from(teams)
+      .where(eq(teams.teamId, teamId))
+      .limit(limit)
 
-    const data: Teams = await executeQuery(sql, [teamId, limit])
-
-    if (data.length === 0) {
-      return apiNotFound(request, "No teams found for this id, try with other.")
+    if (teamData.length === 0) {
+      return apiNotFound(request, "No team found for this id, try with other.")
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Team) => {
+    teamData.forEach((team) => {
       return {
-        teamId: row.Team_ID,
-        teamName: row.Team_Name,
-        country: row.Team_Nationality,
-        firstAppareance: row.First_Appareance,
-        constructorsChampionships: row.Constructors_Championships,
-        driversChampionships: row.Drivers_Championships,
-        url: row.URL,
+        teamId: team.teamId,
+        teamName: team.teamName,
+        country: team.teamNationality,
+        firstAppareance: team.firstAppeareance,
+        driversChampionships: team.driversChampionships,
+        constructorsChampionships: team.constructorsChampionships,
+        url: team.url,
       }
     })
 
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
-      total: processedData.length,
-      team: processedData,
+      total: teamData.length,
+      team: teamData,
     }
 
     return NextResponse.json(response)
