@@ -36,3 +36,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignorar bases de datos locales
+db/*.sqlite
+db/*.db
+
+# Ignorar cachés o datos temporales
+db/temp/
+db/cache/
+
+# NO ignorar migraciones ni esquemas
+!db/migrations/
+!db/schema.ts
