@@ -32,3 +32,10 @@ export function getDay(): string {
   const today = new Date().toISOString().split("T")[0] // Fecha actual en formato YYYY-MM-DD
   return today
 }
+
+export const getLimitAndOffset = (queryParams: URLSearchParams) => {
+  const limit = parseInt(queryParams.get("limit") || "30", 10) // Default to 30
+  const offset = parseInt(queryParams.get("offset") || "0", 10) // Default to 0
+
+  return { limit, offset }
+}
