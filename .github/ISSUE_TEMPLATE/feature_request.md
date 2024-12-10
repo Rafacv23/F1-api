@@ -2,7 +2,7 @@
 name: 🚀 Feature Request
 about: Suggest a new feature or enhancement
 title: "[FEATURE] Your title here"
-labels: 🚀 Feature 👀 Unread
+labels: 🚀 Feature, 👀 Unread
 assignees: rafacv23
 ---
 

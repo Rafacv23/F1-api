@@ -2,7 +2,7 @@
 name: 📚 Documentation Request
 about: Suggest improvements or additions to the documentation
 title: "[DOCS] Your title here"
-labels: 📚 Documentation 👀 Unread
+labels: 📚 Documentation, 👀 Unread
 assignees: rafacv23
 ---
 

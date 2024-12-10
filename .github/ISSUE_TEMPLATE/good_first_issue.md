@@ -2,7 +2,7 @@
 name: 🎯 Good First Issue
 about: Small and straightforward tasks for new contributors
 title: "[BEGINNER] Your title here"
-labels: 🎯 Good First Issue 👀 Unread
+labels: 🎯 Good First Issue, 👀 Unread
 assignees: rafacv23
 ---
 

@@ -2,7 +2,7 @@
 name: ❓ Question
 about: Ask a question about the project
 title: "[QUESTION] Your title here"
-labels: ❓ Question 👀 Unread
+labels: ❓ Question, 👀 Unread
 assignees: rafacv23
 ---
 
