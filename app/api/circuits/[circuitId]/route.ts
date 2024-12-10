@@ -1,45 +1,51 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
-import { executeQuery } from "@/lib/executeQuery"
-import { BaseApiResponse, Circuit, ProcessedCircuits } from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { eq, InferModel } from "drizzle-orm"
+import { circuits } from "@/db/migrations/schema"
 
 export const revalidate = 60
 
+type Circuit = InferModel<typeof circuits>
+
 interface ApiResponse extends BaseApiResponse {
-  circuit: ProcessedCircuits
+  circuit: Circuit[]
 }
 
 export async function GET(request: Request, context: any) {
   try {
-    const { circuitId } = context.params // Captura el parámetro driverId de la URL
-    const sql = "SELECT * FROM Circuits WHERE Circuit_ID = ? LIMIT ?"
+    const { circuitId } = context.params
     const limit = 1
 
-    const data = await executeQuery(sql, [circuitId, limit])
+    const circuitData = await db
+      .select()
+      .from(circuits)
+      .where(eq(circuits.circuitId, circuitId))
+      .limit(limit)
 
-    if (data.length === 0) {
+    if (circuitData.length === 0) {
       return apiNotFound(
         request,
-        "No driver found for this id, try with other one."
+        "No Circuit found for this id, try with other one."
       )
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Circuit) => {
+    circuitData.forEach((circuit) => {
       return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length,
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
+        circuitId: circuit.circuitId,
+        circuitName: circuit.circuitName,
+        country: circuit.country,
+        city: circuit.city,
+        circuitLength: circuit.circuitLength,
+        corners: circuit.numberOfCorners,
+        firstParticipationYear: circuit.firstParticipationYear,
+        lapRecord: circuit.lapRecord,
+        fastestLapDriverId: circuit.fastestLapDriverId,
+        fastestLapTeamId: circuit.fastestLapTeamId,
+        fastestLapYear: circuit.fastestLapYear,
+        url: circuit.url,
       }
     })
 
@@ -47,8 +53,8 @@ export async function GET(request: Request, context: any) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
-      circuit: processedData,
+      total: circuitData.length,
+      circuit: circuitData,
     }
 
     return NextResponse.json(response)

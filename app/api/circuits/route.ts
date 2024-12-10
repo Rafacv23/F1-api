@@ -1,47 +1,48 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
-import {
-  BaseApiResponse,
-  Circuit,
-  Circuits,
-  ProcessedCircuits,
-} from "@/lib/definitions"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { circuits } from "@/db/migrations/schema"
+import { InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Circuit = InferModel<typeof circuits>
+
 interface ApiResponse extends BaseApiResponse {
-  circuits: ProcessedCircuits
+  circuits: Circuit[]
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
-  try {
-    // const limit = 30
-    const sql = `SELECT * FROM Circuits LIMIT ?`
-    const data: Circuits = await executeQuery(sql, [limit])
 
-    if (data.length === 0) {
+  const { limit, offset } = getLimitAndOffset(queryParams)
+  try {
+    const circuitsData = await db
+      .select()
+      .from(circuits)
+      .limit(limit)
+      .offset(offset)
+
+    if (circuitsData.length === 0) {
       return apiNotFound(request, "No circuits found.")
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Circuit) => {
+    circuitsData.forEach((circuit) => {
       return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length,
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
+        circuitId: circuit.circuitId,
+        circuitName: circuit.circuitName,
+        country: circuit.country,
+        city: circuit.city,
+        circuitLength: circuit.circuitLength,
+        corners: circuit.numberOfCorners,
+        firstParticipationYear: circuit.firstParticipationYear,
+        lapRecord: circuit.lapRecord,
+        fastestLapDriverId: circuit.fastestLapDriverId,
+        fastestLapTeamId: circuit.fastestLapTeamId,
+        fastestLapYear: circuit.fastestLapYear,
+        url: circuit.url,
       }
     })
 
@@ -49,8 +50,9 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
-      circuits: processedData,
+      offset: offset,
+      total: circuitsData.length,
+      circuits: circuitsData,
     }
 
     return NextResponse.json(response)
