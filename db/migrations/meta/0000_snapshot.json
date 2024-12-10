@@ -1,0 +1,1409 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "Championships": {
+      "name": "Championships",
+      "columns": {
+        "Championship_ID": {
+          "autoincrement": false,
+          "name": "Championship_ID",
+          "type": "text(100)",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Championship_Name": {
+          "autoincrement": false,
+          "name": "Championship_Name",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Url": {
+          "autoincrement": false,
+          "name": "Url",
+          "type": "text(400)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Year": {
+          "autoincrement": false,
+          "name": "Year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Teams": {
+      "name": "Teams",
+      "columns": {
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(200)",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Team_Name": {
+          "autoincrement": false,
+          "name": "Team_Name",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_Nationality": {
+          "autoincrement": false,
+          "name": "Team_Nationality",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "First_Appeareance": {
+          "autoincrement": false,
+          "name": "First_Appeareance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Constructors_Championships": {
+          "autoincrement": false,
+          "name": "Constructors_Championships",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drivers_Championships": {
+          "autoincrement": false,
+          "name": "Drivers_Championships",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "URL": {
+          "autoincrement": false,
+          "name": "URL",
+          "type": "text(400)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Drivers": {
+      "name": "Drivers",
+      "columns": {
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Name": {
+          "autoincrement": false,
+          "name": "Name",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Surname": {
+          "autoincrement": false,
+          "name": "Surname",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Nationality": {
+          "autoincrement": false,
+          "name": "Nationality",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Birthday": {
+          "autoincrement": false,
+          "name": "Birthday",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Number": {
+          "autoincrement": false,
+          "name": "Number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Short_Name": {
+          "autoincrement": false,
+          "name": "Short_Name",
+          "type": "text(3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "URL": {
+          "autoincrement": false,
+          "name": "URL",
+          "type": "text(400)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Driver_Classifications": {
+      "name": "Driver_Classifications",
+      "columns": {
+        "Classification_ID": {
+          "autoincrement": false,
+          "name": "Classification_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Championship_ID": {
+          "autoincrement": false,
+          "name": "Championship_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Points": {
+          "autoincrement": false,
+          "name": "Points",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Position": {
+          "autoincrement": false,
+          "name": "Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wins": {
+          "autoincrement": false,
+          "name": "wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Driver_Classifications_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Driver_Classifications_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Driver_Classifications",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Driver_Classifications_Team_ID_Teams_Team_ID_fk": {
+          "name": "Driver_Classifications_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Driver_Classifications",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Driver_Classifications_Championship_ID_Championships_Championship_ID_fk": {
+          "name": "Driver_Classifications_Championship_ID_Championships_Championship_ID_fk",
+          "tableFrom": "Driver_Classifications",
+          "tableTo": "Championships",
+          "columnsFrom": [
+            "Championship_ID"
+          ],
+          "columnsTo": [
+            "Championship_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Constructors_Classifications": {
+      "name": "Constructors_Classifications",
+      "columns": {
+        "Classification_ID": {
+          "autoincrement": false,
+          "name": "Classification_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Championship_ID": {
+          "autoincrement": false,
+          "name": "Championship_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Points": {
+          "autoincrement": false,
+          "name": "Points",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Position": {
+          "autoincrement": false,
+          "name": "Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wins": {
+          "autoincrement": false,
+          "name": "wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Constructors_Classifications_Team_ID_Teams_Team_ID_fk": {
+          "name": "Constructors_Classifications_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Constructors_Classifications",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Constructors_Classifications_Championship_ID_Championships_Championship_ID_fk": {
+          "name": "Constructors_Classifications_Championship_ID_Championships_Championship_ID_fk",
+          "tableFrom": "Constructors_Classifications",
+          "tableTo": "Championships",
+          "columnsFrom": [
+            "Championship_ID"
+          ],
+          "columnsTo": [
+            "Championship_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Circuits": {
+      "name": "Circuits",
+      "columns": {
+        "Circuit_ID": {
+          "autoincrement": false,
+          "name": "Circuit_ID",
+          "type": "text(100)",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Circuit_Name": {
+          "autoincrement": false,
+          "name": "Circuit_Name",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Country": {
+          "autoincrement": false,
+          "name": "Country",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "City": {
+          "autoincrement": false,
+          "name": "City",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Circuit_Length": {
+          "autoincrement": false,
+          "name": "Circuit_Length",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Lap_Record": {
+          "autoincrement": false,
+          "name": "Lap_Record",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "First_Participation_Year": {
+          "autoincrement": false,
+          "name": "First_Participation_Year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Number_of_Corners": {
+          "autoincrement": false,
+          "name": "Number_of_Corners",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fastest_Lap_Driver_ID": {
+          "autoincrement": false,
+          "name": "Fastest_Lap_Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fastest_Lap_Team_ID": {
+          "autoincrement": false,
+          "name": "Fastest_Lap_Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fastest_Lap_Year": {
+          "autoincrement": false,
+          "name": "Fastest_Lap_Year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Url": {
+          "autoincrement": false,
+          "name": "Url",
+          "type": "text(400)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Circuits_Fastest_Lap_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Circuits_Fastest_Lap_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Circuits",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Fastest_Lap_Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Circuits_Fastest_Lap_Team_ID_Teams_Team_ID_fk": {
+          "name": "Circuits_Fastest_Lap_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Circuits",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Fastest_Lap_Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Classifications": {
+      "name": "Classifications",
+      "columns": {
+        "Classification_ID": {
+          "autoincrement": false,
+          "name": "Classification_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Q1": {
+          "autoincrement": false,
+          "name": "Q1",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Q2": {
+          "autoincrement": false,
+          "name": "Q2",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Q3": {
+          "autoincrement": false,
+          "name": "Q3",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Grid_Position": {
+          "autoincrement": false,
+          "name": "Grid_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Classifications_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Classifications_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Classifications",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Classifications_Team_ID_Teams_Team_ID_fk": {
+          "name": "Classifications_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Classifications",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Classifications_Race_ID_Races_Race_ID_fk": {
+          "name": "Classifications_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "Classifications",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Races": {
+      "name": "Races",
+      "columns": {
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Championship_ID": {
+          "autoincrement": false,
+          "name": "Championship_ID",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Race_Name": {
+          "autoincrement": false,
+          "name": "Race_Name",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Race_Date": {
+          "autoincrement": false,
+          "name": "Race_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Circuit": {
+          "autoincrement": false,
+          "name": "Circuit",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Laps": {
+          "autoincrement": false,
+          "name": "Laps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Winner_ID": {
+          "autoincrement": false,
+          "name": "Winner_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_Winner_ID": {
+          "autoincrement": false,
+          "name": "Team_Winner_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Url": {
+          "autoincrement": false,
+          "name": "Url",
+          "type": "text(400)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Round": {
+          "autoincrement": false,
+          "name": "Round",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Race_Time": {
+          "autoincrement": false,
+          "name": "Race_Time",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Qualy_Date": {
+          "autoincrement": false,
+          "name": "Qualy_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP1_Date": {
+          "autoincrement": false,
+          "name": "FP1_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP2_Date": {
+          "autoincrement": false,
+          "name": "FP2_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP3_Date": {
+          "autoincrement": false,
+          "name": "FP3_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Sprint_Qualy_Date": {
+          "autoincrement": false,
+          "name": "Sprint_Qualy_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Sprint_Race_Date": {
+          "autoincrement": false,
+          "name": "Sprint_Race_Date",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Qualy_Time": {
+          "autoincrement": false,
+          "name": "Qualy_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP1_Time": {
+          "autoincrement": false,
+          "name": "FP1_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP2_Time": {
+          "autoincrement": false,
+          "name": "FP2_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "FP3_Time": {
+          "autoincrement": false,
+          "name": "FP3_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Sprint_Qualy_Time": {
+          "autoincrement": false,
+          "name": "Sprint_Qualy_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Sprint_Race_Time": {
+          "autoincrement": false,
+          "name": "Sprint_Race_Time",
+          "type": "text(8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fast_lap": {
+          "autoincrement": false,
+          "name": "fast_lap",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fast_lap_driver_id": {
+          "autoincrement": false,
+          "name": "fast_lap_driver_id",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fast_lap_team_id": {
+          "autoincrement": false,
+          "name": "fast_lap_team_id",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Races_Winner_ID_Drivers_Driver_ID_fk": {
+          "name": "Races_Winner_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Races",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Winner_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Races_Team_Winner_ID_Teams_Team_ID_fk": {
+          "name": "Races_Team_Winner_ID_Teams_Team_ID_fk",
+          "tableFrom": "Races",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_Winner_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Races_Championship_ID_Championships_Championship_ID_fk": {
+          "name": "Races_Championship_ID_Championships_Championship_ID_fk",
+          "tableFrom": "Races",
+          "tableTo": "Championships",
+          "columnsFrom": [
+            "Championship_ID"
+          ],
+          "columnsTo": [
+            "Championship_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Results": {
+      "name": "Results",
+      "columns": {
+        "Result_ID": {
+          "autoincrement": false,
+          "name": "Result_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Finishing_Position": {
+          "autoincrement": false,
+          "name": "Finishing_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Grid_Position": {
+          "autoincrement": false,
+          "name": "Grid_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Race_Time": {
+          "autoincrement": false,
+          "name": "Race_Time",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Retired": {
+          "autoincrement": false,
+          "name": "Retired",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Points_Obtained": {
+          "autoincrement": false,
+          "name": "Points_Obtained",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Results_Team_ID_Teams_Team_ID_fk": {
+          "name": "Results_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Results",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Results_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Results_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Results",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Results_Race_ID_Races_Race_ID_fk": {
+          "name": "Results_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "Results",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Sprint_Qualy": {
+      "name": "Sprint_Qualy",
+      "columns": {
+        "Sprint_Qualy_ID": {
+          "autoincrement": false,
+          "name": "Sprint_Qualy_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "SQ1": {
+          "autoincrement": false,
+          "name": "SQ1",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "SQ2": {
+          "autoincrement": false,
+          "name": "SQ2",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "SQ3": {
+          "autoincrement": false,
+          "name": "SQ3",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Grid_Position": {
+          "autoincrement": false,
+          "name": "Grid_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Sprint_Qualy_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Sprint_Qualy_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Sprint_Qualy",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Sprint_Qualy_Team_ID_Teams_Team_ID_fk": {
+          "name": "Sprint_Qualy_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Sprint_Qualy",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Sprint_Qualy_Race_ID_Races_Race_ID_fk": {
+          "name": "Sprint_Qualy_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "Sprint_Qualy",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Sprint_Race": {
+      "name": "Sprint_Race",
+      "columns": {
+        "Sprint_Race_ID": {
+          "autoincrement": false,
+          "name": "Sprint_Race_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Finishing_Position": {
+          "autoincrement": false,
+          "name": "Finishing_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Grid_Position": {
+          "autoincrement": false,
+          "name": "Grid_Position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Laps": {
+          "autoincrement": false,
+          "name": "Laps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Race_Time": {
+          "autoincrement": false,
+          "name": "Race_Time",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Retired": {
+          "autoincrement": false,
+          "name": "Retired",
+          "type": "text(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Points_Obtained": {
+          "autoincrement": false,
+          "name": "Points_Obtained",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "Sprint_Race_Team_ID_Teams_Team_ID_fk": {
+          "name": "Sprint_Race_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "Sprint_Race",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Sprint_Race_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "Sprint_Race_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "Sprint_Race",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Sprint_Race_Race_ID_Races_Race_ID_fk": {
+          "name": "Sprint_Race_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "Sprint_Race",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "FP1": {
+      "name": "FP1",
+      "columns": {
+        "FP1_ID": {
+          "autoincrement": false,
+          "name": "FP1_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Time": {
+          "autoincrement": false,
+          "name": "Time",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "FP1_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "FP1_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "FP1",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP1_Team_ID_Teams_Team_ID_fk": {
+          "name": "FP1_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "FP1",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP1_Race_ID_Races_Race_ID_fk": {
+          "name": "FP1_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "FP1",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "FP3": {
+      "name": "FP3",
+      "columns": {
+        "FP3_ID": {
+          "autoincrement": false,
+          "name": "FP3_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Time": {
+          "autoincrement": false,
+          "name": "Time",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "FP3_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "FP3_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "FP3",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP3_Team_ID_Teams_Team_ID_fk": {
+          "name": "FP3_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "FP3",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP3_Race_ID_Races_Race_ID_fk": {
+          "name": "FP3_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "FP3",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "FP2": {
+      "name": "FP2",
+      "columns": {
+        "FP2_ID": {
+          "autoincrement": false,
+          "name": "FP2_ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": false
+        },
+        "Race_ID": {
+          "autoincrement": false,
+          "name": "Race_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Driver_ID": {
+          "autoincrement": false,
+          "name": "Driver_ID",
+          "type": "text(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Team_ID": {
+          "autoincrement": false,
+          "name": "Team_ID",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Time": {
+          "autoincrement": false,
+          "name": "Time",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "FP2_Driver_ID_Drivers_Driver_ID_fk": {
+          "name": "FP2_Driver_ID_Drivers_Driver_ID_fk",
+          "tableFrom": "FP2",
+          "tableTo": "Drivers",
+          "columnsFrom": [
+            "Driver_ID"
+          ],
+          "columnsTo": [
+            "Driver_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP2_Team_ID_Teams_Team_ID_fk": {
+          "name": "FP2_Team_ID_Teams_Team_ID_fk",
+          "tableFrom": "FP2",
+          "tableTo": "Teams",
+          "columnsFrom": [
+            "Team_ID"
+          ],
+          "columnsTo": [
+            "Team_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "FP2_Race_ID_Races_Race_ID_fk": {
+          "name": "FP2_Race_ID_Races_Race_ID_fk",
+          "tableFrom": "FP2",
+          "tableTo": "Races",
+          "columnsFrom": [
+            "Race_ID"
+          ],
+          "columnsTo": [
+            "Race_ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
