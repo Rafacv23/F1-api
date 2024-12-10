@@ -1,8 +1,9 @@
 ---
-name: Good First Issue
+name: 🎯 Good First Issue
 about: Small and straightforward tasks for new contributors
 title: "[BEGINNER] Your title here"
-labels: good first issue
+labels: 🎯 Good First Issue, 👀 Unread
+assignees: rafacv23
 ---
 
 **Description**

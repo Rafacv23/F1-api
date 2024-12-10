@@ -1,8 +1,9 @@
 ---
-name: Feature Request
+name: 🚀 Feature Request
 about: Suggest a new feature or enhancement
 title: "[FEATURE] Your title here"
-labels: feature
+labels: 🚀 Feature, 👀 Unread
+assignees: rafacv23
 ---
 
 **Is your feature request related to a problem? Please describe.**
