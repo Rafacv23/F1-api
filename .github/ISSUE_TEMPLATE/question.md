@@ -1,8 +1,9 @@
 ---
-name: Question
+name: ❓ Question
 about: Ask a question about the project
 title: "[QUESTION] Your title here"
-labels: ❓ Question
+labels: ❓ Question 👀 Unread
+assignees: rafacv23
 ---
 
 **What’s your question?**

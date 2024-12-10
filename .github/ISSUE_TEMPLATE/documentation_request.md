@@ -1,8 +1,9 @@
 ---
-name: Documentation Request
+name: 📚 Documentation Request
 about: Suggest improvements or additions to the documentation
 title: "[DOCS] Your title here"
-labels: 📚 Documentation
+labels: 📚 Documentation 👀 Unread
+assignees: rafacv23
 ---
 
 **What needs improvement?**

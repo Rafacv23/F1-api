@@ -1,8 +1,9 @@
 ---
-name: Translation Request
+name: 🌐 Translation Request
 about: Suggest adding or reviewing translations for the project
 title: "[TRANSLATION] Your title here"
-labels: 🌐 Translation
+labels: 🌐 Translation 👀 Unread
+assignees: rafacv23
 ---
 
 **Language**
