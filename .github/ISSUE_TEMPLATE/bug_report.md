@@ -2,7 +2,7 @@
 name: Bug Report
 about: Report a bug in the project
 title: "[BUG] Your title here"
-labels: bug
+labels: 🐞 Bug
 ---
 
 **Description**

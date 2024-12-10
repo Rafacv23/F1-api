@@ -2,7 +2,7 @@
 name: Translation Request
 about: Suggest adding or reviewing translations for the project
 title: "[TRANSLATION] Your title here"
-labels: translation
+labels: 🌐 Translation
 ---
 
 **Language**

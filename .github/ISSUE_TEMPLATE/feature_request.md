@@ -2,7 +2,7 @@
 name: Feature Request
 about: Suggest a new feature or enhancement
 title: "[FEATURE] Your title here"
-labels: feature
+labels: 🚀 Feature
 ---
 
 **Is your feature request related to a problem? Please describe.**
