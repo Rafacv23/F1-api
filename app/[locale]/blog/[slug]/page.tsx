@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { getArticleData } from "@/lib/articles"
 import { ArrowLeft } from "lucide-react"
+import { BackBtn } from "@/components/BackBtn"
 
 const Article = async ({ params }: { params: { slug: string } }) => {
   const articleData = await getArticleData(params.slug)
@@ -18,6 +19,7 @@ const Article = async ({ params }: { params: { slug: string } }) => {
         className="article"
         dangerouslySetInnerHTML={{ __html: articleData.contentHtml }}
       />
+      <BackBtn locale="" />
     </section>
   )
 }
