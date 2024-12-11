@@ -209,3 +209,10 @@ export interface ConstructorsChampionship {
   wins: number
   team: Team
 }
+
+export type ArticleItem = {
+  id: string
+  title: string
+  date: string
+  category: string
+}
