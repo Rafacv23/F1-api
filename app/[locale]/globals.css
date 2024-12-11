@@ -74,3 +74,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+.article {
+  @apply flex flex-col gap-3 text-lg tracking-wide mb-20;
+}
+
+.article > h1 {
+  @apply text-4xl text-center tracking-tight;
+}
+
+.article > h2 {
+  @apply text-3xl tracking-tight;
+}
+
+.article > ol {
+  @apply list-decimal flex flex-col mx-10 gap-2;
+}
+
+.article > ul {
+  @apply list-disc flex flex-col mx-10 gap-2;
+}
+
+.article > pre {
+  @apply bg-neutral-950 text-neutral-50 p-5 overflow-scroll;
+}
+
+.article > blockquote {
+  @apply pl-5 italic border-l-2 border-neutral-600 border-opacity-40;
+}
+
+.article > p > img {
+  @apply w-1/2 mx-auto;
+}
