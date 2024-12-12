@@ -40,11 +40,9 @@ export default async function Docs({ params }: { params: { locale: string } }) {
           <TabsTrigger value="circuits">Circuits</TabsTrigger>
         </TabsList>
         <TabsContent value="drivers">
-          Make changes to your account here.
           <EndpointsList locale={params.locale} value="drivers" />
         </TabsContent>
         <TabsContent value="teams">
-          Change your password here.
           <EndpointsList locale={params.locale} value="teams" />
         </TabsContent>
         <TabsContent value="seasons">
