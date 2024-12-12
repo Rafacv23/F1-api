@@ -171,7 +171,6 @@ export default function Header() {
                 </CommandGroup>
               </CommandList>
             </CommandDialog>
-
             <Link
               href={"https://github.com/rafacv23/f1-api"}
               target="_blank"
@@ -195,10 +194,20 @@ export default function Header() {
                   </DrawerDescription>
                 </DrawerHeader>
                 <ul className="flex flex-col gap-2 p-4">
-                  {buttons.map((button) => (
-                    <Link key={button.label} href={button.href}>
-                      {button.label}
-                    </Link>
+                  {searchOptions.map((option) => (
+                    <div key={option.group}>
+                      <DrawerDescription>{option.group}</DrawerDescription>
+                      {option.links.map((link) => (
+                        <Link
+                          key={link.label}
+                          href={link.href}
+                          className="flex items-center gap-2 w-full text-lg"
+                          onClick={() => setOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                 </ul>
               </DrawerContent>
