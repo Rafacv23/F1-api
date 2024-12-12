@@ -25,6 +25,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "drizzle-orm": "^0.38.0",
+    "framer-motion": "^11.14.0",
     "gray-matter": "^4.0.3",
     "i18next": "^23.12.2",
     "i18next-resources-to-backend": "^1.2.1",
@@ -40,7 +41,7 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "tailwind": "^4.0.0",
-    "tailwind-merge": "^2.3.0",
+    "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.1"
   },
