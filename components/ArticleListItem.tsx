@@ -1,27 +1,36 @@
 import Link from "next/link"
 import type { ArticleItem } from "@/lib/definitions"
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import moment from "moment"
 
 interface Props {
-  category: string
   articles: ArticleItem[]
 }
 
-const ArticleItemList = ({ category, articles }: Props) => {
+const ArticleItemList = ({ articles }: Props) => {
   return (
-    <div className="flex flex-col gap-5">
-      <h2 className="font-cormorantGaramond text-4xl">{category}</h2>
-      <div className="flex flex-col gap-2.5 font-poppins text-lg">
-        {articles.map((article, id) => (
-          <Link
-            href={`/blog/${article.id}`}
-            key={id}
-            className="hover:text-amber-700 transition duration-150"
-          >
-            {article.title}
-          </Link>
-        ))}
-      </div>
-    </div>
+    <Card className="flex flex-col gap-5">
+      {articles.map((article, id) => (
+        <CardHeader
+          className="flex flex-col gap-2.5 font-poppins text-lg"
+          key={article.id}
+        >
+          <CardTitle>
+            <Link
+              href={`/blog/${article.id}`}
+              key={id}
+              className="hover:text-f1 transition duration-150"
+            >
+              {article.title}
+            </Link>
+          </CardTitle>
+          <CardDescription>
+            {moment(article.date, "DD-MM-YYYY").format("MMMM Do YYYY")} by{" "}
+            {article.author}
+          </CardDescription>
+        </CardHeader>
+      ))}
+    </Card>
   )
 }
 
