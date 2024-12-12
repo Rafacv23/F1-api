@@ -1,36 +1,43 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
-import { BaseApiResponse, ProcessedTeam, Team, Teams } from "@/lib/definitions"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { teams } from "@/db/migrations/schema"
+import { InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Team = InferModel<typeof teams>
 interface ApiResponse extends BaseApiResponse {
-  teams: ProcessedTeam[]
+  teams: Team[]
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const sql = "SELECT * FROM teams LIMIT ?;"
-    const data: Teams = await executeQuery(sql, [limit])
+    const teamsData = await db
+      .select()
+      .from(teams)
+      .limit(limit)
+      .offset(offset)
+      .orderBy(teams.teamId)
 
     // Verificar si se encontraron datos
-    if (data.length === 0) {
+    if (teamsData.length === 0) {
       return apiNotFound(request, "No teams found.")
     }
-    // Procesamos los datos
-    const processedData = data.map((row: Team) => {
+
+    teamsData.forEach((team) => {
       return {
-        teamId: row.Team_ID,
-        teamName: row.Team_Name,
-        country: row.Team_Nationality,
-        firstAppareance: row.First_Appareance,
-        constructorsChampionships: row.Constructors_Championships,
-        driversChampionships: row.Drivers_Championships,
-        url: row.URL,
+        teamId: team.teamId,
+        teamName: team.teamName,
+        country: team.teamNationality,
+        firstAppareance: team.firstAppeareance,
+        driversChampionships: team.driversChampionships,
+        constructorsChampionships: team.constructorsChampionships,
+        url: team.url,
       }
     })
 
@@ -38,13 +45,14 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: processedData.length,
-      teams: processedData,
+      offset: offset,
+      total: teamsData.length,
+      teams: teamsData,
     }
 
     return NextResponse.json(response)
   } catch (error) {
-    console.error("Error:", error) // Agregamos un mensaje de error para la consola
+    console.error("Error:", error)
     return NextResponse.error()
   }
 }

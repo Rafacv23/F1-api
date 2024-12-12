@@ -1,55 +1,55 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 import { apiNotFound } from "@/lib/utils"
-import { executeQuery } from "@/lib/executeQuery"
-import {
-  BaseApiResponse,
-  Driver,
-  Drivers,
-  ProcessedDrivers,
-} from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { drivers } from "@/db/migrations/schema"
+import { eq, InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Driver = InferModel<typeof drivers>
+
 interface ApiResonse extends BaseApiResponse {
-  driver: ProcessedDrivers
+  driver: Driver[]
 }
 
 export async function GET(request: Request, context: any) {
   try {
-    const { driverId } = context.params // Captura el parámetro driverId de la URL
-    const sql = "SELECT * FROM Drivers WHERE Driver_Id = ? LIMIT ?"
+    const { driverId } = context.params
     const limit = 1
 
-    const data: Drivers = await executeQuery(sql, [driverId, limit])
+    const driverData = await db
+      .select()
+      .from(drivers)
+      .where(eq(drivers.driverId, driverId))
+      .limit(limit)
 
-    if (data.length === 0) {
+    if (driverData.length === 0) {
       return apiNotFound(
         request,
         "No driver found for this id, try with other one."
       )
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Driver) => {
+    driverData.forEach((driver) => {
       return {
-        driverId: row.Driver_ID,
-        name: row.Name,
-        surname: row.Surname,
-        country: row.Nationality,
-        birthday: row.Birthday,
-        number: row.Number,
-        shortName: row.Short_Name,
-        url: row.URL,
+        driverId: driver.driverId,
+        name: driver.name,
+        surname: driver.surname,
+        country: driver.nationality,
+        birthday: driver.birthday,
+        number: driver.number,
+        shortName: driver.shortName,
+        url: driver.url,
       }
     })
 
     const response: ApiResonse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
-      total: processedData.length,
-      driver: processedData,
+      total: driverData.length,
+      driver: driverData,
     }
 
     return NextResponse.json(response)
