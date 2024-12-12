@@ -30,7 +30,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
       </Breadcrumb>
       <p className="mb-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
-      <Tabs defaultValue="account">
+      <Tabs defaultValue="drivers">
         <TabsList>
           <TabsTrigger value="drivers">Drivers</TabsTrigger>
           <TabsTrigger value="teams">Teams</TabsTrigger>
