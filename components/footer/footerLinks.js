@@ -37,6 +37,11 @@ export const pages = [
     children: "docs",
   },
   {
+    href: "/blog",
+    title: "Blog",
+    children: "Blog",
+  },
+  {
     href: "/referrals",
     title: "Referrals",
     children: "referrals",
