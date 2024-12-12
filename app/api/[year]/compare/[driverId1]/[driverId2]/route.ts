@@ -72,11 +72,7 @@ WHERE r1.Driver_ID = ?
         )
       )
 
-    console.log(driversPointsData)
-
     const data = await executeQuery(sql, [driverId1, driverId2, year])
-
-    console.log(data)
 
     if (data.length === 0) {
       return apiNotFound(
