@@ -1,5 +1,5 @@
 ---
-title: "How to write clean code"
+title: "Balance of the 2024 F1 season"
 category: "f1"
 date: "01-01-2023"
 author: "Rafa Canosa"
