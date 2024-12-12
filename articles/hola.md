@@ -1,7 +1,8 @@
 ---
 title: "How to write clean code"
-category: "software engineering"
+category: "f1"
 date: "01-01-2023"
+author: "Rafa Canosa"
 ---
 
 # How to Write Clean Code
