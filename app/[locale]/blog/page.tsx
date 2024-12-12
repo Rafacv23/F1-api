@@ -2,12 +2,13 @@ import initTranslations from "@/app/i18n"
 import ArticleItemList from "@/components/ArticleListItem"
 import {
   Breadcrumb,
+  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
+  BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getCategorizedArticles } from "@/lib/articles"
 
 const HomePage = async ({ params }: { params: { locale: string } }) => {
@@ -15,9 +16,9 @@ const HomePage = async ({ params }: { params: { locale: string } }) => {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <section className="mx-auto w-11/12 md:w-1/2 mt-20 flex flex-col gap-16 mb-20">
-      <header className="font-light text-6xl text-center">
-        <h1>minimal blog</h1>
+    <main className="max-w-5xl mx-auto p-6 mt-28 h-screen">
+      <header className="font-light text-6xl">
+        <h1 className="text-3xl font-bold mb-4">Blog</h1>
       </header>
       <Breadcrumb>
         <BreadcrumbList>
@@ -30,17 +31,24 @@ const HomePage = async ({ params }: { params: { locale: string } }) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      <p className="my-6">{t("p1")}</p>
       <section className="md:grid md:grid-cols-2 flex flex-col gap-10">
-        {articles !== null &&
-          Object.keys(articles).map((article) => (
-            <ArticleItemList
-              category={article}
-              articles={articles[article]}
-              key={article}
-            />
+        <Tabs defaultValue="changelog">
+          <TabsList>
+            {Object.keys(articles).map((category) => (
+              <TabsTrigger key={category} value={category}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {Object.keys(articles).map((category) => (
+            <TabsContent key={category} value={category}>
+              <ArticleItemList articles={articles[category]} />
+            </TabsContent>
           ))}
+        </Tabs>
       </section>
-    </section>
+    </main>
   )
 }
 
