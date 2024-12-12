@@ -18,7 +18,7 @@ export default async function Referral({
 }) {
   const { t } = await initTranslations(params.locale, ["referrals"])
   return (
-    <main className="max-w-3xl mx-auto p-6 h-screen mt-28">
+    <main className="max-w-5xl mx-auto p-6 h-screen mt-28">
       <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
       <Breadcrumb>
         <BreadcrumbList>
