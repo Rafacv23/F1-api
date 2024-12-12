@@ -18,7 +18,7 @@ export default async function EndpointsList({
 
   return (
     <>
-      <h2 className="text-2xl font-bold mb-2">Endpoints</h2>
+      <h2 className="text-2xl font-bold my-4">Endpoints</h2>
       <ExpandableCardList cards={filterEndpoints} />
     </>
   )
