@@ -17,7 +17,7 @@ export default async function ContactPage({
   const { t } = await initTranslations(params.locale, ["contact"])
 
   return (
-    <main className="max-w-5xl mx-auto p-6 h-screen mt-32 mb-24 flex flex-col justify-center items-center">
+    <main className="max-w-5xl mx-auto p-6 h-screen mt-44 md:mt-32 mb-20 md:mb-0 flex flex-col justify-center items-center">
       <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
