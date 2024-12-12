@@ -38,8 +38,8 @@ export default async function ReferralsList({ locale }: { locale: string }) {
                   className="rounded"
                   src={referral.img}
                   alt={`${referral.name} logo`}
-                  width={100}
-                  height={100}
+                  width={40}
+                  height={40}
                   loading="lazy"
                 />
               </TableCell>
