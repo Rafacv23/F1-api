@@ -23,8 +23,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "./ui/input"
@@ -96,173 +94,40 @@ export default function Header() {
               <DialogTrigger className={buttonVariants({ variant: "outline" })}>
                 Search documentation...
               </DialogTrigger>
-              <DialogContent className="h-auto">
-                <DialogHeader>
-                  <DialogTitle>Search</DialogTitle>
-                </DialogHeader>
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <Label htmlFor="link" className="sr-only">
-                      Link
-                    </Label>
-                    <Input
-                      id="link"
-                      placeholder="Search..."
-                      type="search"
-                      autoFocus
-                    />
+              <DialogContent className="h-1/2">
+                <div className="relative">
+                  <div className="flex items-center space-x-2 fixed py-1 top-0 left-0 right-0">
+                    <div className="grid flex-1 gap-2">
+                      <Label htmlFor="link" className="sr-only">
+                        Link
+                      </Label>
+                      <Input id="link" placeholder="Search..." autoFocus />
+                    </div>
+                  </div>
+                  <div className="overflow-auto mt-8">
+                    {searchOptions.map((option) => (
+                      <>
+                        <DialogDescription>
+                          {option.links[0].label}
+                        </DialogDescription>
+                        <ul className="flex flex-col gap-4 items-start">
+                          {option.links.map((link) => (
+                            <li
+                              key={link.label}
+                              className={buttonVariants({
+                                variant: "ghost",
+                                className: "flex items-center gap-2 px-0",
+                              })}
+                            >
+                              {option.links[0].icon}
+                              <Link href={link.href}>{link.label}</Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ))}
                   </div>
                 </div>
-                {searchOptions.map((option) => (
-                  <>
-                    <DialogDescription>
-                      {option.links[0].label}
-                    </DialogDescription>
-                    <ul className="flex flex-col gap-4 items-start">
-                      {option.links.map((link) => (
-                        <li
-                          key={link.label}
-                          className={buttonVariants({
-                            variant: "ghost",
-                            className: "flex items-center gap-2 px-0",
-                          })}
-                        >
-                          {option.links[0].icon}
-                          <Link href={link.href}>{link.label}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ))}
-                <DialogDescription>Links</DialogDescription>
-                <ul className="flex flex-col gap-4 items-start">
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    <StickyNote />
-                    <Link href="/docs/introduction">Home</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <StickyNote />
-                    <Link href="/docs/endpoints">Docs</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <StickyNote />
-                    <Link href="/docs/data-structure">Blog</Link>
-                  </li>
-                </ul>
-                <DialogDescription>Endpoints</DialogDescription>
-                <ul className="flex flex-col gap-4 items-start">
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <Braces />
-                    <Link href="/docs/introduction">drivers</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <Braces />
-                    <Link href="/docs/endpoints">teams</Link>
-                  </li>
-                </ul>
-                <DialogDescription>About</DialogDescription>
-                <ul className="flex flex-col gap-4 items-start">
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <CircleHelp />
-                    <Link href="/docs/introduction">Contact</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <CircleHelp />
-                    <Link href="/docs/endpoints">Faqs</Link>
-                  </li>
-
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <CircleHelp />
-                    <Link href="/docs/data-structure">Terms</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    {" "}
-                    <CircleHelp />
-                    <Link href="/docs/data-structure">Referrals</Link>
-                  </li>
-                </ul>
-                <DialogDescription>Theme</DialogDescription>
-                <ul className="flex flex-col gap-4 items-start">
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    <Sun />
-                    <Link href="/docs/introduction">Light</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    <Moon />
-                    <Link href="/docs/endpoints">Dark</Link>
-                  </li>
-                  <li
-                    className={buttonVariants({
-                      variant: "ghost",
-                      className: "flex items-center gap-2 px-0",
-                    })}
-                  >
-                    <Laptop />
-                    <Link href="/docs/data-structure">System</Link>
-                  </li>
-                </ul>
               </DialogContent>
             </Dialog>
             <Link
