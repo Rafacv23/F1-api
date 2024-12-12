@@ -14,7 +14,9 @@
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "@next/third-parties": "^14.2.5",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
@@ -37,7 +39,8 @@
     "remark-html": "^16.0.1",
     "tailwind": "^4.0.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
