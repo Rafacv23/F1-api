@@ -28,7 +28,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <p className="mb-6">{t("p1")}</p>
+      <p className="my-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
       <Tabs defaultValue="drivers">
         <TabsList>
