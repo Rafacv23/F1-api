@@ -17,15 +17,15 @@ export default async function ContactPage({
   const { t } = await initTranslations(params.locale, ["contact"])
 
   return (
-    <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
+    <main className="max-w-5xl mx-auto p-6 h-screen mt-32 mb-24 flex flex-col justify-center items-center">
       <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
           <p className="mb-8">{t("subtitle")}</p>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <ul className="flex flex-col gap-4">
-              <li className="h-[max-content]">
-                <Card className="w-[350px]">
+          <div>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <li>
+                <Card className="w-[300px] h-[200px]">
                   <CardHeader>
                     <CardTitle>{t("email")}</CardTitle>
                     <CardDescription>
@@ -43,12 +43,12 @@ export default async function ContactPage({
                 </Card>
               </li>
               <li>
-                <Card className="w-[350px]">
+                <Card className="w-[300px] h-[200px]">
                   <CardHeader>
                     <CardTitle>{t("social")}</CardTitle>
                     <CardDescription>{t("social-description")}</CardDescription>
                   </CardHeader>
-                  <CardContent className="flex flex-col gap-4">
+                  <CardContent className="flex flex-row gap-4">
                     <Link
                       href="https://ninjapath.vercel.app/linkedin"
                       title="Rafa Canosa Linkedin"
@@ -71,7 +71,7 @@ export default async function ContactPage({
                 </Card>
               </li>
               <li>
-                <Card className="w-[350px]">
+                <Card className="w-[300px] h-[200px]">
                   <CardHeader>
                     <CardTitle>{t("support")}</CardTitle>
                     <CardDescription>
