@@ -20,6 +20,9 @@ const config = {
     extend: {
       colors: {
         f1: "#E00700",
+        customGrayDark: "rgba(17,18,20,0.75)",
+        customGrayDarker: "rgba(12,13,15,0.9)",
+        headerBorder: "hsla(0, 0%, 100%, .06))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
