@@ -12,8 +12,18 @@ import {
 import Link from "next/link"
 import initTranslations from "@/app/i18n"
 
-export default async function EndpointsList({ locale }: { locale: string }) {
+export default async function EndpointsList({
+  locale,
+  value,
+}: {
+  locale: string
+  value: string
+}) {
   const { t } = await initTranslations(locale, ["docs"])
+
+  const filterEndpoints = endpoints.filter(
+    (endpoint) => endpoint.value === value
+  )
 
   return (
     <>
@@ -30,7 +40,7 @@ export default async function EndpointsList({ locale }: { locale: string }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {endpoints.map((endpoint) => (
+          {filterEndpoints.map((endpoint) => (
             <TableRow key={endpoint.url}>
               <TableCell className="font-medium">{endpoint.title}</TableCell>
               <TableCell>{endpoint.description}</TableCell>
