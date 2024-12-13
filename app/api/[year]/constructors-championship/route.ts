@@ -29,8 +29,6 @@ export async function GET(request: Request, context: any) {
       .limit(limit)
       .offset(offset)
 
-    console.log(teamStandingsData)
-
     if (teamStandingsData.length === 0) {
       return apiNotFound(
         request,
