@@ -83,6 +83,7 @@ export async function GET(request: Request, context: any) {
       api: SITE_NAME,
       url: request.url,
       limit: limit,
+      offset: offset,
       total: circuitsData.length,
       season: year,
       circuits: circuitsData,
