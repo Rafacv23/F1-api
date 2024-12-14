@@ -1,53 +1,81 @@
 import { NextResponse } from "next/server"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { SITE_NAME } from "@/lib/constants"
-import { BaseApiResponse, Circuit, ProcessedCircuits } from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { circuits, races } from "@/db/migrations/schema"
+import { eq } from "drizzle-orm"
 
 export const revalidate = 60
 
+type Circuit = {
+  circuitId: string | null
+  circuitName: string | null
+  country: string | null
+  city: string | null
+  circuitLength: number | null
+  firstParticipationYear: number | null
+  corners?: number | null
+  lapRecord: string | null
+  fastestLapDriverId: string | null
+  fastestLapTeamId: string | null
+  fastestLapYear: number | null
+  url: string | null
+}
+
 interface ApiResponse extends BaseApiResponse {
   season: string | number
-  circuits: ProcessedCircuits
+  circuits: Circuit[]
 }
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const { year } = context.params
-    const sql = `
-      SELECT DISTINCT Circuits.*
-      FROM Circuits
-      JOIN Races ON Circuits.Circuit_ID = Races.Circuit
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      WHERE Championships.Year = ? LIMIT ?;
-    `
 
-    const data = await executeQuery(sql, [year, limit])
+    const circuitsData = await db
+      .select({
+        circuitId: races.circuit,
+        circuitName: circuits.circuitName,
+        country: circuits.country,
+        city: circuits.city,
+        circuitLength: circuits.circuitLength,
+        lapRecord: circuits.lapRecord,
+        firstParticipationYear: circuits.firstParticipationYear,
+        numberOfCorners: circuits.numberOfCorners,
+        fastestLapDriverId: circuits.fastestLapDriverId,
+        fastestLapTeamId: circuits.fastestLapTeamId,
+        fastestLapYear: circuits.fastestLapYear,
+        url: circuits.url,
+      })
+      .from(circuits)
+      .innerJoin(races, eq(circuits.circuitId, races.circuit))
+      .where(eq(races.championshipId, `f1_${year}`))
+      .limit(limit)
+      .offset(offset)
 
-    if (data.length === 0) {
+    if (circuitsData.length === 0) {
       return apiNotFound(
         request,
         "No circuits found for this year. Try with other one."
       )
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: Circuit) => {
+    circuitsData.forEach((circuit) => {
       return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length,
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
+        circuitId: circuit.circuitId,
+        circuitName: circuit.circuitName,
+        country: circuit.country,
+        city: circuit.city,
+        circuitLength: circuit.circuitLength,
+        lapRecord: circuit.lapRecord,
+        firstParticipationYear: circuit.firstParticipationYear,
+        corners: circuit.numberOfCorners,
+        fastestLapDriverId: circuit.fastestLapDriverId,
+        fastestLapTeamId: circuit.fastestLapTeamId,
+        fastestLapYear: circuit.fastestLapYear,
+        url: circuit.url,
       }
     })
 
@@ -55,9 +83,9 @@ export async function GET(request: Request, context: any) {
       api: SITE_NAME,
       url: request.url,
       limit: limit,
-      total: processedData.length,
+      total: circuitsData.length,
       season: year,
-      circuits: processedData,
+      circuits: circuitsData,
     }
 
     return NextResponse.json(response)
