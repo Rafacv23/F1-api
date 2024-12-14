@@ -1,10 +1,15 @@
 import { db } from "@/db"
-import { driverClassifications, drivers } from "@/db/migrations/schema"
+import {
+  driverClassifications,
+  drivers,
+  races,
+  results,
+} from "@/db/migrations/schema"
 import { SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { and, eq, or } from "drizzle-orm"
+import { and, eq, or, asc } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
 export const revalidate = 60
@@ -26,6 +31,12 @@ export interface ProcessedComparison {
   raceComparison: DriverStats
   qualifyingComparison: DriverStats
   wins: {
+    [driverId: string]: number | null
+  }
+  podiums: {
+    [driverId: string]: number | null
+  }
+  poles: {
     [driverId: string]: number | null
   }
   pointFinishes: DriverStats
@@ -62,22 +73,26 @@ export async function GET(request: Request, context: any) {
   COUNT(r1.Race_ID) AS Total_Races,
   SUM(CASE WHEN r1.Grid_Position < r2.Grid_Position THEN 1 ELSE 0 END) AS Driver1_BetterQualifying, 
   SUM(CASE WHEN r2.Grid_Position < r1.Grid_Position THEN 1 ELSE 0 END) AS Driver2_BetterQualifying,
-  MIN(CASE WHEN r1.Grid_Position != 'NC' THEN r1.Grid_Position ELSE NULL END) AS Driver1_BestQualifying,
-  MIN(CASE WHEN r2.Grid_Position != 'NC' THEN r2.Grid_Position ELSE NULL END) AS Driver2_BestQualifying,
-  SUM(CASE WHEN r1.Finishing_Position < r2.Finishing_Position AND r1.Finishing_Position != 'NC' AND r2.Finishing_Position != 'NC' THEN 1 ELSE 0 END) AS Driver1_BetterRaceFinish,
-  SUM(CASE WHEN r2.Finishing_Position < r1.Finishing_Position AND r1.Finishing_Position != 'NC' AND r2.Finishing_Position != 'NC' THEN 1 ELSE 0 END) AS Driver2_BetterRaceFinish,
-  MIN(CASE WHEN r1.Finishing_Position != 'NC' THEN r1.Finishing_Position ELSE NULL END) AS Driver1_BestRaceFinish,
-  MIN(CASE WHEN r2.Finishing_Position != 'NC' THEN r2.Finishing_Position ELSE NULL END) AS Driver2_BestRaceFinish,
-  SUM(CASE WHEN r1.Finishing_Position != 'NC' THEN r1.Points_Obtained ELSE 0 END) AS Driver1_TotalPoints,
-  SUM(CASE WHEN r2.Finishing_Position != 'NC' THEN r2.Points_Obtained ELSE 0 END) AS Driver2_TotalPoints,
+  MIN(r1.Grid_Position) AS Driver1_BestQualifying,
+  MIN(r2.Grid_Position) AS Driver2_BestQualifying,
+  SUM(CASE WHEN r1.Finishing_Position < r2.Finishing_Position THEN 1 ELSE 0 END) AS Driver1_BetterRaceFinish,
+  SUM(CASE WHEN r2.Finishing_Position < r1.Finishing_Position THEN 1 ELSE 0 END) AS Driver2_BetterRaceFinish,
+  MIN(r1.Finishing_Position) AS Driver1_BestRaceFinish,
+  MIN(r2.Finishing_Position) AS Driver2_BestRaceFinish,
+  SUM(CASE WHEN r1.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver1_PointFinishes,
+  SUM(CASE WHEN r2.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver2_PointFinishes,
+  SUM(CASE WHEN r1.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver1_Podiums,
+  SUM(CASE WHEN r2.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver2_Podiums,
+  SUM(CASE WHEN r1.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver1_Poles,
+  SUM(CASE WHEN r2.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver2_Poles,
   SUM(CASE WHEN r1.Finishing_Position = 'NC' THEN 1 ELSE 0 END) AS Driver1_DNFs,
-  SUM(CASE WHEN r2.Finishing_Position = 'NC' THEN 1 ELSE 0 END) AS Driver2_DNFs,
-  SUM(CASE WHEN r1.Finishing_Position <= 10 AND r1.Finishing_Position != 'NC' THEN 1 ELSE 0 END) AS Driver1_PointFinishes,
-  SUM(CASE WHEN r2.Finishing_Position <= 10 AND r2.Finishing_Position != 'NC' THEN 1 ELSE 0 END) AS Driver2_PointFinishes
+  SUM(CASE WHEN r2.Finishing_Position = 'NC' THEN 1 ELSE 0 END) AS Driver2_DNFs
 FROM Results r1
 JOIN Results r2 ON r1.Race_ID = r2.Race_ID AND r2.Driver_ID = ?
 WHERE r1.Driver_ID = ? 
-  AND r1.Race_ID LIKE CONCAT('%_', ?);
+  AND r1.Race_ID LIKE CONCAT('%_', ?)
+  AND r1.Grid_Position != 'NC'
+  AND r2.Grid_Position != 'NC';
   `
 
     const driversPointsData = await db
@@ -94,8 +109,6 @@ WHERE r1.Driver_ID = ?
         )
       )
       .limit(2)
-
-    console.log(driversPointsData)
 
     const data = await executeQuery(sql, [driverId1, driverId2, year])
 
@@ -164,6 +177,14 @@ WHERE r1.Driver_ID = ?
       wins: {
         [driverId1]: driversPointsData[0].Driver_Classifications.wins,
         [driverId2]: driversPointsData[1].Driver_Classifications.wins,
+      },
+      podiums: {
+        [driverId1]: result.Driver2_Podiums,
+        [driverId2]: result.Driver1_Podiums,
+      },
+      poles: {
+        [driverId1]: result.Driver2_Poles,
+        [driverId2]: result.Driver1_Poles,
       },
       pointFinishes: {
         [driverId1]: result.Driver2_PointFinishes,
