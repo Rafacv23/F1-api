@@ -1,15 +1,10 @@
 import { db } from "@/db"
-import {
-  driverClassifications,
-  drivers,
-  races,
-  results,
-} from "@/db/migrations/schema"
+import { driverClassifications, drivers } from "@/db/migrations/schema"
 import { SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { and, eq, or, asc } from "drizzle-orm"
+import { and, eq, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
 export const revalidate = 60
