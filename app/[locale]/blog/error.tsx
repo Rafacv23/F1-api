@@ -18,7 +18,7 @@ export default function Error({
   return (
     <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold mb-4">This article doesnt exists!</h2>
-      <p className="text-gray-900">
+      <p className="text-gray-900 dark:text-gray-100">
         Looks like this article doesnt exists. But dont worry, we have a lot of
         other articles.
       </p>
