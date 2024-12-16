@@ -124,7 +124,7 @@ function ExpandableCard({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/20 h-full w-full z-10"
+        className="fixed inset-0 bg-black/20 h-2/3 md:h-full w-full z-10"
       />
       <div className="fixed inset-0 grid place-items-center z-[100]">
         <motion.button
@@ -214,13 +214,13 @@ function ExpandableCardItem({
         <div>
           <motion.h3
             layoutId={`title-${card.title}-${id}`}
-            className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left"
+            className="font-medium text-neutral-800 dark:text-neutral-200 text-left"
           >
             {card.title}
           </motion.h3>
           <motion.p
             layoutId={`description-${card.description}-${id}`}
-            className="text-neutral-600 dark:text-neutral-400 text-center md:text-left"
+            className="text-neutral-600 dark:text-neutral-400 text-left"
           >
             {card.description}
           </motion.p>
@@ -228,7 +228,10 @@ function ExpandableCardItem({
       </div>
       <motion.button
         layoutId={`button-${card.title}-${id}`}
-        className={buttonVariants({ variant: "outline" })}
+        className={buttonVariants({
+          variant: "outline",
+          className: "w-full mt-4 md:w-auto",
+        })}
       >
         Try
       </motion.button>
