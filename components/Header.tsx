@@ -193,7 +193,7 @@ export default function Header() {
                     data.
                   </DrawerDescription>
                 </DrawerHeader>
-                <ul className="flex flex-col gap-2 p-4">
+                <ul className="flex flex-col gap-2 p-4 overflow-y-auto">
                   {searchOptions.map((option) => (
                     <div key={option.group}>
                       <DrawerDescription>{option.group}</DrawerDescription>
@@ -208,6 +208,17 @@ export default function Header() {
                         </Link>
                       ))}
                     </div>
+                  ))}
+                  <DrawerDescription>Theme</DrawerDescription>
+                  {themeToggle.map((button) => (
+                    <button
+                      key={button.label}
+                      onClick={button.onclick}
+                      className="flex items-center gap-2 w-full"
+                    >
+                      {button.icon}
+                      {button.label}
+                    </button>
                   ))}
                 </ul>
               </DrawerContent>
