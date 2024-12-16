@@ -58,6 +58,6 @@ export async function GET(request: Request) {
     return NextResponse.json(response)
   } catch (error) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }
