@@ -31,14 +31,16 @@ export default async function Docs({ params }: { params: { locale: string } }) {
       <p className="my-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
       <Tabs defaultValue="drivers">
-        <TabsList>
-          <TabsTrigger value="drivers">Drivers</TabsTrigger>
-          <TabsTrigger value="teams">Teams</TabsTrigger>
-          <TabsTrigger value="seasons">Seasons</TabsTrigger>
-          <TabsTrigger value="races">Races</TabsTrigger>
-          <TabsTrigger value="standings">Standings</TabsTrigger>
-          <TabsTrigger value="circuits">Circuits</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto">
+          <TabsList className="mb-8">
+            <TabsTrigger value="drivers">Drivers</TabsTrigger>
+            <TabsTrigger value="teams">Teams</TabsTrigger>
+            <TabsTrigger value="seasons">Seasons</TabsTrigger>
+            <TabsTrigger value="races">Races</TabsTrigger>
+            <TabsTrigger value="standings">Standings</TabsTrigger>
+            <TabsTrigger value="circuits">Circuits</TabsTrigger>
+          </TabsList>
+        </div>
         <TabsContent value="drivers">
           <EndpointsList locale={params.locale} value="drivers" />
         </TabsContent>
