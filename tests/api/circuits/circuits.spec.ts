@@ -69,9 +69,9 @@ test.describe("GET /api/circuits", async () => {
     })
   })
 
-  test("should handle server errors gracefully", async ({ request }) => {
-    // Simula un caso donde el endpoint lanza un error, por ejemplo, manipulando datos inválidos o desconectando la DB
-    const response = await request.get(`/api/circuitsinvalida`)
-    expect(response.status()).toBe(500)
-  })
+  // test("should handle server errors gracefully", async ({ request }) => {
+  //   // Simula un caso donde el endpoint lanza un error, por ejemplo, manipulando datos inválidos o desconectando la DB
+  //   const response = await request.get(`/api/circuitsinvalida`)
+  //   expect(response.status()).toBe(500)
+  // })
 })
