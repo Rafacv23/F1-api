@@ -35,7 +35,7 @@ test.describe("GET /api/drivers", async () => {
 
       driver.shortName === null
         ? expect(driver.shortName).toBeNull()
-        : expect(driver.shortName).toEqual(expect.any(Number))
+        : expect(driver.shortName).toEqual(expect.any(String))
     }
   })
 
