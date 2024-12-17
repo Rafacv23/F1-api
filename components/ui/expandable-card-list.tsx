@@ -25,7 +25,7 @@ export function ExpandableCardList({
 
   const handleCardClick = async (card: any) => {
     try {
-      const response = await fetch(`http://localhost:3000${card.url}`)
+      const response = await fetch(`${SITE_URL}${card.url}`)
       const data = await response.json()
 
       setActiveCard({ data, card })
