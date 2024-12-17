@@ -31,8 +31,13 @@ const HomePage = async ({ params }: { params: { locale: string } }) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <p className="my-6">{t("p1")}</p>
-      <section className="md:grid md:grid-cols-2 flex flex-col gap-10">
+      <p className="my-6">{t("blog-entrance")}</p>
+      <p className="my-6">{t("blog-advertise")}</p>
+      <section
+        className={`md:grid md:grid-cols-2 flex flex-col gap-10 ${
+          Object.keys(articles).length === 0 ? "hidden" : ""
+        }`}
+      >
         <Tabs defaultValue="changelog">
           <TabsList>
             {Object.keys(articles).map((category) => (
