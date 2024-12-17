@@ -76,15 +76,15 @@
 }
 
 .article {
-  @apply flex flex-col gap-3 text-lg tracking-wide mb-20;
+  @apply flex flex-col gap-4 text-lg tracking-wide mb-20;
 }
 
 .article > h1 {
-  @apply text-4xl text-center tracking-tight;
+  @apply text-4xl text-center tracking-tight font-bold mb-4;
 }
 
 .article > h2 {
-  @apply text-3xl tracking-tight;
+  @apply text-3xl font-semibold my-4 tracking-tight;
 }
 
 .article > ol {
