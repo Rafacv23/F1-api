@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { circuits } from "@/db/migrations/schema"
 import { InferModel } from "drizzle-orm"
 
-export const revalidate = 60
+export const revalidate = 300
 
 type Circuit = InferModel<typeof circuits>
 
@@ -55,7 +55,12 @@ export async function GET(request: Request) {
       circuits: circuitsData,
     }
 
-    return NextResponse.json(response, { status: 200 })
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
     console.log(error)
     return NextResponse.json({ message: "Server error" }, { status: 500 })
