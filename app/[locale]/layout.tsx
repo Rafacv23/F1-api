@@ -11,6 +11,7 @@ import Footer from "@/components/Footer"
 import initTranslations from "../i18n"
 import TranslationsProvider from "@/components/TranslationsProvider"
 import { Providers } from "@/components/Providers"
+import Header from "@/components/Header"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -109,6 +110,7 @@ export default async function RootLayout({
           resources={resources}
         >
           <Providers>
+            <Header />
             {children}
             <Footer locale={params.locale} />
           </Providers>

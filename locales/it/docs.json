@@ -7,5 +7,7 @@
   "example": "Esempio",
   "params": "Parametri",
   "default": "Predefinito",
-  "table-caption": "Un elenco di tutti gli endpoint dell'API."
+  "table-caption": "Un elenco di tutti gli endpoint dell'API.",
+  "blog-entrance": "In questo blog esploreremo ogni aggiornamento dell'API. Come notizie e curiosità relative a F1.",
+  "blog-advertise": "Nota che i changelog sono scritti in inglese, ma le notizie sulla F1 sono scritte in spagnolo."
 }

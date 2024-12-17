@@ -2,6 +2,7 @@
   {
     "url": "/api/seasons",
     "title": "/api/seasons",
+    "value": "seasons",
     "description": "Retrieve a list of all F1 Seasons, since the first one (1950) to the latest.",
     "params": "limit",
     "default": 30
@@ -9,6 +10,7 @@
   {
     "url": "/api/drivers",
     "title": "/api/drivers",
+    "value": "drivers",
     "description": "Retrieve a list of all the Drivers who at least race one F1 race.",
     "params": "limit",
     "default": 30
@@ -16,12 +18,14 @@
   {
     "url": "/api/2024/compare/leclerc/sainz",
     "title": "/api/${year}/compare/${driverId1}/${driverId2}",
+    "value": "drivers",
     "description": "Compare the head to head between two drivers in a season.",
     "params": "-"
   },
   {
     "url": "/api/teams",
     "title": "/api/teams",
+    "value": "teams",
     "description": "Retrieve a list of all the teams that participated in Formula 1 races.",
     "params": "limit",
     "default": 30
@@ -29,6 +33,7 @@
   {
     "url": "/api/teams/mercedes",
     "title": "/api/teams/[teamId]",
+    "value": "teams",
     "description": "Retrieve a list of a team based on his id.",
     "params": "limit",
     "default": 1
@@ -36,6 +41,7 @@
   {
     "url": "/api/circuits",
     "title": "/api/circuits",
+    "value": "circuits",
     "description": "Retrieve the list of all the F1 circuits.",
     "params": "limit",
     "default": 30
@@ -43,18 +49,21 @@
   {
     "url": "/api/drivers/alonso",
     "title": "/api/drivers/[driverId]",
+    "value": "drivers",
     "description": "Retrieve a driver using his id.",
     "params": "-"
   },
   {
     "url": "/api/teams/ferrari",
     "title": "/api/teams/[teamId]",
+    "value": "teams",
     "description": "Retrieve a team using his id.",
     "params": "-"
   },
   {
     "url": "/api/2024",
     "title": "/api/[year]",
+    "value": "seasons",
     "description": "Retrieve the races of the specific year.",
     "params": "limit",
     "default": 30
@@ -62,6 +71,7 @@
   {
     "url": "/api/2024/drivers",
     "title": "/api/[year]/drivers",
+    "value": "drivers",
     "description": "Retrieve the list of the drivers of the specific year.",
     "params": "limit",
     "default": 30
@@ -69,6 +79,7 @@
   {
     "url": "/api/2024/drivers/norris",
     "title": "/api/[year]/drivers/[driverId]",
+    "value": "drivers",
     "description": "Retrieve the results of the specific driver of the specific year.",
     "params": "limit",
     "default": 30
@@ -76,6 +87,7 @@
   {
     "url": "/api/2024/teams",
     "title": "/api/[year]/teams",
+    "value": "teams",
     "description": "Retrieve the list of the teams of the specific year.",
     "params": "limit",
     "default": 30
@@ -83,6 +95,7 @@
   {
     "url": "/api/2024/teams/aston_martin",
     "title": "/api/[year]/teams/[teamId]",
+    "value": "teams",
     "description": "Retrieve the data of a team based on his id and the specific year.",
     "params": "limit",
     "default": 1
@@ -90,6 +103,7 @@
   {
     "url": "/api/2024/teams/ferrari/drivers",
     "title": "/api/[year]/teams/[teamId]/drivers",
+    "value": "drivers",
     "description": "Retrieve a list of all the drivers of a team based on the teamId and the specific year.",
     "params": "limit",
     "default": 4
@@ -97,6 +111,7 @@
   {
     "url": "/api/current",
     "title": "/api/current",
+    "value": "seasons",
     "description": "Retrieve the races of the current year.",
     "params": "limit",
     "default": 30
@@ -104,6 +119,7 @@
   {
     "url": "/api/current/drivers",
     "title": "/api/current/drivers",
+    "value": "drivers",
     "description": "Retrieve the list of the drivers of the current year.",
     "params": "limit",
     "default": 30
@@ -111,6 +127,7 @@
   {
     "url": "/api/current/drivers/norris",
     "title": "/api/current/drivers/[driverId]",
+    "value": "drivers",
     "description": "Retrieve the results of the specific driver of the current year.",
     "params": "limit",
     "default": 30
@@ -118,6 +135,7 @@
   {
     "url": "/api/current/teams",
     "title": "/api/current/teams",
+    "value": "teams",
     "description": "Retrieve the list of the teams of the current year.",
     "params": "limit",
     "default": 30
@@ -125,6 +143,7 @@
   {
     "url": "/api/current/teams/aston_martin",
     "title": "/api/current/teams/[teamId]",
+    "value": "teams",
     "description": "Retrieve the data of a team based on his id and the current year.",
     "params": "limit",
     "default": 1
@@ -132,6 +151,7 @@
   {
     "url": "/api/current/teams/ferrari/drivers",
     "title": "/api/current/teams/[teamId]/drivers",
+    "value": "drivers",
     "description": "Retrieve a list of all the drivers of a team based on the teamId and the current year.",
     "params": "limit",
     "default": 4
@@ -139,12 +159,14 @@
   {
     "url": "/api/2024/1",
     "title": "/api/[year]/[round]",
+    "value": "races",
     "description": "Retrieve the information of a race based on the year and the round. ",
     "params": "-"
   },
   {
     "url": "/api/2024/5/sprint/qualy",
     "title": "/api/[year]/[round]/sprint/qualy",
+    "value": "races",
     "description": "Retrieve the information of a sprint qualy (if exist) based on the year and the round. ",
     "params": "limit",
     "default": 20
@@ -152,6 +174,7 @@
   {
     "url": "/api/2024/5/sprint/race",
     "title": "/api/[year]/[round]/sprint/race",
+    "value": "races",
     "description": "Retrieve the information of a sprint race (if exist) based on the year and the round.",
     "params": "limit",
     "default": 20
@@ -159,6 +182,7 @@
   {
     "url": "/api/2024/1/fp1",
     "title": "/api/[year]/[round]/fp1",
+    "value": "races",
     "description": "Retrieve the information of the free practice 1 of a race based on the year and the round.",
     "params": "limit",
     "default": 30
@@ -166,6 +190,7 @@
   {
     "url": "/api/2024/1/fp2",
     "title": "/api/[year]/[round]/fp2",
+    "value": "races",
     "description": "Retrieve the information of the free practice 2 of a race based on the year and the round.",
     "params": "limit",
     "default": 30
@@ -173,6 +198,7 @@
   {
     "url": "/api/2024/1/fp3",
     "title": "/api/[year]/[round]/fp3",
+    "value": "races",
     "description": "Retrieve the information of the free practice 3 of a race based on the year and the round.",
     "params": "limit",
     "default": 30
@@ -180,6 +206,7 @@
   {
     "url": "/api/2024/1/qualy",
     "title": "/api/[year]/[round]/qualy",
+    "value": "races",
     "description": "Retrieve the information of the qualy of a race based on the year and the round.",
     "params": "limit",
     "default": 30
@@ -187,6 +214,7 @@
   {
     "url": "/api/2024/1/race",
     "title": "/api/[year]/[round]/race",
+    "value": "races",
     "description": "Retrieve the information of a specific race based on the year and the round.",
     "params": "limit",
     "default": 30
@@ -194,6 +222,7 @@
   {
     "url": "/api/current/last",
     "title": "/api/current/last",
+    "value": "races",
     "description": "Retrieve the information of the last race of the current year.",
     "params": "limit",
     "default": 20
@@ -201,6 +230,7 @@
   {
     "url": "/api/current/last/fp1",
     "title": "/api/current/last/fp1",
+    "value": "races",
     "description": "Retrieve the information of the last free practice 1 of a race of the current year.",
     "params": "limit",
     "default": 20
@@ -208,6 +238,7 @@
   {
     "url": "/api/current/last/fp2",
     "title": "/api/current/last/fp2",
+    "value": "races",
     "description": "Retrieve the information of the last free practice 2 of a race of the current year.",
     "params": "limit",
     "default": 20
@@ -215,6 +246,7 @@
   {
     "url": "/api/current/last/fp3",
     "title": "/api/current/last/fp3",
+    "value": "races",
     "description": "Retrieve the information of the last free practice 3 of a race of the current year.",
     "params": "limit",
     "default": 20
@@ -222,6 +254,7 @@
   {
     "url": "/api/current/last/qualy",
     "title": "/api/current/last/qualy",
+    "value": "races",
     "description": "Retrieve the information of the last qualy of a race of the current year.",
     "params": "limit",
     "default": 20
@@ -229,6 +262,7 @@
   {
     "url": "/api/current/last/race",
     "title": "/api/current/last/race",
+    "value": "races",
     "description": "Retrieve the results of the last race of the current year.",
     "params": "limit",
     "default": 20
@@ -236,6 +270,7 @@
   {
     "url": "/api/current/last/sprint/qualy",
     "title": "/api/current/last/sprint/qualy",
+    "value": "races",
     "description": "Retrieve the information of a sprint qualy (if exist) based on the year and the round. ",
     "params": "limit",
     "default": 20
@@ -243,6 +278,7 @@
   {
     "url": "/api/current/last/sprint/race",
     "title": "/api/current/last/sprint/race",
+    "value": "races",
     "description": "Retrieve the information of a sprint race (if exist) based on the year and the round.",
     "params": "limit",
     "default": 20
@@ -250,6 +286,7 @@
   {
     "url": "/api/current/next",
     "title": "/api/current/next",
+    "value": "seasons",
     "description": "Retrieve the information of the next race of the current year.",
     "params": "limit",
     "default": 20
@@ -257,6 +294,7 @@
   {
     "url": "/api/2024/circuits",
     "title": "/api/[year]/circuits",
+    "value": "circuits",
     "description": "Retrieve a list of the circuits of the specific F1 season.",
     "params": "limit",
     "default": 30
@@ -264,6 +302,7 @@
   {
     "url": "/api/2024/drivers",
     "title": "/api/[year]/drivers",
+    "value": "drivers",
     "description": "Retrieve a list of the F1 drivers of the specific season.",
     "params": "limit",
     "default": 30
@@ -271,6 +310,7 @@
   {
     "url": "/api/2024/teams",
     "title": "/api/[year]/teams",
+    "value": "teams",
     "description": "Retrieve a list of the F1 Teams of the specific season.",
     "params": "limit",
     "default": 30
@@ -278,6 +318,7 @@
   {
     "url": "/api/2024/drivers-championship",
     "title": "/api/[year]/drivers-championship",
+    "value": "standings",
     "description": "Retrieve the drivers championship standing of the specific season.",
     "params": "limit",
     "default": 30
@@ -285,6 +326,7 @@
   {
     "url": "/api/2024/constructors-championship",
     "title": "/api/[year]/constructors-championship",
+    "value": "standings",
     "description": "Retrieve the constructors championship standing of the specific season.",
     "params": "limit",
     "default": 30
@@ -292,6 +334,7 @@
   {
     "url": "/api/current/drivers-championship",
     "title": "/api/current/drivers-championship",
+    "value": "standings",
     "description": "Retrieve the drivers championship standing of the current season.",
     "params": "limit",
     "default": 30
@@ -299,6 +342,7 @@
   {
     "url": "/api/current/constructors-championship",
     "title": "/api/current/constructors-championship",
+    "value": "standings",
     "description": "Retrieve the constructors championship standing of the current season.",
     "params": "limit",
     "default": 30

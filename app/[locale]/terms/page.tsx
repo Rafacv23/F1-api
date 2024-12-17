@@ -12,7 +12,7 @@ export default async function Terms({
   const { t } = await initTranslations(params.locale, ["terms"])
 
   return (
-    <main className="max-w-3xl mx-auto p-6 md:h-screen flex flex-col justify-center items-center">
+    <main className="max-w-5xl mx-auto p-6 md:h-screen mt-32 mb-8 flex flex-col justify-center items-center">
       <section className="mb-8">
         <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
         <p>{t("subtitle")}</p>
