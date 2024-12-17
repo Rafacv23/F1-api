@@ -7,7 +7,7 @@ const Article = async ({ params }: { params: { slug: string } }) => {
   const articleData = await getArticleData(params.slug)
 
   return (
-    <section className="mx-auto w-10/12 md:w-1/2 flex flex-col gap-5 mt-32">
+    <section className="mx-auto w-10/12 md:w-2/3 max-w-5xl flex flex-col gap-5 mt-32">
       <div className="flex justify-between font-poppins">
         <Link href={"/blog"} className="flex flex-row gap-1 place-items-center">
           <ArrowLeft width={16} />
