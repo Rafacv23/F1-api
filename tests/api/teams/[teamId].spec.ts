@@ -14,7 +14,6 @@ test.describe("GET /api/teams/[teamId]", async () => {
       team: expect.any(Array),
     })
 
-    // Verificar un circuito dentro de la respuesta
     if (data.team.length > 0) {
       const team = data.team[0]
       expect(team).toMatchObject({
