@@ -11,6 +11,8 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
+export const revalidate = 60
+
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
@@ -42,8 +44,6 @@ export async function GET(request: Request, context: any) {
       .limit(limit)
       .offset(offset)
       .orderBy(races.round, races.raceId)
-
-    console.log(seasonData)
 
     if (seasonData.length === 0) {
       return apiNotFound(
@@ -130,9 +130,14 @@ export async function GET(request: Request, context: any) {
       races: formattedData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=60, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
-    console.error(error)
-    return NextResponse.error()
+    console.log(error)
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }
