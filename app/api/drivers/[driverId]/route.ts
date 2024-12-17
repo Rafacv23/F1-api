@@ -52,9 +52,14 @@ export async function GET(request: Request, context: any) {
       driver: driverData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
-    console.log(error)
-    return NextResponse.error()
+    console.error("Error:", error)
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }
