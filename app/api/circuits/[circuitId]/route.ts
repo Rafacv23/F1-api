@@ -52,14 +52,13 @@ export async function GET(request: Request, context: any) {
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
       total: circuitData.length,
       circuit: circuitData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, { status: 200 })
   } catch (error) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }
