@@ -89,6 +89,7 @@ export async function GET(request: Request, context: any) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
+      offset: offset,
       total: fp3Data.length,
       season: year,
       races: {
