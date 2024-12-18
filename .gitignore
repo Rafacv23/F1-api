@@ -48,3 +48,8 @@ db/cache/
 # NO ignorar migraciones ni esquemas
 !db/migrations/
 !db/schema.ts
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
