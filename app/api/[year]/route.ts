@@ -43,8 +43,6 @@ export async function GET(request: Request, context: any) {
       .offset(offset)
       .orderBy(races.round, races.raceId)
 
-    console.log(seasonData)
-
     if (seasonData.length === 0) {
       return apiNotFound(
         request,
