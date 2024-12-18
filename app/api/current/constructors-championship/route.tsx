@@ -1,56 +1,54 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getYear } from "@/lib/utils"
-import { executeQuery } from "@/lib/executeQuery"
-import { BaseApiResponse, ConstructorsChampionship } from "@/lib/definitions"
+import { apiNotFound, getLimitAndOffset, getYear } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { constructorsClassifications, teams } from "@/db/migrations/schema"
+import { db } from "@/db"
+import { asc, eq } from "drizzle-orm"
 
 export const revalidate = 60
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number
+  championshipId: string
   constructors_championship: any
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const year = getYear()
-    const sql = `SELECT Constructors_Classifications.*, Teams.*
-    FROM Constructors_Classifications
-    JOIN Championships ON Constructors_Classifications.Championship_ID = Championships.Championship_ID
-    JOIN Teams ON Constructors_Classifications.Team_ID = Teams.Team_ID
-    WHERE Championships.Year = ?
-    ORDER BY Constructors_Classifications.Points DESC, Constructors_Classifications.Position ASC
-    LIMIT ?;
-    `
+    const teamStandingsData = await db
+      .select()
+      .from(constructorsClassifications)
+      .innerJoin(teams, eq(teams.teamId, constructorsClassifications.teamId))
+      .where(eq(constructorsClassifications.championshipId, `f1_${year}`))
+      .orderBy(asc(constructorsClassifications.position))
+      .limit(limit)
+      .offset(offset)
 
-    const data = await executeQuery(sql, [year, limit])
-
-    if (data.length === 0) {
+    if (teamStandingsData.length === 0) {
       return apiNotFound(
         request,
         "No constructors championship found for this year. Try with other one."
       )
     }
 
-    // Procesamos los datos
-    const processedData: ConstructorsChampionship[] = data.map((row: any) => {
+    const processedData = teamStandingsData.map((team) => {
       return {
-        classificationId: row.Classification_ID,
-        championshipId: row.Championship_ID,
-        teamId: row.Team_ID,
-        points: row.Points,
-        position: row.Position,
-        wins: row.wins,
+        classificationId: team.Constructors_Classifications.classificationId,
+        teamId: team.Constructors_Classifications.teamId,
+        points: team.Constructors_Classifications.points,
+        position: team.Constructors_Classifications.position,
+        wins: team.Constructors_Classifications.wins,
         team: {
-          teamId: row.Team_ID,
-          teamName: row.Team_Name,
-          country: row.Team_Nationality,
-          firstAppareance: row.First_Appareance,
-          constructorsChampionships: row.Constructors_Championships,
-          driversChampionships: row.Drivers_Championships,
-          url: row.URL,
+          teamName: team.Teams.teamName,
+          country: team.Teams.teamNationality,
+          firstAppareance: team.Teams.firstAppeareance,
+          constructorsChampionships: team.Teams.constructorsChampionships,
+          driversChampionships: team.Teams.driversChampionships,
+          url: team.Teams.url,
         },
       }
     })
@@ -59,8 +57,10 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: data.length,
+      offset: offset,
+      total: processedData.length,
       season: year,
+      championshipId: `f1_${year}`,
       constructors_championship: processedData,
     }
 
