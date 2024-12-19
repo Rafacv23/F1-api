@@ -13,7 +13,7 @@ import {
 import { eq, and, gte, asc } from "drizzle-orm"
 
 export const revalidate = 60
-
+export const dynamic = "force-dynamic"
 interface ApiResponse extends BaseApiResponse {
   season: number | string
   round?: number | null
