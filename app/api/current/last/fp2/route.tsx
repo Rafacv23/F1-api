@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getDay, getYear } from "@/lib/utils"
-import { BaseApiResponse, Circuit } from "@/lib/definitions"
-
-//revalidate
+import { apiNotFound, getDay, getLimitAndOffset, getYear } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { eq, and, desc, lte } from "drizzle-orm"
+import { circuits, drivers, fp2, races, teams } from "@/db/migrations/schema"
 
 export const revalidate = 60
 
@@ -15,75 +15,74 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const year = getYear()
     const today = getDay()
 
-    const sql = `
-      SELECT FP2.*, Races.*, Drivers.*, Teams.*, Circuits.*
-      FROM FP2
-      JOIN Races ON FP2.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      JOIN Drivers ON FP2.Driver_ID = Drivers.Driver_ID
-      JOIN Teams ON FP2.Team_ID = Teams.Team_ID
-      JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-      WHERE Championships.Year = ? AND Races.Race_Date <= ?
-      ORDER BY Races.Race_Date DESC, FP2.Time ASC
-      LIMIT ?;
-    `
+    const fp2Data = await db
+      .select()
+      .from(fp2)
+      .innerJoin(races, eq(races.raceId, fp2.raceId))
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
+      .innerJoin(drivers, eq(fp2.driverId, drivers.driverId))
+      .innerJoin(teams, eq(fp2.teamId, teams.teamId))
+      .where(
+        and(lte(races.raceDate, today), eq(races.championshipId, `f1_${year}`))
+      )
+      .limit(20)
+      .offset(offset)
+      .orderBy(desc(races.fp2Date))
 
-    const data = await executeQuery(sql, [year, today, limit])
-
-    if (data.length === 0) {
+    if (fp2Data.length === 0) {
       return apiNotFound(
         request,
-        "No qualy results found for this round. Try with other one."
+        "No fp2 results found for this round. Try with other one."
       )
     }
 
     // Procesamos los datos
-    const processedData = data.map((row: any) => ({
-      fp2Id: row[0],
-      raceId: row[1],
-      driverId: row[2],
-      teamId: row[3],
-      time: row[4],
+    const processedData = fp2Data.map((row) => ({
+      fp1Id: row.FP2.fp2Id,
+      driverId: row.FP2.driverId,
+      teamId: row.FP2.teamId,
+      time: row.FP2.time,
       driver: {
-        driverId: row[31],
-        number: row[36],
-        shortName: row[37],
-        url: row[38],
-        name: row[32],
-        surname: row[33],
-        nationality: row[34],
-        birthday: row[35],
+        driverId: row.FP2.driverId,
+        name: row.Drivers.name,
+        surname: row.Drivers.surname,
+        nationality: row.Drivers.nationality,
+        number: row.Drivers.number,
+        shortName: row.Drivers.shortName,
+        birthday: row.Drivers.birthday,
+        url: row.Drivers.url,
       },
       team: {
-        teamId: row[39],
-        teamName: row[40],
-        nationality: row[41],
-        firstAppareance: row[42],
-        constructorsChampionships: row[43],
-        driversChampionships: row[44],
-        url: row[45],
+        teamId: row.FP2.teamId,
+        teamName: row.Teams.teamName,
+        nationality: row.Teams.teamNationality,
+        firstAppareance: row.Teams.firstAppeareance,
+        constructorsChampionships: row.Teams.constructorsChampionships,
+        driversChampionships: row.Teams.driversChampionships,
+        url: row.Teams.url,
       },
     }))
 
-    const circuitData = data.map((row: Circuit) => {
+    // Obtener el circuito correspondiente a la carrera
+    const circuitData = fp2Data.map((row) => {
       return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length + "km",
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
+        circuitId: row.Circuits.circuitId,
+        circuitName: row.Circuits.circuitName,
+        country: row.Circuits.country,
+        city: row.Circuits.city,
+        circuitLength: row.Circuits.circuitLength + "km",
+        lapRecord: row.Circuits.lapRecord,
+        firstParticipationYear: row.Circuits.firstParticipationYear,
+        corners: row.Circuits.numberOfCorners,
+        fastestLapDriverId: row.Circuits.fastestLapDriverId,
+        fastestLapTeamId: row.Circuits.fastestLapTeamId,
+        fastestLapYear: row.Circuits.fastestLapYear,
+        url: row.Circuits.url,
       }
     })
 
@@ -91,16 +90,18 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: data.length,
+      offset: offset,
+      total: fp2Data.length,
       season: year,
       races: {
-        date: data[0][17],
-        time: data[0][23],
-        url: data[0][13],
-        raceId: data[0][1],
-        raceName: data[0][7],
+        round: fp2Data[0].Races.round,
+        fp1Date: fp2Data[0].Races.fp1Date,
+        fp1Time: fp2Data[0].Races.fp1Time,
+        url: fp2Data[0].Races.url,
+        raceId: fp2Data[0].Races.raceId,
+        raceName: fp2Data[0].Races.raceName,
         circuit: circuitData[0],
-        FP2_Results: processedData,
+        fp1Results: processedData,
       },
     }
 

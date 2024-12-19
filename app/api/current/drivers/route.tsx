@@ -1,59 +1,65 @@
 import { NextResponse } from "next/server"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getYear } from "@/lib/utils"
+import { apiNotFound, getYear, getLimitAndOffset } from "@/lib/utils"
 import { SITE_URL } from "@/lib/constants"
-import { BaseApiResponse, Driver, ProcessedDrivers } from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { InferModel, eq, asc } from "drizzle-orm"
+import { driverClassifications, drivers } from "@/db/migrations/schema"
+import { db } from "@/db"
 
 export const revalidate = 60
 
+type Driver = InferModel<typeof drivers>
+type ExtendedDriver = Driver & { teamId: string | null }
+
 interface ApiResponse extends BaseApiResponse {
   season: string | number
-  drivers: ProcessedDrivers
+  championshipId: string
+  drivers: ExtendedDriver[]
 }
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const year = getYear()
-    const sql = `
-      SELECT DISTINCT Drivers.*
-      FROM Drivers
-      JOIN Results ON Drivers.Driver_ID = Results.Driver_ID
-      JOIN Races ON Results.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      WHERE Championships.Year = ? LIMIT ?;
-    `
 
-    const data = await executeQuery(sql, [year, limit])
+    const driversData = await db
+      .select({
+        driverId: drivers.driverId,
+        name: drivers.name,
+        surname: drivers.surname,
+        nationality: drivers.nationality,
+        birthday: drivers.birthday,
+        number: drivers.number,
+        shortName: drivers.shortName,
+        url: drivers.url,
+        teamId: driverClassifications.teamId,
+      })
+      .from(drivers)
+      .innerJoin(
+        driverClassifications,
+        eq(drivers.driverId, driverClassifications.driverId)
+      )
+      .where(eq(driverClassifications.championshipId, `f1_${year}`))
+      .limit(limit)
+      .offset(offset)
+      .orderBy(asc(driverClassifications.position))
 
-    if (data.length === 0) {
+    if (driversData.length === 0) {
       return apiNotFound(
         request,
-        "No drivers found fot this year, try with other one."
+        "No drivers found for this year, try with another one."
       )
     }
-
-    // Procesamos los datos
-    const processedData = data.map((row: Driver) => {
-      return {
-        driverId: row.Driver_ID,
-        name: row.Name,
-        surname: row.Surname,
-        country: row.Nationality,
-        birthday: row.Birthday,
-        number: row.Number,
-        shortName: row.Short_Name,
-        url: row.URL,
-      }
-    })
 
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
-      total: processedData.length,
+      limit,
+      offset,
+      total: driversData.length,
       season: year,
-      drivers: processedData,
+      championshipId: `f1_${year}`,
+      drivers: driversData,
     }
 
     return NextResponse.json(response)

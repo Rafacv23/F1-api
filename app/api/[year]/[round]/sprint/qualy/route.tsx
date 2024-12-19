@@ -1,10 +1,17 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
-import { BaseApiResponse, Circuit } from "@/lib/definitions"
-
-//revalidate
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import {
+  championships,
+  circuits,
+  drivers,
+  races,
+  sprintQualy,
+  teams,
+} from "@/db/migrations/schema"
+import { eq, and, asc } from "drizzle-orm"
 
 export const revalidate = 60
 
@@ -15,25 +22,29 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 20
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const { year, round } = context.params
-    const sql = `
-      SELECT Sprint_Qualy.*, Races.*, Drivers.*, Teams.*, Circuits.*
-      FROM Sprint_Qualy
-      JOIN Races ON Sprint_Qualy.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      JOIN Drivers ON Sprint_Qualy.Driver_ID = Drivers.Driver_ID
-      JOIN Teams ON Sprint_Qualy.Team_ID = Teams.Team_ID
-      JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-      WHERE Championships.Year = ? AND Races.Round = ?
-      ORDER BY Sprint_Qualy.Grid_Position ASC
-      LIMIT ?;
-    `
 
-    const data = await executeQuery(sql, [year, round, limit])
+    const sprintQualyResults = await db
+      .select()
+      .from(sprintQualy)
+      .innerJoin(races, eq(races.raceId, sprintQualy.raceId))
+      .innerJoin(
+        championships,
+        eq(races.championshipId, championships.championshipId)
+      )
+      .innerJoin(drivers, eq(sprintQualy.driverId, drivers.driverId))
+      .innerJoin(teams, eq(sprintQualy.teamId, teams.teamId))
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
+      .where(
+        and(eq(races.round, round), eq(races.championshipId, `f1_${year}`))
+      )
+      .limit(limit)
+      .offset(offset)
+      .orderBy(asc(sprintQualy.gridPosition))
 
-    if (data.length === 0) {
+    if (sprintQualyResults.length === 0) {
       return apiNotFound(
         request,
         "No sprint qualy results found for this round. Try with other one."
@@ -41,50 +52,50 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row: any) => ({
-      Sprint_Qualification_ID: row[0],
-      Driver_ID: row[2],
-      Team_ID: row[3],
-      SQ1_Time: row[4],
-      SQ2_Time: row[5],
-      SQ3_Time: row[6],
-      Grid_Position: row[7],
+    const processedData = sprintQualyResults.map((row) => ({
+      sprintQualyId: row.Sprint_Qualy.sprintQualyId,
+      driverId: row.Sprint_Qualy.driverId,
+      teamId: row.Sprint_Qualy.teamId,
+      sq1: row.Sprint_Qualy.sq1,
+      sq2: row.Sprint_Qualy.sq2,
+      Sq3: row.Sprint_Qualy.sq3,
+      gridPosition: row.Sprint_Qualy.gridPosition,
       driver: {
-        driverId: row[2],
-        number: row[39],
-        name: row[35],
-        surname: row[36],
-        shortName: row[40],
-        url: row[41],
-        nationality: row[37],
-        birthday: row[38],
+        driverId: row.Drivers.driverId,
+        number: row.Drivers.number,
+        name: row.Drivers.name,
+        surname: row.Drivers.surname,
+        shortName: row.Drivers.shortName,
+        url: row.Drivers.url,
+        nationality: row.Drivers.nationality,
+        birthday: row.Drivers.birthday,
       },
       team: {
-        teamId: row[42],
-        teamName: row[43],
-        nationality: row[44],
-        firstAppareance: row[45],
-        constructorsChampionships: row[46],
-        driversChampionships: row[47],
-        url: row[48],
+        teamId: row.Teams.teamId,
+        teamName: row.Teams.teamName,
+        teamNationality: row.Teams.teamNationality,
+        firstAppeareance: row.Teams.firstAppeareance,
+        constructorsChampionships: row.Teams.constructorsChampionships,
+        driversChampionships: row.Teams.driversChampionships,
+        url: row.Teams.url,
       },
     }))
 
     // Obtener el circuito correspondiente a la carrera
-    const circuitData = data.map((row: Circuit) => {
+    const circuitData = sprintQualyResults.map((row) => {
       return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length + "km",
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
+        circuitId: row.Circuits.circuitId,
+        circuitName: row.Circuits.circuitName,
+        country: row.Circuits.country,
+        city: row.Circuits.city,
+        circuitLength: row.Circuits.circuitLength + "km",
+        corners: row.Circuits.numberOfCorners,
+        firstParticipationYear: row.Circuits.firstParticipationYear,
+        lapRecord: row.Circuits.lapRecord,
+        fastestLapDriverId: row.Circuits.fastestLapDriverId,
+        fastestLapTeamId: row.Circuits.fastestLapTeamId,
+        fastestLapYear: row.Circuits.fastestLapYear,
+        url: row.Circuits.url,
       }
     })
 
@@ -92,15 +103,15 @@ export async function GET(request: Request, context: any) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
-      total: data.length,
+      total: sprintQualyResults.length,
       season: year,
       races: {
         round: round,
-        date: data[0][23],
-        time: data[0][29],
-        url: data[0][16],
-        raceId: data[0][1],
-        raceName: data[0][10],
+        date: sprintQualyResults[0].Races.sprintQualyDate,
+        time: sprintQualyResults[0].Races.sprintQualyTime,
+        url: sprintQualyResults[0].Races.url,
+        raceId: sprintQualyResults[0].Races.raceId,
+        raceName: sprintQualyResults[0].Races.raceName,
         circuit: circuitData[0],
         sprintQualyResults: processedData,
       },
