@@ -124,6 +124,7 @@ export async function GET(request: Request, context: any) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
+      offset: offset,
       total: processedData.length,
       season: year,
       championshipId: `f1_${year}`,
