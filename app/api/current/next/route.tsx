@@ -22,9 +22,9 @@ interface ApiResponse extends BaseApiResponse {
 }
 
 export async function GET(request: Request) {
-  const year = getYear()
-  const today = getDay()
   try {
+    const year = getYear()
+    const today = getDay()
     //   const sql = `SELECT Races.*, Circuits.*
     // FROM Races
     // JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
@@ -138,7 +138,7 @@ export async function GET(request: Request) {
 
     const response: ApiResponse = {
       api: SITE_URL,
-      url: request.url,
+      url: `${SITE_URL}api/current/last`,
       total: formattedData.length,
       season: year,
       round: formattedData[0].round,
