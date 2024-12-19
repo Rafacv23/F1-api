@@ -11,6 +11,8 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
+export const revalidate = 60
+
 export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
