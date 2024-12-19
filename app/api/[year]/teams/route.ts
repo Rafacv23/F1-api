@@ -8,10 +8,8 @@ import { asc, eq, InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
-type Team = InferModel<typeof teams>
-
 interface ApiResponse extends BaseApiResponse {
-  teams: Team[]
+  teams: InferModel<typeof teams>[]
   season: string | number
   championshipId: string
 }
@@ -22,7 +20,7 @@ export async function GET(request: Request, context: any) {
   try {
     const { year } = context.params
 
-    const teamsData: Team[] = await db
+    const teamsData = await db
       .select({
         teamId: teams.teamId,
         teamName: teams.teamName,
