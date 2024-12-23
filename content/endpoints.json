@@ -1,0 +1,55 @@
+[
+  {
+    "id": "drivers",
+    "title": "Drivers",
+    "url": "drivers",
+    "section": "drivers",
+    "endpoints": [
+      {
+        "id": "drivers",
+        "title": "Drivers",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "driverId",
+        "title": "Driver per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  },
+  {
+    "id": "teams",
+    "title": "Teams",
+    "url": "teams",
+    "section": "teams",
+    "endpoints": [
+      {
+        "id": "teams",
+        "title": "Teams",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "drivers",
+        "params": "limit=1&offset=20"
+      },
+      {
+        "id": "teamId",
+        "title": "Team per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  }
+]
