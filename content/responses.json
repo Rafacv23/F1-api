@@ -1,0 +1,14 @@
+[
+  {
+    "status": "200",
+    "description": "Successful request"
+  },
+  {
+    "status": "404",
+    "description": "Resource not found"
+  },
+  {
+    "status": "500",
+    "description": "Internal server error"
+  }
+]
