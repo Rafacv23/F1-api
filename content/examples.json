@@ -1,0 +1,24 @@
+[
+  {
+    "enpointId": "drivers",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/drivers?limit=1&offset=20",
+      "limit": 1,
+      "offset": 20,
+      "total": 1,
+      "drivers": [
+        {
+          "driverId": "alonso",
+          "name": "Fernando",
+          "surname": "Alonso",
+          "nationality": "Spain",
+          "birthday": "29/07/1981",
+          "number": 14,
+          "shortName": "ALO",
+          "url": "https://en.wikipedia.org/wiki/Fernando_Alonso"
+        }
+      ]
+    }
+  }
+]
