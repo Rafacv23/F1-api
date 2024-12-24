@@ -70,15 +70,36 @@ export default async function EnpointPage({
       </h1>
       <p className="mb-4">{subendpoint.description}</p>
       <h2 id="example" className="my-4 text-xl font-semibold">
-        Example response
+        Example Response
       </h2>
       <div className="bg-slate-100 dark:bg-slate-900 p-4 rounded-md">
         <pre className="whitespace-pre-wrap text-sm">
           {JSON.stringify(example?.exampleResponse, null, 2)}
         </pre>
       </div>
+      <h2 id="types" className="mt-4 text-xl font-semibold">
+        Response Types
+      </h2>
+      <Table className="my-4">
+        <TableHeader className="text-left">
+          <TableRow>
+            <TableHead className="w-[100px]">Field</TableHead>
+            <TableHead>Type</TableHead>
+            <TableHead>Description</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {example?.responseTypes.map((field) => (
+            <TableRow key={field.field}>
+              <TableCell className="font-medium">{field.field}</TableCell>
+              <TableCell>{field.type}</TableCell>
+              <TableCell>{field.description}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       <h2 id="params" className="mt-4 text-xl font-semibold">
-        Response params
+        Response Params
       </h2>
       <Table className="my-4">
         <TableHeader className="text-left">
@@ -99,7 +120,7 @@ export default async function EnpointPage({
         </TableBody>
       </Table>
       <h2 id="status" className="mt-4 text-xl font-semibold">
-        Response status
+        Response Status
       </h2>
       <Table className="my-4">
         <TableHeader className="text-left">
