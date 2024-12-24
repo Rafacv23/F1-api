@@ -6,16 +6,22 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import EndpointsList from "@/components/EndpointsList"
 import initTranslations from "@/app/i18n"
 import { BackBtn } from "@/components/BackBtn"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Link from "next/link"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import endpoints from "@/content/endpoints.json"
 
 export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <main className="max-w-3xl mx-auto p-6">
+    <main className="max-w-3xl p-6">
       <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
       <Breadcrumb>
         <BreadcrumbList>
@@ -30,36 +36,20 @@ export default async function Docs({ params }: { params: { locale: string } }) {
       </Breadcrumb>
       <p className="my-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
-      <Tabs defaultValue="drivers">
-        <div className="overflow-x-auto">
-          <TabsList className="mb-8">
-            <TabsTrigger value="drivers">Drivers</TabsTrigger>
-            <TabsTrigger value="teams">Teams</TabsTrigger>
-            <TabsTrigger value="seasons">Seasons</TabsTrigger>
-            <TabsTrigger value="races">Races</TabsTrigger>
-            <TabsTrigger value="standings">Standings</TabsTrigger>
-            <TabsTrigger value="circuits">Circuits</TabsTrigger>
-          </TabsList>
-        </div>
-        <TabsContent value="drivers">
-          <EndpointsList locale={params.locale} value="drivers" />
-        </TabsContent>
-        <TabsContent value="teams">
-          <EndpointsList locale={params.locale} value="teams" />
-        </TabsContent>
-        <TabsContent value="seasons">
-          <EndpointsList locale={params.locale} value="seasons" />
-        </TabsContent>
-        <TabsContent value="races">
-          <EndpointsList locale={params.locale} value="races" />
-        </TabsContent>
-        <TabsContent value="standings">
-          <EndpointsList locale={params.locale} value="standings" />
-        </TabsContent>
-        <TabsContent value="circuits">
-          <EndpointsList locale={params.locale} value="circuits" />
-        </TabsContent>
-      </Tabs>
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {endpoints.map((section) => (
+          <li key={section.id}>
+            <Link href={`/docs/${section.id}`}>
+              <Card>
+                <CardHeader className="hover:text-f1 hover:transition-colors">
+                  <CardTitle>{section.title}</CardTitle>
+                  <CardDescription>{section.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+          </li>
+        ))}
+      </ul>
       <BackBtn locale={params.locale} />
     </main>
   )
