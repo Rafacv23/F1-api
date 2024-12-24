@@ -21,8 +21,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <main className="max-w-3xl p-6">
-      <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
+    <main className="max-w-3xl mt-32 mx-auto p-6 h-screen flex flex-col">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -34,6 +33,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      <h1 className="text-3xl font-bold my-4">{t("title")}</h1>
       <p className="my-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
