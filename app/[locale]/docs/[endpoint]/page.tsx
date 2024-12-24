@@ -8,6 +8,12 @@ import {
 import endpoints from "@/content/endpoints.json"
 import Link from "next/link"
 
+export async function generateStaticParams() {
+  return endpoints.map((endpoint) => ({
+    params: { endpoint: endpoint.section },
+  }))
+}
+
 export default function EnpointPage({
   params,
 }: Readonly<{ params: { endpoint: string } }>) {
