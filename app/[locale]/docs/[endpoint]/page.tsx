@@ -37,7 +37,7 @@ export default function EnpointPage({
         {filteredEnpoints.endpoints.map((endpoint) => (
           <li key={endpoint.id}>
             <Link href={`/docs/${filteredEnpoints.id}/${endpoint.id}`}>
-              <Card>
+              <Card className="min-h-36">
                 <CardHeader className="hover:text-f1 hover:transition-colors">
                   <CardTitle>{endpoint.title}</CardTitle>
                   <CardDescription>{endpoint.description}</CardDescription>
