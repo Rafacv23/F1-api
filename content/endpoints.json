@@ -2,6 +2,7 @@
   {
     "id": "drivers",
     "title": "Drivers",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
     "url": "drivers",
     "section": "drivers",
     "endpoints": [
@@ -34,6 +35,7 @@
   {
     "id": "teams",
     "title": "Teams",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
     "url": "teams",
     "section": "teams",
     "endpoints": [
@@ -47,6 +49,94 @@
       {
         "id": "teamId",
         "title": "Team per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  },
+  {
+    "id": "seasons",
+    "title": "Seasons",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "url": "seasons",
+    "section": "seasons",
+    "endpoints": [
+      {
+        "id": "seasons",
+        "title": "Seasons",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "seasons",
+        "params": "limit=1&offset=20"
+      },
+      {
+        "id": "seasonId",
+        "title": "Season per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  },
+  {
+    "id": "races",
+    "title": "Races",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "url": "races",
+    "section": "races",
+    "endpoints": [
+      {
+        "id": "races",
+        "title": "Races",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "races",
+        "params": "limit=1&offset=20"
+      },
+      {
+        "id": "raceId",
+        "title": "Race per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  },
+  {
+    "id": "standings",
+    "title": "Standings",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "url": "standings",
+    "section": "standings",
+    "endpoints": [
+      {
+        "id": "standings",
+        "title": "Standings",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "standings",
+        "params": "limit=1&offset=20"
+      },
+      {
+        "id": "standingsId",
+        "title": "Standings per Id",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "driverId"
+      }
+    ]
+  },
+  {
+    "id": "circuits",
+    "title": "Circuits",
+    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "url": "circuits",
+    "section": "circuits",
+    "endpoints": [
+      {
+        "id": "circuits",
+        "title": "Circuits",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "circuits",
+        "params": "limit=1&offset=20"
+      },
+      {
+        "id": "circuitId",
+        "title": "Circuit per Id",
         "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
         "url": "driverId"
       }
