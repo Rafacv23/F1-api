@@ -43,7 +43,7 @@ export default async function EnpointPage({
   }
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl md:w-2/3">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
