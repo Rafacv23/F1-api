@@ -92,5 +92,236 @@
         "description": "A URL to the Wikipedia page of the driver."
       }
     ]
+  },
+  {
+    "enpointId": "circuits",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/circuits?limit=1&offset=0",
+      "limit": 1,
+      "offset": 0,
+      "total": 1,
+      "circuits": [
+        {
+          "circuitId": "bahrein",
+          "circuitName": "Bahrein International Circuit",
+          "country": "Bahrein",
+          "city": "Sakhir",
+          "circuitLength": 5412,
+          "lapRecord": "1:31:447",
+          "firstParticipationYear": 2004,
+          "numberOfCorners": 15,
+          "fastestLapDriverId": "de_la_rosa",
+          "fastestLapTeamId": "mclaren",
+          "fastestLapYear": 2005,
+          "url": "https://en.wikipedia.org/wiki/Bahrain_International_Circuit"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "circuits",
+        "type": "array",
+        "description": "A list of circuit objects returned from the API."
+      },
+      {
+        "field": "circuitId",
+        "type": "string",
+        "description": "A unique identifier for the circuit."
+      },
+      {
+        "field": "circuitName",
+        "type": "string",
+        "description": "The circuit's name."
+      },
+      {
+        "field": "country",
+        "type": "string",
+        "description": "The circuit's country."
+      },
+      {
+        "field": "city",
+        "type": "string",
+        "description": "The circuit's city."
+      },
+      {
+        "field": "circuitLength",
+        "type": "number",
+        "description": "The circuit's length in kilometers."
+      },
+      {
+        "field": "lapRecord",
+        "type": "string",
+        "description": "The lap record for the circuit."
+      },
+      {
+        "field": "firstParticipationYear",
+        "type": "number",
+        "description": "The year the circuit first hosted a Grand Prix."
+      },
+      {
+        "field": "numberOfCorners",
+        "type": "number",
+        "description": "The number of corners on the circuit."
+      },
+      {
+        "field": "fastestLapDriverId",
+        "type": "string",
+        "description": "The driverId of the fastest lap driver."
+      },
+      {
+        "field": "fastestLapTeamId",
+        "type": "string",
+        "description": "The teamId of the fastest lap team."
+      },
+      {
+        "field": "fastestLapYear",
+        "type": "number",
+        "description": "The year the fastest lap was set."
+      },
+
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the circuit."
+      }
+    ]
+  },
+  {
+    "enpointId": "circuitId",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/circuits/monza",
+      "limit": 1,
+      "total": 1,
+      "circuit": [
+        {
+          "circuitId": "monza",
+          "circuitName": "Autodromo Nazionale Monza",
+          "country": "Italy",
+          "city": "Monza",
+          "circuitLength": 5793,
+          "lapRecord": "1:21:046",
+          "firstParticipationYear": 1950,
+          "numberOfCorners": 11,
+          "fastestLapDriverId": "barrichelo",
+          "fastestLapTeamId": "ferrari",
+          "fastestLapYear": 2004,
+          "url": "https://en.wikipedia.org/wiki/Monza_Circuit"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "circuit",
+        "type": "array",
+        "description": "A list of circuit objects returned from the API."
+      },
+      {
+        "field": "circuitId",
+        "type": "string",
+        "description": "A unique identifier for the circuit."
+      },
+      {
+        "field": "circuitName",
+        "type": "string",
+        "description": "The circuit's name."
+      },
+      {
+        "field": "country",
+        "type": "string",
+        "description": "The circuit's country."
+      },
+      {
+        "field": "city",
+        "type": "string",
+        "description": "The circuit's city."
+      },
+      {
+        "field": "circuitLength",
+        "type": "number",
+        "description": "The circuit's length in kilometers."
+      },
+      {
+        "field": "lapRecord",
+        "type": "string",
+        "description": "The lap record for the circuit."
+      },
+      {
+        "field": "firstParticipationYear",
+        "type": "number",
+        "description": "The year the circuit first hosted a Grand Prix."
+      },
+      {
+        "field": "numberOfCorners",
+        "type": "number",
+        "description": "The number of corners on the circuit."
+      },
+      {
+        "field": "fastestLapDriverId",
+        "type": "string",
+        "description": "The driverId of the fastest lap driver."
+      },
+      {
+        "field": "fastestLapTeamId",
+        "type": "string",
+        "description": "The teamId of the fastest lap team."
+      },
+      {
+        "field": "fastestLapYear",
+        "type": "number",
+        "description": "The year the fastest lap was set."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the circuit."
+      }
+    ]
   }
 ]
