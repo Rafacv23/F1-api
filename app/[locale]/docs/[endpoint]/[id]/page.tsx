@@ -9,14 +9,7 @@ import {
 import endpoints from "@/content/endpoints.json"
 import examples from "@/content/examples.json"
 import responses from "@/content/responses.json"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+import ArrayBread from "@/components/ArrayBread"
 
 export default async function EnpointPage({
   params,
@@ -44,27 +37,16 @@ export default async function EnpointPage({
 
   return (
     <div className="max-w-3xl md:w-2/3">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/docs/${section.url}`}>
-              {section.title}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{subendpoint.title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <ArrayBread
+        items={[
+          { label: "Docs", link: "/docs" },
+          { label: section.title, link: `/docs/${section.url}` },
+          {
+            label: subendpoint.title,
+            link: `/docs/${section.url}/${params.id}`,
+          },
+        ]}
+      />
       <h1 id="start" className="text-3xl font-bold my-4">
         {subendpoint.title}
       </h1>

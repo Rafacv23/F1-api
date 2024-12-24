@@ -1,11 +1,3 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import initTranslations from "@/app/i18n"
 import { BackBtn } from "@/components/BackBtn"
 import Link from "next/link"
@@ -16,23 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import endpoints from "@/content/endpoints.json"
+import ArrayBread from "@/components/ArrayBread"
 
 export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <main className="max-w-3xl mt-32 mx-auto p-6 h-screen flex flex-col">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">{t("home")}</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Docs</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <main className="max-w-3xl mt-32 mb-16 mx-auto p-6 h-screen flex flex-col">
+      <ArrayBread items={[{ label: "Docs", link: "/docs" }]} />
       <h1 className="text-3xl font-bold my-4">{t("title")}</h1>
       <p className="my-6">{t("p1")}</p>
       <p className="mb-6">{t("p2")}</p>

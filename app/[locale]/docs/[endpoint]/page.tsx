@@ -1,20 +1,11 @@
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
+import ArrayBread from "@/components/ArrayBread"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 import endpoints from "@/content/endpoints.json"
-import { t } from "i18next"
 import Link from "next/link"
 
 export default function EnpointPage({
@@ -30,21 +21,16 @@ export default function EnpointPage({
 
   return (
     <div className="max-w-3xl w-2/3 mx-auto">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{filteredEnpoints.title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <ArrayBread
+        items={[
+          { label: "Docs", link: "/docs" },
+          {
+            label: filteredEnpoints.title,
+            link: `/docs/${filteredEnpoints.id}`,
+          },
+        ]}
+      />
+
       <h1 className="text-3xl font-bold mb-4">{filteredEnpoints.title}</h1>
       <p className="mb-4">{filteredEnpoints.description}</p>
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
