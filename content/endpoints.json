@@ -123,22 +123,22 @@
   {
     "id": "circuits",
     "title": "Circuits",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old.",
     "url": "circuits",
     "section": "circuits",
     "endpoints": [
       {
         "id": "circuits",
         "title": "Circuits",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old circuits.",
         "url": "circuits",
         "params": "limit=1&offset=20"
       },
       {
         "id": "circuitId",
-        "title": "Circuit per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "driverId"
+        "title": "[circuitId]",
+        "description": "This endpoint retrieves details about circuits in the database with the given Id.",
+        "url": "circuitId"
       }
     ]
   }
