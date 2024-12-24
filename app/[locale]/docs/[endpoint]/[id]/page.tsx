@@ -101,24 +101,30 @@ export default async function EnpointPage({
       <h2 id="params" className="mt-4 text-xl font-semibold">
         Response Params
       </h2>
-      <Table className="my-4">
-        <TableHeader className="text-left">
-          <TableRow>
-            <TableHead className="w-[100px]">Param</TableHead>
-            <TableHead>Default</TableHead>
-            <TableHead>Data</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {subendpoint.params.map((param) => (
-            <TableRow key={param.name}>
-              <TableCell className="font-medium">{param.name}</TableCell>
-              <TableCell>{param.default}</TableCell>
-              <TableCell>{param.description}</TableCell>
+      {Array.isArray(subendpoint.params) ? (
+        <Table className="my-4">
+          <TableHeader className="text-left">
+            <TableRow>
+              <TableHead className="w-[100px]">Param</TableHead>
+              <TableHead>Default</TableHead>
+              <TableHead>Data</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {subendpoint.params.map((param) => (
+              <TableRow key={param.name}>
+                <TableCell className="font-medium">{param.name}</TableCell>
+                <TableCell>{param.default}</TableCell>
+                <TableCell>{param.description}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : subendpoint.params ? (
+        <p>{subendpoint.params}</p>
+      ) : (
+        <p>No params for this endpoint.</p>
+      )}
       <h2 id="status" className="mt-4 text-xl font-semibold">
         Response Status
       </h2>
