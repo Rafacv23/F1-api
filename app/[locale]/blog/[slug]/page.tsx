@@ -1,7 +1,14 @@
 import Link from "next/link"
-import { getArticleData } from "@/lib/articles"
+import { getAllArticles, getArticleData } from "@/lib/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
+
+export async function generateStaticParams() {
+  const articles = await getAllArticles()
+  return articles.map((article) => ({
+    slug: article.id,
+  }))
+}
 
 const Article = async ({ params }: { params: { slug: string } }) => {
   const articleData = await getArticleData(params.slug)
