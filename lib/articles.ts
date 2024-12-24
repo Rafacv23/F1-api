@@ -4,10 +4,34 @@ import path from "path"
 import moment from "moment"
 import { remark } from "remark"
 import html from "remark-html"
-import { ArticleItem } from "./definitions"
-import { title } from "process"
+import { ArticleItem } from "@/lib/definitions"
 
 const articlesDirectory = path.join(process.cwd(), "articles")
+
+export const getAllArticles = (): ArticleItem[] => {
+  const fileNames = fs.readdirSync(articlesDirectory)
+
+  const allArticlesData = fileNames.map((fileName) => {
+    const id = fileName.replace(/\.md$/, "")
+
+    const fullPath = path.join(articlesDirectory, fileName)
+    const fileContents = fs.readFileSync(fullPath, "utf-8")
+
+    const matterResult = matter(fileContents)
+
+    return {
+      id,
+      title: matterResult.data.title,
+      date: matterResult.data.date,
+      category: matterResult.data.category,
+      author: matterResult.data.author,
+    }
+  })
+
+  return allArticlesData.sort((a, b) =>
+    moment(a.date, "DD-MM-YYYY").diff(moment(b.date, "DD-MM-YYYY"))
+  )
+}
 
 const getSortedArticles = (): ArticleItem[] => {
   const fileNames = fs.readdirSync(articlesDirectory)
