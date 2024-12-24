@@ -38,6 +38,10 @@ const searchOptions: SearchOption[] = [
     links: [
       { label: "Drivers", href: "/docs/introduction", icon: Braces },
       { label: "Teams", href: "/docs/endpoints", icon: Braces },
+      { label: "Seasons", href: "/docs/seasons", icon: Braces },
+      { label: "Races", href: "/docs/races", icon: Braces },
+      { label: "Standings", href: "/docs/standings", icon: Braces },
+      { label: "Circuits", href: "/docs/circuits", icon: Braces },
     ],
   },
   {
