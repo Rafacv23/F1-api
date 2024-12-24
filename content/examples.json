@@ -19,6 +19,78 @@
           "url": "https://en.wikipedia.org/wiki/Fernando_Alonso"
         }
       ]
-    }
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "drivers",
+        "type": "array",
+        "description": "A list of driver objects returned from the API."
+      },
+      {
+        "field": "driverId",
+        "type": "string",
+        "description": "A unique identifier for the driver."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthdate in DD/MM/YYYY format."
+      },
+      {
+        "field": "number",
+        "type": "number",
+        "description": "The driver's racing number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's abbreviated name, often used in standings or graphics."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      }
+    ]
   }
 ]
