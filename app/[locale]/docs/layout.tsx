@@ -18,7 +18,7 @@ export default function DocsLayout({
 }>) {
   return (
     <div className="flex md:flex-row gap-6 p-6 mt-32 justify-center w-full">
-      <nav className="hidden md:block w-full md:w-1/6 border-r pr-4 border-gray-200 sticky top-32 h-screen overflow-y-auto">
+      <nav className="hidden md:block w-full md:w-1/6 border-r pr-4 border-headerBorder dark:border-customGrayDark sticky top-32 h-screen overflow-y-auto">
         <h3 className="font-semibold text-lg mb-4">Endpoints</h3>
         <ul>
           {endpoints.map((endpoint) => (
@@ -49,43 +49,6 @@ export default function DocsLayout({
         </ul>
       </nav>
       {children}
-      <nav className="hidden lg:block w-full md:w-1/6 border-l border-gray-200 pl-4 sticky top-32 h-screen overflow-y-auto">
-        <h3 className="font-semibold text-lg mb-4">On this page</h3>
-        <ul className="flex flex-col gap-2">
-          <li>
-            <Link
-              href={`#start`}
-              className="text-slate-500 hover:text-black dark:text-slate-300 dark:hover:text-white hover:transition-all ease-in-out duration-300"
-            >
-              Endpoint
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`#example`}
-              className="text-slate-500 hover:text-black dark:text-slate-300 dark:hover:text-white hover:transition-all ease-in-out duration-300"
-            >
-              Example response
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`#params`}
-              className="text-slate-500 hover:text-black dark:text-slate-300 dark:hover:text-white hover:transition-all ease-in-out duration-300"
-            >
-              Response params
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`#status`}
-              className="text-slate-500 hover:text-black dark:text-slate-300 dark:hover:text-white hover:transition-all ease-in-out duration-300"
-            >
-              Response status
-            </Link>
-          </li>
-        </ul>
-      </nav>
     </div>
   )
 }
