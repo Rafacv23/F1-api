@@ -29,7 +29,7 @@ export default function EnpointPage({
   }
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl w-2/3 mx-auto">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
