@@ -17,7 +17,7 @@ export default function DocsLayout({
   }
 }>) {
   return (
-    <div className="flex md:flex-row gap-6 p-6 mt-32 justify-center w-full">
+    <div className="flex p-6 mt-32 max-w-5xl w-full justify-center mx-auto">
       <nav className="hidden md:block w-full md:w-1/6 border-r pr-4 border-headerBorder dark:border-customGrayDark sticky top-32 h-screen overflow-y-auto">
         <h3 className="font-semibold text-lg mb-4">Endpoints</h3>
         <ul>
