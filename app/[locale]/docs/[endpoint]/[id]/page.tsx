@@ -11,6 +11,19 @@ import examples from "@/content/examples.json"
 import responses from "@/content/responses.json"
 import ArrayBread from "@/components/ArrayBread"
 
+export async function generateStaticParams() {
+  const paths = endpoints.flatMap((endpoint) =>
+    endpoint.endpoints.map((subendpoint) => ({
+      endpoint: endpoint.id,
+      id: subendpoint.id,
+    }))
+  )
+
+  return paths.map(({ endpoint, id }) => ({
+    params: { endpoint, id },
+  }))
+}
+
 export default async function EnpointPage({
   params,
 }: {
