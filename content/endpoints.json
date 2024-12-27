@@ -84,7 +84,7 @@
   {
     "id": "races",
     "title": "Races",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "Endpoints related to the races and results.",
     "url": "races",
     "section": "races",
     "endpoints": [
@@ -106,29 +106,88 @@
   {
     "id": "standings",
     "title": "Standings",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "Endpoints related to the standings.",
     "url": "standings",
     "section": "standings",
     "endpoints": [
       {
-        "id": "standings",
-        "title": "Standings",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "standings",
-        "params": "limit=1&offset=20"
+        "id": "drivers-championship",
+        "title": "[year]/drivers-championship",
+        "description": "This endpoint retrieves drivers standings by the provided year.",
+        "url": "2021/drivers-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
       },
       {
-        "id": "standingsId",
-        "title": "Standings per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "driverId"
+        "id": "constructors-championship",
+        "title": "[year]/constructors-championship",
+        "description": "This endpoint retrieves constructors standings by the provided year.",
+        "url": "2021/constructors-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-drivers-championship",
+        "title": "current/drivers-championship",
+        "description": "This endpoint retrieves drivers standings from the current season.",
+        "url": "current/drivers-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-constructors-championship",
+        "title": "current/constructors-championship",
+        "description": "This endpoint retrieves constructors standings from the current season.",
+        "url": "current/constructors-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
       }
     ]
   },
   {
     "id": "circuits",
     "title": "Circuits",
-    "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old.",
+    "description": "All the endpoints related to the circuits.",
     "url": "circuits",
     "section": "circuits",
     "endpoints": [
