@@ -341,6 +341,76 @@
     ]
   },
   {
+    "enpointId": "seasons",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/seasons?limit=1&offset=0",
+      "limit": 1,
+      "offset": 0,
+      "total": 1,
+      "championships": [
+        {
+          "championshipId": "f1_2025",
+          "championshipName": "2025 Formula 1 World Championship",
+          "url": "https://en.wikipedia.org/wiki/2025_Formula_One_World_Championship",
+          "year": 2025
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of seasons available in the dataset."
+      },
+      {
+        "field": "championships",
+        "type": "array",
+        "description": "A list of championship objects returned from the API."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "A unique identifier for the championship."
+      },
+      {
+        "field": "championshipName",
+        "type": "string",
+        "description": "The championship's name."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the championship."
+      },
+      {
+        "field": "year",
+        "type": "number",
+        "description": "The year the championship was held."
+      }
+    ]
+  },
+  {
     "enpointId": "circuits",
     "exampleResponse": {
       "api": "https://f1connectapi.vercel.app",

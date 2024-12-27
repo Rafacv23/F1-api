@@ -57,22 +57,27 @@
   {
     "id": "seasons",
     "title": "Seasons",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "All the endpoints related to the seasons.",
     "url": "seasons",
     "section": "seasons",
     "endpoints": [
       {
         "id": "seasons",
-        "title": "Seasons",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "title": "seasons",
+        "description": "This endpoint retrieves details about a all the seasons in the database.",
         "url": "seasons",
-        "params": "limit=1&offset=20"
-      },
-      {
-        "id": "seasonId",
-        "title": "Season per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "driverId"
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
       }
     ]
   },
@@ -129,7 +134,7 @@
     "endpoints": [
       {
         "id": "circuits",
-        "title": "Circuits",
+        "title": "circuits",
         "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old circuits.",
         "url": "circuits",
         "params": "limit=1&offset=20"
