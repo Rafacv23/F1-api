@@ -7,11 +7,11 @@ import {
   SITE_URL,
 } from "@/lib/constants"
 import "./globals.css"
-import Footer from "@/components/Footer"
+import Footer from "@/components/footer/Footer"
 import initTranslations from "../i18n"
 import TranslationsProvider from "@/components/TranslationsProvider"
 import { Providers } from "@/components/Providers"
-import Header from "@/components/Header"
+import Header from "@/components/header/Header"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 

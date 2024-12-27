@@ -1,8 +1,7 @@
 import React from "react"
-import TermsList from "@/components/TermList"
-import Link from "next/link"
+import TermsList from "@/components/terms/TermList"
 import initTranslations from "@/app/i18n"
-import { BackBtn } from "@/components/BackBtn"
+import { BackBtn } from "@/components/buttons/BackBtn"
 
 export default async function Terms({
   params,

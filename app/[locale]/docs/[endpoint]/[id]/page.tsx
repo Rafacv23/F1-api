@@ -15,7 +15,7 @@ import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { SITE_URL } from "@/lib/constants"
 import { ExternalLink } from "lucide-react"
-import CopyBtn from "@/components/CopyBtn"
+import CopyBtn from "@/components/buttons/CopyBtn"
 
 export async function generateStaticParams() {
   const paths = endpoints.flatMap((endpoint) =>

@@ -1,6 +1,6 @@
 import initTranslations from "@/app/i18n"
-import { BackBtn } from "@/components/BackBtn"
-import FaqsList from "@/components/FaqsList"
+import { BackBtn } from "@/components/buttons/BackBtn"
+import FaqsList from "@/components/faqs/FaqsList"
 import React from "react"
 
 export default async function FAQs({ params }: { params: { locale: string } }) {

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import initTranslations from "@/app/i18n"
-import { BackBtn } from "@/components/BackBtn"
+import { BackBtn } from "@/components/buttons/BackBtn"
 
 export default async function ContactPage({
   params,

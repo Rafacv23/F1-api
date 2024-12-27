@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import ReferralsList from "@/components/ReferralsList"
 import initTranslations from "@/app/i18n"
-import { BackBtn } from "@/components/BackBtn"
+import { BackBtn } from "@/components/buttons/BackBtn"
 
 export default async function Referral({
   params,

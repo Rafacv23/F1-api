@@ -1,5 +1,5 @@
-import Announcer from "@/components/Announcer"
-import HomeBanner from "@/components/HomeBanner"
+import Announcer from "@/components/home/Announcer"
+import HomeBanner from "@/components/home/HomeBanner"
 
 export default function Page({ params }: { params: { locale: string } }) {
   return (
