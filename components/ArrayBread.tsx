@@ -19,7 +19,7 @@ export default function ArrayBread({ items }: ArrayBreadProps) {
   const currentPage = items[items.length - 1]
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="mb-4">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -33,8 +33,6 @@ export default function ArrayBread({ items }: ArrayBreadProps) {
             {index < items.length - 1 && <BreadcrumbSeparator />}
           </React.Fragment>
         ))}
-
-        {/* Current page (last item) */}
         {currentPage && (
           <BreadcrumbItem>
             <BreadcrumbPage>{currentPage.label}</BreadcrumbPage>
