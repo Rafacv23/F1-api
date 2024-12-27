@@ -2,13 +2,13 @@
   {
     "id": "drivers",
     "title": "Drivers",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "All the endpoints related to the drivers.",
     "url": "drivers",
     "section": "drivers",
     "endpoints": [
       {
         "id": "drivers",
-        "title": "Drivers",
+        "title": "drivers",
         "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
         "url": "drivers",
         "params": [
@@ -26,8 +26,8 @@
       },
       {
         "id": "driverId",
-        "title": "Driver per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "title": "[driverId]",
+        "description": "This endpoint retrieves details about a driver in the database. Based on the provided driverId.",
         "url": "driverId"
       }
     ]
@@ -35,22 +35,22 @@
   {
     "id": "teams",
     "title": "Teams",
-    "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+    "description": "All the endpoints related to the teams.",
     "url": "teams",
     "section": "teams",
     "endpoints": [
       {
         "id": "teams",
-        "title": "Teams",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "drivers",
+        "title": "teams",
+        "description": "This endpoint retrieves details about a all the teams in the database. The active and the old teams.",
+        "url": "teams",
         "params": "limit=1&offset=20"
       },
       {
         "id": "teamId",
-        "title": "Team per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "driverId"
+        "title": "[teamId]",
+        "description": "This endpoint retrieves details about a team in the database. Based on the provided teamId.",
+        "url": "teamId"
       }
     ]
   },

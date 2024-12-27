@@ -94,6 +94,253 @@
     ]
   },
   {
+    "enpointId": "driverId",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/drivers/alonso",
+      "total": 1,
+      "driver": [
+        {
+          "driverId": "alonso",
+          "name": "Fernando",
+          "surname": "Alonso",
+          "nationality": "Spain",
+          "birthday": "29/07/1981",
+          "number": 14,
+          "shortName": "ALO",
+          "url": "https://en.wikipedia.org/wiki/Fernando_Alonso"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "driver",
+        "type": "array",
+        "description": "A list of driver objects returned from the API."
+      },
+      {
+        "field": "driverId",
+        "type": "string",
+        "description": "A unique identifier for the driver."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthdate in DD/MM/YYYY format."
+      },
+      {
+        "field": "number",
+        "type": "number",
+        "description": "The driver's racing number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's abbreviated name, often used in standings or graphics."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      }
+    ]
+  },
+  {
+    "enpointId": "teams",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/teams?limit=1&offset=70",
+      "limit": 1,
+      "offset": 70,
+      "total": 1,
+      "teams": [
+        {
+          "teamId": "ferrari",
+          "teamName": "Scuderia Ferrari",
+          "teamNationality": "Italy",
+          "firstAppeareance": 1950,
+          "constructorsChampionships": 16,
+          "driversChampionships": 15,
+          "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the teams data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of teams available in the dataset."
+      },
+      {
+        "field": "teams",
+        "type": "array",
+        "description": "A list of team objects returned from the API."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      }
+    ]
+  },
+  {
+    "enpointId": "teamId",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/teams/ferrari",
+      "limit": 1,
+      "total": 1,
+      "team": [
+        {
+          "teamId": "ferrari",
+          "teamName": "Scuderia Ferrari",
+          "teamNationality": "Italy",
+          "firstAppeareance": 1950,
+          "constructorsChampionships": 16,
+          "driversChampionships": 15,
+          "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the teams data with query parameters for limit and offset."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of teams available in the dataset."
+      },
+      {
+        "field": "team",
+        "type": "array",
+        "description": "A list of team objects returned from the API."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number | null",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number | null",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      }
+    ]
+  },
+  {
     "enpointId": "circuits",
     "exampleResponse": {
       "api": "https://f1connectapi.vercel.app",
