@@ -5,7 +5,7 @@ import { SiGoogledocs } from "react-icons/si"
 import initTranslations from "@/app/i18n"
 import { SITE_TITLE } from "@/lib/constants"
 import Image from "next/image"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 
 export default async function HomeBanner({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["home"])
