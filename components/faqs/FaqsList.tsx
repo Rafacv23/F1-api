@@ -5,7 +5,7 @@ import initTranslations from "@/app/i18n"
 export default async function FaqsList({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["faqs"])
 
-  const faqs = await import(`../locales/${locale}/faqs.json`).then(
+  const faqs = await import(`../../locales/${locale}/faqs.json`).then(
     (module) => module.default
   )
 
