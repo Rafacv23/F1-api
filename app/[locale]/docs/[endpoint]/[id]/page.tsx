@@ -10,6 +10,7 @@ import endpoints from "@/content/endpoints.json"
 import examples from "@/content/examples.json"
 import responses from "@/content/responses.json"
 import ArrayBread from "@/components/ArrayBread"
+import { Card, CardContent } from "@/components/ui/card"
 
 export async function generateStaticParams() {
   const paths = endpoints.flatMap((endpoint) =>
@@ -67,11 +68,13 @@ export default async function EnpointPage({
       <h2 id="example" className="my-4 text-xl font-semibold">
         Example Response
       </h2>
-      <div className="bg-slate-100 dark:bg-slate-900 p-4 rounded-md">
-        <pre className="whitespace-pre-wrap text-sm">
-          {JSON.stringify(example?.exampleResponse, null, 2)}
-        </pre>
-      </div>
+      <Card>
+        <CardContent>
+          <pre className="whitespace-pre-wrap text-sm">
+            {JSON.stringify(example?.exampleResponse, null, 2)}
+          </pre>
+        </CardContent>
+      </Card>
       <h2 id="types" className="mt-4 text-xl font-semibold">
         Response Types
       </h2>
