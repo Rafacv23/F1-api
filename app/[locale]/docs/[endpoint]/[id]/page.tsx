@@ -11,6 +11,11 @@ import examples from "@/content/examples.json"
 import responses from "@/content/responses.json"
 import ArrayBread from "@/components/ArrayBread"
 import { Card, CardContent } from "@/components/ui/card"
+import { buttonVariants } from "@/components/ui/button"
+import Link from "next/link"
+import { SITE_URL } from "@/lib/constants"
+import { ExternalLink } from "lucide-react"
+import CopyBtn from "@/components/CopyBtn"
 
 export async function generateStaticParams() {
   const paths = endpoints.flatMap((endpoint) =>
@@ -61,9 +66,25 @@ export default async function EnpointPage({
           },
         ]}
       />
-      <h1 id="start" className="text-3xl font-bold my-4">
-        {subendpoint.title}
-      </h1>
+      <div className="flex flex-row justify-between items-center">
+        <h1 id="start" className="text-2xl font-bold my-4">
+          GET api/{subendpoint.title}
+        </h1>
+        <div className="flex gap-4 my-4 items-center">
+          <CopyBtn text={`api/${subendpoint.url}`} />
+          <Link
+            href={`${SITE_URL}/api/${subendpoint.url}`}
+            target="_blank"
+            className={buttonVariants({
+              variant: "outline",
+              className: "flex gap-2 items-center",
+            })}
+          >
+            Try it
+            <ExternalLink size={16} />
+          </Link>
+        </div>
+      </div>
       <p className="mb-4">{subendpoint.description}</p>
       <h2 id="example" className="my-4 text-xl font-semibold">
         Example Response
