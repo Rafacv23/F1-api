@@ -1,4 +1,4 @@
-import PageNav from "@/components/PageNav"
+import PageNav from "@/components/navs/PageNav"
 
 export default function DocsIdLayout({
   children,

@@ -1,4 +1,4 @@
-import DocsNav from "@/components/DocsNav"
+import DocsNav from "@/components/navs/DocsNav"
 
 export default function DocsLayout({
   children,
