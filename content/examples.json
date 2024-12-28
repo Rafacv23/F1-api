@@ -94,6 +94,832 @@
     ]
   },
   {
+    "enpointId": "year-drivers",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/2010/drivers?limit=1",
+      "limit": 1,
+      "offset": 0,
+      "total": 1,
+      "season": "2010",
+      "championshipId": "f1_2010",
+      "drivers": [
+        {
+          "driverId": "vettel",
+          "name": "Sebastian",
+          "surname": "Vettel",
+          "nationality": "Germany",
+          "birthday": "03/07/1987",
+          "number": 5,
+          "shortName": "VET",
+          "url": "https://en.wikipedia.org/wiki/Sebastian_Vettel",
+          "teamId": "red_bull"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "The championship id."
+      },
+      {
+        "field": "drivers",
+        "type": "array",
+        "description": "The drivers array of driver objects."
+      },
+      {
+        "field": "driverId",
+        "type": "string",
+        "description": "A unique identifier for the driver."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthdate in DD/MM/YYYY format."
+      },
+      {
+        "field": "number",
+        "type": "number",
+        "description": "The driver's racing number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's abbreviated name, often used in standings or graphics."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "The team id."
+      }
+    ]
+  },
+  {
+    "enpointId": "year-teams",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/2016/teams?limit=1",
+      "limit": 1,
+      "offset": 0,
+      "total": 1,
+      "season": "2016",
+      "championshipId": "f1_2016",
+      "teams": [
+        {
+          "teamId": "mercedes",
+          "teamName": "Mercedes Formula 1 Team",
+          "teamNationality": "Germany",
+          "firstAppeareance": 1954,
+          "constructorsChampionships": 8,
+          "driversChampionships": 9,
+          "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "The championship id."
+      },
+      {
+        "field": "teams",
+        "type": "array",
+        "description": "The teams array of team objects."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number | null",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number | null",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      }
+    ]
+  },
+  {
+    "enpointId": "year-teamId-drivers",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/2024/teams/mercedes/drivers",
+      "total": 2,
+      "limit": 4,
+      "season": "2024",
+      "teamId": "mercedes",
+      "team": {
+        "teamId": "mercedes",
+        "teamName": "Mercedes Formula 1 Team",
+        "country": "Germany",
+        "constructorsChampionships": 8,
+        "driversChampionships": 9,
+        "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+      },
+      "drivers": [
+        {
+          "driver": {
+            "driverId": "russell",
+            "name": "George",
+            "surname": "Russell",
+            "nationality": "Great Britain",
+            "birthday": "15/02/1998",
+            "number": 63,
+            "shortName": "RUS",
+            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+          }
+        },
+        {
+          "driver": {
+            "driverId": "hamilton",
+            "name": "Lewis",
+            "surname": "Hamilton",
+            "nationality": "Great Britain",
+            "birthday": "07/01/1985",
+            "number": 44,
+            "shortName": "HAM",
+            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+          }
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "team",
+        "type": "object",
+        "description": "The team object."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number | null",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number | null",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      },
+      {
+        "field": "drivers",
+        "type": "array",
+        "description": "A list of drivers objects returned from the API."
+      },
+      {
+        "field": "driverId",
+        "type": "string",
+        "description": "A unique identifier for the driver."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthday."
+      },
+      {
+        "field": "number",
+        "type": "number | null",
+        "description": "The driver's number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's short name."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      }
+    ]
+  },
+  {
+    "enpointId": "year-teamId",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/2016/teams?limit=1",
+      "total": 1,
+      "season": "2016",
+      "team": [
+        {
+          "teamId": "mercedes",
+          "teamName": "Mercedes Formula 1 Team",
+          "teamNationality": "Germany",
+          "firstAppeareance": 1954,
+          "constructorsChampionships": 8,
+          "driversChampionships": 9,
+          "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "The championship id."
+      },
+      {
+        "field": "team",
+        "type": "array",
+        "description": "The array of driver objects."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number | null",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number | null",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      }
+    ]
+  },
+  {
+    "enpointId": "year-driverId",
+    "exampleResponse": {
+      "api": "https://f1connectapi.vercel.app",
+      "url": "https://f1connectapi.vercel.app/api/2024/drivers/alonso?limit=1&offset=4",
+      "limit": 1,
+      "offset": 4,
+      "total": 1,
+      "season": "2024",
+      "championshipId": "f1_2024",
+      "driver": {
+        "driverId": "alonso",
+        "name": "Fernando",
+        "surname": "Alonso",
+        "nationality": "Spain",
+        "birthday": "29/07/1981",
+        "number": 14,
+        "shortName": "ALO",
+        "url": "https://en.wikipedia.org/wiki/Fernando_Alonso"
+      },
+      "team": {
+        "teamId": "aston_martin",
+        "teamName": "Aston Martin F1 Team",
+        "teamNationality": "Great Britain",
+        "firstAppeareance": 1959,
+        "constructorsChampionships": null,
+        "driversChampionships": null,
+        "url": "https://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One"
+      },
+      "results": [
+        {
+          "race": {
+            "raceId": "china_2024",
+            "name": "Lenovo Chinese Grand Prix 2024",
+            "round": 5,
+            "date": "2024-04-21",
+            "circuit": {
+              "circuitId": "shangai",
+              "name": "Shangai International Circuit",
+              "country": "China",
+              "city": "Shangai",
+              "length": 5451,
+              "lapRecord": "1:32:238",
+              "firstParticipationYear": 2004,
+              "numberOfCorners": 16,
+              "fastestLapDriverId": "michael_schumacher",
+              "fastestLapTeamId": "ferrari",
+              "fastestLapYear": 2004
+            }
+          },
+          "result": {
+            "finishingPosition": 7,
+            "gridPosition": 3,
+            "raceTime": "+43.414",
+            "pointsObtained": 7,
+            "retired": null
+          },
+          "sprintResult": {
+            "finishingPosition": 17,
+            "gridPosition": 18,
+            "raceTime": "+42.998\t",
+            "pointsObtained": 0,
+            "retired": null
+          }
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "The championship id."
+      },
+      {
+        "field": "driver",
+        "type": "object",
+        "description": "The driver object."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthdate in DD/MM/YYYY format."
+      },
+      {
+        "field": "number",
+        "type": "number",
+        "description": "The driver's racing number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's abbreviated name, often used in standings or graphics."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      },
+      {
+        "field": "team",
+        "type": "object",
+        "description": "The team object."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "The team id."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      },
+      {
+        "field": "results",
+        "type": "array",
+        "description": "A list of results objects returned from the API."
+      },
+      {
+        "field": "race",
+        "type": "object",
+        "description": "The race object."
+      },
+      {
+        "field": "raceId",
+        "type": "string",
+        "description": "The race id."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The race name."
+      },
+      {
+        "field": "round",
+        "type": "number",
+        "description": "The race round."
+      },
+      {
+        "field": "date",
+        "type": "string",
+        "description": "The race date in YYYY-MM-DD format."
+      },
+      {
+        "field": "circuit",
+        "type": "object",
+        "description": "The circuit object."
+      },
+      {
+        "field": "circuitId",
+        "type": "string",
+        "description": "The circuit id."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The circuit name."
+      },
+      {
+        "field": "country",
+        "type": "string",
+        "description": "The circuit country."
+      },
+      {
+        "field": "city",
+        "type": "string",
+        "description": "The circuit city."
+      },
+      {
+        "field": "length",
+        "type": "number",
+        "description": "The circuit length in kilometers."
+      },
+      {
+        "field": "lapRecord",
+        "type": "string",
+        "description": "The lap record for the circuit."
+      },
+      {
+        "field": "firstParticipationYear",
+        "type": "number",
+        "description": "The year the circuit first hosted a Grand Prix."
+      },
+      {
+        "field": "numberOfCorners",
+        "type": "number",
+        "description": "The number of corners on the circuit."
+      },
+      {
+        "field": "fastestLapDriverId",
+        "type": "string",
+        "description": "The driverId of the fastest lap driver."
+      },
+      {
+        "field": "fastestLapTeamId",
+        "type": "string",
+        "description": "The teamId of the fastest lap team."
+      },
+      {
+        "field": "fastestLapYear",
+        "type": "number",
+        "description": "The year the fastest lap was set."
+      },
+      {
+        "field": "result",
+        "type": "object",
+        "description": "The result object."
+      },
+      {
+        "field": "finishingPosition",
+        "type": "number",
+        "description": "The finishing position of the driver."
+      },
+      {
+        "field": "gridPosition",
+        "type": "number",
+        "description": "The grid position of the driver."
+      },
+      {
+        "field": "raceTime",
+        "type": "string",
+        "description": "The race time of the driver."
+      },
+      {
+        "field": "pointsObtained",
+        "type": "number",
+        "description": "The points obtained by the driver."
+      },
+      {
+        "field": "retired",
+        "type": "boolean",
+        "description": "Whether the driver retired or not."
+      },
+      {
+        "field": "sprintResult",
+        "type": "object",
+        "description": "The sprint result object."
+      },
+      {
+        "field": "finishingPosition",
+        "type": "number",
+        "description": "The finishing position of the driver."
+      },
+      {
+        "field": "gridPosition",
+        "type": "number",
+        "description": "The grid position of the driver."
+      },
+      {
+        "field": "raceTime",
+        "type": "string",
+        "description": "The race time of the driver."
+      },
+      {
+        "field": "pointsObtained",
+        "type": "number",
+        "description": "The points obtained by the driver."
+      },
+      {
+        "field": "retired",
+        "type": "boolean",
+        "description": "Whether the driver retired or not."
+      },
+      {
+        "field": "sprintResult",
+        "type": "object",
+        "description": "The sprint result object."
+      },
+      {
+        "field": "finishingPosition",
+        "type": "number",
+        "description": "The finishing position of the driver."
+      },
+      {
+        "field": "gridPosition",
+        "type": "number",
+        "description": "The grid position of the driver."
+      },
+      {
+        "field": "raceTime",
+        "type": "string",
+        "description": "The race time of the driver."
+      },
+      {
+        "field": "pointsObtained",
+        "type": "number",
+        "description": "The points obtained by the driver."
+      },
+      {
+        "field": "retired",
+        "type": "boolean",
+        "description": "Whether the driver retired or not."
+      }
+    ]
+  },
+  {
     "enpointId": "driverId",
     "exampleResponse": {
       "api": "https://f1connectapi.vercel.app",
