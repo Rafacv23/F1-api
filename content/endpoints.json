@@ -171,31 +171,108 @@
     ]
   },
   {
-    "id": "races",
-    "title": "Races",
-    "description": "Endpoints related to the races and results.",
-    "url": "races",
-    "section": "races",
+    "id": "results",
+    "title": "Results",
+    "description": "All the endpoints related to the race results.",
+    "url": "results",
+    "section": "results",
     "endpoints": [
       {
-        "id": "races",
-        "title": "Races",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "races",
-        "params": "limit=1&offset=20"
+        "id": "round-fp1",
+        "title": "[year]/[round]/fp1",
+        "description": "This endpoint retrieves the results of the free practice 1 of the given round.",
+        "url": "2024/1/fp1",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
       },
       {
-        "id": "raceId",
-        "title": "Race per Id",
-        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
-        "url": "driverId"
+        "id": "round-fp2",
+        "title": "[year]/[round]/fp2",
+        "description": "This endpoint retrieves the results of the free practice 2 of the given round.",
+        "url": "2024/1/fp2",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-fp3",
+        "title": "[year]/[round]/fp3",
+        "description": "This endpoint retrieves the results of the free practice 3 of the given round.",
+        "url": "2024/1/fp3",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-qualy",
+        "title": "[year]/[round]/qualy",
+        "description": "This endpoint retrieves the results of the qualifying of the given round.",
+        "url": "2024/1/qualy",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-race",
+        "title": "[year]/[round]/race",
+        "description": "This endpoint retrieves the results of the race of the given round.",
+        "url": "2024/1/race",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
       }
     ]
   },
   {
     "id": "standings",
     "title": "Standings",
-    "description": "Endpoints related to the standings.",
+    "description": "All the endpoints related to the standings.",
     "url": "standings",
     "section": "standings",
     "endpoints": [
@@ -292,6 +369,22 @@
         "title": "[circuitId]",
         "description": "This endpoint retrieves details about circuits in the database with the given Id.",
         "url": "circuitId"
+      }
+    ]
+  },
+  {
+    "id": "races",
+    "title": "Races",
+    "description": "All the endpoints related to the races data.",
+    "url": "races",
+    "section": "races",
+    "endpoints": [
+      {
+        "id": "circuits",
+        "title": "circuits",
+        "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old circuits.",
+        "url": "circuits",
+        "params": "limit=1&offset=20"
       }
     ]
   }
