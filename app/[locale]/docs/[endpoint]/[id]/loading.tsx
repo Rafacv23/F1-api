@@ -3,7 +3,7 @@ import React from "react"
 
 export default function loading() {
   return (
-    <div className="max-w-3xl flex flex-col gap-4 w-full">
+    <div className="max-w-3xl flex flex-col gap-4 w-full md:w-2/3">
       <Skeleton className="h-20" />
       <Skeleton className="h-10" />
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
