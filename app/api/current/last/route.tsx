@@ -13,6 +13,7 @@ import {
 import { lte, and, eq, desc } from "drizzle-orm"
 
 export const revalidate = 60
+export const dynamic = "force-dynamic"
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
