@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 
-const ScrollToTop = () => {
+interface ScrollToTopProps extends React.HTMLAttributes<HTMLButtonElement> {
+  className?: string
+}
+
+const ScrollToTop = ({ className }: ScrollToTopProps) => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -25,15 +29,14 @@ const ScrollToTop = () => {
     })
   }
 
-  return (
-    <div>
-      {isVisible && (
-        <Button onClick={scrollToTop} className="fixed bottom-8 right-8">
-          ↑
-        </Button>
-      )}
-    </div>
-  )
+  return isVisible ? (
+    <Button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 ${className}`}
+    >
+      ↑
+    </Button>
+  ) : null
 }
 
 export default ScrollToTop
