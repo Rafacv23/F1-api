@@ -7,10 +7,11 @@ import {
   SITE_URL,
 } from "@/lib/constants"
 import "./globals.css"
-import Footer from "@/components/Footer"
+import Footer from "@/components/footer/Footer"
 import initTranslations from "../i18n"
 import TranslationsProvider from "@/components/TranslationsProvider"
 import { Providers } from "@/components/Providers"
+import Header from "@/components/header/Header"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -53,7 +54,18 @@ export const metadata: Metadata = {
       pt: "/pt",
     },
   },
-  keywords: ["F1", "Public API", "Formula 1"],
+  keywords: [
+    "F1",
+    "Public API",
+    "Formula 1",
+    "F1 API",
+    "F1 Data",
+    "F1 Stats",
+    "F1 Stats API",
+    "Open source",
+    "Open f1 api",
+    "Fast f1 api",
+  ],
   referrer: "origin-when-cross-origin",
   icons: {
     icon: "/favicon.ico",
@@ -109,6 +121,7 @@ export default async function RootLayout({
           resources={resources}
         >
           <Providers>
+            <Header />
             {children}
             <Footer locale={params.locale} />
           </Providers>

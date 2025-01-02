@@ -7,5 +7,7 @@
   "example": "Exemple",
   "params": "Paramètres",
   "default": "Défaut",
-  "table-caption": "Une liste de tous les points de terminaison de l'API."
+  "table-caption": "Une liste de tous les points de terminaison de l'API.",
+  "blog-entrance": "Dans ce blog, nous allons détailler chaque mise à jour de l'API. De nouvelles et curieuses informations sur F1.",
+  "blog-advertise": "Notez que les journaux des changements sont écrits en anglais, mais les actualités sur F1 sont écrites en espagnol."
 }

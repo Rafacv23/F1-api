@@ -7,7 +7,7 @@ export default function Announcer() {
   const [show, setShow] = useState(true)
   const handleDismiss = () => setShow(false)
   return show && Announce ? (
-    <div className="fixed inset-x-0 top-0 p-4 items-center justify-center flex">
+    <div className="fixed inset-x-0 bottom-0 p-4 items-center justify-center flex">
       <div className=" lg:w-1/2 relative flex items-center justify-center gap-4 rounded-lg px-4 py-3 text-white shadow-lg bg-f1">
         <p className="text-center text-sm font-medium">
           {Announce.announce}

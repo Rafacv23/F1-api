@@ -18,7 +18,7 @@ export default function LanguageChanger() {
   const router = useRouter()
   const currentPathname = usePathname()
 
-  const handleChange = (newLocale) => {
+  const handleChange = (newLocale: string) => {
     // set cookie for next-i18n-router
     const days = 30
     const date = new Date()
@@ -29,7 +29,7 @@ export default function LanguageChanger() {
     // redirect to the new locale path
     if (
       currentLocale === i18nConfig.defaultLocale &&
-      !i18nConfig.prefixDefault
+      !i18nConfig.locales.includes(newLocale)
     ) {
       router.push("/" + newLocale + currentPathname)
     } else {

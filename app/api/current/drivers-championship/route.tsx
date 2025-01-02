@@ -1,72 +1,67 @@
 import { NextResponse } from "next/server"
 import { SITE_NAME } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getYear } from "@/lib/utils"
-import { BaseApiResponse, DriverChampionship } from "@/lib/definitions"
+import { apiNotFound, getLimitAndOffset, getYear } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { asc, eq } from "drizzle-orm"
+import { driverClassifications, drivers, teams } from "@/db/migrations/schema"
 
 export const revalidate = 60
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  championshipId: string
   drivers_championship: any
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 30
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const year = getYear()
-    const sql = `SELECT Driver_Classifications.*, Drivers.*, Teams.*
-    FROM Driver_Classifications
-    JOIN Championships ON Driver_Classifications.Championship_ID = Championships.Championship_ID
-    JOIN Drivers ON Driver_Classifications.Driver_ID = Drivers.Driver_ID
-    JOIN Teams ON Driver_Classifications.Team_ID = Teams.Team_ID
-    WHERE Championships.Year = ?
-    ORDER BY Driver_Classifications.Points DESC, Driver_Classifications.Position ASC
-    LIMIT ?;
-    `
+    const driverStandings = await db
+      .select()
+      .from(driverClassifications)
+      .innerJoin(drivers, eq(driverClassifications.driverId, drivers.driverId))
+      .innerJoin(teams, eq(driverClassifications.teamId, teams.teamId))
+      .where(eq(driverClassifications.championshipId, `f1_${year}`))
+      .orderBy(asc(driverClassifications.position))
+      .limit(limit)
+      .offset(offset)
 
-    const data = await executeQuery(sql, [year, limit])
-
-    if (data.length === 0) {
+    if (driverStandings.length === 0) {
       return apiNotFound(
         request,
         "No drivers championship found for this year, try with other one."
       )
     }
-    // Procesamos los datos
-    const processedData: DriverChampionship[] = data.map((row: any) => {
-      const driver = {
-        driverId: row.Driver_ID,
-        name: row.Name,
-        surname: row.Surname,
-        nationality: row.Nationality,
-        birthday: row.Birthday,
-        number: row.Number,
-        shortName: row.Short_Name,
-        url: row.URL,
-      }
 
-      const team = {
-        teamId: row.Team_ID,
-        teamName: row.Team_Name,
-        country: row.Team_Nationality,
-        firstAppareance: row.First_Appareance,
-        constructorsChampionships: row.Constructors_Championships,
-        driversChampionships: row.Drivers_Championships,
-        url: row.Team_URL,
-      }
-
+    const formattedDriverStandings = driverStandings.map((driver) => {
       return {
-        classificationId: row.Classification_ID,
-        championshipId: row.Championship_ID,
-        driverId: row.Driver_ID,
-        teamId: row.Team_ID,
-        points: row.Points,
-        position: row.Position,
-        wins: row.Wins,
-        driver: driver,
-        team: team,
+        classificationId: driver.Driver_Classifications.classificationId,
+        driverId: driver.Driver_Classifications.driverId,
+        teamId: driver.Driver_Classifications.teamId,
+        points: driver.Driver_Classifications.points,
+        position: driver.Driver_Classifications.position,
+        wins: driver.Driver_Classifications.wins,
+        driver: {
+          name: driver.Drivers.name,
+          surname: driver.Drivers.surname,
+          nationality: driver.Drivers.nationality,
+          birthday: driver.Drivers.birthday,
+          number: driver.Drivers.number,
+          shortName: driver.Drivers.shortName,
+          url: driver.Drivers.url,
+        },
+        team: {
+          teamId: driver.Teams.teamId,
+          teamName: driver.Teams.teamName,
+          country: driver.Teams.teamNationality,
+          firstAppareance: driver.Teams.firstAppeareance,
+          constructorsChampionships: driver.Teams.constructorsChampionships,
+          driversChampionships: driver.Teams.driversChampionships,
+          url: driver.Teams.url,
+        },
       }
     })
 
@@ -74,9 +69,10 @@ export async function GET(request: Request) {
       api: SITE_NAME,
       url: request.url,
       limit: limit,
-      total: processedData.length,
+      total: driverStandings.length,
       season: year,
-      drivers_championship: processedData,
+      championshipId: `f1_${year}`,
+      drivers_championship: formattedDriverStandings,
     }
 
     return NextResponse.json(response)

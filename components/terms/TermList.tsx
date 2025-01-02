@@ -1,8 +1,8 @@
 import React from "react"
-import Term from "./ui/Term"
+import Term from "./Term"
 
 export default async function TermsList({ locale }: { locale: string }) {
-  const terms = await import(`../locales/${locale}/terms.json`).then(
+  const terms = await import(`../../locales/${locale}/terms.json`).then(
     (module) => module.default
   )
 

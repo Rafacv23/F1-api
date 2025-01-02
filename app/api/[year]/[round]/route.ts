@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {

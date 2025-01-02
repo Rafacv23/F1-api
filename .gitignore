@@ -48,7 +48,7 @@ db/cache/
 # NO ignorar migraciones ni esquemas
 !db/migrations/
 !db/schema.ts
-node_modules/
+
 /test-results/
 /playwright-report/
 /blob-report/

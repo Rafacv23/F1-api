@@ -1,8 +1,7 @@
 import React from "react"
-import TermsList from "@/components/TermList"
-import Link from "next/link"
+import TermsList from "@/components/terms/TermList"
 import initTranslations from "@/app/i18n"
-import { BackBtn } from "@/components/BackBtn"
+import { BackBtn } from "@/components/buttons/BackBtn"
 
 export default async function Terms({
   params,
@@ -12,7 +11,7 @@ export default async function Terms({
   const { t } = await initTranslations(params.locale, ["terms"])
 
   return (
-    <main className="max-w-3xl mx-auto p-6 md:h-screen flex flex-col justify-center items-center">
+    <main className="max-w-5xl mx-auto p-6 md:h-screen mt-32 mb-8 flex flex-col justify-center items-center">
       <section className="mb-8">
         <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
         <p>{t("subtitle")}</p>

@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import ReferralsList from "@/components/ReferralsList"
 import initTranslations from "@/app/i18n"
-import Link from "next/link"
-import { BackBtn } from "@/components/BackBtn"
+import { BackBtn } from "@/components/buttons/BackBtn"
 
 export default async function Referral({
   params,
@@ -19,7 +18,7 @@ export default async function Referral({
 }) {
   const { t } = await initTranslations(params.locale, ["referrals"])
   return (
-    <main className="max-w-3xl mx-auto p-6 h-screen">
+    <main className="max-w-5xl mx-auto p-6 h-screen mt-28">
       <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
       <Breadcrumb>
         <BreadcrumbList>
@@ -32,7 +31,7 @@ export default async function Referral({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <p className="mb-6">{t("subtitle")}</p>
+      <p className="my-6">{t("subtitle")}</p>
       <ReferralsList locale={params.locale} />
       <BackBtn locale={params.locale} />
     </main>

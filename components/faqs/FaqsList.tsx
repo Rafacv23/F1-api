@@ -1,11 +1,11 @@
 import React from "react"
-import Faq from "./ui/Faq"
+import Faq from "./Faq"
 import initTranslations from "@/app/i18n"
 
 export default async function FaqsList({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["faqs"])
 
-  const faqs = await import(`../locales/${locale}/faqs.json`).then(
+  const faqs = await import(`../../locales/${locale}/faqs.json`).then(
     (module) => module.default
   )
 

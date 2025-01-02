@@ -14,13 +14,19 @@
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "@next/third-parties": "^14.2.5",
+    "@radix-ui/react-accordion": "^1.2.2",
+    "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cmdk": "^1.0.4",
     "drizzle-orm": "^0.38.0",
+    "framer-motion": "^11.14.0",
     "gray-matter": "^4.0.3",
     "i18next": "^23.12.2",
     "i18next-resources-to-backend": "^1.2.1",
@@ -36,8 +42,9 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "tailwind": "^4.0.0",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",

@@ -2,30 +2,40 @@ import { FaGithub, FaLinkedin } from "react-icons/fa"
 import { MdOutlineWebAsset } from "react-icons/md"
 import { SiKofi } from "react-icons/si"
 
-export const contactLinks = [
+interface Link {
+  href: string
+  title: string
+  children?: string
+}
+
+interface ContactLink extends Link {
+  icon: React.FC<React.SVGProps<SVGSVGElement>>
+}
+
+const contactLinks: ContactLink[] = [
   {
     href: "https://ninjapath.vercel.app/linkedin",
     title: "Rafa Canosa Linkedin",
-    icon: <FaLinkedin />,
+    icon: FaLinkedin,
   },
   {
     href: "https://ko-fi.com/rafacanosa",
     title: "Buy me a coffee",
-    icon: <SiKofi />,
+    icon: SiKofi,
   },
   {
     href: "https://ninjapath.vercel.app/github",
     title: "Rafa Canosa Github",
-    icon: <FaGithub />,
+    icon: FaGithub,
   },
   {
     href: "https://ninjapath.vercel.app/portfolio",
     title: "Rafa Canosa Portfolio",
-    icon: <MdOutlineWebAsset />,
+    icon: MdOutlineWebAsset,
   },
 ]
 
-export const pages = [
+const pages: Link[] = [
   {
     href: "/",
     title: "Home page",
@@ -37,13 +47,18 @@ export const pages = [
     children: "docs",
   },
   {
+    href: "/blog",
+    title: "Blog",
+    children: "Blog",
+  },
+  {
     href: "/referrals",
     title: "Referrals",
     children: "referrals",
   },
 ]
 
-export const api = [
+const api: Link[] = [
   {
     href: "/api/seasons",
     title: "/api/seasons",
@@ -66,7 +81,7 @@ export const api = [
   },
 ]
 
-export const help = [
+const help: Link[] = [
   {
     href: "/contact",
     title: "Contact",
@@ -83,3 +98,5 @@ export const help = [
     children: "terms",
   },
 ]
+
+export { contactLinks, pages, api, help }

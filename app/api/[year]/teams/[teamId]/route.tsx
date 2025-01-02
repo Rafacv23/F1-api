@@ -1,33 +1,32 @@
 import { NextResponse } from "next/server"
 import { SITE_NAME } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound } from "@/lib/utils"
-import { BaseApiResponse, ProcessedTeams, Team, Teams } from "@/lib/definitions"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { eq, InferModel } from "drizzle-orm"
+import { results, teams } from "@/db/migrations/schema"
 
 export const revalidate = 60
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
-  team: ProcessedTeams
+  team: InferModel<typeof teams>[]
 }
 
 export async function GET(request: Request, context: any) {
-  const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 1
   try {
     const { year, teamId } = context.params
-    const sql = `
-      SELECT DISTINCT Teams.*
-      FROM Teams
-      JOIN Results ON Teams.Team_ID = Results.Team_ID
-      JOIN Races ON Results.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      WHERE Championships.Year = ? AND Teams.Team_ID = ? LIMIT ?;
-    `
 
-    const data: Teams = await executeQuery(sql, [year, teamId, limit])
+    const teamData = await db
+      .select({
+        Teams: teams,
+      })
+      .from(teams)
+      .innerJoin(results, eq(teams.teamId, results.teamId))
+      .where(eq(teams.teamId, teamId))
+      .limit(1)
 
-    if (data.length === 0) {
+    if (teamData.length === 0) {
       return apiNotFound(
         request,
         "No teams found for this year, try with other one."
@@ -35,22 +34,21 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row: Team) => {
+    const processedData = teamData.map((row) => {
       return {
-        teamId: row.Team_ID,
-        teamName: row.Team_Name,
-        country: row.Team_Nationality,
-        firstAppareance: row.First_Appareance,
-        constructorsChampionships: row.Constructors_Championships,
-        driversChampionships: row.Drivers_Championships,
-        url: row.URL,
+        teamId: row.Teams.teamId,
+        teamName: row.Teams.teamName,
+        teamNationality: row.Teams.teamNationality,
+        firstAppeareance: row.Teams.firstAppeareance,
+        constructorsChampionships: row.Teams.constructorsChampionships,
+        driversChampionships: row.Teams.driversChampionships,
+        url: row.Teams.url,
       }
     })
 
     const response: ApiResponse = {
       api: SITE_NAME,
       url: request.url,
-      limit: limit,
       total: processedData.length,
       season: year,
       team: processedData,

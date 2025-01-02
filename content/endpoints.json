@@ -1,0 +1,689 @@
+[
+  {
+    "id": "drivers",
+    "title": "Drivers",
+    "description": "All the endpoints related to the drivers.",
+    "url": "drivers",
+    "section": "drivers",
+    "endpoints": [
+      {
+        "id": "drivers",
+        "title": "drivers",
+        "description": "This endpoint retrieves details about a all the drivers in the database. The active and the old drivers.",
+        "url": "drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "driverId",
+        "title": "[driverId]",
+        "description": "This endpoint retrieves details about a driver in the database. Based on the provided driverId.",
+        "url": "driverId"
+      },
+      {
+        "id": "year-drivers",
+        "title": "[year]/drivers",
+        "description": "This endpoint retrieves details about all the drivers in the database. Based on the provided year.",
+        "url": "2010/drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-drivers",
+        "title": "current/drivers",
+        "description": "This endpoint retrieves details about all the drivers in the database. Of the current season.",
+        "url": "current/drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "year-driverId",
+        "title": "[year]/drivers/[driverId]",
+        "description": "This endpoint retrieves details about a driver in the database. Based on the provided driverId and year.",
+        "url": "2010/drivers/alonso",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-driverId",
+        "title": "current/drivers/[driverId]",
+        "description": "This endpoint retrieves details about a driver and his race results. Based on the provided driverId and the current season.",
+        "url": "current/drivers/alonso",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teams",
+    "title": "Teams",
+    "description": "All the endpoints related to the teams.",
+    "url": "teams",
+    "section": "teams",
+    "endpoints": [
+      {
+        "id": "teams",
+        "title": "teams",
+        "description": "This endpoint retrieves details about a all the teams in the database. The active and the old teams.",
+        "url": "teams",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "teamId",
+        "title": "[teamId]",
+        "description": "This endpoint retrieves details about a team in the database. Based on the provided teamId.",
+        "url": "teamId"
+      },
+      {
+        "id": "year-teams",
+        "title": "[year]/teams",
+        "description": "This endpoint retrieves details about all the teams in the database. Based on the provided year.",
+        "url": "2016/teams",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-teams",
+        "title": "current/teams",
+        "description": "This endpoint retrieves details about all the teams in the database. Based on the current season.",
+        "url": "current/teams",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "year-teamId",
+        "title": "[year]/teams/[teamId]",
+        "description": "This endpoint retrieves details about a team in the database. Based on the provided teamId and year.",
+        "url": "2016/teams/mercedes"
+      },
+      {
+        "id": "current-teamId",
+        "title": "current/teams/[teamId]",
+        "description": "This endpoint retrieves details about a team in the database. Based on the provided teamId and the current season.",
+        "url": "current/teams/mercedes"
+      },
+      {
+        "id": "year-teamId-drivers",
+        "title": "[year]/teams/[teamId]/drivers",
+        "description": "This endpoint retrieves details about all the drivers in the database. Based on the provided teamId and year.",
+        "url": "2016/teams/mercedes/drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-teamId-drivers",
+        "title": "current/teams/[teamId]/drivers",
+        "description": "This endpoint retrieves details about all the drivers in the database. Based on the provided teamId and the current season.",
+        "url": "current/teams/mercedes/drivers",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "seasons",
+    "title": "Seasons",
+    "description": "All the endpoints related to the seasons.",
+    "url": "seasons",
+    "section": "seasons",
+    "endpoints": [
+      {
+        "id": "seasons",
+        "title": "seasons",
+        "description": "This endpoint retrieves details about a all the seasons in the database.",
+        "url": "seasons",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "results",
+    "title": "Results",
+    "description": "All the endpoints related to the race results.",
+    "url": "results",
+    "section": "results",
+    "endpoints": [
+      {
+        "id": "round-fp1",
+        "title": "[year]/[round]/fp1",
+        "description": "This endpoint retrieves the results of the free practice 1 of the given round.",
+        "url": "2024/1/fp1",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-fp1",
+        "title": "current/last/fp1",
+        "description": "This endpoint retrieves the results of the latest free practice 1 of the current season.",
+        "url": "current/last/fp1",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-fp2",
+        "title": "[year]/[round]/fp2",
+        "description": "This endpoint retrieves the results of the free practice 2 of the given round.",
+        "url": "2024/1/fp2",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-fp2",
+        "title": "current/last/fp2",
+        "description": "This endpoint retrieves the results of the latest free practice 2 of the current season.",
+        "url": "current/last/fp2",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-fp3",
+        "title": "[year]/[round]/fp3",
+        "description": "This endpoint retrieves the results of the free practice 3 of the given round.",
+        "url": "2024/1/fp3",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-fp3",
+        "title": "current/last/fp3",
+        "description": "This endpoint retrieves the results of the latest free practice 3 of the current season.",
+        "url": "current/last/fp3",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-qualy",
+        "title": "[year]/[round]/qualy",
+        "description": "This endpoint retrieves the results of the qualifying of the given round.",
+        "url": "2024/1/qualy",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-qualy",
+        "title": "current/last/qualy",
+        "description": "This endpoint retrieves the results of the latest qualy of the current season.",
+        "url": "current/last/qualy",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-race",
+        "title": "[year]/[round]/race",
+        "description": "This endpoint retrieves the results of the race of the given round.",
+        "url": "2024/1/race",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-race",
+        "title": "current/last/race",
+        "description": "This endpoint retrieves the results of the latest race of the current season.",
+        "url": "current/last/race",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-sprintQualy",
+        "title": "[year]/[round]/sprint/qualy",
+        "description": "This endpoint retrieves the results of the sprint qualy of the given round.",
+        "url": "2024/5/sprint/qualy",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-sprintQualy",
+        "title": "current/last/sprint/qualy",
+        "description": "This endpoint retrieves the results of the latest sprint qualy of the current season.",
+        "url": "current/last/sprint/qualy",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "round-sprintRace",
+        "title": "[year]/[round]/sprint/race",
+        "description": "This endpoint retrieves the results of the sprint race of the given round.",
+        "url": "2024/5/sprint/race",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-sprintRace",
+        "title": "current/last/sprint/race",
+        "description": "This endpoint retrieves the results of the latest sprint race of the current season.",
+        "url": "current/last/sprint/race",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "standings",
+    "title": "Standings",
+    "description": "All the endpoints related to the standings.",
+    "url": "standings",
+    "section": "standings",
+    "endpoints": [
+      {
+        "id": "drivers-championship",
+        "title": "[year]/drivers-championship",
+        "description": "This endpoint retrieves drivers standings by the provided year.",
+        "url": "2021/drivers-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "constructors-championship",
+        "title": "[year]/constructors-championship",
+        "description": "This endpoint retrieves constructors standings by the provided year.",
+        "url": "2021/constructors-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-drivers-championship",
+        "title": "current/drivers-championship",
+        "description": "This endpoint retrieves drivers standings from the current season.",
+        "url": "current/drivers-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current-constructors-championship",
+        "title": "current/constructors-championship",
+        "description": "This endpoint retrieves constructors standings from the current season.",
+        "url": "current/constructors-championship",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "circuits",
+    "title": "Circuits",
+    "description": "All the endpoints related to the circuits.",
+    "url": "circuits",
+    "section": "circuits",
+    "endpoints": [
+      {
+        "id": "circuits",
+        "title": "circuits",
+        "description": "This endpoint retrieves details about a all the circuits in the database. The active and the old circuits.",
+        "url": "circuits",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "circuitId",
+        "title": "[circuitId]",
+        "description": "This endpoint retrieves details about circuits in the database with the given Id.",
+        "url": "circuitId"
+      }
+    ]
+  },
+  {
+    "id": "races",
+    "title": "Races",
+    "description": "All the endpoints related to the races data.",
+    "url": "races",
+    "section": "races",
+    "endpoints": [
+      {
+        "id": "year",
+        "title": "[year]",
+        "description": "This endpoint retrieves details about the races of the given year.",
+        "url": "2024",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "current",
+        "title": "current",
+        "description": "This endpoint retrieves details about the races of the current seasons.",
+        "url": "current",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "year-round",
+        "title": "[year]/[round]",
+        "description": "This endpoint retrieves details about the race of the given year and round.",
+        "url": "2024/1"
+      },
+      {
+        "id": "current-last",
+        "title": "current/last",
+        "description": "This endpoint retrieves details about the last race of the current season.",
+        "url": "current/last"
+      },
+      {
+        "id": "current-next",
+        "title": "current/next",
+        "description": "This endpoint retrieves details about the next race of the current season.",
+        "url": "current/next"
+      }
+    ]
+  }
+]

@@ -1,17 +1,12 @@
 import { FaHeart } from "react-icons/fa"
-import LanguageChanger from "@/components/LanguageChanger"
 import Link from "next/link"
 import Image from "next/image"
 import initTranslations from "@/app/i18n"
 import { SITE_NAME } from "@/lib/constants"
-import ThemeToggle from "./ThemeToggle"
-import {
-  contactLinks,
-  pages,
-  help,
-  api,
-} from "@/components/footer/footerLinks.js"
-import { List } from "./footer/List"
+import ThemeToggle from "@/components/ThemeToggle"
+import { contactLinks, pages, help, api } from "@/components/footer/footerData"
+import { List } from "@/components/footer/List"
+import LanguageChanger from "@/components/LanguageChanger"
 
 export default async function Footer({ locale }: { locale: string }) {
   const { t } = await initTranslations(locale, ["footer"])
@@ -44,7 +39,7 @@ export default async function Footer({ locale }: { locale: string }) {
                     target="_blank"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
-                    {link.icon}
+                    <link.icon />
                   </Link>
                 </li>
               ))}

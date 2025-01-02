@@ -7,5 +7,7 @@
   "example": "示例",
   "params": "参数",
   "default": "默认",
-  "table-caption": "所有 API 端点的列表。"
+  "table-caption": "所有 API 端点的列表。",
+  "blog-entrance": " 在本博客中，我们将会介绍每个 API 的更新。以及 F1 相关的新闻和奇闻。",
+  "blog-advertise": "请注意，更新日志写在英语中，但新闻关于 F1 写在西班牙语中。"
 }
