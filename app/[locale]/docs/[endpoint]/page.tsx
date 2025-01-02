@@ -28,7 +28,7 @@ export default function EnpointPage({
   }
 
   return (
-    <div className="max-w-3xl md:w-2/3 mx-auto">
+    <div className="max-w-5xl md:w-2/3 mx-auto">
       <ArrayBread
         items={[
           { label: "Docs", link: "/docs" },
