@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/card"
 import endpoints from "@/content/endpoints.json"
 import ArrayBread from "@/components/ArrayBread"
+import ScrollToTop from "@/components/buttons/ScrollToTop"
 
 export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <main className="max-w-3xl mt-32 mb-16 mx-auto p-6 h-screen flex flex-col">
+    <main className="max-w-3xl mt-32 mx-auto p-6 flex flex-col">
       <ArrayBread items={[{ label: "Docs", link: "/docs" }]} />
       <h1 className="text-3xl font-bold my-4">{t("title")}</h1>
       <p className="my-6">{t("p1")}</p>
@@ -34,6 +35,7 @@ export default async function Docs({ params }: { params: { locale: string } }) {
         ))}
       </ul>
       <BackBtn locale={params.locale} />
+      <ScrollToTop />
     </main>
   )
 }
