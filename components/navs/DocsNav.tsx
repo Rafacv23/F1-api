@@ -9,7 +9,7 @@ import {
 
 export default function DocsNav() {
   return (
-    <nav className="hidden md:block w-full md:w-1/6 border-r pr-4 border-headerBorder dark:border-customGrayDark sticky top-32 h-screen overflow-y-auto">
+    <nav className="hidden md:block w-full md:min-w-fit md:max-w-xs border-r pr-4 border-headerBorder dark:border-customGrayDark sticky top-32 h-screen overflow-y-auto">
       <Link
         href="/docs"
         className="font-semibold text-lg mb-4 hover:text-f1 hover:transition-colors"
@@ -25,7 +25,7 @@ export default function DocsNav() {
                   <Link href={`/docs/${endpoint.id}`}>{endpoint.title}</Link>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul>
+                  <ul className="overflow-y-auto relative space-y-2">
                     {endpoint.endpoints.map((subEndpoint) => (
                       <li key={subEndpoint.id}>
                         <Link
