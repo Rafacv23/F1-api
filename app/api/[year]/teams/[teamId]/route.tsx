@@ -26,7 +26,7 @@ export async function GET(request: Request, context: any) {
       .where(eq(teams.teamId, teamId))
       .limit(1)
 
-    if (teamData.length === 0 || year) {
+    if (teamData.length === 0 || !Number(year)) {
       return apiNotFound(
         request,
         "No teams found for this year, try with other one."
