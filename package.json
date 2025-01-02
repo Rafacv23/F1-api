@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "playwright test",
     "insert": "cd lib/insert && node index.js",
     "scrap": "cd lib/scrap && node index.js"
   },
