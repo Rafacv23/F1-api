@@ -8,11 +8,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      window.scrollY > 300 ? setIsVisible(true) : setIsVisible(false)
     }
 
     window.addEventListener("scroll", toggleVisibility)
@@ -32,14 +28,7 @@ const ScrollToTop = () => {
   return (
     <div>
       {isVisible && (
-        <Button
-          onClick={scrollToTop}
-          style={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
-          }}
-        >
+        <Button onClick={scrollToTop} className="fixed bottom-8 right-8">
           ↑
         </Button>
       )}
