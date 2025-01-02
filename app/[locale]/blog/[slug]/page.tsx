@@ -42,8 +42,8 @@ const Article = async ({ params }: { params: { slug: string } }) => {
             Back
           </Link>
           <Link
-            title="Back to home page"
-            href="/"
+            title="Back to blog page"
+            href="/blog"
             className={buttonVariants({ variant: "link" })}
           >
             Read other articles
