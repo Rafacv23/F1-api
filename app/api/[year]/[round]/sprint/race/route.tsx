@@ -113,7 +113,7 @@ export async function GET(request: Request, context: any) {
         raceId: sprintRaceResults[0].Races.raceId,
         raceName: sprintRaceResults[0].Races.raceName,
         circuit: circuitData[0],
-        sprintQualyResults: processedData,
+        sprintRaceResults: processedData,
       },
     }
 
