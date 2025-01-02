@@ -7,7 +7,13 @@ author: "Rafa Canosa"
 
 # 🚀 New Docs page!
 
-Happy new year 2025! 🎉 We are happy to announce that we have a new docs page, with a new design and a new structure. We think this is a great improvement to the current docs, and we hope you like it too. 😊
+Happy new year 2025! 🎉
+
+We are happy to announce that we have a new docs page, with a new design and a new structure. We think this is a great improvement to the current docs, and we hope you like it too. 😊
+
+## ⚠️ Advice
+
+With these new changes, we are changed a few enpoints responses, so we recommend you to update your code to the new structure. If you need any help, please open an issue in our [Github](https://github.com/Rafacv23/F1-api).
 
 ## 📌 Next
 
