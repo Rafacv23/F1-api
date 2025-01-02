@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/buttons/ScrollToTop"
 import DocsNav from "@/components/navs/DocsNav"
 
 export default function DocsLayout({
@@ -10,9 +11,10 @@ export default function DocsLayout({
   }
 }>) {
   return (
-    <div className="flex p-6 mt-32 max-w-6xl w-full justify-center mx-auto">
+    <div className="flex p-6 mt-32 mb-8 max-w-6xl w-full justify-center mx-auto">
       <DocsNav />
       {children}
+      <ScrollToTop />
     </div>
   )
 }
