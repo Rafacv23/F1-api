@@ -10,7 +10,7 @@ const sections = [
 
 export default function PageNav() {
   return (
-    <nav className="hidden lg:block w-full md:w-1/6 border-l border-headerBorder dark:border-customGrayDark pl-4 sticky top-32 h-screen overflow-y-auto">
+    <nav className="hidden xl:block w-full md:w-1/6 border-l border-headerBorder dark:border-customGrayDark pl-4 sticky top-32 h-screen overflow-y-auto">
       <h3 className="font-semibold text-lg mb-4">On this page</h3>
       <ul className="flex flex-col gap-2">
         {sections.map((section) => (
