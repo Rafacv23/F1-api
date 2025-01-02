@@ -35,7 +35,7 @@ export async function GET(request: Request) {
       .where(
         and(lte(races.qualyDate, today), eq(races.championshipId, `f1_${year}`))
       )
-      .limit(20)
+      .limit(limit || 20)
       .offset(offset)
       .orderBy(desc(races.qualyDate))
 

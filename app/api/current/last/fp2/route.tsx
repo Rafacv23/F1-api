@@ -30,7 +30,7 @@ export async function GET(request: Request) {
       .where(
         and(lte(races.raceDate, today), eq(races.championshipId, `f1_${year}`))
       )
-      .limit(20)
+      .limit(limit || 20)
       .offset(offset)
       .orderBy(desc(races.fp2Date))
 
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
 
     // Procesamos los datos
     const processedData = fp2Data.map((row) => ({
-      fp1Id: row.FP2.fp2Id,
+      fp2Id: row.FP2.fp2Id,
       driverId: row.FP2.driverId,
       teamId: row.FP2.teamId,
       time: row.FP2.time,
@@ -95,13 +95,13 @@ export async function GET(request: Request) {
       season: year,
       races: {
         round: fp2Data[0].Races.round,
-        fp1Date: fp2Data[0].Races.fp1Date,
-        fp1Time: fp2Data[0].Races.fp1Time,
+        fp2Date: fp2Data[0].Races.fp1Date,
+        fp2Time: fp2Data[0].Races.fp1Time,
         url: fp2Data[0].Races.url,
         raceId: fp2Data[0].Races.raceId,
         raceName: fp2Data[0].Races.raceName,
         circuit: circuitData[0],
-        fp1Results: processedData,
+        fp2Results: processedData,
       },
     }
 

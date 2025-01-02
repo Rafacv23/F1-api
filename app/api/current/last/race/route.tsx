@@ -56,7 +56,7 @@ export async function GET(request: Request) {
       .innerJoin(teams, eq(results.teamId, teams.teamId))
       .where(eq(results.raceId, race.Races.raceId))
       .orderBy(results.finishingPosition)
-      .limit(20)
+      .limit(limit || 20)
       .offset(offset)
 
     if (resultsData.length === 0) {
