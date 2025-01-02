@@ -25,14 +25,6 @@ export async function GET(request: Request) {
   try {
     const year = getYear()
     const today = getDay()
-    // const sql = `SELECT Races.*, Circuits.*
-    // FROM Races
-    // JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-    // JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-    // WHERE Championships.Year = ? AND Races.Race_Date <= ?
-    // ORDER BY RACES.Race_Date DESC
-    // LIMIT ?;
-    // `
 
     const championshipData = await db
       .select()
