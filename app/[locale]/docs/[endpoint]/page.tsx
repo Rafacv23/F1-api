@@ -1,4 +1,5 @@
 import ArrayBread from "@/components/ArrayBread"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
@@ -6,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import endpoints from "@/content/endpoints.json"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export async function generateStaticParams() {
@@ -26,7 +28,7 @@ export default function EnpointPage({
   }
 
   return (
-    <div className="max-w-3xl w-2/3 mx-auto">
+    <div className="max-w-3xl md:w-2/3 mx-auto">
       <ArrayBread
         items={[
           { label: "Docs", link: "/docs" },
@@ -53,6 +55,16 @@ export default function EnpointPage({
           </li>
         ))}
       </ul>
+      <div className="mt-8 place-content-center flex">
+        <Link className={buttonVariants({ variant: "link" })} href={`/`}>
+          <ArrowLeft size={16} />
+          Home
+        </Link>
+        <Link className={buttonVariants({ variant: "link" })} href={`/docs`}>
+          See other endpoints
+          <ArrowRight size={16} />
+        </Link>
+      </div>
     </div>
   )
 }
