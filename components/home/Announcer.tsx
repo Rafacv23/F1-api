@@ -13,7 +13,7 @@ export default function Announcer() {
           {Announce.announce}
           {". "}
           <a href={Announce.link} className="inline-block underline">
-            Check out the endpoint!
+            Check out!
           </a>
         </p>
         <button
