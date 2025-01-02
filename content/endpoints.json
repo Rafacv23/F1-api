@@ -87,7 +87,7 @@
       {
         "id": "current-driverId",
         "title": "current/drivers/[driverId]",
-        "description": "This endpoint retrieves details about a driver in the database. Based on the provided driverId and the current season.",
+        "description": "This endpoint retrieves details about a driver and his race results. Based on the provided driverId and the current season.",
         "url": "current/drivers/alonso",
         "params": [
           {
@@ -671,6 +671,12 @@
         "title": "[year]/[round]",
         "description": "This endpoint retrieves details about the race of the given year and round.",
         "url": "2024/1"
+      },
+      {
+        "id": "current-last",
+        "title": "current/last",
+        "description": "This endpoint retrieves details about the last race of the current season.",
+        "url": "current/last"
       },
       {
         "id": "current-next",
