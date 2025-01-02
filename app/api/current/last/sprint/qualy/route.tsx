@@ -4,8 +4,6 @@ import { executeQuery } from "@/lib/executeQuery"
 import { apiNotFound, getDay, getYear } from "@/lib/utils"
 import { BaseApiResponse, Circuit } from "@/lib/definitions"
 
-//revalidate
-
 export const revalidate = 60
 
 interface ApiResponse extends BaseApiResponse {
