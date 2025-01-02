@@ -14,7 +14,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { SITE_URL } from "@/lib/constants"
-import { ExternalLink } from "lucide-react"
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react"
 import CopyBtn from "@/components/buttons/CopyBtn"
 
 export async function generateStaticParams() {
@@ -55,7 +55,7 @@ export default async function EnpointPage({
   }
 
   return (
-    <div className="max-w-3xl md:w-2/3">
+    <div className="max-w-3xl md:w-2/3 mx-auto">
       <ArrayBread
         items={[
           { label: "Docs", link: "/docs" },
@@ -91,7 +91,7 @@ export default async function EnpointPage({
       </h2>
       <Card>
         <CardContent>
-          <pre className="whitespace-pre-wrap text-sm">
+          <pre className="whitespace-pre-wrap text-sm relative w-full overflow-auto max-w-xs sm:max-w-sm md:max-w-max">
             {JSON.stringify(example?.exampleResponse, null, 2)}
           </pre>
         </CardContent>
@@ -163,6 +163,16 @@ export default async function EnpointPage({
           ))}
         </TableBody>
       </Table>
+      <div className="mt-8 place-content-center flex">
+        <Link className={buttonVariants({ variant: "link" })} href={`/`}>
+          <ArrowLeft size={16} />
+          More {section.title} endpoints
+        </Link>
+        <Link className={buttonVariants({ variant: "link" })} href={`/docs`}>
+          See other endpoints
+          <ArrowRight size={16} />
+        </Link>
+      </div>
     </div>
   )
 }
