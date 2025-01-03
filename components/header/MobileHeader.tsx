@@ -27,7 +27,7 @@ export default function MobileHeader() {
         </DrawerTrigger>
         <DrawerContent className="h-2/3">
           <DrawerHeader>
-            <DrawerTitle>{SITE_NAME} API</DrawerTitle>
+            <DrawerTitle>{SITE_NAME}</DrawerTitle>
             <DrawerDescription>
               {SITE_NAME} API is a free and open-source API for Formula 1 data.
             </DrawerDescription>
