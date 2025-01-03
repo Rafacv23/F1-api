@@ -22,9 +22,34 @@ interface ApiResponse extends BaseApiResponse {
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
+
   try {
     const year = CURRENT_YEAR
     const today = getDay()
+
+    // Obtener la última carrera basada en la fecha de clasificación
+    const lastRace = await db
+      .select()
+      .from(races)
+      .where(
+        and(
+          lte(races.qualyDate, today), // Clasificación ya sucedió
+          eq(races.championshipId, `f1_${year}`) // Temporada actual
+        )
+      )
+      .orderBy(desc(races.qualyDate)) // Ordenar por la fecha de clasificación descendente
+      .limit(1) // Obtener solo la última carrera
+
+    if (lastRace.length === 0) {
+      return apiNotFound(
+        request,
+        "No qualifying results found for the current season."
+      )
+    }
+
+    const race = lastRace[0]
+
+    // Obtener los datos de clasificación para esa carrera
     const qualyData = await db
       .select()
       .from(classifications)
@@ -32,9 +57,7 @@ export async function GET(request: Request) {
       .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
       .innerJoin(drivers, eq(classifications.driverId, drivers.driverId))
       .innerJoin(teams, eq(classifications.teamId, teams.teamId))
-      .where(
-        and(lte(races.qualyDate, today), eq(races.championshipId, `f1_${year}`))
-      )
+      .where(eq(races.raceId, race.raceId)) // Solo datos de la última carrera
       .limit(limit || 20)
       .offset(offset)
       .orderBy(desc(races.qualyDate))
@@ -42,11 +65,11 @@ export async function GET(request: Request) {
     if (qualyData.length === 0) {
       return apiNotFound(
         request,
-        "No qualy results found for this round. Try with other one."
+        "No qualifying results found for the last race."
       )
     }
 
-    // Procesamos los datos
+    // Procesar los datos
     const processedData = qualyData.map((row) => ({
       classificationId: row.Classifications.classificationId,
       driverId: row.Classifications.driverId,
@@ -76,21 +99,20 @@ export async function GET(request: Request) {
       },
     }))
 
-    // Obtener el circuito correspondiente a la carrera
-    const circuitData = qualyData.map((row) => {
+    const circuitData = qualyData.map((circuit) => {
       return {
-        circuitId: row.Circuits.circuitId,
-        circuitName: row.Circuits.circuitName,
-        country: row.Circuits.country,
-        city: row.Circuits.city,
-        circuitLength: row.Circuits.circuitLength + "km",
-        lapRecord: row.Circuits.lapRecord,
-        firstParticipationYear: row.Circuits.firstParticipationYear,
-        corners: row.Circuits.numberOfCorners,
-        fastestLapDriverId: row.Circuits.fastestLapDriverId,
-        fastestLapTeamId: row.Circuits.fastestLapTeamId,
-        fastestLapYear: row.Circuits.fastestLapYear,
-        url: row.Circuits.url,
+        circuitId: circuit.Circuits.circuitId,
+        circuitName: circuit.Circuits.circuitName,
+        country: circuit.Circuits.country,
+        city: circuit.Circuits.city,
+        circuitLength: circuit.Circuits.circuitLength + "km",
+        corners: circuit.Circuits.numberOfCorners,
+        firstParticipationYear: circuit.Circuits.firstParticipationYear,
+        lapRecord: circuit.Circuits.lapRecord,
+        fastestLapDriverId: circuit.Circuits.fastestLapDriverId,
+        fastestLapTeamId: circuit.Circuits.fastestLapTeamId,
+        fastestLapYear: circuit.Circuits.fastestLapYear,
+        url: circuit.Circuits.url,
       }
     })
 
@@ -102,12 +124,12 @@ export async function GET(request: Request) {
       total: qualyData.length,
       season: year,
       races: {
-        round: qualyData[0].Races.round,
-        qualyTime: qualyData[0].Races.qualyTime,
-        qualyDate: qualyData[0].Races.qualyDate,
-        url: qualyData[0].Races.url,
-        raceId: qualyData[0].Races.raceId,
-        raceName: qualyData[0].Races.raceName,
+        round: race.round,
+        qualyTime: race.qualyTime,
+        qualyDate: race.qualyDate,
+        url: race.url,
+        raceId: race.raceId,
+        raceName: race.raceName,
         circuit: circuitData[0],
         qualyResults: processedData,
       },
