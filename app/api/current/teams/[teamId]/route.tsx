@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_NAME } from "@/lib/constants"
-import { apiNotFound, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_NAME } from "@/lib/constants"
+import { apiNotFound } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { InferModel, eq } from "drizzle-orm"
 import { results, teams } from "@/db/migrations/schema"
@@ -15,7 +15,7 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request, context: any) {
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const { teamId } = context.params
     const teamData = await db
       .select({

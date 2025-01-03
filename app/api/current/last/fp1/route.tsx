@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay, getLimitAndOffset, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
+import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { eq, and, desc, lte } from "drizzle-orm"
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const today = getDay()
 
     const fp1Data = await db

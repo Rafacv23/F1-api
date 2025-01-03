@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
+import { apiNotFound, getDay } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -24,7 +24,7 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request) {
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const today = getDay()
 
     const championshipData = await db

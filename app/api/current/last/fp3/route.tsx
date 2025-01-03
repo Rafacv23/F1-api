@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay, getLimitAndOffset, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
+import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { circuits, drivers, fp3, races, teams } from "@/db/migrations/schema"
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const today = getDay()
 
     const fp3Data = await db

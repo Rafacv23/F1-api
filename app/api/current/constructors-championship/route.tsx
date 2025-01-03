@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { constructorsClassifications, teams } from "@/db/migrations/schema"
 import { db } from "@/db"
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const teamStandingsData = await db
       .select()
       .from(constructorsClassifications)

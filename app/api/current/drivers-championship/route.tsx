@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_NAME } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_NAME } from "@/lib/constants"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { asc, eq } from "drizzle-orm"
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const driverStandings = await db
       .select()
       .from(driverClassifications)

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { apiNotFound, getYear, getLimitAndOffset } from "@/lib/utils"
-import { SITE_URL } from "@/lib/constants"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { InferModel, eq, asc } from "drizzle-orm"
 import { driverClassifications, drivers } from "@/db/migrations/schema"
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
 
     const driversData = await db
       .select({
