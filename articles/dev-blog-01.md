@@ -1,5 +1,6 @@
 ---
 title: "Whats coming to F1 Connect Api?"
+description: "Discover the new updates for F1 Connect API."
 category: "changelog"
 date: "17-12-2024"
 author: "Rafa Canosa"

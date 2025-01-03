@@ -1,5 +1,6 @@
 ---
 title: "New Docs"
+description: "We are updated the docs of the website. See all the changes."
 category: "changelog"
 date: "02-01-2025"
 author: "Rafa Canosa"
