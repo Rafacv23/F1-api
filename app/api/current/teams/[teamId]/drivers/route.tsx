@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getYear } from "@/lib/utils"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
+import { apiNotFound } from "@/lib/utils"
 import { executeQuery } from "@/lib/executeQuery"
 import {
   BaseApiResponse,
@@ -23,7 +23,7 @@ export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 4
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const { teamId } = context.params // Captura los parámetros year y driverId de la URL
     const sql = `
     SELECT

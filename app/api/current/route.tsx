@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
-import { getYear } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -11,17 +10,17 @@ import {
   races,
   teams,
 } from "@/db/migrations/schema"
-import { eq } from "drizzle-orm"
-import { off } from "process"
+import { eq, InferModel } from "drizzle-orm"
 
 export const revalidate = 60
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  races: InferModel<typeof races>[] | any
 }
 
 export async function GET(request: Request) {
-  const year = getYear()
+  const year = CURRENT_YEAR
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
@@ -125,7 +124,7 @@ export async function GET(request: Request) {
         : null,
     }))
 
-    const response = {
+    const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,

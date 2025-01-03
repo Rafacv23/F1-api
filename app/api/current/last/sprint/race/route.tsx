@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
-import { SITE_URL } from "@/lib/constants"
+import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getDay, getYear } from "@/lib/utils"
+import { apiNotFound, getDay } from "@/lib/utils"
 import { BaseApiResponse, Circuit } from "@/lib/definitions"
 
 export const revalidate = 60
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 20
   try {
-    const year = getYear()
+    const year = CURRENT_YEAR
     const today = getDay()
     //const today = 5 testing endpoint
 
