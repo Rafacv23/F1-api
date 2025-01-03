@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { championships } from "@/db/migrations/schema"
 import { InferModel, desc } from "drizzle-orm"
 
-export const revalidate = 60
+export const revalidate = 300
 
 type Championship = InferModel<typeof championships>
 
@@ -47,9 +47,14 @@ export async function GET(request: Request) {
       championships: seasonsData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
-    console.log(error)
-    return NextResponse.error()
+    console.error("Error:", error)
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }

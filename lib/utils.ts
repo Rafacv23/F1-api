@@ -11,11 +11,17 @@ import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
 
 export function apiNotFound(request: Request, message: string) {
-  return NextResponse.json({
-    api: SITE_URL,
-    url: request.url,
-    message: message,
-  })
+  return NextResponse.json(
+    {
+      api: SITE_URL,
+      url: request.url,
+      message: message,
+      status: 404,
+    },
+    {
+      status: 404,
+    }
+  )
 }
 
 export function copyUrlToClipboard(url: string) {
