@@ -6,4 +6,3 @@ export const SITE_META_NAME =
   "F1 Connect API | Free and open source F1 API that provides data about all Formula 1 Seasons."
 export const SITE_META_DESCRIPTION =
   "F1 Connect API it's a free and open source API that provides data about all Formula 1 Seasons. The API offers realtime data and historical."
-export const CURRENT_YEAR = 2024 // Displays the latest season with data. Change it when the new season starts.
