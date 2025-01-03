@@ -1,11 +1,10 @@
-import { CURRENT_YEAR } from "@/lib/constants"
 import { test, expect } from "@playwright/test"
 
-test.describe("GET /api/current/[round]/fp3", async () => {
-  test("should return fp3 race data for the current year and round, with default limit and offset", async ({
+test.describe("GET /api/current/last/fp1", async () => {
+  test("should return fp1 race data for the current year and round, with default limit and offset", async ({
     request,
   }) => {
-    const response = await request.get(`/api/${CURRENT_YEAR}/3/fp3`)
+    const response = await request.get(`/api/current/last/fp1`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 
@@ -16,7 +15,7 @@ test.describe("GET /api/current/[round]/fp3", async () => {
       limit: expect.any(Number),
       offset: expect.any(Number),
       total: expect.any(Number),
-      season: expect.any(String),
+      season: expect.any(Number),
       races: expect.any(Object),
     })
 
@@ -25,23 +24,21 @@ test.describe("GET /api/current/[round]/fp3", async () => {
       const race = data.races[0]
       expect(race).toMatchObject({
         round: expect.any(Number),
-        fp3Time: expect.any(String),
-        fp3Date: expect.any(String),
+        fp1Time: expect.any(String),
+        fp1Date: expect.any(String),
         url: expect.any(String),
         raceId: expect.any(String),
         raceName: expect.any(String),
         circuit: expect.any(Object),
-        fp3Results: expect.any(Array),
+        fp1Results: expect.any(Array),
       })
     }
   })
 
-  test("should return fp3 race data for the current year and round, with limit and offset", async ({
+  test("should return fp1 race data for the current year and round, with limit and offset", async ({
     request,
   }) => {
-    const response = await request.get(
-      `/api/${CURRENT_YEAR}/3/fp3?limit=1&offset=1`
-    )
+    const response = await request.get(`/api/current/last/fp1?limit=1&offset=1`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 
@@ -52,7 +49,7 @@ test.describe("GET /api/current/[round]/fp3", async () => {
       limit: expect.any(Number),
       offset: expect.any(Number),
       total: expect.any(Number),
-      season: expect.any(String),
+      season: expect.any(Number),
       races: expect.any(Object),
     })
 
@@ -61,19 +58,19 @@ test.describe("GET /api/current/[round]/fp3", async () => {
       const race = data.races[0]
       expect(race).toMatchObject({
         round: expect.any(Number),
-        fp3Time: expect.any(String),
-        fp3Date: expect.any(String),
+        fp1Time: expect.any(String),
+        fp1Date: expect.any(String),
         url: expect.any(String),
         raceId: expect.any(String),
         raceName: expect.any(String),
         circuit: expect.any(Object),
-        fp3Results: expect.any(Array),
+        fp1Results: expect.any(Array),
       })
     }
   })
 
   test("should return 404 when no year are found", async ({ request }) => {
-    const response = await request.get(`/api/2099/1/fp3`)
+    const response = await request.get(`/api/2099/1/fp1`)
     expect(response.status()).toBe(404)
 
     const data = await response.json()
@@ -86,21 +83,7 @@ test.describe("GET /api/current/[round]/fp3", async () => {
   })
 
   test("should return 404 when no round are found", async ({ request }) => {
-    const response = await request.get(`/api/${CURRENT_YEAR}/30/fp3`)
-    expect(response.status()).toBe(404)
-
-    const data = await response.json()
-    expect(data).toMatchObject({
-      api: expect.any(String),
-      url: expect.any(String),
-      message: expect.any(String),
-      status: 404,
-    })
-  })
-
-  test("should return 404 when the round is not fp3", async ({ request }) => {
-    //we pick a round with sprint who is not fp3
-    const response = await request.get(`/api/${CURRENT_YEAR}/5/fp3`)
+    const response = await request.get(`/api/current/30/fp1`)
     expect(response.status()).toBe(404)
 
     const data = await response.json()

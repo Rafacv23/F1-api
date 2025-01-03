@@ -1,11 +1,10 @@
-import { CURRENT_YEAR } from "@/lib/constants"
 import { test, expect } from "@playwright/test"
 
 test.describe("GET /api/current/drivers/[driverId]", async () => {
   test("should return driver data for a valid driverId and the current year", async ({
     request,
   }) => {
-    const response = await request.get(`/api/${CURRENT_YEAR}/drivers/alonso`)
+    const response = await request.get(`/api/current/drivers/alonso`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 

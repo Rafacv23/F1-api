@@ -1,13 +1,10 @@
-import { CURRENT_YEAR } from "@/lib/constants"
 import { test, expect } from "@playwright/test"
 
 test.describe("GET /api/current/constructors-championship", async () => {
   test("should return teams championships by the current year", async ({
     request,
   }) => {
-    const response = await request.get(
-      `/api/${CURRENT_YEAR}/constructors-championship`
-    )
+    const response = await request.get(`/api/current/constructors-championship`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 
@@ -18,7 +15,7 @@ test.describe("GET /api/current/constructors-championship", async () => {
       limit: expect.any(Number),
       offset: expect.any(Number),
       total: expect.any(Number),
-      season: expect.any(String),
+      season: expect.any(Number),
       championshipId: expect.any(String),
       constructors_championship: expect.any(Array),
     })

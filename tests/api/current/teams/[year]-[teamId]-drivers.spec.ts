@@ -1,13 +1,10 @@
-import { CURRENT_YEAR } from "@/lib/constants"
 import { test, expect } from "@playwright/test"
 
 test.describe("GET /api/current/teams/[teamId]/drivers", async () => {
   test("should return drivers data for a valid teamId and the current year", async ({
     request,
   }) => {
-    const response = await request.get(
-      `/api/${CURRENT_YEAR}/teams/ferrari/drivers`
-    )
+    const response = await request.get(`/api/current/teams/ferrari/drivers`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 
@@ -17,7 +14,7 @@ test.describe("GET /api/current/teams/[teamId]/drivers", async () => {
       url: expect.any(String),
       total: expect.any(Number),
       limit: expect.any(Number),
-      season: expect.any(String),
+      season: expect.any(Number),
       teamId: expect.any(String),
       team: expect.any(Object),
       drivers: expect.any(Array),

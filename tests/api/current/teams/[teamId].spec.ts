@@ -1,11 +1,10 @@
-import { CURRENT_YEAR } from "@/lib/constants"
 import { test, expect } from "@playwright/test"
 
 test.describe("GET /api/current/teams/[teamId]", async () => {
   test("should return team data for a valid teamId and the current year", async ({
     request,
   }) => {
-    const response = await request.get(`/api/${CURRENT_YEAR}/teams/ferrari`)
+    const response = await request.get(`/api/current/teams/ferrari`)
     expect(response.ok()).toBeTruthy()
     expect(response.status()).toBe(200)
 
@@ -53,9 +52,7 @@ test.describe("GET /api/current/teams/[teamId]", async () => {
   })
 
   test("should return 404 when no team are found", async ({ request }) => {
-    const response = await request.get(
-      `/api/${CURRENT_YEAR}/teams/inventedTeam`
-    )
+    const response = await request.get(`/api/current/teams/inventedTeam`)
     expect(response.status()).toBe(404)
 
     const data = await response.json()
