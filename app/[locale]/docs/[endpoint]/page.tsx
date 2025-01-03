@@ -7,13 +7,30 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import endpoints from "@/content/endpoints.json"
+import { SITE_NAME } from "@/lib/constants"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { Metadata } from "next"
 import Link from "next/link"
 
 export async function generateStaticParams() {
   return endpoints.map((endpoint) => ({
     params: { endpoint: endpoint.section },
   }))
+}
+
+type Props = {
+  params: { endpoint: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const filteredEnpoints = endpoints.find(
+    (endpoint) => endpoint.section === params.endpoint
+  )
+
+  return {
+    title: `Docs: ${filteredEnpoints?.title} | ${SITE_NAME}`,
+    description: `Discover all the available endpoints from ${SITE_NAME}.`,
+  }
 }
 
 export default function EnpointPage({

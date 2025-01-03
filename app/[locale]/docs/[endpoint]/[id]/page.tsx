@@ -13,9 +13,10 @@ import ArrayBread from "@/components/ArrayBread"
 import { Card, CardContent } from "@/components/ui/card"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
-import { SITE_URL } from "@/lib/constants"
+import { SITE_NAME, SITE_URL } from "@/lib/constants"
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react"
 import CopyBtn from "@/components/buttons/CopyBtn"
+import { Metadata } from "next"
 
 export async function generateStaticParams() {
   const paths = endpoints.flatMap((endpoint) =>
@@ -28,6 +29,25 @@ export async function generateStaticParams() {
   return paths.map(({ endpoint, id }) => ({
     params: { endpoint, id },
   }))
+}
+
+type Props = {
+  params: { id: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const section = endpoints.find((section) =>
+    section.endpoints.some((subendpoint) => subendpoint.id === params.id)
+  )
+
+  const subendpoint = section?.endpoints.find(
+    (subendpoint) => subendpoint.id === params.id
+  )
+
+  return {
+    title: `${section?.title}: ${subendpoint?.title} | ${SITE_NAME}`,
+    description: `Discover the ${subendpoint?.title} endpoint from ${SITE_NAME}.`,
+  }
 }
 
 export default async function EnpointPage({

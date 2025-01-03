@@ -3,12 +3,25 @@ import { getAllArticles, getArticleData } from "@/lib/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { Metadata } from "next"
+import { SITE_NAME } from "@/lib/constants"
 
 export async function generateStaticParams() {
   const articles = await getAllArticles()
   return articles.map((article) => ({
     slug: article.id,
   }))
+}
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const articleData = await getArticleData(params.slug)
+  return {
+    title: `${articleData.title} | ${SITE_NAME}`,
+    description: articleData.description,
+  }
 }
 
 const Article = async ({ params }: { params: { slug: string } }) => {

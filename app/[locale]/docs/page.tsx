@@ -10,6 +10,13 @@ import {
 import endpoints from "@/content/endpoints.json"
 import ArrayBread from "@/components/ArrayBread"
 import ScrollToTop from "@/components/buttons/ScrollToTop"
+import { Metadata } from "next"
+import { SITE_NAME } from "@/lib/constants"
+
+export const metadata: Metadata = {
+  title: `Docs | ${SITE_NAME}`,
+  description: `Welcome to the ${SITE_NAME} Documentation`,
+}
 
 export default async function Docs({ params }: { params: { locale: string } }) {
   const { t } = await initTranslations(params.locale, ["docs"])
