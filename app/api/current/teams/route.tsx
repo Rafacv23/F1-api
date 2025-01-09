@@ -6,7 +6,7 @@ import { InferModel, asc, eq } from "drizzle-orm"
 import { constructorsClassifications, teams } from "@/db/migrations/schema"
 import { db } from "@/db"
 
-export const revalidate = 60
+export const revalidate = 120
 
 interface ApiResponse extends BaseApiResponse {
   teams: InferModel<typeof teams>[]
@@ -69,9 +69,14 @@ export async function GET(request: Request) {
       teams: teamsData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }

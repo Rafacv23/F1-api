@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { circuits, races } from "@/db/migrations/schema"
 import { eq } from "drizzle-orm"
 
-export const revalidate = 60
+export const revalidate = 120
 
 type Circuit = {
   circuitId: string | null
@@ -89,9 +89,14 @@ export async function GET(request: Request, context: any) {
       circuits: circuitsData,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }

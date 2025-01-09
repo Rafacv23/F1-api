@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { driverClassifications, drivers, teams } from "@/db/migrations/schema"
 import { asc, eq } from "drizzle-orm"
 
-export const revalidate = 60
+export const revalidate = 120
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
@@ -77,9 +77,14 @@ export async function GET(request: Request, context: any) {
       drivers_championship: formattedDriverStandings,
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+      },
+      status: 200,
+    })
   } catch (error) {
     console.log(error)
-    return NextResponse.error()
+    return NextResponse.json({ message: "Server error" }, { status: 500 })
   }
 }
