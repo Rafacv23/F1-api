@@ -5,5 +5,12 @@
     "author": "Artem Anisimov",
     "url": "https://apps.apple.com/us/app/planb-f1-data/id6503033841",
     "img": "/referrals/PlanB.avif"
+  },
+  {
+    "name": "Formula One",
+    "description": "Formula One schedule and results.",
+    "author": "Sam Frost",
+    "url": "https://formulaone.pythonanywhere.com",
+    "img": "/referrals/SamFrost.avif"
   }
 ]
