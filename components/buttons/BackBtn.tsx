@@ -2,7 +2,11 @@ import Link from "next/link"
 import initTranslations from "@/app/i18n"
 import { buttonVariants } from "@/components/ui/button"
 
-export async function BackBtn({ locale }: { locale: string }) {
+interface BackBtnProps extends React.HTMLAttributes<HTMLButtonElement> {
+  locale: string
+}
+
+export async function BackBtn({ locale }: BackBtnProps) {
   const { t } = await initTranslations(locale, ["common"])
 
   return (

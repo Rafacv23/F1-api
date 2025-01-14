@@ -28,7 +28,9 @@
     ".next/types/**/*.ts",
     "app/api/[year]/drivers/[driverId]/route.tsx",
     "middleware.js",
-    "app/i18n.js"
+    "app/i18n.js",
+    "lib/scrap/sprint/race.js",
+    "lib/scrap/sprint/qualy.js"
   ],
   "exclude": ["node_modules"]
 }
