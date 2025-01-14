@@ -2,14 +2,15 @@
 
 import { Button } from "@/components/ui/button"
 import { Check, Copy } from "lucide-react"
-import { copyUrlToClipboard } from "@/lib/utils"
+import { cn, copyUrlToClipboard } from "@/lib/utils"
 import { useState } from "react"
 
 interface CopyBtnProps extends React.HTMLAttributes<HTMLButtonElement> {
   text: string
+  className?: string
 }
 
-export default function CopyBtn({ text }: CopyBtnProps) {
+export default function CopyBtn({ text, className }: CopyBtnProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -23,7 +24,10 @@ export default function CopyBtn({ text }: CopyBtnProps) {
   }
 
   return (
-    <Button className="flex gap-2 items-center" onClick={handleCopy}>
+    <Button
+      className={cn("flex items-center gap-2", className)}
+      onClick={handleCopy}
+    >
       {copied ? "Copied!" : "Copy Link"}
       {copied ? <Check size={16} /> : <Copy size={16} />}
     </Button>
