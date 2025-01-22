@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articleRoutes = articles.map((article) => {
     return {
       url: `${SITE_URL}/blog/${article.id}`,
-      lastModified: article.date,
       changeFrequency: "weekly" as const,
       priority: 0.6,
     }
