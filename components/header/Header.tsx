@@ -15,7 +15,7 @@ export default function Header() {
               className="flex items-center gap-2 hover:transform hover:scale-105 hover:transition-all ease-in-out duration-300"
             >
               <img src="/logo.avif" alt="logo" className="h-8 w-8" />
-              <h1 className="dark:text-white">{SITE_NAME}</h1>
+              <h2 className="dark:text-white">{SITE_NAME}</h1>
             </Link>
           </div>
           <div className="hidden gap-4 lg:flex items-center justify-center">
