@@ -57,15 +57,14 @@ const getSortedArticles = (): ArticleItem[] => {
 
   return allArticlesData.sort((a, b) => {
     const format = "DD-MM-YYYY"
-    const dateOne = moment(a.date, format)
-    const dateTwo = moment(b.date, format)
-    if (dateOne.isBefore(dateTwo)) {
-      return -1
-    } else if (dateTwo.isAfter(dateOne)) {
-      return 1
-    } else {
-      return 0
+    const dateOne = moment(a.date, format, true)
+    const dateTwo = moment(b.date, format, true)
+    if (!dateOne.isValid() || !dateTwo.isValid()) {
+      console.warn(`Fecha inválida en los artículos: ${a.title} o ${b.title}`)
+      return 0 // Si alguna fecha es inválida, se mantiene el orden original
     }
+
+    return dateTwo.valueOf() - dateOne.valueOf()
   })
 }
 
