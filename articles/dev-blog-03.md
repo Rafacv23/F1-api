@@ -2,7 +2,7 @@
 title: "New Domain"
 description: "We are getting a new domain for the website."
 category: "changelog"
-date: "02-01-2025"
+date: "22-01-2025"
 author: "Rafa Canosa"
 ---
 
