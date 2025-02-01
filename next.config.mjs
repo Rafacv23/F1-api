@@ -7,7 +7,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://f1api.dev",
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -16,6 +16,10 @@ const nextConfig = {
           {
             key: "Access-Control-Allow-Headers",
             value: "Content-Type, Authorization",
+          },
+          {
+            key: "Access-Control-Max-Age",
+            value: "300",
           },
         ],
       },
