@@ -15,8 +15,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { handleSubmit } from "@/lib/send-email"
 
-const formSchema = z.object({
+export const formSchema = z.object({
+  subject: z
+    .string()
+    .min(2, {
+      message: "Subject must be at least 2 characters",
+    })
+    .max(60, {
+      message: "Subject must be at most 60 characters",
+    }),
   name: z
     .string()
     .min(2, {
@@ -43,20 +52,32 @@ export default function ContactForm() {
     resolver: zodResolver(formSchema),
   })
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    const name = values.name
-    const email = values.email
-    const message = values.message
-    console.log(name, email, message)
-  }
-
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
+        onSubmit={form.handleSubmit((data) => handleSubmit({ ...data }))}
         method="POST"
         className="space-y-8 mt-8"
       >
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Subject</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  required
+                  placeholder="I want to contribute in the API"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>Your subject</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="name"
