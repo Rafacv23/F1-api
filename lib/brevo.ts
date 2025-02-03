@@ -10,7 +10,7 @@ apiInstance.setApiKey(
 // params received from the frontend form
 interface Params {
   name: string
-  email: { email: string; name: string }[]
+  email: string
   message: string
 }
 
@@ -19,7 +19,7 @@ export async function sendEmail({ name, email, message }: Params) {
     const smtpEmail = new brevo.SendSmtpEmail()
 
     //smtpEmail.subject = subject
-    smtpEmail.to = { name: "Rafa Canosa", email: "rafacv23@gmail.com" }
+    smtpEmail.to = [{ email: "rafacv23@gmail.com" }]
     smtpEmail.htmlContent = `<html><body>${message}</body></html>`
     smtpEmail.sender = { name: name, email: email }
 
