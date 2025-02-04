@@ -9,6 +9,7 @@ import {
 import initTranslations from "@/app/i18n"
 import { BackBtn } from "@/components/buttons/BackBtn"
 import ContactForm from "@/components/ContactForm"
+import ArrayBread from "@/components/ArrayBread"
 
 export default async function ContactPage({
   params,
@@ -59,6 +60,15 @@ export default async function ContactPage({
       <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
+          <ArrayBread
+            locale={params.locale}
+            items={[
+              {
+                label: t("title"),
+                link: `/contact`,
+              },
+            ]}
+          />
           <p className="mb-8">{t("subtitle")}</p>
           <div>
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
