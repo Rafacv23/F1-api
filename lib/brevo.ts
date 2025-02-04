@@ -27,6 +27,19 @@ export async function sendEmail({ subject, name, email, message }: Params) {
     smtpEmail.sender = { name: name, email: "rafacv23@gmail.com" }
 
     await apiInstance.sendTransacEmail(smtpEmail)
+
+    // now we want to send an email to the user to confirm his email was sent
+    const emailConfirmation = new brevo.SendSmtpEmail()
+
+    emailConfirmation.subject = "Welcome to F1 API"
+    emailConfirmation.to = [{ email: email }]
+    emailConfirmation.htmlContent = `<html><body>Your email was sent correctly. The team of F! API will contact you soon.</body></html>`
+    emailConfirmation.sender = {
+      name: "Rafa Canosa",
+      email: "rafacv23@gmail.com",
+    }
+
+    await apiInstance.sendTransacEmail(emailConfirmation)
   } catch (error) {
     console.error(error)
   }
