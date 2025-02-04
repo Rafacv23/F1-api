@@ -11,6 +11,7 @@ export const handleSubmit = async (values: z.infer<typeof formSchema>) => {
   const name = values.name
   const email = values.email
   const message = values.message
+  const meet = values.meet
 
   // check all the fields are filled
   if (!subject || !name || !email || !message) {
@@ -22,6 +23,7 @@ export const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     name,
     email,
     message,
+    meet,
   })
 
   // create a cookie to set that the user has submitted the form and can access to the success page
@@ -32,8 +34,6 @@ export const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   })
-
-  console.log("Form submitted successfully")
 
   redirect("/contact/success")
 }

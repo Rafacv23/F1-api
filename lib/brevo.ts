@@ -15,15 +15,22 @@ interface Params {
   name: string
   email: string
   message: string
+  meet?: string
 }
 
-export async function sendEmail({ subject, name, email, message }: Params) {
+export async function sendEmail({
+  subject,
+  name,
+  email,
+  message,
+  meet,
+}: Params) {
   try {
     const smtpEmail = new brevo.SendSmtpEmail()
 
     smtpEmail.subject = subject
     smtpEmail.to = [{ email: "rafacv23@gmail.com" }]
-    smtpEmail.htmlContent = `<html><body>${message} from ${email}</body></html>`
+    smtpEmail.htmlContent = `<html><body>${message}. <br> How i meet you: ${meet}<br> from ${email}</body></html>`
     smtpEmail.sender = { name: name, email: "rafacv23@gmail.com" }
 
     await apiInstance.sendTransacEmail(smtpEmail)

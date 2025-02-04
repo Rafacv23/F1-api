@@ -47,6 +47,15 @@ export const formSchema = z.object({
     .max(1000, {
       message: "Message must be at most 1000 characters",
     }),
+  meet: z
+    .string()
+    .min(10, {
+      message: "Message must be at least 10 characters",
+    })
+    .max(1000, {
+      message: "Message must be at most 1000 characters",
+    })
+    .optional(),
 })
 
 export default function ContactForm() {
@@ -75,7 +84,7 @@ export default function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel>Subject*</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -85,7 +94,7 @@ export default function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>Your subject</FormDescription>
+              <FormDescription>Why are you contacting us?</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -95,7 +104,7 @@ export default function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Name*</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -115,7 +124,7 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Email*</FormLabel>
               <FormControl>
                 <Input
                   type="email"
@@ -125,7 +134,7 @@ export default function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>Your email</FormDescription>
+              <FormDescription>Your email to contact you</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -135,7 +144,7 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>Message*</FormLabel>
               <FormControl>
                 <Textarea
                   required
@@ -146,6 +155,26 @@ export default function ContactForm() {
               </FormControl>
               <FormDescription>
                 Tell us what you think about the API
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="meet"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>How you know us</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Searching in google..."
+                  disabled={loading}
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                Tell us how you know about our API
               </FormDescription>
               <FormMessage />
             </FormItem>
