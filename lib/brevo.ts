@@ -49,7 +49,7 @@ export async function sendEmail({
 </head>
 <body style="background-color: hsl(0, 0%, 100%); color: hsl(0, 0%, 5%); font-family: Arial, sans-serif; margin: 0; padding: 0;">
     <div style="max-width: 600px; margin: 20px auto; background-color: hsl(0, 0%, 100%); padding: 20px; border-radius: 8px; border: 1px solid hsl(0, 0%, 92%); text-align: center;">
-        <h1 style="color: hsl(2, 100%, 44%); margin-bottom: 20px;">Welcome to F1 API</h1>
+        <h1 style="color: hsl(2, 100%, 44%); margin-bottom: 20px;">🏎️ Welcome to F1 API</h1>
           <p style="font-size: 16px; color: hsl(0, 0%, 5%);">
             Hi <strong>${name}</strong>!</p>
             <p>Thanks for contacting us. We will get back to you as soon as possible.</p>
