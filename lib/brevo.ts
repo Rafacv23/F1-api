@@ -68,7 +68,12 @@ export async function sendEmail({
     }
 
     await apiInstance.sendTransacEmail(emailConfirmation)
+
+    return { success: true }
   } catch (error) {
-    console.error(error)
+    return {
+      success: false,
+      error: "Failed to send email. Please try again later.",
+    }
   }
 }

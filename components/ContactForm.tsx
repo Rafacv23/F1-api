@@ -64,14 +64,21 @@ export default function ContactForm() {
   })
 
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (data) => {
           setLoading(true)
+          setError(null) // Reset error before submitting
+
           try {
-            await handleSubmit(data)
+            const response = await handleSubmit(data)
+
+            if (response?.error) {
+              setError(response.error) // Set error if submission fails
+            }
           } finally {
             setLoading(false)
           }
@@ -79,6 +86,9 @@ export default function ContactForm() {
         method="POST"
         className="space-y-8 mt-8"
       >
+        {error && (
+          <div className="bg-red-500 text-white p-2 rounded">{error}</div>
+        )}
         <FormField
           control={form.control}
           name="subject"

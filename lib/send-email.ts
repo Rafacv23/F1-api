@@ -15,16 +15,14 @@ export const handleSubmit = async (values: z.infer<typeof formSchema>) => {
 
   // check all the fields are filled
   if (!subject || !name || !email || !message) {
-    return console.log("Please fill all the fields")
+    return { error: "Please fill all required fields." }
   }
 
-  await sendEmail({
-    subject,
-    name,
-    email,
-    message,
-    meet,
-  })
+  const response = await sendEmail(values)
+
+  if (!response.success) {
+    return { error: response.error }
+  }
 
   // create a cookie to set that the user has submitted the form and can access to the success page
   const cookieStore = await cookies()
