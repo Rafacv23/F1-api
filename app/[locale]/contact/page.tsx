@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/card"
 import initTranslations from "@/app/i18n"
 import { BackBtn } from "@/components/buttons/BackBtn"
+import ContactForm from "@/components/ContactForm"
+import ArrayBread from "@/components/ArrayBread"
 
 export default async function ContactPage({
   params,
@@ -54,10 +56,19 @@ export default async function ContactPage({
   ]
 
   return (
-    <main className="max-w-5xl mx-auto p-6 h-screen mt-44 md:mt-28 mb-20 md:mb-0 flex flex-col justify-center items-center">
+    <main className="max-w-5xl mx-auto p-6 mt-44 md:mt-28 mb-20 md:mb-0 flex flex-col justify-center items-center">
       <section>
         <div className="max-w-screen-lg mx-auto">
           <h1 className="text-3xl font-bold mb-4">{t("title")}</h1>
+          <ArrayBread
+            locale={params.locale}
+            items={[
+              {
+                label: t("title"),
+                link: `/contact`,
+              },
+            ]}
+          />
           <p className="mb-8">{t("subtitle")}</p>
           <div>
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -86,6 +97,7 @@ export default async function ContactPage({
                 </li>
               ))}
             </ul>
+            <ContactForm />
           </div>
           <BackBtn locale={params.locale} />
         </div>
