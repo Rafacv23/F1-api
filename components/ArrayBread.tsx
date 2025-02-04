@@ -1,3 +1,4 @@
+import initTranslations from "@/app/i18n"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,9 +11,12 @@ import React from "react"
 
 interface ArrayBreadProps {
   items: { label: string; link: string }[]
+  locale?: string
 }
 
-export default function ArrayBread({ items }: ArrayBreadProps) {
+export default async function ArrayBread({ items, locale }: ArrayBreadProps) {
+  const { t } = await initTranslations(locale, ["docs"])
+
   // Extract all except the last item
   const breadcrumbs = items.slice(0, -1)
   // Extract the last item
@@ -22,7 +26,9 @@ export default function ArrayBread({ items }: ArrayBreadProps) {
     <Breadcrumb className="mb-4">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink href="/">
+            {locale ? t("home") : "Home"}
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         {breadcrumbs.map((item, index) => (
