@@ -16,6 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { handleSubmit } from "@/lib/send-email"
+import { useState } from "react"
+import { Loader2 } from "lucide-react"
 
 export const formSchema = z.object({
   subject: z
@@ -52,10 +54,19 @@ export default function ContactForm() {
     resolver: zodResolver(formSchema),
   })
 
+  const [loading, setLoading] = useState(false)
+
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((data) => handleSubmit({ ...data }))}
+        onSubmit={form.handleSubmit(async (data) => {
+          setLoading(true)
+          try {
+            await handleSubmit(data)
+          } finally {
+            setLoading(false)
+          }
+        })}
         method="POST"
         className="space-y-8 mt-8"
       >
@@ -70,6 +81,7 @@ export default function ContactForm() {
                   type="text"
                   required
                   placeholder="I want to contribute in the API"
+                  disabled={loading}
                   {...field}
                 />
               </FormControl>
@@ -89,6 +101,7 @@ export default function ContactForm() {
                   type="text"
                   required
                   placeholder="Max Verstappen"
+                  disabled={loading}
                   {...field}
                 />
               </FormControl>
@@ -108,6 +121,7 @@ export default function ContactForm() {
                   type="email"
                   required
                   placeholder="youremail@example.com"
+                  disabled={loading}
                   {...field}
                 />
               </FormControl>
@@ -123,7 +137,12 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea required placeholder="I love F1 Api" {...field} />
+                <Textarea
+                  required
+                  placeholder="I love F1 Api"
+                  disabled={loading}
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 Tell us what you think about the API
@@ -132,7 +151,16 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Send</Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <Loader2 className="animate-spin" />
+              Sending
+            </span>
+          ) : (
+            "Send"
+          )}
+        </Button>
       </form>
     </Form>
   )
