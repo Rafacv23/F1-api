@@ -97,6 +97,7 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       total: processedData.length,
       limit: limit,
+      offset: offset,
       season: year,
       teamId: teamId,
       team: teamData[0],
