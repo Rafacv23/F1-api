@@ -23,7 +23,7 @@ export default function MobileHeader() {
     <div className="lg:hidden">
       <Drawer>
         <DrawerTrigger>
-          <AlignJustify />
+          <AlignJustify aria-label="Open menu" />
         </DrawerTrigger>
         <DrawerContent className="h-2/3">
           <DrawerHeader>
