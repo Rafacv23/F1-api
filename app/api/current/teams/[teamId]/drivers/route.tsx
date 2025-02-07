@@ -1,52 +1,62 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound } from "@/lib/utils"
-import { executeQuery } from "@/lib/executeQuery"
+import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
 import {
-  BaseApiResponse,
-  Driver,
-  ProcessedDrivers,
-  ProcessedTeams,
-  Team,
-} from "@/lib/definitions"
+  championships,
+  drivers,
+  races,
+  results,
+  teams,
+} from "@/db/migrations/schema"
+import { and, eq, InferModel } from "drizzle-orm"
 
 export const revalidate = 120
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
   teamId: string
-  team: ProcessedTeams[0]
-  drivers: ProcessedDrivers
+  team: InferModel<typeof teams>
+  drivers: {
+    driver: {
+      driverId: string
+      name: string
+      surname: string
+      nationality: string
+      birthday: string
+      number: number | null
+      shortName: string | null
+      url: string | null
+    }
+  }[]
 }
 
 export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 4
+  const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const year = CURRENT_YEAR
-    const { teamId } = context.params // Captura los parámetros year y driverId de la URL
-    const sql = `
-    SELECT
-    r.Result_ID,
-    ra.Race_ID,
-    c.Year,
-    t.*,
-    d.*
-  FROM Results AS r
-  INNER JOIN Races AS ra ON r.Race_ID = ra.Race_ID
-  INNER JOIN Championships AS c ON ra.Championship_ID = c.Championship_ID
-  INNER JOIN Teams AS t ON r.Team_ID = t.Team_ID
-  INNER JOIN Drivers AS d ON r.Driver_ID = d.Driver_ID
-  WHERE
-    c.Year = ? AND
-    r.Team_ID = ?
+    const { teamId } = context.params
 
-    GROUP BY d.Driver_ID
-    ORDER BY d.Name
-    LIMIT ?;  
-    `
-
-    const data = await executeQuery(sql, [year, teamId, limit])
+    const data = await db
+      .select({
+        drivers,
+        teams,
+      })
+      .from(results)
+      .innerJoin(races, eq(results.raceId, races.raceId))
+      .innerJoin(
+        championships,
+        eq(races.championshipId, championships.championshipId)
+      )
+      .innerJoin(teams, eq(results.teamId, teams.teamId))
+      .innerJoin(drivers, eq(results.driverId, drivers.driverId))
+      .where(and(eq(results.teamId, teamId), eq(championships.year, year)))
+      .groupBy(drivers.driverId)
+      .orderBy(drivers.name)
+      .limit(limit || 4)
+      .offset(offset || 0)
 
     if (data.length === 0) {
       return apiNotFound(
@@ -56,30 +66,30 @@ export async function GET(request: Request, context: any) {
     }
 
     // Procesamos los datos
-    const processedData = data.map((row: Driver) => {
+    const processedData = data.map((driver) => {
       return {
         driver: {
-          driverId: row.Driver_ID,
-          name: row.Name,
-          surname: row.Surname,
-          nationality: row.Nationality,
-          birthday: row.Birthday,
-          number: row.Number,
-          shortName: row.Short_Name,
-          url: row.URL,
+          driverId: driver.drivers.driverId,
+          name: driver.drivers.name,
+          surname: driver.drivers.surname,
+          nationality: driver.drivers.nationality,
+          birthday: driver.drivers.birthday,
+          number: driver.drivers.number,
+          shortName: driver.drivers.shortName,
+          url: driver.drivers.url,
         },
       }
     })
 
-    const teamData = data.map((row: Team) => {
+    const teamData = data.map((row) => {
       return {
-        teamId: row.Team_ID,
-        teamName: row.Team_Name,
-        country: row.Team_Nationality,
-        firstAppareance: row.First_Appareance,
-        constructorsChampionships: row.Constructors_Championships,
-        driversChampionships: row.Drivers_Championships,
-        url: row.URL,
+        teamId: row.teams.teamId,
+        teamName: row.teams.teamName,
+        teamNationality: row.teams.teamNationality,
+        firstAppeareance: row.teams.firstAppeareance,
+        constructorsChampionships: row.teams.constructorsChampionships,
+        driversChampionships: row.teams.driversChampionships,
+        url: row.teams.url,
       }
     })
 
