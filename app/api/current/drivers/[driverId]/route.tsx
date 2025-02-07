@@ -29,6 +29,12 @@ export async function GET(request: Request, context: any) {
   try {
     const year = CURRENT_YEAR
     const { driverId } = context.params
+
+    const sprintResultsData = await db
+      .select()
+      .from(sprintRace)
+      .where(eq(sprintRace.driverId, driverId))
+
     const resultsData = await db
       .select()
       .from(results)
@@ -36,7 +42,7 @@ export async function GET(request: Request, context: any) {
       .innerJoin(drivers, eq(results.driverId, drivers.driverId))
       .innerJoin(teams, eq(results.teamId, teams.teamId))
       .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
-      .leftJoin(sprintRace, eq(results.raceId, sprintRace.raceId))
+      //.leftJoin(sprintRace, eq(results.raceId, sprintRace.raceId))
       .where(
         and(
           eq(races.championshipId, `f1_${year}`),
@@ -80,6 +86,10 @@ export async function GET(request: Request, context: any) {
 
     // Procesamos los datos
     const processedData = resultsData.map((row) => {
+      const sprintResult = sprintResultsData.find(
+        (sprint) => sprint.raceId === row.Races.raceId
+      )
+
       return {
         race: {
           raceId: row.Races.raceId,
@@ -107,16 +117,15 @@ export async function GET(request: Request, context: any) {
           pointsObtained: row.Results.pointsObtained,
           retired: row.Results.retired,
         },
-        sprintResult:
-          row.Sprint_Race?.finishingPosition != null
-            ? {
-                finishingPosition: row.Sprint_Race.finishingPosition,
-                gridPosition: row.Sprint_Race.gridPosition,
-                raceTime: row.Sprint_Race.raceTime,
-                pointsObtained: row.Sprint_Race.pointsObtained,
-                retired: row.Sprint_Race.retired,
-              }
-            : null,
+        sprintResult: sprintResult
+          ? {
+              finishingPosition: sprintResult.finishingPosition,
+              gridPosition: sprintResult.gridPosition,
+              raceTime: sprintResult.raceTime,
+              pointsObtained: sprintResult.pointsObtained,
+              retired: sprintResult.retired,
+            }
+          : null,
       }
     })
 
