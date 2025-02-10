@@ -1,4 +1,13 @@
-import { Braces, CircleHelp, Laptop, Moon, StickyNote, Sun } from "lucide-react"
+import {
+  Braces,
+  CircleHelp,
+  Download,
+  Github,
+  Laptop,
+  Moon,
+  StickyNote,
+  Sun,
+} from "lucide-react"
 import React from "react"
 
 type Button = {
@@ -42,6 +51,21 @@ const searchOptions: SearchOption[] = [
       { label: "Races", href: "/docs/races", icon: Braces },
       { label: "Standings", href: "/docs/standings", icon: Braces },
       { label: "Circuits", href: "/docs/circuits", icon: Braces },
+    ],
+  },
+  {
+    group: "Resources",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/rafacv23/f1-api",
+        icon: Github,
+      },
+      {
+        label: "NPM",
+        href: "https://www.npmjs.com/package/@f1api/sdk",
+        icon: Download,
+      },
     ],
   },
   {

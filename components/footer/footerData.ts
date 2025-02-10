@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaDownload } from "react-icons/fa"
 import { MdOutlineWebAsset } from "react-icons/md"
 import { SiKofi } from "react-icons/si"
 
@@ -27,6 +27,11 @@ const contactLinks: ContactLink[] = [
     href: "https://ninjapath.vercel.app/github",
     title: "Rafa Canosa Github",
     icon: FaGithub,
+  },
+  {
+    href: "https://www.npmjs.com/package/@f1api/sdk",
+    title: "Download the SDK from NPM",
+    icon: FaDownload,
   },
   {
     href: "https://ninjapath.vercel.app/portfolio",

@@ -1,6 +1,6 @@
 "use client"
 
-import { Github } from "lucide-react"
+import { Download, Github } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   CommandDialog,
@@ -80,9 +80,19 @@ export default function DesktopHeader() {
         href={"https://github.com/rafacv23/f1-api"}
         target="_blank"
         rel="noreferrer"
+        title="View the source code on GitHub"
         className={buttonVariants({ variant: "outline" })}
       >
         <Github />
+      </Link>
+      <Link
+        href={"https://www.npmjs.com/package/@f1api/sdk"}
+        target="_blank"
+        rel="noreferrer"
+        title="Download the SDK from NPM"
+        className={buttonVariants({ variant: "outline" })}
+      >
+        <Download />
       </Link>
     </div>
   )
