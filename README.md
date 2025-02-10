@@ -1,4 +1,4 @@
-# 🏎️ F1 Connect API | Your free api, ready for development
+# 🏎️ F1api.dev | Your free & open source F1 api, ready for development
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -10,36 +10,49 @@
 
 Project made with Next.js and Turso to take all the data about the Formula 1 Championship.
 
-[Live demo](https://f1-connect-api.vercel.app)
+[f1api.dev](https://f1api.dev)
 
 ![f1-connect-api-preview](https://i.imgur.com/BDxpw46.png)
 ![f1-connect-api-performance](https://i.imgur.com/9FiC5VK.png)
 
-```
-git clone https://github.com/Rafacv23/F1-api
-```
+## 🛫 Endpoints
 
-## 🚀 Project Structure
+You can find all the available endpoints in the [docs](https://f1api.dev/docs) section of the website.
 
-```text
-/
-├── public/
-│   └── favicon.avif
-│   └── wallpaper.avif
-├── app/
-│   ├── api/
-│   ├── components/
-│   ├── contact/
-│   ├── data/
-│   ├── docs/
-│   ├── faq/
-│   ├── lib/
-│   ├── terms/
-│   └── lib/
-└── package.json
+## 🪄 Official SDK to use the API
+
+You can use the official SDK to use the API. This is not mandatory, you can simply use fetch to get the data.
+
+[F1 API SDK GitHub](https://github.com/Rafacv23/f1api-sdk) <br>
+[F1 API SDK NPM](https://www.npmjs.com/package/@f1api/sdk)
+
+### Installation
+
+You can use npm, pnpm, yarn or bun to install this package.
+
+```bash
+npm install @f1api/sdk
 ```
 
-## ⌨️ Technologies
+### Usage
+
+#### Initialize the SDK
+
+You can use coommonjs or ES6 import to initialize the SDK.
+
+```js
+import F1Api from "@f1api/sdk"
+
+const f1Api = new F1Api()
+```
+
+#### Use any method to retrieve endpoint data
+
+```js
+const drivers = await f1Api.getDrivers()
+```
+
+## ⌨️ Stack
 
 - Next.js
 - React
@@ -49,10 +62,19 @@ git clone https://github.com/Rafacv23/F1-api
 - Tailwind
 - Shadcn
 - HyperUi
+- Playwright
+
+## 📱 Contact
+
+You can contact with us [contact](https://f1api.dev/contact) section of the website.
 
 ## 👀 Be part of the project
 
 Feel free to check my code and make comments about it. And use it in your daily work.
+
+```
+git clone https://github.com/Rafacv23/F1-api
+```
 
 ## Contributors ✨
 
