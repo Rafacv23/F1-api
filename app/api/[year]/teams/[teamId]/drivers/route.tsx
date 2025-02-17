@@ -80,7 +80,7 @@ export async function GET(request: Request, context: any) {
         )
       )
       .groupBy(driverClassifications.driverId)
-      .orderBy(driverClassifications.driverId)
+      .orderBy(driverClassifications.points)
       .limit(limit || 4)
       .offset(offset || 0)
 
