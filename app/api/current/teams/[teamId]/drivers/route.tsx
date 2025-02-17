@@ -4,10 +4,9 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
-  championships,
+  constructorsClassifications,
+  driverClassifications,
   drivers,
-  races,
-  results,
   teams,
 } from "@/db/migrations/schema"
 import { and, eq, InferModel } from "drizzle-orm"
@@ -39,22 +38,50 @@ export async function GET(request: Request, context: any) {
     const year = CURRENT_YEAR
     const { teamId } = context.params
 
+    // const data = await db
+    //   .select({
+    //     drivers,
+    //     teams,
+    //   })
+    //   .from(results)
+    //   .innerJoin(races, eq(results.raceId, races.raceId))
+    //   .innerJoin(
+    //     championships,
+    //     eq(races.championshipId, championships.championshipId)
+    //   )
+    //   .innerJoin(teams, eq(results.teamId, teams.teamId))
+    //   .innerJoin(drivers, eq(results.driverId, drivers.driverId))
+    //   .where(and(eq(results.teamId, teamId), eq(championships.year, year)))
+    //   .groupBy(drivers.driverId)
+    //   .orderBy(drivers.name)
+    //   .limit(limit || 4)
+    //   .offset(offset || 0)
+
     const data = await db
       .select({
         drivers,
         teams,
+        driverClassifications,
+        constructorsClassifications,
       })
-      .from(results)
-      .innerJoin(races, eq(results.raceId, races.raceId))
+      .from(driverClassifications)
+      .innerJoin(teams, eq(driverClassifications.teamId, teams.teamId))
+      .innerJoin(drivers, eq(driverClassifications.driverId, drivers.driverId))
       .innerJoin(
-        championships,
-        eq(races.championshipId, championships.championshipId)
+        constructorsClassifications,
+        and(
+          eq(constructorsClassifications.teamId, teamId),
+          eq(constructorsClassifications.championshipId, `f1_${year}`)
+        )
       )
-      .innerJoin(teams, eq(results.teamId, teams.teamId))
-      .innerJoin(drivers, eq(results.driverId, drivers.driverId))
-      .where(and(eq(results.teamId, teamId), eq(championships.year, year)))
-      .groupBy(drivers.driverId)
-      .orderBy(drivers.name)
+      .where(
+        and(
+          eq(driverClassifications.teamId, teamId),
+          eq(driverClassifications.championshipId, `f1_${year}`)
+        )
+      )
+      .groupBy(driverClassifications.driverId)
+      .orderBy(driverClassifications.driverId)
       .limit(limit || 4)
       .offset(offset || 0)
 
@@ -77,6 +104,9 @@ export async function GET(request: Request, context: any) {
           number: driver.drivers.number,
           shortName: driver.drivers.shortName,
           url: driver.drivers.url,
+          points: driver.driverClassifications.points,
+          position: driver.driverClassifications.position,
+          wins: driver.driverClassifications.wins,
         },
       }
     })
@@ -89,6 +119,9 @@ export async function GET(request: Request, context: any) {
         firstAppeareance: row.teams.firstAppeareance,
         constructorsChampionships: row.teams.constructorsChampionships,
         driversChampionships: row.teams.driversChampionships,
+        points: row.constructorsClassifications.points,
+        position: row.constructorsClassifications.position,
+        wins: row.constructorsClassifications.wins,
         url: row.teams.url,
       }
     })
