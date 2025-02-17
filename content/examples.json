@@ -840,6 +840,9 @@
         "country": "Germany",
         "constructorsChampionships": 8,
         "driversChampionships": 9,
+        "points": 468,
+        "position": 4,
+        "wins": 4,
         "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
       },
       "drivers": [
@@ -852,7 +855,10 @@
             "birthday": "15/02/1998",
             "number": 63,
             "shortName": "RUS",
-            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One",
+            "points": 223,
+            "position": 7,
+            "wins": 2
           }
         },
         {
@@ -864,7 +870,10 @@
             "birthday": "07/01/1985",
             "number": 44,
             "shortName": "HAM",
-            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
+            "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One",
+            "points": 245,
+            "position": 6,
+            "wins": 2
           }
         }
       ]
@@ -936,6 +945,21 @@
         "description": "The number of drivers championships the team has won."
       },
       {
+        "field": "points",
+        "type": "number",
+        "description": "The points scored by the team."
+      },
+      {
+        "field": "position",
+        "type": "number",
+        "description": "The position of the team in the championship."
+      },
+      {
+        "field": "wins",
+        "type": "number | null",
+        "description": "Wins of the team in the selected season."
+      },
+      {
         "field": "url",
         "type": "string",
         "description": "A URL to the Wikipedia page of the team."
@@ -984,6 +1008,21 @@
         "field": "url",
         "type": "string",
         "description": "A URL to the Wikipedia page of the driver."
+      },
+      {
+        "field": "points",
+        "type": "number",
+        "description": "The points scored by the driver."
+      },
+      {
+        "field": "position",
+        "type": "number",
+        "description": "The position of the driver in the championship."
+      },
+      {
+        "field": "wins",
+        "type": "number | null",
+        "description": "Wins of the driver in the selected season."
       }
     ]
   },
@@ -1002,19 +1041,25 @@
         "country": "Italy",
         "constructorsChampionships": 16,
         "driversChampionships": 15,
+        "points": 652,
+        "position": 2,
+        "wins": 5,
         "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
       },
       "drivers": [
         {
           "driver": {
-            "driverId": "sainz",
-            "name": "Carlos",
-            "surname": "Sainz",
-            "nationality": "Spain",
-            "birthday": "01/09/1994",
-            "number": 55,
-            "shortName": "SAI",
-            "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
+            "driverId": "bearman",
+            "name": "Oliver",
+            "surname": "Bearman",
+            "nationality": "Great Britain",
+            "birthday": "08/05/2005",
+            "number": 38,
+            "shortName": "BEA",
+            "url": "https://en.wikipedia.org/wiki/Oliver_Bearman",
+            "points": 7,
+            "position": 18,
+            "wins": null
           }
         },
         {
@@ -1026,7 +1071,10 @@
             "birthday": "16/10/1997",
             "number": 16,
             "shortName": "LEC",
-            "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
+            "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari",
+            "points": 356,
+            "position": 3,
+            "wins": 3
           }
         }
       ]
@@ -1098,6 +1146,21 @@
         "description": "The number of drivers championships the team has won."
       },
       {
+        "field": "points",
+        "type": "number",
+        "description": "The points scored by the team."
+      },
+      {
+        "field": "position",
+        "type": "number",
+        "description": "The position of the team in the championship."
+      },
+      {
+        "field": "wins",
+        "type": "number | null",
+        "description": "Wins of the team in the selected season."
+      },
+      {
         "field": "url",
         "type": "string",
         "description": "A URL to the Wikipedia page of the team."
@@ -1146,6 +1209,21 @@
         "field": "url",
         "type": "string",
         "description": "A URL to the Wikipedia page of the driver."
+      },
+      {
+        "field": "points",
+        "type": "number",
+        "description": "The points scored by the driver."
+      },
+      {
+        "field": "position",
+        "type": "number",
+        "description": "The position of the driver in the championship."
+      },
+      {
+        "field": "wins",
+        "type": "number | null",
+        "description": "Wins of the driver in the selected season."
       }
     ]
   },
