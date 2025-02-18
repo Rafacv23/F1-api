@@ -58,7 +58,7 @@ export async function GET(request: Request, context: any) {
       teamId: row.Sprint_Qualy.teamId,
       sq1: row.Sprint_Qualy.sq1,
       sq2: row.Sprint_Qualy.sq2,
-      Sq3: row.Sprint_Qualy.sq3,
+      sq3: row.Sprint_Qualy.sq3,
       gridPosition: row.Sprint_Qualy.gridPosition,
       driver: {
         driverId: row.Drivers.driverId,
