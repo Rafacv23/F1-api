@@ -5163,7 +5163,7 @@
             "teamId": "mclaren",
             "sq1": "1:36.384\t",
             "sq2": "1:36.047\t",
-            "Sq3": "1:57.940\t",
+            "sq3": "1:57.940\t",
             "gridPosition": 1,
             "driver": {
               "driverId": "norris",
@@ -5442,7 +5442,7 @@
             "teamId": "mclaren",
             "sq1": "1:36.384\t",
             "sq2": "1:36.047\t",
-            "Sq3": "1:57.940\t",
+            "sq3": "1:57.940\t",
             "gridPosition": 1,
             "driver": {
               "driverId": "norris",
