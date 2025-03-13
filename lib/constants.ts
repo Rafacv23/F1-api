@@ -7,4 +7,4 @@ export const SITE_META_NAME =
 export const GITHUB_REPO = "https://github.com/Rafacv23/F1-api"
 export const SITE_META_DESCRIPTION =
   "F1 API it's a free and open source API that provides data about all Formula 1 Seasons. The API offers realtime data and historical."
-export const CURRENT_YEAR = 2024 // Change this value every year, displaying the latest season with data.
+export const CURRENT_YEAR = 2025 // Change this value every year, displaying the latest season with data.
