@@ -12,5 +12,12 @@
     "author": "Sam Frost",
     "url": "https://formulaone.pythonanywhere.com",
     "img": "/referrals/SamFrost.avif"
+  },
+  {
+    "name": "F1PL",
+    "description": "F1 data, news, and stadistics.",
+    "author": "Patryk Chmielewski",
+    "url": "https://f1pl.pl",
+    "img": "/referrals/PatrykChmielewski.avif"
   }
 ]
