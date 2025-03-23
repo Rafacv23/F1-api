@@ -1,4 +1,4 @@
 {
-  "announce": "We have a new SDK tool to integrate the API in your projects",
-  "link": "https://f1api.dev/docs/sdk"
+  "announce": "Data updated after the 2025 Chinese GP. Check out the endpoint",
+  "link": "https://f1api.dev/api/2025/2/race"
 }
