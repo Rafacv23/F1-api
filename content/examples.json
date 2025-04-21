@@ -94,6 +94,111 @@
     ]
   },
   {
+    "enpointId": "drivers-search",
+    "exampleResponse": {
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/drivers/search?q=verstappen",
+      "query": "verstappen",
+      "limit": 30,
+      "offset": 0,
+      "total": 2,
+      "drivers": [
+        {
+          "driverId": "max_verstappen",
+          "name": "Max",
+          "surname": "Verstappen",
+          "nationality": "Netherlands",
+          "birthday": "30/09/1997",
+          "number": 33,
+          "shortName": "VER",
+          "url": "https://en.wikipedia.org/wiki/Max_Verstappen"
+        },
+        {
+          "driverId": "verstappen",
+          "name": "Jos",
+          "surname": "Verstappen",
+          "nationality": "Dutch",
+          "birthday": "1972-03-04",
+          "number": null,
+          "shortName": null,
+          "url": "http://en.wikipedia.org/wiki/Jos_Verstappen"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "drivers",
+        "type": "array",
+        "description": "A list of driver objects returned from the API."
+      },
+      {
+        "field": "driverId",
+        "type": "string",
+        "description": "A unique identifier for the driver."
+      },
+      {
+        "field": "name",
+        "type": "string",
+        "description": "The driver's first name."
+      },
+      {
+        "field": "surname",
+        "type": "string",
+        "description": "The driver's surname."
+      },
+      {
+        "field": "nationality",
+        "type": "string",
+        "description": "The driver's nationality."
+      },
+      {
+        "field": "birthday",
+        "type": "string",
+        "description": "The driver's birthdate in DD/MM/YYYY format."
+      },
+      {
+        "field": "number",
+        "type": "number",
+        "description": "The driver's racing number."
+      },
+      {
+        "field": "shortName",
+        "type": "string",
+        "description": "The driver's abbreviated name, often used in standings or graphics."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the driver."
+      }
+    ]
+  },
+  {
     "enpointId": "current-drivers",
     "exampleResponse": {
       "api": "https://f1connectapi.vercel.app",
@@ -726,10 +831,132 @@
     ]
   },
   {
+    "enpointId": "teams-search",
+    "exampleResponse": {
+      "api": "https://f1api.dev",
+      "url": "https:f1api.dev/api/teams/search?q=ferrari",
+      "limit": 30,
+      "offset": 0,
+      "query": "ferrari",
+      "total": 3,
+      "teams": [
+        {
+          "teamId": "cooper-ferrari",
+          "teamName": "Cooper-Ferrari",
+          "teamNationality": "British",
+          "firstAppeareance": null,
+          "constructorsChampionships": null,
+          "driversChampionships": null,
+          "url": "http://en.wikipedia.org/wiki/Cooper_Car_Company"
+        },
+        {
+          "teamId": "de_tomaso-ferrari",
+          "teamName": "De Tomaso-Ferrari",
+          "teamNationality": "Italian",
+          "firstAppeareance": null,
+          "constructorsChampionships": null,
+          "driversChampionships": null,
+          "url": "http://en.wikipedia.org/wiki/De_Tomaso"
+        },
+        {
+          "teamId": "ferrari",
+          "teamName": "Scuderia Ferrari",
+          "teamNationality": "Italy",
+          "firstAppeareance": 1950,
+          "constructorsChampionships": 16,
+          "driversChampionships": 15,
+          "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "query",
+        "type": "string",
+        "description": "The search query used to filter the teams."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "season",
+        "type": "string",
+        "description": "The season of the championship."
+      },
+      {
+        "field": "championshipId",
+        "type": "string",
+        "description": "The championship id."
+      },
+      {
+        "field": "teams",
+        "type": "array",
+        "description": "The teams array of team objects."
+      },
+      {
+        "field": "teamId",
+        "type": "string",
+        "description": "A unique identifier for the team."
+      },
+      {
+        "field": "teamName",
+        "type": "string",
+        "description": "The team name."
+      },
+      {
+        "field": "teamNationality",
+        "type": "string",
+        "description": "The team nationality."
+      },
+      {
+        "field": "firstAppeareance",
+        "type": "number",
+        "description": "The year the team first appeared in a Grand Prix."
+      },
+      {
+        "field": "constructorsChampionships",
+        "type": "number | null",
+        "description": "The number of constructors championships the team has won."
+      },
+      {
+        "field": "driversChampionships",
+        "type": "number | null",
+        "description": "The number of drivers championships the team has won."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the team."
+      }
+    ]
+  },
+  {
     "enpointId": "current-teams",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.app/api/current/teams?limit=1",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/current/teams?limit=1",
       "limit": 1,
       "offset": 0,
       "total": 1,
@@ -2133,6 +2360,159 @@
         "field": "total",
         "type": "number",
         "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "circuits",
+        "type": "array",
+        "description": "A list of circuit objects returned from the API."
+      },
+      {
+        "field": "circuitId",
+        "type": "string",
+        "description": "A unique identifier for the circuit."
+      },
+      {
+        "field": "circuitName",
+        "type": "string",
+        "description": "The circuit's name."
+      },
+      {
+        "field": "country",
+        "type": "string",
+        "description": "The circuit's country."
+      },
+      {
+        "field": "city",
+        "type": "string",
+        "description": "The circuit's city."
+      },
+      {
+        "field": "circuitLength",
+        "type": "number",
+        "description": "The circuit's length in kilometers."
+      },
+      {
+        "field": "lapRecord",
+        "type": "string",
+        "description": "The lap record for the circuit."
+      },
+      {
+        "field": "firstParticipationYear",
+        "type": "number",
+        "description": "The year the circuit first hosted a Grand Prix."
+      },
+      {
+        "field": "numberOfCorners",
+        "type": "number",
+        "description": "The number of corners on the circuit."
+      },
+      {
+        "field": "fastestLapDriverId",
+        "type": "string",
+        "description": "The driverId of the fastest lap driver."
+      },
+      {
+        "field": "fastestLapTeamId",
+        "type": "string",
+        "description": "The teamId of the fastest lap team."
+      },
+      {
+        "field": "fastestLapYear",
+        "type": "number",
+        "description": "The year the fastest lap was set."
+      },
+
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the circuit."
+      }
+    ]
+  },
+  {
+    "enpointId": "circuits-search",
+    "exampleResponse": {
+      "api": "https://f1api.dev",
+      "url": "http://f1api.dev/api/circuits/search?q=japan",
+      "limit": 30,
+      "offset": 0,
+      "query": "japan",
+      "total": 3,
+      "circuits": [
+        {
+          "circuitId": "suzuka",
+          "circuitName": "Suzuka International Circuit",
+          "country": "Japan",
+          "city": "Suzuka",
+          "circuitLength": 5807,
+          "lapRecord": "1:30:983",
+          "firstParticipationYear": 1987,
+          "numberOfCorners": 18,
+          "fastestLapDriverId": "hamilton",
+          "fastestLapTeamId": "mercedes",
+          "fastestLapYear": 2019,
+          "url": "https://en.wikipedia.org/wiki/Suzuka_International_Racing_Course"
+        },
+        {
+          "circuitId": "fuji",
+          "circuitName": "Fuji Speedway",
+          "country": "Japan",
+          "city": "Oyama",
+          "circuitLength": null,
+          "lapRecord": null,
+          "firstParticipationYear": null,
+          "numberOfCorners": null,
+          "fastestLapDriverId": null,
+          "fastestLapTeamId": null,
+          "fastestLapYear": null,
+          "url": "http://en.wikipedia.org/wiki/Fuji_Speedway"
+        },
+        {
+          "circuitId": "okayama",
+          "circuitName": "Okayama International Circuit",
+          "country": "Japan",
+          "city": "Okayama",
+          "circuitLength": null,
+          "lapRecord": null,
+          "firstParticipationYear": null,
+          "numberOfCorners": null,
+          "fastestLapDriverId": null,
+          "fastestLapTeamId": null,
+          "fastestLapYear": null,
+          "url": "http://en.wikipedia.org/wiki/TI_Circuit"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the drivers data with query parameters for limit and offset."
+      },
+      {
+        "field": "limit",
+        "type": "number",
+        "description": "The number of results returned per request."
+      },
+      {
+        "field": "offset",
+        "type": "number",
+        "description": "The offset used for pagination, i.e., the starting point for the result set."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of drivers available in the dataset."
+      },
+      {
+        "field": "query",
+        "type": "string",
+        "description": "The search query used to filter the circuits."
       },
       {
         "field": "circuits",

@@ -25,6 +25,30 @@
         ]
       },
       {
+        "id": "drivers-search",
+        "title": "drivers/search",
+        "value": "drivers",
+        "description": "Search with a q parameter for a driver or a list of drivers. Based on his name or surname.",
+        "url": "drivers/search?q=verstappen",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          },
+          {
+            "name": "q",
+            "description": "Search query, can be a driver name or surname.",
+            "default": ""
+          }
+        ]
+      },
+      {
         "id": "driverId",
         "title": "[driverId]",
         "description": "This endpoint retrieves details about a driver in the database. Based on the provided driverId.",
@@ -126,6 +150,30 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "teams-search",
+        "title": "teams/search",
+        "description": "Search with a q parameter for a team or a list of teams. Based on his name.",
+        "url": "teams/search?q=ferrari",
+
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          },
+          {
+            "name": "q",
+            "description": "Search query, can be a team name.",
+            "default": ""
           }
         ]
       },
@@ -612,6 +660,29 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          }
+        ]
+      },
+      {
+        "id": "circuits-search",
+        "title": "circuits/search",
+        "description": "This endpoint retrieves details about all the circuits in the database that match the search query. The query can be the circuit name, country or city.",
+        "url": "circuits/search?q=japan",
+        "params": [
+          {
+            "name": "limit",
+            "description": "Number of records returned per request.",
+            "default": "30"
+          },
+          {
+            "name": "offset",
+            "description": "Number of records skipped before starting to fetch.",
+            "default": "0"
+          },
+          {
+            "name": "q",
+            "description": "Search query, can be a circuit name, country or city.",
+            "default": "-"
           }
         ]
       },
