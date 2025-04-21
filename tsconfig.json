@@ -27,7 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/[year]/drivers/[driverId]/route.tsx",
-    "middleware.js",
+    "middleware.ts",
     "app/i18n.js",
     "lib/scrap/sprint/race.js",
     "lib/scrap/sprint/qualy.js"

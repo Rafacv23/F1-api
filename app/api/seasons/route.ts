@@ -29,29 +29,20 @@ export async function GET(request: Request) {
       return apiNotFound(request, "No seasons found.")
     }
 
-    seasonsData.forEach((season) => {
-      return {
-        championshipId: season.championshipId,
-        championshipName: season.championshipName,
-        url: season.url,
-        year: season.year,
-      }
-    })
-
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
-      offset: offset,
+      limit,
+      offset,
       total: seasonsData.length,
       championships: seasonsData,
     }
 
     return NextResponse.json(response, {
+      status: 200,
       headers: {
         "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
-      status: 200,
     })
   } catch (error) {
     console.error("Error:", error)
