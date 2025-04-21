@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { constructorsClassifications, teams } from "@/db/migrations/schema"
 import { asc, eq } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number

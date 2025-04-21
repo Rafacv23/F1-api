@@ -14,7 +14,7 @@ import {
 } from "@/db/migrations/schema"
 import { eq, and, lte, desc } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string

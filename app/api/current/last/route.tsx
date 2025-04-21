@@ -12,7 +12,7 @@ import {
 } from "@/db/migrations/schema"
 import { lte, and, eq, desc } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 export const dynamic = "force-dynamic"
 
 interface ApiResponse extends BaseApiResponse {

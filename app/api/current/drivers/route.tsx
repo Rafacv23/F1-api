@@ -6,7 +6,7 @@ import { InferModel, eq, asc } from "drizzle-orm"
 import { driverClassifications, drivers } from "@/db/migrations/schema"
 import { db } from "@/db"
 
-export const revalidate = 120
+export const revalidate = 600
 
 type Driver = InferModel<typeof drivers>
 type ExtendedDriver = Driver & { teamId: string | null }

@@ -11,7 +11,7 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const revalidate = 120
+export const revalidate = 600
 
 export async function GET(request: Request, context: any) {
   try {

@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { eq, and, asc } from "drizzle-orm"
 import { circuits, drivers, fp3, races, teams } from "@/db/migrations/schema"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string

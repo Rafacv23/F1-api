@@ -13,7 +13,7 @@ import {
   teams,
 } from "@/db/migrations/schema"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number

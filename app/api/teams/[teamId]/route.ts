@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { teams } from "@/db/migrations/schema"
 import { eq, InferModel } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 type Team = InferModel<typeof teams>
 

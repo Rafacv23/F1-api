@@ -7,7 +7,7 @@ import { apiNotFound } from "@/lib/utils"
 import { and, eq, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface DriverStats {
   [driverId: string]: number

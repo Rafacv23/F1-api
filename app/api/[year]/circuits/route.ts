@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { circuits, races } from "@/db/migrations/schema"
 import { eq } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 type Circuit = {
   circuitId: string | null

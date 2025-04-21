@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { teams } from "@/db/migrations/schema"
 import { InferModel, like } from "drizzle-orm"
 
-export const revalidate = 300
+export const revalidate = 600
 
 type Team = InferModel<typeof teams>
 interface ApiResponse extends BaseApiResponse {

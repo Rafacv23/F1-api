@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { eq, InferModel } from "drizzle-orm"
 import { results, teams } from "@/db/migrations/schema"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string

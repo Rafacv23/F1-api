@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { eq, InferModel } from "drizzle-orm"
 import { circuits } from "@/db/migrations/schema"
 
-export const revalidate = 300
+export const revalidate = 600
 
 type Circuit = InferModel<typeof circuits>
 
