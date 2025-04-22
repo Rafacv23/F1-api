@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { teams } from "@/db/migrations/schema"
 import { InferModel, like } from "drizzle-orm"
 
-export const revalidate = 300
+export const revalidate = 600
 
 type Team = InferModel<typeof teams>
 interface ApiResponse extends BaseApiResponse {
@@ -55,7 +55,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

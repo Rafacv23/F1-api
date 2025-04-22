@@ -12,6 +12,7 @@ import initTranslations from "../i18n"
 import TranslationsProvider from "@/components/TranslationsProvider"
 import { Providers } from "@/components/Providers"
 import Header from "@/components/header/Header"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -153,6 +154,7 @@ export default async function RootLayout({
         </TranslationsProvider>
       </body>
       <GoogleAnalytics gaId="G-BSF96MBRJC" />
+      <SpeedInsights />
     </html>
   )
 }

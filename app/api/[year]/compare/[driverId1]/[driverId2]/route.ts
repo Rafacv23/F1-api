@@ -7,7 +7,7 @@ import { apiNotFound } from "@/lib/utils"
 import { and, eq, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface DriverStats {
   [driverId: string]: number
@@ -210,7 +210,7 @@ WHERE r1.Driver_ID = ?
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

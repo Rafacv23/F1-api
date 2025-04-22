@@ -11,7 +11,7 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const revalidate = 120
+export const revalidate = 600
 
 export async function GET(request: Request, context: any) {
   try {
@@ -132,7 +132,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=30",
       },
       status: 200,
     })
