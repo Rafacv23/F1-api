@@ -16,7 +16,7 @@
         "translation",
         "bug"
       ]
-    }, 
+    },
     {
       "login": "brzzdev",
       "name": "Paul",
@@ -25,7 +25,7 @@
       "contributions": [
         "bug"
       ]
-    }, 
+    },
     {
       "login": "didoub74-off",
       "name": "Darlann Banache",
@@ -33,7 +33,7 @@
       "profile": "https://github.com/didoub74-off",
       "contributions": [
         "bug",
-        "feature"
+        "feat"
       ]
     },
     {
@@ -42,7 +42,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/95458562?v=4",
       "profile": "https://github.com/zhenghaoyang24",
       "contributions": [
-        "feature"
+        "feat"
       ]
     }
   ],
