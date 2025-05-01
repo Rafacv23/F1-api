@@ -16,6 +16,33 @@
         "translation",
         "bug"
       ]
+    },
+    {
+      "login": "brzzdev",
+      "name": "Paul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15687450?v=4",
+      "profile": "https://github.com/brzzdev",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "didoub74-off",
+      "name": "Darlann Banache",
+      "avatar_url": "https://avatars.githubusercontent.com/u/120744788?v=4",
+      "profile": "https://github.com/didoub74-off",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "zhenghaoyang24",
+      "name": "zhenghaoyang24",
+      "avatar_url": "https://avatars.githubusercontent.com/u/95458562?v=4",
+      "profile": "https://zhenghaoyang.cn",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,

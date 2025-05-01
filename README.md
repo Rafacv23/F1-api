@@ -1,9 +1,7 @@
 # 🏎️ F1api.dev | Your free & open source F1 api, ready for development
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Star on GitHub](https://img.shields.io/github/stars/rafacv23/F1-api?style=social)](https://github.com/rafacv23/F1-api) [![Fork on GitHub](https://img.shields.io/github/forks/rafacv23/F1-api?style=social)](https://github.com/rafacv23/F1-api/fork)
@@ -87,6 +85,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mbhusty"><img src="https://avatars.githubusercontent.com/u/7149699?v=4?s=100" width="100px;" alt="Artem Anisimov"/><br /><sub><b>Artem Anisimov</b></sub></a><br /><a href="#translation-mbhusty" title="Translation">🌍</a> <a href="https://github.com/Rafacv23/F1-api/issues?q=author%3Ambhusty" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/brzzdev"><img src="https://avatars.githubusercontent.com/u/15687450?v=4?s=100" width="100px;" alt="Paul"/><br /><sub><b>Paul</b></sub></a><br /><a href="https://github.com/Rafacv23/F1-api/issues?q=author%3Abrzzdev" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/didoub74-off"><img src="https://avatars.githubusercontent.com/u/120744788?v=4?s=100" width="100px;" alt="Darlann Banache"/><br /><sub><b>Darlann Banache</b></sub></a><br /><a href="https://github.com/Rafacv23/F1-api/issues?q=author%3Adidoub74-off" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://zhenghaoyang.cn"><img src="https://avatars.githubusercontent.com/u/95458562?v=4?s=100" width="100px;" alt="zhenghaoyang24"/><br /><sub><b>zhenghaoyang24</b></sub></a><br /><a href="#ideas-zhenghaoyang24" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
