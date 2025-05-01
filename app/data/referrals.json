@@ -19,5 +19,12 @@
     "author": "Patryk Chmielewski",
     "url": "https://f1pl.pl",
     "img": "/referrals/PatrykChmielewski.avif"
+  },
+  {
+    "name": "Podium F1",
+    "description": "Preddiction F1 Game based on real results.",
+    "author": "Podium F1",
+    "url": "https://pitlane.podiumf1.com",
+    "img": "/referrals/PodiumF1.avif"
   }
 ]
