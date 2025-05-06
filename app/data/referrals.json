@@ -26,5 +26,12 @@
     "author": "Podium F1",
     "url": "https://pitlane.podiumf1.com",
     "img": "/referrals/PodiumF1.avif"
+  },
+  {
+    "name": "F1 Hub iOS",
+    "description": "F1 Hub is an iOS app that uses F1 API endpoints.",
+    "author": "Marcos Morales",
+    "url": "https://github.com/marquinhosMorales/f1hub-ios",
+    "img": "/referrals/F1Hub.avif"
   }
 ]
