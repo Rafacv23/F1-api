@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
+import {
+  apiNotFound,
+  convertToTimezone,
+  getDay,
+  getLimitAndOffset,
+} from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -16,6 +21,7 @@ export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -24,6 +30,9 @@ export async function GET(request: Request) {
   const { limit, offset } = getLimitAndOffset(queryParams)
 
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
+
     const year = CURRENT_YEAR
     const today = getDay()
 
@@ -68,6 +77,12 @@ export async function GET(request: Request) {
         "No qualifying results found for the last race."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      race.qualyDate,
+      race.qualyTime,
+      timezone
+    )
 
     // Procesar los datos
     const processedData = qualyData.map((row) => ({
@@ -121,12 +136,13 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: qualyData.length,
       season: year,
       races: {
         round: race.round,
-        qualyTime: race.qualyTime,
-        qualyDate: race.qualyDate,
+        qualyTime: localDate,
+        qualyDate: localTime,
         url: race.url,
         raceId: race.raceId,
         raceName: race.raceName,

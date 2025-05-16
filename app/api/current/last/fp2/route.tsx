@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
+import {
+  apiNotFound,
+  convertToTimezone,
+  getDay,
+  getLimitAndOffset,
+} from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { eq, and, desc, lte } from "drizzle-orm"
@@ -10,6 +15,7 @@ export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -17,6 +23,8 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
     const year = CURRENT_YEAR
     const today = getDay()
 
@@ -40,6 +48,12 @@ export async function GET(request: Request) {
         "No fp2 results found for this round. Try with other one."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      fp2Data[0].Races.fp2Date,
+      fp2Data[0].Races.fp2Time,
+      timezone
+    )
 
     // Procesamos los datos
     const processedData = fp2Data.map((row) => ({
@@ -91,12 +105,13 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: fp2Data.length,
       season: year,
       races: {
         round: fp2Data[0].Races.round,
-        fp2Date: fp2Data[0].Races.fp1Date,
-        fp2Time: fp2Data[0].Races.fp1Time,
+        fp2Date: localDate,
+        fp2Time: localTime,
         url: fp2Data[0].Races.url,
         raceId: fp2Data[0].Races.raceId,
         raceName: fp2Data[0].Races.raceName,
