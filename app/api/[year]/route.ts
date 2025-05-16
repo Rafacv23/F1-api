@@ -7,7 +7,7 @@ import {
   teams,
 } from "@/db/migrations/schema"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getLimitAndOffset } from "@/lib/utils"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
@@ -18,6 +18,8 @@ export async function GET(request: Request, context: any) {
     const { year } = context.params
     const queryParams = new URL(request.url).searchParams
     const { limit, offset } = getLimitAndOffset(queryParams)
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
 
     const championshipData = await db
       .select()
@@ -58,19 +60,41 @@ export async function GET(request: Request, context: any) {
       championshipId: race.Races.championshipId,
       raceName: race.Races.raceName,
       schedule: {
-        race: { date: race.Races.raceDate, time: race.Races.raceTime },
-        qualy: { date: race.Races.qualyDate, time: race.Races.qualyTime },
-        fp1: { date: race.Races.fp1Date, time: race.Races.fp1Time },
-        fp2: { date: race.Races.fp2Date, time: race.Races.fp2Time },
-        fp3: { date: race.Races.fp3Date, time: race.Races.fp3Time },
-        sprintQualy: {
-          date: race.Races.sprintQualyDate,
-          time: race.Races.sprintQualyTime,
-        },
-        sprintRace: {
-          date: race.Races.sprintRaceDate,
-          time: race.Races.sprintRaceTime,
-        },
+        race: convertToTimezone(
+          race.Races.raceDate,
+          race.Races.raceTime,
+          timezone
+        ),
+        qualy: convertToTimezone(
+          race.Races.qualyDate,
+          race.Races.qualyTime,
+          timezone
+        ),
+        fp1: convertToTimezone(
+          race.Races.fp1Date,
+          race.Races.fp1Time,
+          timezone
+        ),
+        fp2: convertToTimezone(
+          race.Races.fp2Date,
+          race.Races.fp2Time,
+          timezone
+        ),
+        fp3: convertToTimezone(
+          race.Races.fp3Date,
+          race.Races.fp3Time,
+          timezone
+        ),
+        sprintQualy: convertToTimezone(
+          race.Races.sprintQualyDate,
+          race.Races.sprintQualyTime,
+          timezone
+        ),
+        sprintRace: convertToTimezone(
+          race.Races.sprintRaceDate,
+          race.Races.sprintRaceTime,
+          timezone
+        ),
       },
       laps: race.Races.laps,
       round: race.Races.round,
@@ -124,6 +148,7 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: formattedData.length,
       season: year,
       championship: championship,

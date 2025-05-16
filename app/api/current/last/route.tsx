@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getDay } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getDay } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -18,6 +18,7 @@ export const dynamic = "force-dynamic"
 interface ApiResponse extends BaseApiResponse {
   season: number | string
   round: number | null
+  timezone?: string
   championship: any
   race: any
 }
@@ -26,6 +27,9 @@ export async function GET(request: Request) {
   try {
     const year = CURRENT_YEAR
     const today = getDay()
+
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
 
     const championshipData = await db
       .select()
@@ -69,19 +73,41 @@ export async function GET(request: Request) {
       championshipId: race.Races.championshipId,
       raceName: race.Races.raceName,
       schedule: {
-        race: { date: race.Races.raceDate, time: race.Races.raceTime },
-        qualy: { date: race.Races.qualyDate, time: race.Races.qualyTime },
-        fp1: { date: race.Races.fp1Date, time: race.Races.fp1Time },
-        fp2: { date: race.Races.fp2Date, time: race.Races.fp2Time },
-        fp3: { date: race.Races.fp3Date, time: race.Races.fp3Time },
-        sprintQualy: {
-          date: race.Races.sprintQualyDate,
-          time: race.Races.sprintQualyTime,
-        },
-        sprintRace: {
-          date: race.Races.sprintRaceDate,
-          time: race.Races.sprintRaceTime,
-        },
+        race: convertToTimezone(
+          race.Races.raceDate,
+          race.Races.raceTime,
+          timezone
+        ),
+        qualy: convertToTimezone(
+          race.Races.qualyDate,
+          race.Races.qualyTime,
+          timezone
+        ),
+        fp1: convertToTimezone(
+          race.Races.fp1Date,
+          race.Races.fp1Time,
+          timezone
+        ),
+        fp2: convertToTimezone(
+          race.Races.fp2Date,
+          race.Races.fp2Time,
+          timezone
+        ),
+        fp3: convertToTimezone(
+          race.Races.fp3Date,
+          race.Races.fp3Time,
+          timezone
+        ),
+        sprintQualy: convertToTimezone(
+          race.Races.sprintQualyDate,
+          race.Races.sprintQualyTime,
+          timezone
+        ),
+        sprintRace: convertToTimezone(
+          race.Races.sprintRaceDate,
+          race.Races.sprintRaceTime,
+          timezone
+        ),
       },
       laps: race.Races.laps,
       round: race.Races.round,
@@ -133,6 +159,7 @@ export async function GET(request: Request) {
     const response: ApiResponse = {
       api: SITE_URL,
       url: `${SITE_URL}api/current/last`,
+      timezone: timezone || undefined,
       total: formattedData.length,
       season: year,
       round: formattedData[0].round,

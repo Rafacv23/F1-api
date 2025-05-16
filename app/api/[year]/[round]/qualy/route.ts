@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -16,6 +16,7 @@ export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -24,6 +25,8 @@ export async function GET(request: Request, context: any) {
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const { year, round } = context.params
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
 
     const qualyData = await db
       .select()
@@ -45,6 +48,12 @@ export async function GET(request: Request, context: any) {
         "No qualy results found for this round. Try with other one."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      qualyData[0].Races.qualyDate,
+      qualyData[0].Races.qualyTime,
+      timezone
+    )
 
     // Procesamos los datos
     const processedData = qualyData.map((row) => ({
@@ -99,12 +108,13 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: qualyData.length,
       season: year,
       races: {
         round: round,
-        qualyTime: qualyData[0].Races.qualyTime,
-        qualyDate: qualyData[0].Races.qualyDate,
+        qualyTime: localTime,
+        qualyDate: localDate,
         url: qualyData[0].Races.url,
         raceId: qualyData[0].Races.raceId,
         raceName: qualyData[0].Races.raceName,

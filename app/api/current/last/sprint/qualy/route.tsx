@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getDay } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getDay } from "@/lib/utils"
 import { BaseApiResponse, Circuit } from "@/lib/definitions"
 
 export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -15,6 +16,9 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const limit = queryParams.get("limit") || 20
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
+
     const year = CURRENT_YEAR
     const today = getDay()
     //const today = 5 testing endpoint
@@ -40,16 +44,25 @@ export async function GET(request: Request) {
       )
     }
 
+    const sprintQualyDate = data[0][23]
+    const sprintQualyTime = data[0][29]
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      sprintQualyDate,
+      sprintQualyTime,
+      timezone
+    )
+
     // Procesamos los datos
     const processedData = data.map((row: any) => ({
-      Sprint_Qualification_ID: row[0],
-      Race_ID: row[1],
-      Driver_ID: row[2],
-      Team_ID: row[3],
-      SQ1_Time: row[4],
-      SQ2_Time: row[5],
-      SQ3_Time: row[6],
-      Grid_Position: row[7],
+      sprintQualyId: row[0],
+      raceId: row[1],
+      driverId: row[2],
+      teamId: row[3],
+      sq1: row[4],
+      sq2: row[5],
+      sq3: row[6],
+      gridPosition: row[7],
       driver: {
         driverId: row[2],
         number: row[39],
@@ -93,11 +106,12 @@ export async function GET(request: Request) {
       api: SITE_URL,
       url: request.url,
       limit: limit,
+      timezone: timezone || undefined,
       total: data.length,
       season: year,
       races: {
-        date: data[0][23],
-        time: data[0][29],
+        date: localDate,
+        time: localTime,
         url: data[0][16],
         raceId: data[0][1],
         raceName: data[0][10],
