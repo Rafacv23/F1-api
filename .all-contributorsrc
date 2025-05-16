@@ -52,6 +52,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "jghaanstra",
+      "name": "Jelger Haanstra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4710062?v=4",
+      "profile": "https://solidewebservices.com",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
