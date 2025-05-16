@@ -318,6 +318,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -336,6 +341,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -354,6 +364,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -372,6 +387,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -390,6 +410,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -408,6 +433,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -426,6 +456,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -444,6 +479,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -462,6 +502,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -480,6 +525,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -498,6 +548,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -516,6 +571,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -534,6 +594,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -552,6 +617,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       }
@@ -716,6 +786,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -734,6 +809,11 @@
             "name": "offset",
             "description": "Number of records skipped before starting to fetch.",
             "default": "0"
+          },
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
           }
         ]
       },
@@ -741,19 +821,40 @@
         "id": "year-round",
         "title": "[year]/[round]",
         "description": "This endpoint retrieves details about the race of the given year and round.",
-        "url": "2024/1"
+        "url": "2024/1",
+        "params": [
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
+          }
+        ]
       },
       {
         "id": "current-last",
         "title": "current/last",
         "description": "This endpoint retrieves details about the last race of the current season.",
-        "url": "current/last"
+        "url": "current/last",
+        "params": [
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
+          }
+        ]
       },
       {
         "id": "current-next",
         "title": "current/next",
         "description": "This endpoint retrieves details about the next race of the current season.",
-        "url": "current/next"
+        "url": "current/next",
+        "params": [
+          {
+            "name": "timezone",
+            "description": "Timezone to use for the dates. If not provided, the default timezone is used.",
+            "default": "-"
+          }
+        ]
       }
     ]
   }
