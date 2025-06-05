@@ -17,6 +17,7 @@ export const revalidate = 600
 interface ApiResponse extends BaseApiResponse {
   season: number | string
   timezone?: string
+  championship: any
   races: InferModel<typeof races>[] | any
 }
 
@@ -158,6 +159,7 @@ export async function GET(request: Request) {
       timezone: timezone || undefined,
       total: formattedData.length,
       season: year,
+      championship: championship,
       races: formattedData,
     }
 
