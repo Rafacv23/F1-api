@@ -150,7 +150,7 @@ export async function GET(request: Request, context: any) {
       offset: offset,
       timezone: timezone || undefined,
       total: formattedData.length,
-      season: year,
+      season: parseInt(year),
       championship: championship,
       races: formattedData,
     }

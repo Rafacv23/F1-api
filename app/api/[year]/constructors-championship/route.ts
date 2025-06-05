@@ -60,7 +60,7 @@ export async function GET(request: Request, context: any) {
       limit: limit,
       offset: offset,
       total: teamStandingsData.length,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       constructors_championship: processedData,
     }

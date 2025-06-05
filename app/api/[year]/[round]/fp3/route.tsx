@@ -101,7 +101,7 @@ export async function GET(request: Request, context: any) {
       offset: offset,
       timezone: timezone || undefined,
       total: fp3Data.length,
-      season: year,
+      season: parseInt(year),
       races: {
         round: round,
         fp3Date: localDate,
