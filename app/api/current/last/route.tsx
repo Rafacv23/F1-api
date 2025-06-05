@@ -158,7 +158,7 @@ export async function GET(request: Request) {
 
     const response: ApiResponse = {
       api: SITE_URL,
-      url: `${SITE_URL}api/current/last`,
+      url: `${SITE_URL}/api/current/last`,
       timezone: timezone || undefined,
       total: formattedData.length,
       season: year,
