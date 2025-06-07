@@ -3213,10 +3213,10 @@
     ]
   },
   {
-    "enpointId": "constructors-championship",
+    "enpointId": "current-constructors-championship",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.app/api/current/constructors-championship?limit=1&offset=0",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/current/constructors-championship?limit=1&offset=0",
       "limit": 1,
       "offset": 0,
       "total": 1,
