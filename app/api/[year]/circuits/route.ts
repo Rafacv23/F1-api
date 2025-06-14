@@ -85,7 +85,7 @@ export async function GET(request: Request, context: any) {
       limit: limit,
       offset: offset,
       total: circuitsData.length,
-      season: year,
+      season: parseInt(year),
       circuits: circuitsData,
     }
 

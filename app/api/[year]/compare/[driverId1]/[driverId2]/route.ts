@@ -202,7 +202,7 @@ WHERE r1.Driver_ID = ?
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       drivers: driversInfo,
       comparison: processedData,

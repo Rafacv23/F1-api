@@ -50,7 +50,7 @@ export async function GET(request: Request, context: any) {
       api: SITE_NAME,
       url: request.url,
       total: processedData.length,
-      season: year,
+      season: parseInt(year),
       team: processedData,
     }
 

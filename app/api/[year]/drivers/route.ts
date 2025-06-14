@@ -59,7 +59,7 @@ export async function GET(request: Request, context: any) {
       limit,
       offset,
       total: driversData.length,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       drivers: driversData,
     }

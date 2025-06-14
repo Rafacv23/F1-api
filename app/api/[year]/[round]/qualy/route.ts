@@ -110,7 +110,7 @@ export async function GET(request: Request, context: any) {
       offset: offset,
       timezone: timezone || undefined,
       total: qualyData.length,
-      season: year,
+      season: parseInt(year),
       races: {
         round: round,
         qualyTime: localTime,

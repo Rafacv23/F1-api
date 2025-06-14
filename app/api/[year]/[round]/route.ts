@@ -158,7 +158,7 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       total: formattedData.length,
       timezone: timezone ?? undefined,
-      season: year,
+      season: parseInt(year),
       round: round,
       championship: championship,
       race: formattedData,

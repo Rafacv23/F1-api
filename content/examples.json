@@ -3213,10 +3213,10 @@
     ]
   },
   {
-    "enpointId": "constructors-championship",
+    "enpointId": "current-constructors-championship",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.app/api/current/constructors-championship?limit=1&offset=0",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/current/constructors-championship?limit=1&offset=0",
       "limit": 1,
       "offset": 0,
       "total": 1,
@@ -7507,8 +7507,8 @@
   {
     "enpointId": "current-last",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.appapi/current/last",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/current/last",
       "total": 1,
       "season": 2024,
       "round": 24,
@@ -7613,6 +7613,11 @@
         "field": "total",
         "type": "number",
         "description": "Total number of races returned."
+      },
+      {
+        "field": "timezone",
+        "type": "string | null",
+        "description": "The format for the dates. If not provided, the default timezone is used."
       },
       {
         "field": "season",
@@ -7909,8 +7914,8 @@
   {
     "enpointId": "current-next",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.appapi/current/next",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/current/next",
       "total": 1,
       "season": 2025,
       "round": 1,
@@ -7998,6 +8003,11 @@
         "field": "total",
         "type": "number",
         "description": "Total number of races returned."
+      },
+      {
+        "field": "timezone",
+        "type": "string | null",
+        "description": "The format for the dates. If not provided, the default timezone is used."
       },
       {
         "field": "season",
@@ -9102,8 +9112,8 @@
   {
     "enpointId": "year-round",
     "exampleResponse": {
-      "api": "https://f1connectapi.vercel.app",
-      "url": "https://f1connectapi.vercel.app/api/2024/5",
+      "api": "https://f1api.dev",
+      "url": "https://f1api.dev/api/2024/5",
       "total": 1,
       "season": "2024",
       "round": "5",
@@ -9204,19 +9214,14 @@
         "description": "The endpoint URL."
       },
       {
-        "field": "limit",
-        "type": "number",
-        "description": "The number of results returned per request."
-      },
-      {
-        "field": "offset",
-        "type": "number",
-        "description": "The offset used for pagination, i.e., the starting point for the result set."
-      },
-      {
         "field": "total",
         "type": "number",
         "description": "Total number of races returned."
+      },
+      {
+        "field": "timezone",
+        "type": "string",
+        "description": "The timezone that the dates are in."
       },
       {
         "field": "season",

@@ -131,7 +131,7 @@ export async function GET(request: Request, context: any) {
       total: processedData.length,
       limit: limit,
       offset: offset,
-      season: year,
+      season: parseInt(year),
       teamId: teamId,
       team: teamData[0],
       drivers: processedData,
