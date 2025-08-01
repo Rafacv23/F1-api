@@ -42,7 +42,7 @@ export async function GET(request: Request, context: any) {
         teamId: team.Constructors_Classifications.teamId,
         points: team.Constructors_Classifications.points,
         position: team.Constructors_Classifications.position,
-        wins: team.Constructors_Classifications.wins,
+        wins: team.Constructors_Classifications.wins ?? 0,
         team: {
           teamName: team.Teams.teamName,
           country: team.Teams.teamNationality,

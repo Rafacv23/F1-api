@@ -43,7 +43,7 @@ export async function GET(request: Request) {
         teamId: driver.Driver_Classifications.teamId,
         points: driver.Driver_Classifications.points,
         position: driver.Driver_Classifications.position,
-        wins: driver.Driver_Classifications.wins,
+        wins: driver.Driver_Classifications.wins ?? 0,
         driver: {
           name: driver.Drivers.name,
           surname: driver.Drivers.surname,
