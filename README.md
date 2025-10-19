@@ -8,7 +8,7 @@
 
 Project made with Next.js and Turso to take all the data about the Formula 1 Championship.
 
-[f1api.dev](https://f1api.dev)
+[f1api.dev](https://f1api.dev) | [Discord server](https://discord.gg/WHG9THxjqM)
 
 ![f1-connect-api-preview](https://i.imgur.com/BDxpw46.png)
 ![f1-connect-api-performance](https://i.imgur.com/9FiC5VK.png)
