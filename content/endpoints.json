@@ -761,6 +761,19 @@
         "title": "[circuitId]",
         "description": "This endpoint retrieves details about circuits in the database with the given Id.",
         "url": "circuitId"
+      },
+      {
+        "id": "circuits-active",
+        "title": "circuits/active",
+        "description": "This endpoint retrieves all circuits used in a given Formula 1 season. If no year is provided, the API returns circuits from the latest available season.",
+        "url": "circuits/active?year=2025",
+        "params": [
+          {
+            "name": "year",
+            "description": "Season year to retrieve active circuits for. If not provided, the latest available season is used.",
+            "default": "latest"
+          }
+        ]
       }
     ]
   },

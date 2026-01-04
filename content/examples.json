@@ -2695,6 +2695,119 @@
     ]
   },
   {
+    "enpointId": "circuits-active",
+    "exampleResponse": {
+      "api": "https://f1api.dev",
+      "url": "http://localhost:3000/api/circuits/active?year=2025",
+      "year": "2024",
+      "total": 24,
+      "circuits": [
+        {
+          "circuitId": "bahrain",
+          "circuitName": "Bahrain International Circuit",
+          "country": "Bahrain",
+          "city": "Sakhir",
+          "circuitLength": "5412km",
+          "lapRecord": "1:31:447",
+          "firstParticipationYear": 2004,
+          "corners": 15,
+          "fastestLapDriverId": "de_la_rosa",
+          "fastestLapTeamId": "mclaren",
+          "fastestLapYear": 2005,
+          "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit"
+        }
+      ]
+    },
+    "responseTypes": [
+      {
+        "field": "api",
+        "type": "string",
+        "description": "The base API URL for the F1 Connect service."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "The URL used to fetch the circuits data with query parameters for year."
+      },
+      {
+        "field": "year",
+        "type": "string",
+        "description": "The year for which circuits are being fetched."
+      },
+      {
+        "field": "total",
+        "type": "number",
+        "description": "The total number of circuits available in the dataset for the given year."
+      },
+      {
+        "field": "circuits",
+        "type": "array",
+        "description": "A list of circuit objects returned from the API."
+      },
+      {
+        "field": "circuitId",
+        "type": "string",
+        "description": "A unique identifier for the circuit."
+      },
+      {
+        "field": "circuitName",
+        "type": "string",
+        "description": "The circuit's name."
+      },
+      {
+        "field": "country",
+        "type": "string",
+        "description": "The circuit's country."
+      },
+      {
+        "field": "city",
+        "type": "string",
+        "description": "The circuit's city."
+      },
+      {
+        "field": "circuitLength",
+        "type": "string",
+        "description": "The circuit's length (e.g., '5412km')."
+      },
+      {
+        "field": "lapRecord",
+        "type": "string",
+        "description": "The lap record for the circuit."
+      },
+      {
+        "field": "firstParticipationYear",
+        "type": "number",
+        "description": "The year the circuit first hosted a Grand Prix."
+      },
+      {
+        "field": "corners",
+        "type": "number",
+        "description": "The number of corners on the circuit."
+      },
+      {
+        "field": "fastestLapDriverId",
+        "type": "string",
+        "description": "The driverId of the fastest lap driver."
+      },
+      {
+        "field": "fastestLapTeamId",
+        "type": "string",
+        "description": "The teamId of the fastest lap team."
+      },
+      {
+        "field": "fastestLapYear",
+        "type": "number",
+        "description": "The year the fastest lap was set."
+      },
+      {
+        "field": "url",
+        "type": "string",
+        "description": "A URL to the Wikipedia page of the circuit."
+      }
+    ]
+  },
+
+  {
     "enpointId": "drivers-championship",
     "exampleResponse": {
       "api": "https://f1connectapi.vercel.app",
