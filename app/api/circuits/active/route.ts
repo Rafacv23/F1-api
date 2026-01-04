@@ -19,14 +19,14 @@ export async function GET(request: Request) {
   let year = yearParam ?? String(currentYear)
 
   try {
-    let res = await fetch(`https://f1api.dev/api/${year}`, {
+    let res = await fetch(`${SITE_URL}/api/${year}`, {
       cache: "no-store",
     })
 
     // fallback to previous year if current year is not available
     if (!res.ok && !yearParam) {
       year = String(currentYear - 1)
-      res = await fetch(`https://f1api.dev/api/${year}`, {
+      res = await fetch(`${SITE_URL}/api/${year}`, {
         cache: "no-store",
       })
     }
