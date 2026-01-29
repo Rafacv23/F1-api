@@ -109,7 +109,11 @@ export async function GET(request: Request, context: any) {
         circuitName: circuit.Circuits.circuitName,
         country: circuit.Circuits.country,
         city: circuit.Circuits.city,
-        circuitLength: circuit.Circuits.circuitLength + "km",
+        circuitLength:
+          circuit.Circuits.circuitLength !== null &&
+          circuit.Circuits.circuitLength !== undefined
+            ? `${circuit.Circuits.circuitLength}km`
+            : null,
         corners: circuit.Circuits.numberOfCorners,
         firstParticipationYear: circuit.Circuits.firstParticipationYear,
         lapRecord: circuit.Circuits.lapRecord,
