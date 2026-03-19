@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   category: "formula one",
   verification: { google: "8Ssu9wyMqGLnOHp01rAbY2QJAKTU4XkqTq9OPShpeOc" },
+  other: {
+    "google-adsense-account": "ca-pub-7329488569166267",
+  },
   openGraph: {
     type: "website",
     url: SITE_URL,

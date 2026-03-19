@@ -119,7 +119,11 @@ export async function GET(request: Request, context: any) {
         circuitName: race.Circuits.circuitName,
         country: race.Circuits.country,
         city: race.Circuits.city,
-        circuitLength: race.Circuits.circuitLength + "km",
+        circuitLength:
+          race.Circuits.circuitLength !== null &&
+          race.Circuits.circuitLength !== undefined
+            ? `${race.Circuits.circuitLength}km`
+            : null,
         lapRecord: race.Circuits.lapRecord,
         firstParticipationYear: race.Circuits.firstParticipationYear,
         corners: race.Circuits.numberOfCorners,
