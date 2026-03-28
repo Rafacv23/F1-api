@@ -3,10 +3,16 @@ import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
-import { circuits, drivers, races, sprintRace, teams } from "@/db/migrations/schema"
+import {
+  circuits,
+  drivers,
+  races,
+  sprintRace,
+  teams,
+} from "@/db/migrations/schema"
 import { and, desc, eq, lte } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
@@ -25,7 +31,10 @@ export async function GET(request: Request) {
       .select()
       .from(races)
       .where(
-        and(eq(races.championshipId, `f1_${year}`), lte(races.sprintRaceDate, today))
+        and(
+          eq(races.championshipId, `f1_${year}`),
+          lte(races.sprintRaceDate, today),
+        ),
       )
       .orderBy(desc(races.sprintRaceDate), desc(races.round))
       .limit(1)
@@ -33,7 +42,7 @@ export async function GET(request: Request) {
     if (lastSprintRace.length === 0) {
       return apiNotFound(
         request,
-        "No sprint race results found for this season yet."
+        "No sprint race results found for this season yet.",
       )
     }
 
@@ -54,7 +63,7 @@ export async function GET(request: Request) {
     if (sprintRaceData.length === 0) {
       return apiNotFound(
         request,
-        "No sprint race results found for this round. Try with other one."
+        "No sprint race results found for this round. Try with other one.",
       )
     }
 

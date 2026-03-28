@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { circuits, drivers, fp2, races, teams } from "@/db/migrations/schema"
 import { eq, and, asc } from "drizzle-orm"
 
 //revalidate
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -18,6 +19,9 @@ export async function GET(request: Request, context: any) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
+
     const { year, round } = context.params
 
     const fp2Data = await db
@@ -40,6 +44,12 @@ export async function GET(request: Request, context: any) {
         "No fp2 results found for this round. Try with other one."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      fp2Data[0].Races.fp2Date,
+      fp2Data[0].Races.fp2Time,
+      timezone
+    )
 
     // Procesamos los datos
     const processedData = fp2Data.map((row) => ({
@@ -91,12 +101,13 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: fp2Data.length,
-      season: year,
+      season: parseInt(year),
       races: {
         round: round,
-        fp2Date: fp2Data[0].Races.fp2Date,
-        fp2Time: fp2Data[0].Races.fp2Time,
+        fp2Date: localDate,
+        fp2Time: localTime,
         url: fp2Data[0].Races.url,
         raceId: fp2Data[0].Races.raceId,
         raceName: fp2Data[0].Races.raceName,
@@ -107,7 +118,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

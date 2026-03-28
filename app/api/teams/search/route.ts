@@ -3,42 +3,43 @@ import { SITE_URL } from "@/lib/constants"
 import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
-import { drivers } from "@/db/migrations/schema"
-import { InferModel } from "drizzle-orm"
+import { teams } from "@/db/migrations/schema"
+import { InferModel, like } from "drizzle-orm"
 
 export const revalidate = 600
 
-type Drivers = InferModel<typeof drivers>
-
+type Team = InferModel<typeof teams>
 interface ApiResponse extends BaseApiResponse {
-  drivers: Drivers[]
+  teams: Team[]
+  query: string
 }
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
-    const driversData = await db
+    const teamsData = await db
       .select()
-      .from(drivers)
+      .from(teams)
+      .where(like(teams.teamName, `%${queryParams.get("q") ?? ""}%`))
       .limit(limit)
       .offset(offset)
-      .orderBy(drivers.driverId)
+      .orderBy(teams.teamId)
 
-    if (driversData.length === 0) {
-      return apiNotFound(request, "No drivers found.")
+    // Verificar si se encontraron datos
+    if (teamsData.length === 0) {
+      return apiNotFound(request, "No teams found.")
     }
 
-    driversData.forEach((driver) => {
+    teamsData.forEach((team) => {
       return {
-        driverId: driver.driverId,
-        name: driver.name,
-        surname: driver.surname,
-        country: driver.nationality,
-        birthday: driver.birthday,
-        number: driver.number,
-        shortName: driver.shortName,
-        url: driver.url,
+        teamId: team.teamId,
+        teamName: team.teamName,
+        country: team.teamNationality,
+        firstAppareance: team.firstAppeareance,
+        driversChampionships: team.driversChampionships,
+        constructorsChampionships: team.constructorsChampionships,
+        url: team.url,
       }
     })
 
@@ -47,8 +48,9 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
-      total: driversData.length,
-      drivers: driversData,
+      query: queryParams.get("q") ?? "",
+      total: teamsData.length,
+      teams: teamsData,
     }
 
     return NextResponse.json(response, {

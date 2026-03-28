@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { constructorsClassifications, teams } from "@/db/migrations/schema"
 import { asc, eq, InferModel } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   teams: InferModel<typeof teams>[]
@@ -65,14 +65,14 @@ export async function GET(request: Request, context: any) {
       limit: limit,
       offset: offset,
       total: teamsData.length,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       teams: teamsData,
     }
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

@@ -3,13 +3,20 @@ import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
-import { circuits, drivers, races, sprintQualy, teams } from "@/db/migrations/schema"
+import {
+  circuits,
+  drivers,
+  races,
+  sprintQualy,
+  teams,
+} from "@/db/migrations/schema"
 import { and, desc, eq, lte } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -18,6 +25,9 @@ export async function GET(request: Request) {
   const { limit, offset } = getLimitAndOffset(queryParams)
 
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
+
     const year = CURRENT_YEAR
     const today = getDay()
 
@@ -25,7 +35,10 @@ export async function GET(request: Request) {
       .select()
       .from(races)
       .where(
-        and(eq(races.championshipId, `f1_${year}`), lte(races.sprintQualyDate, today))
+        and(
+          eq(races.championshipId, `f1_${year}`),
+          lte(races.sprintQualyDate, today),
+        ),
       )
       .orderBy(desc(races.sprintQualyDate), desc(races.round))
       .limit(1)
@@ -33,7 +46,7 @@ export async function GET(request: Request) {
     if (lastSprintQualy.length === 0) {
       return apiNotFound(
         request,
-        "No sprint qualifying results found for this season yet."
+        "No sprint qualifying results found for this season yet.",
       )
     }
 
@@ -54,7 +67,7 @@ export async function GET(request: Request) {
     if (sprintQualyData.length === 0) {
       return apiNotFound(
         request,
-        "No sprint qualy results found for this round. Try with other one."
+        "No sprint qualy results found for this round. Try with other one.",
       )
     }
 
@@ -99,7 +112,8 @@ export async function GET(request: Request) {
           ? `${sprintQualyData[0].Circuits.circuitLength}km`
           : null,
       lapRecord: sprintQualyData[0].Circuits.lapRecord,
-      firstParticipationYear: sprintQualyData[0].Circuits.firstParticipationYear,
+      firstParticipationYear:
+        sprintQualyData[0].Circuits.firstParticipationYear,
       corners: sprintQualyData[0].Circuits.numberOfCorners,
       fastestLapDriverId: sprintQualyData[0].Circuits.fastestLapDriverId,
       fastestLapTeamId: sprintQualyData[0].Circuits.fastestLapTeamId,

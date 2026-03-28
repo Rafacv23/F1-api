@@ -2,59 +2,55 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { i18nRouter } from "next-i18n-router"
 import i18nConfig from "./i18nConfig"
-import { Redis } from "@upstash/redis"
-import { Ratelimit } from "@upstash/ratelimit"
+import { LRUCache } from "lru-cache"
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+// 🧠 In-memory rate limiter (temporary fallback)
+const memoryCache = new LRUCache<string, number>({
+  max: 1000,
+  ttl: 1000 * 60 * 10, // 10 minutes
 })
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.fixedWindow(100, "10 m"),
-  analytics: true,
-})
+const RATE_LIMIT = 100 // max requests
+const WINDOW_MS = 10 * 60 * 1000 // 10 minutes
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // 🧭 Rate limit only /api routes
   if (pathname.startsWith("/api")) {
     const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.ip ||
-      "anonymous"
+      request.headers.get("x-forwarded-for") || request.ip || "anonymous"
 
-    const { success, limit, remaining, reset } = await ratelimit.limit(ip)
+    const count = memoryCache.get(ip) || 0
 
-    if (!success) {
-      return new NextResponse("Rate limit exceeded", {
+    if (count >= RATE_LIMIT) {
+      return new NextResponse("Rate limit exceeded (memory)", {
         status: 429,
         headers: {
-          "X-RateLimit-Limit": limit.toString(),
-          "X-RateLimit-Remaining": remaining.toString(),
-          "X-RateLimit-Reset": reset.toString(),
+          "X-RateLimit-Limit": RATE_LIMIT.toString(),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": (Date.now() + WINDOW_MS).toString(),
         },
       })
     }
 
+    memoryCache.set(ip, count + 1)
+
     const response = NextResponse.next()
-    response.headers.set("X-RateLimit-Limit", limit.toString())
-    response.headers.set("X-RateLimit-Remaining", remaining.toString())
-    response.headers.set("X-RateLimit-Reset", reset.toString())
+    response.headers.set("X-RateLimit-Limit", RATE_LIMIT.toString())
+    response.headers.set(
+      "X-RateLimit-Remaining",
+      (RATE_LIMIT - count - 1).toString()
+    )
+    response.headers.set(
+      "X-RateLimit-Reset",
+      (Date.now() + WINDOW_MS).toString()
+    )
     return response
   }
 
-  // 🌐 Apply i18n to all other routes (non-API)
   return i18nRouter(request, i18nConfig)
 }
 
 export const config = {
-  matcher: [
-    // Apply i18nRouter to non-API pages
-    "/((?!api|static|.*\\..*|_next).*)",
-    // Apply rate limiter only to API routes
-    "/api/:path*",
-  ],
+  matcher: ["/((?!api|static|.*\\..*|_next).*)", "/api/:path*"],
 }

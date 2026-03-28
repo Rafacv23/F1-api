@@ -7,7 +7,7 @@ import { apiNotFound } from "@/lib/utils"
 import { and, eq, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface DriverStats {
   [driverId: string]: number
@@ -201,7 +201,7 @@ export async function GET(request: Request, context: any) {
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       drivers: driversInfo,
       comparison: processedData,
@@ -209,7 +209,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

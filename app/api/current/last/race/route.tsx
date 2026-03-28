@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getLimitAndOffset } from "@/lib/utils"
 import { getDay } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
@@ -14,10 +14,11 @@ import {
 } from "@/db/migrations/schema"
 import { eq, and, lte, desc } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -25,6 +26,9 @@ export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
+
     const year = CURRENT_YEAR
     const today = getDay()
 
@@ -65,6 +69,12 @@ export async function GET(request: Request) {
         "No race results found for this round. Try with other one."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      race.Races.raceDate,
+      race.Races.raceTime,
+      timezone
+    )
 
     // Procesamos los datos de los resultados
     const processedData = resultsData.map((result) => ({
@@ -118,12 +128,13 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: resultsData.length,
       season: year,
       races: {
         round: race.Races.round,
-        date: race.Races.raceDate,
-        time: race.Races.raceTime,
+        date: localDate,
+        time: localTime,
         url: race.Races.url,
         raceId: race.Races.raceId,
         raceName: race.Races.raceName,
@@ -134,7 +145,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

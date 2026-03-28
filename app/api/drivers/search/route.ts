@@ -4,13 +4,14 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { drivers } from "@/db/migrations/schema"
-import { InferModel } from "drizzle-orm"
+import { InferModel, like, or } from "drizzle-orm"
 
 export const revalidate = 600
 
 type Drivers = InferModel<typeof drivers>
 
 interface ApiResponse extends BaseApiResponse {
+  query: string
   drivers: Drivers[]
 }
 
@@ -21,6 +22,12 @@ export async function GET(request: Request) {
     const driversData = await db
       .select()
       .from(drivers)
+      .where(
+        or(
+          like(drivers.surname, `%${queryParams.get("q") ?? ""}%`),
+          like(drivers.name, `%${queryParams.get("q") ?? ""}%`)
+        )
+      )
       .limit(limit)
       .offset(offset)
       .orderBy(drivers.driverId)
@@ -47,13 +54,14 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
+      query: queryParams.get("q") ?? "",
       total: driversData.length,
       drivers: driversData,
     }
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
+        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
       },
       status: 200,
     })

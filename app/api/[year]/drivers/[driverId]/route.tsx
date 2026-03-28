@@ -13,7 +13,7 @@ import {
 } from "@/db/migrations/schema"
 import { eq, and, InferModel } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number
@@ -150,7 +150,7 @@ export async function GET(request: Request, context: any) {
       limit: limit,
       offset: offset,
       total: processedData.length,
-      season: year,
+      season: parseInt(year),
       championshipId: `f1_${year}`,
       driver: driver[0],
       team: team[0],
@@ -159,7 +159,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

@@ -4,7 +4,7 @@ import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { circuits } from "@/db/migrations/schema"
-import { InferModel } from "drizzle-orm"
+import { InferModel, or, like } from "drizzle-orm"
 
 export const revalidate = 600
 
@@ -12,6 +12,7 @@ type Circuit = InferModel<typeof circuits>
 
 interface ApiResponse extends BaseApiResponse {
   circuits: Circuit[]
+  query: string
 }
 
 export async function GET(request: Request) {
@@ -22,6 +23,13 @@ export async function GET(request: Request) {
     const circuitsData = await db
       .select()
       .from(circuits)
+      .where(
+        or(
+          like(circuits.circuitName, `%${queryParams.get("q") ?? ""}%`),
+          like(circuits.city, `%${queryParams.get("q") ?? ""}%`),
+          like(circuits.country, `%${queryParams.get("q") ?? ""}%`)
+        )
+      )
       .limit(limit)
       .offset(offset)
 
@@ -51,6 +59,7 @@ export async function GET(request: Request) {
       url: request.url,
       limit: limit,
       offset: offset,
+      query: queryParams.get("q") ?? "",
       total: circuitsData.length,
       circuits: circuitsData,
     }
