@@ -64,31 +64,30 @@ export async function GET(request: Request, context: any) {
     const { year, driverId1, driverId2 } = context.params
 
     const sql = `
-    SELECT 
-  COUNT(r1.Race_ID) AS Total_Races,
-  SUM(CASE WHEN r1.Grid_Position < r2.Grid_Position THEN 1 ELSE 0 END) AS Driver1_BetterQualifying, 
-  SUM(CASE WHEN r2.Grid_Position < r1.Grid_Position THEN 1 ELSE 0 END) AS Driver2_BetterQualifying,
-  MIN(r1.Grid_Position) AS Driver1_BestQualifying,
-  MIN(r2.Grid_Position) AS Driver2_BestQualifying,
-  SUM(CASE WHEN r1.Finishing_Position < r2.Finishing_Position THEN 1 ELSE 0 END) AS Driver1_BetterRaceFinish,
-  SUM(CASE WHEN r2.Finishing_Position < r1.Finishing_Position THEN 1 ELSE 0 END) AS Driver2_BetterRaceFinish,
-  MIN(r1.Finishing_Position) AS Driver1_BestRaceFinish,
-  MIN(r2.Finishing_Position) AS Driver2_BestRaceFinish,
-  SUM(CASE WHEN r1.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver1_PointFinishes,
-  SUM(CASE WHEN r2.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver2_PointFinishes,
-  SUM(CASE WHEN r1.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver1_Podiums,
-  SUM(CASE WHEN r2.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver2_Podiums,
-  SUM(CASE WHEN r1.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver1_Poles,
-  SUM(CASE WHEN r2.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver2_Poles,
-  SUM(CASE WHEN r1.Finishing_Position = 'NC' THEN 1 ELSE 0 END) AS Driver1_DNFs,
-  SUM(CASE WHEN r2.Finishing_Position = 'NC' THEN 1 ELSE 0 END) AS Driver2_DNFs
-FROM Results r1
-JOIN Results r2 ON r1.Race_ID = r2.Race_ID AND r2.Driver_ID = ?
-WHERE r1.Driver_ID = ? 
-  AND r1.Race_ID LIKE CONCAT('%_', ?)
-  AND r1.Grid_Position != 'NC'
-  AND r2.Grid_Position != 'NC';
-  `
+    SELECT
+      COUNT(r1.Race_ID) AS Total_Races,
+      SUM(CASE WHEN r1.Grid_Position < r2.Grid_Position THEN 1 ELSE 0 END) AS Driver1_BetterQualifying,
+      SUM(CASE WHEN r2.Grid_Position < r1.Grid_Position THEN 1 ELSE 0 END) AS Driver2_BetterQualifying,
+      MIN(r1.Grid_Position) AS Driver1_BestQualifying,
+      MIN(r2.Grid_Position) AS Driver2_BestQualifying,
+      SUM(CASE WHEN r1.Finishing_Position < r2.Finishing_Position THEN 1 ELSE 0 END) AS Driver1_BetterRaceFinish,
+      SUM(CASE WHEN r2.Finishing_Position < r1.Finishing_Position THEN 1 ELSE 0 END) AS Driver2_BetterRaceFinish,
+      MIN(r1.Finishing_Position) AS Driver1_BestRaceFinish,
+      MIN(r2.Finishing_Position) AS Driver2_BestRaceFinish,
+      SUM(CASE WHEN r1.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver1_PointFinishes,
+      SUM(CASE WHEN r2.Finishing_Position <= 10 THEN 1 ELSE 0 END) AS Driver2_PointFinishes,
+      SUM(CASE WHEN r1.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver1_Podiums,
+      SUM(CASE WHEN r2.Finishing_Position <= 3 THEN 1 ELSE 0 END) AS Driver2_Podiums,
+      SUM(CASE WHEN r1.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver1_Poles,
+      SUM(CASE WHEN r2.Grid_Position = 1 THEN 1 ELSE 0 END) AS Driver2_Poles,
+      SUM(CASE WHEN r1.Retired IS NOT NULL AND TRIM(r1.Retired) <> '' THEN 1 ELSE 0 END) AS Driver1_DNFs,
+      SUM(CASE WHEN r2.Retired IS NOT NULL AND TRIM(r2.Retired) <> '' THEN 1 ELSE 0 END) AS Driver2_DNFs
+    FROM Results r1
+    JOIN Results r2 ON r1.Race_ID = r2.Race_ID AND r2.Driver_ID = ?
+    JOIN Races rr ON rr.Race_ID = r1.Race_ID
+    WHERE r1.Driver_ID = ?
+      AND rr.Championship_ID = ?;
+    `
 
     const driversPointsData = await db
       .select()
@@ -105,7 +104,7 @@ WHERE r1.Driver_ID = ?
       )
       .limit(2)
 
-    const data = await executeQuery(sql, [driverId1, driverId2, year])
+    const data = await executeQuery(sql, [driverId1, driverId2, `f1_${year}`])
 
     if (data.length === 0) {
       return apiNotFound(

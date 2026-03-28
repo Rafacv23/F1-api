@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound, getDay } from "@/lib/utils"
-import { BaseApiResponse, Circuit } from "@/lib/definitions"
+import { apiNotFound, getDay, getLimitAndOffset } from "@/lib/utils"
+import { BaseApiResponse } from "@/lib/definitions"
+import { db } from "@/db"
+import { circuits, drivers, races, sprintQualy, teams } from "@/db/migrations/schema"
+import { and, desc, eq, lte } from "drizzle-orm"
 
 export const revalidate = 120
 
@@ -13,102 +15,121 @@ interface ApiResponse extends BaseApiResponse {
 
 export async function GET(request: Request) {
   const queryParams = new URL(request.url).searchParams
-  const limit = queryParams.get("limit") || 20
+  const { limit, offset } = getLimitAndOffset(queryParams)
+
   try {
     const year = CURRENT_YEAR
     const today = getDay()
-    //const today = 5 testing endpoint
-    const sql = `
-      SELECT Sprint_Qualy.*, Races.*, Drivers.*, Teams.*, Circuits.*
-      FROM Sprint_Qualy
-      JOIN Races ON Sprint_Qualy.Race_ID = Races.Race_ID
-      JOIN Championships ON Races.Championship_ID = Championships.Championship_ID
-      JOIN Drivers ON Sprint_Qualy.Driver_ID = Drivers.Driver_ID
-      JOIN Teams ON Sprint_Qualy.Team_ID = Teams.Team_ID
-      JOIN Circuits ON Races.Circuit = Circuits.Circuit_ID
-      WHERE Championships.Year = ? AND Races.Round = ?
-      ORDER BY Sprint_Qualy.Grid_Position ASC
-      LIMIT ?;
-    `
 
-    const data = await executeQuery(sql, [year, today, limit])
+    const lastSprintQualy = await db
+      .select()
+      .from(races)
+      .where(
+        and(eq(races.championshipId, `f1_${year}`), lte(races.sprintQualyDate, today))
+      )
+      .orderBy(desc(races.sprintQualyDate), desc(races.round))
+      .limit(1)
 
-    if (data.length === 0) {
+    if (lastSprintQualy.length === 0) {
+      return apiNotFound(
+        request,
+        "No sprint qualifying results found for this season yet."
+      )
+    }
+
+    const race = lastSprintQualy[0]
+
+    const sprintQualyData = await db
+      .select()
+      .from(sprintQualy)
+      .innerJoin(drivers, eq(sprintQualy.driverId, drivers.driverId))
+      .innerJoin(teams, eq(sprintQualy.teamId, teams.teamId))
+      .innerJoin(races, eq(sprintQualy.raceId, races.raceId))
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
+      .where(eq(sprintQualy.raceId, race.raceId))
+      .orderBy(sprintQualy.gridPosition)
+      .limit(limit)
+      .offset(offset)
+
+    if (sprintQualyData.length === 0) {
       return apiNotFound(
         request,
         "No sprint qualy results found for this round. Try with other one."
       )
     }
 
-    // Procesamos los datos
-    const processedData = data.map((row: any) => ({
-      Sprint_Qualification_ID: row[0],
-      Race_ID: row[1],
-      Driver_ID: row[2],
-      Team_ID: row[3],
-      SQ1_Time: row[4],
-      SQ2_Time: row[5],
-      SQ3_Time: row[6],
-      Grid_Position: row[7],
+    const processedData = sprintQualyData.map((row) => ({
+      sprintQualyId: row.Sprint_Qualy.sprintQualyId,
+      raceId: row.Sprint_Qualy.raceId,
+      driverId: row.Sprint_Qualy.driverId,
+      teamId: row.Sprint_Qualy.teamId,
+      sq1: row.Sprint_Qualy.sq1,
+      sq2: row.Sprint_Qualy.sq2,
+      sq3: row.Sprint_Qualy.sq3,
+      gridPosition: row.Sprint_Qualy.gridPosition,
       driver: {
-        driverId: row[2],
-        number: row[39],
-        name: row[35],
-        surname: row[36],
-        shortName: row[40],
-        url: row[41],
-        nationality: row[37],
-        birthday: row[38],
+        driverId: row.Drivers.driverId,
+        number: row.Drivers.number,
+        name: row.Drivers.name,
+        surname: row.Drivers.surname,
+        shortName: row.Drivers.shortName,
+        url: row.Drivers.url,
+        nationality: row.Drivers.nationality,
+        birthday: row.Drivers.birthday,
       },
       team: {
-        teamId: row[42],
-        teamName: row[43],
-        nationality: row[44],
-        firstAppareance: row[45],
-        constructorsChampionships: row[46],
-        driversChampionships: row[47],
-        url: row[48],
+        teamId: row.Teams.teamId,
+        teamName: row.Teams.teamName,
+        nationality: row.Teams.teamNationality,
+        firstAppareance: row.Teams.firstAppeareance,
+        constructorsChampionships: row.Teams.constructorsChampionships,
+        driversChampionships: row.Teams.driversChampionships,
+        url: row.Teams.url,
       },
     }))
 
-    // Obtener el circuito correspondiente a la carrera
-    const circuitData = data.map((row: Circuit) => {
-      return {
-        circuitId: row.Circuit_ID,
-        circuitName: row.Circuit_Name,
-        country: row.Country,
-        city: row.City,
-        circuitLength: row.Circuit_Length + "km",
-        lapRecord: row.Lap_Record,
-        firstParticipationYear: row.First_Participation_Year,
-        corners: row.Number_of_Corners,
-        fastestLapDriverId: row.Fastest_Lap_Driver_ID,
-        fastestLapTeamId: row.Fastest_Lap_Team_ID,
-        fastestLapYear: row.Fastest_Lap_Year,
-        url: row.Url,
-      }
-    })
+    const circuitData = {
+      circuitId: sprintQualyData[0].Circuits.circuitId,
+      circuitName: sprintQualyData[0].Circuits.circuitName,
+      country: sprintQualyData[0].Circuits.country,
+      city: sprintQualyData[0].Circuits.city,
+      circuitLength:
+        sprintQualyData[0].Circuits.circuitLength !== null &&
+        sprintQualyData[0].Circuits.circuitLength !== undefined
+          ? `${sprintQualyData[0].Circuits.circuitLength}km`
+          : null,
+      lapRecord: sprintQualyData[0].Circuits.lapRecord,
+      firstParticipationYear: sprintQualyData[0].Circuits.firstParticipationYear,
+      corners: sprintQualyData[0].Circuits.numberOfCorners,
+      fastestLapDriverId: sprintQualyData[0].Circuits.fastestLapDriverId,
+      fastestLapTeamId: sprintQualyData[0].Circuits.fastestLapTeamId,
+      fastestLapYear: sprintQualyData[0].Circuits.fastestLapYear,
+      url: sprintQualyData[0].Circuits.url,
+    }
 
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
-      limit: limit,
-      total: data.length,
+      limit,
+      offset,
+      total: processedData.length,
       season: year,
       races: {
-        date: data[0][23],
-        time: data[0][29],
-        url: data[0][16],
-        raceId: data[0][1],
-        raceName: data[0][10],
-        circuit: circuitData[0],
+        date: race.sprintQualyDate,
+        time: race.sprintQualyTime,
+        raceId: race.raceId,
+        raceName: race.raceName,
+        round: race.round,
+        url: race.url,
+        circuit: circuitData,
         sprintQualyResults: processedData,
       },
     }
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control":
+          "public, s-maxage=120, max-age=30, stale-while-revalidate=600, stale-if-error=86400",
       },
       status: 200,
     })

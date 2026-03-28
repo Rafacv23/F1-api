@@ -13,7 +13,6 @@ import {
 import { eq, and, gte, asc } from "drizzle-orm"
 
 export const revalidate = 120
-export const dynamic = "force-dynamic"
 interface ApiResponse extends BaseApiResponse {
   season: number | string
   round?: number | null
@@ -148,7 +147,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control":
+          "public, s-maxage=120, max-age=30, stale-while-revalidate=600, stale-if-error=86400",
       },
       status: 200,
     })
