@@ -5,45 +5,55 @@ import i18nConfig from "./i18nConfig"
 import { Redis } from "@upstash/redis"
 import { Ratelimit } from "@upstash/ratelimit"
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-})
-
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.fixedWindow(100, "10 m"),
-  analytics: true,
-})
+const upstashUrl = process.env.UPSTASH_REDIS_REST_URL
+const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN
+const ratelimit =
+  upstashUrl && upstashToken
+    ? new Ratelimit({
+        redis: new Redis({
+          url: upstashUrl,
+          token: upstashToken,
+        }),
+        limiter: Ratelimit.fixedWindow(100, "10 m"),
+        analytics: true,
+      })
+    : null
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // 🧭 Rate limit only /api routes
   if (pathname.startsWith("/api")) {
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.ip ||
-      "anonymous"
+    const forwardedFor = request.headers.get("x-forwarded-for")
+    const clientIp = forwardedFor?.split(",")[0]?.trim()
+    const ip = clientIp || request.ip || "anonymous"
 
-    const { success, limit, remaining, reset } = await ratelimit.limit(ip)
+    if (ratelimit) {
+      try {
+        const { success, limit, remaining, reset } = await ratelimit.limit(ip)
 
-    if (!success) {
-      return new NextResponse("Rate limit exceeded", {
-        status: 429,
-        headers: {
-          "X-RateLimit-Limit": limit.toString(),
-          "X-RateLimit-Remaining": remaining.toString(),
-          "X-RateLimit-Reset": reset.toString(),
-        },
-      })
+        if (!success) {
+          return new NextResponse("Rate limit exceeded", {
+            status: 429,
+            headers: {
+              "X-RateLimit-Limit": limit.toString(),
+              "X-RateLimit-Remaining": remaining.toString(),
+              "X-RateLimit-Reset": reset.toString(),
+            },
+          })
+        }
+
+        const response = NextResponse.next()
+        response.headers.set("X-RateLimit-Limit", limit.toString())
+        response.headers.set("X-RateLimit-Remaining", remaining.toString())
+        response.headers.set("X-RateLimit-Reset", reset.toString())
+        return response
+      } catch (error) {
+        console.error("Rate limiter failed in middleware:", error)
+      }
     }
 
-    const response = NextResponse.next()
-    response.headers.set("X-RateLimit-Limit", limit.toString())
-    response.headers.set("X-RateLimit-Remaining", remaining.toString())
-    response.headers.set("X-RateLimit-Reset", reset.toString())
-    return response
+    return NextResponse.next()
   }
 
   // 🌐 Apply i18n to all other routes (non-API)
