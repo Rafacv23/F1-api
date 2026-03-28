@@ -15,7 +15,7 @@ import {
   races,
   teams,
 } from "@/db/migrations/schema"
-import { eq, and, desc, lte } from "drizzle-orm"
+import { eq, and, desc, lte, asc } from "drizzle-orm"
 
 export const revalidate = 600
 
@@ -36,18 +36,18 @@ export async function GET(request: Request) {
     const year = CURRENT_YEAR
     const today = getDay()
 
-    // Obtener la última carrera basada en la fecha de clasificación
     const lastRace = await db
       .select()
       .from(races)
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
       .where(
         and(
-          lte(races.qualyDate, today), // Clasificación ya sucedió
-          eq(races.championshipId, `f1_${year}`) // Temporada actual
+          lte(races.qualyDate, today),
+          eq(races.championshipId, `f1_${year}`)
         )
       )
-      .orderBy(desc(races.qualyDate)) // Ordenar por la fecha de clasificación descendente
-      .limit(1) // Obtener solo la última carrera
+      .orderBy(desc(races.qualyDate), desc(races.round))
+      .limit(1)
 
     if (lastRace.length === 0) {
       return apiNotFound(
@@ -58,18 +58,15 @@ export async function GET(request: Request) {
 
     const race = lastRace[0]
 
-    // Obtener los datos de clasificación para esa carrera
     const qualyData = await db
       .select()
       .from(classifications)
-      .innerJoin(races, eq(races.raceId, classifications.raceId))
-      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
       .innerJoin(drivers, eq(classifications.driverId, drivers.driverId))
       .innerJoin(teams, eq(classifications.teamId, teams.teamId))
-      .where(eq(races.raceId, race.raceId)) // Solo datos de la última carrera
+      .where(eq(classifications.raceId, race.Races.raceId))
       .limit(limit || 20)
       .offset(offset)
-      .orderBy(desc(races.qualyDate))
+      .orderBy(asc(classifications.gridPosition))
 
     if (qualyData.length === 0) {
       return apiNotFound(
@@ -79,8 +76,8 @@ export async function GET(request: Request) {
     }
 
     const { date: localDate, time: localTime } = convertToTimezone(
-      race.qualyDate,
-      race.qualyTime,
+      race.Races.qualyDate,
+      race.Races.qualyTime,
       timezone
     )
 
@@ -114,22 +111,23 @@ export async function GET(request: Request) {
       },
     }))
 
-    const circuitData = qualyData.map((circuit) => {
-      return {
-        circuitId: circuit.Circuits.circuitId,
-        circuitName: circuit.Circuits.circuitName,
-        country: circuit.Circuits.country,
-        city: circuit.Circuits.city,
-        circuitLength: circuit.Circuits.circuitLength + "km",
-        corners: circuit.Circuits.numberOfCorners,
-        firstParticipationYear: circuit.Circuits.firstParticipationYear,
-        lapRecord: circuit.Circuits.lapRecord,
-        fastestLapDriverId: circuit.Circuits.fastestLapDriverId,
-        fastestLapTeamId: circuit.Circuits.fastestLapTeamId,
-        fastestLapYear: circuit.Circuits.fastestLapYear,
-        url: circuit.Circuits.url,
-      }
-    })
+    const circuitData = {
+      circuitId: race.Circuits.circuitId,
+      circuitName: race.Circuits.circuitName,
+      country: race.Circuits.country,
+      city: race.Circuits.city,
+      circuitLength:
+        race.Circuits.circuitLength !== null && race.Circuits.circuitLength !== undefined
+          ? `${race.Circuits.circuitLength}km`
+          : null,
+      corners: race.Circuits.numberOfCorners,
+      firstParticipationYear: race.Circuits.firstParticipationYear,
+      lapRecord: race.Circuits.lapRecord,
+      fastestLapDriverId: race.Circuits.fastestLapDriverId,
+      fastestLapTeamId: race.Circuits.fastestLapTeamId,
+      fastestLapYear: race.Circuits.fastestLapYear,
+      url: race.Circuits.url,
+    }
 
     const response: ApiResponse = {
       api: SITE_URL,
@@ -140,13 +138,13 @@ export async function GET(request: Request) {
       total: qualyData.length,
       season: year,
       races: {
-        round: race.round,
-        qualyTime: localDate,
-        qualyDate: localTime,
-        url: race.url,
-        raceId: race.raceId,
-        raceName: race.raceName,
-        circuit: circuitData[0],
+        round: race.Races.round,
+        qualyTime: localTime,
+        qualyDate: localDate,
+        url: race.Races.url,
+        raceId: race.Races.raceId,
+        raceName: race.Races.raceName,
+        circuit: circuitData,
         qualyResults: processedData,
       },
     }

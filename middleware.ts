@@ -7,17 +7,25 @@ import { Redis } from "@upstash/redis"
 
 const upstashUrl = process.env.UPSTASH_REDIS_REST_URL
 const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN
-const ratelimit =
-  upstashUrl && upstashToken
-    ? new Ratelimit({
-        redis: new Redis({
-          url: upstashUrl,
-          token: upstashToken,
-        }),
-        limiter: Ratelimit.fixedWindow(100, "10 m"),
-        analytics: true,
-      })
-    : null
+const ratelimit = (() => {
+  if (!upstashUrl || !upstashToken) {
+    return null
+  }
+
+  try {
+    return new Ratelimit({
+      redis: new Redis({
+        url: upstashUrl,
+        token: upstashToken,
+      }),
+      limiter: Ratelimit.fixedWindow(100, "10 m"),
+      analytics: true,
+    })
+  } catch (error) {
+    console.error("Failed to initialize Upstash rate limiter:", error)
+    return null
+  }
+})()
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
