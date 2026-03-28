@@ -4,48 +4,54 @@ import { i18nRouter } from "next-i18n-router"
 import i18nConfig from "./i18nConfig"
 import { LRUCache } from "lru-cache"
 
-// 🧠 In-memory rate limiter (temporary fallback)
-const memoryCache = new LRUCache<string, number>({
-  max: 1000,
-  ttl: 1000 * 60 * 10, // 10 minutes
-})
-
-const RATE_LIMIT = 100 // max requests
-const WINDOW_MS = 10 * 60 * 1000 // 10 minutes
+const upstashUrl = process.env.UPSTASH_REDIS_REST_URL
+const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN
+const ratelimit =
+  upstashUrl && upstashToken
+    ? new Ratelimit({
+        redis: new Redis({
+          url: upstashUrl,
+          token: upstashToken,
+        }),
+        limiter: Ratelimit.fixedWindow(100, "10 m"),
+        analytics: true,
+      })
+    : null
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith("/api")) {
-    const ip =
-      request.headers.get("x-forwarded-for") || request.ip || "anonymous"
+    const forwardedFor = request.headers.get("x-forwarded-for")
+    const clientIp = forwardedFor?.split(",")[0]?.trim()
+    const ip = clientIp || request.ip || "anonymous"
 
-    const count = memoryCache.get(ip) || 0
+    if (ratelimit) {
+      try {
+        const { success, limit, remaining, reset } = await ratelimit.limit(ip)
 
-    if (count >= RATE_LIMIT) {
-      return new NextResponse("Rate limit exceeded (memory)", {
-        status: 429,
-        headers: {
-          "X-RateLimit-Limit": RATE_LIMIT.toString(),
-          "X-RateLimit-Remaining": "0",
-          "X-RateLimit-Reset": (Date.now() + WINDOW_MS).toString(),
-        },
-      })
+        if (!success) {
+          return new NextResponse("Rate limit exceeded", {
+            status: 429,
+            headers: {
+              "X-RateLimit-Limit": limit.toString(),
+              "X-RateLimit-Remaining": remaining.toString(),
+              "X-RateLimit-Reset": reset.toString(),
+            },
+          })
+        }
+
+        const response = NextResponse.next()
+        response.headers.set("X-RateLimit-Limit", limit.toString())
+        response.headers.set("X-RateLimit-Remaining", remaining.toString())
+        response.headers.set("X-RateLimit-Reset", reset.toString())
+        return response
+      } catch (error) {
+        console.error("Rate limiter failed in middleware:", error)
+      }
     }
 
-    memoryCache.set(ip, count + 1)
-
-    const response = NextResponse.next()
-    response.headers.set("X-RateLimit-Limit", RATE_LIMIT.toString())
-    response.headers.set(
-      "X-RateLimit-Remaining",
-      (RATE_LIMIT - count - 1).toString()
-    )
-    response.headers.set(
-      "X-RateLimit-Reset",
-      (Date.now() + WINDOW_MS).toString()
-    )
-    return response
+    return NextResponse.next()
   }
 
   return i18nRouter(request, i18nConfig)
