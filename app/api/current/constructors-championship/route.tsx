@@ -6,7 +6,7 @@ import { constructorsClassifications, teams } from "@/db/migrations/schema"
 import { db } from "@/db"
 import { asc, eq } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: string | number
@@ -66,7 +66,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

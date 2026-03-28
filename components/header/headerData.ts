@@ -5,6 +5,7 @@ import {
   Github,
   Laptop,
   Moon,
+  Radio,
   StickyNote,
   Sun,
 } from "lucide-react"
@@ -28,6 +29,7 @@ type SearchOption = {
 
 const buttons: Button[] = [
   { label: "Docs", href: "/docs" },
+  { label: "Live", href: "https://live.f1api.dev" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ]
@@ -38,6 +40,7 @@ const searchOptions: SearchOption[] = [
     links: [
       { label: "Home", href: "/", icon: StickyNote },
       { label: "Docs", href: "/docs", icon: StickyNote },
+      { label: "Live", href: "https://live.f1api.dev", icon: StickyNote },
       { label: "Blog", href: "/blog", icon: StickyNote },
       { label: "Contact", href: "/contact", icon: StickyNote },
     ],

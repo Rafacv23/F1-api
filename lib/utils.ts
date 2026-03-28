@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { parseISO, format } from "date-fns"
+import { toZonedTime } from "date-fns-tz"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -40,8 +42,35 @@ export function getDay(): string {
 }
 
 export const getLimitAndOffset = (queryParams: URLSearchParams) => {
-  const limit = parseInt(queryParams.get("limit") || "30", 10) // Default to 30
-  const offset = parseInt(queryParams.get("offset") || "0", 10) // Default to 0
+  const rawLimit = parseInt(queryParams.get("limit") || "30", 10)
+  const rawOffset = parseInt(queryParams.get("offset") || "0", 10)
+
+  const limit = Number.isFinite(rawLimit)
+    ? Math.min(Math.max(rawLimit, 1), 100)
+    : 30
+  const offset = Number.isFinite(rawOffset)
+    ? Math.min(Math.max(rawOffset, 0), 10_000)
+    : 0
 
   return { limit, offset }
+}
+
+export function convertToTimezone(
+  date: string | null,
+  time: string | null,
+  timezone: string | null
+) {
+  if (!date || !time || !timezone) return { date, time }
+
+  try {
+    const isoString = `${date}T${time}` // UTC time
+    const zoned = toZonedTime(isoString, timezone)
+
+    return {
+      date: format(zoned, "yyyy-MM-dd"),
+      time: format(zoned, "HH:mm:ss"),
+    }
+  } catch (e) {
+    return { date, time } // fallback to original on error
+  }
 }

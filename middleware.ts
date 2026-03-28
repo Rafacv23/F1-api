@@ -2,8 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { i18nRouter } from "next-i18n-router"
 import i18nConfig from "./i18nConfig"
-import { Redis } from "@upstash/redis"
-import { Ratelimit } from "@upstash/ratelimit"
+import { LRUCache } from "lru-cache"
 
 const upstashUrl = process.env.UPSTASH_REDIS_REST_URL
 const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN
@@ -22,7 +21,6 @@ const ratelimit =
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // 🧭 Rate limit only /api routes
   if (pathname.startsWith("/api")) {
     const forwardedFor = request.headers.get("x-forwarded-for")
     const clientIp = forwardedFor?.split(",")[0]?.trim()
@@ -56,15 +54,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // 🌐 Apply i18n to all other routes (non-API)
   return i18nRouter(request, i18nConfig)
 }
 
 export const config = {
-  matcher: [
-    // Apply i18nRouter to non-API pages
-    "/((?!api|static|.*\\..*|_next).*)",
-    // Apply rate limiter only to API routes
-    "/api/:path*",
-  ],
+  matcher: ["/((?!api|static|.*\\..*|_next).*)", "/api/:path*"],
 }

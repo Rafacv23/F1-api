@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, convertToTimezone, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { eq, and } from "drizzle-orm"
@@ -13,10 +13,11 @@ import {
   teams,
 } from "@/db/migrations/schema"
 
-export const revalidate = 120
+export const revalidate = 600
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
+  timezone?: string
   races: any
 }
 
@@ -25,6 +26,8 @@ export async function GET(request: Request, context: any) {
   const { limit, offset } = getLimitAndOffset(queryParams)
 
   try {
+    const { searchParams } = new URL(request.url)
+    const timezone = searchParams.get("timezone")
     const { year, round } = context.params
 
     const raceData = await db
@@ -63,6 +66,12 @@ export async function GET(request: Request, context: any) {
         "No race results found for this round. Try with other one."
       )
     }
+
+    const { date: localDate, time: localTime } = convertToTimezone(
+      raceData[0].Races.raceDate,
+      raceData[0].Races.raceTime,
+      timezone
+    )
 
     // Procesamos los datos de los resultados
     const processedData = resultsData.map((result) => ({
@@ -116,12 +125,13 @@ export async function GET(request: Request, context: any) {
       url: request.url,
       limit: limit,
       offset: offset,
+      timezone: timezone || undefined,
       total: resultsData.length,
-      season: year,
+      season: parseInt(year),
       races: {
         round: round,
-        date: race.Races.raceDate,
-        time: race.Races.raceTime,
+        date: localDate,
+        time: localTime,
         url: race.Races.url,
         raceId: race.Races.raceId,
         raceName: race.Races.raceName,
@@ -132,7 +142,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=120, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })

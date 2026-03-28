@@ -6,7 +6,7 @@ import { db } from "@/db"
 import { drivers } from "@/db/migrations/schema"
 import { eq, InferModel } from "drizzle-orm"
 
-export const revalidate = 120
+export const revalidate = 600
 
 type Driver = InferModel<typeof drivers>
 
@@ -54,7 +54,7 @@ export async function GET(request: Request, context: any) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=300, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
       },
       status: 200,
     })
