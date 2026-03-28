@@ -68,9 +68,9 @@ export async function GET(request: Request) {
 
     // Procesamos los datos de los resultados
     const processedData = resultsData.map((result) => ({
-      position: result.Results.finishingPosition,
+      position: String(result.Results.finishingPosition),
       points: result.Results.pointsObtained,
-      grid: result.Results.gridPosition,
+      grid: String(result.Results.gridPosition),
       time: result.Results.raceTime,
       fastLap: result.Results.fastLap,
       retired: result.Results.retired,
