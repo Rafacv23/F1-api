@@ -5,7 +5,6 @@ import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { eq, and } from "drizzle-orm"
 import {
-  championships,
   circuits,
   drivers,
   races,
@@ -29,22 +28,31 @@ export async function GET(request: Request, context: any) {
     const { searchParams } = new URL(request.url)
     const timezone = searchParams.get("timezone")
     const { year, round } = context.params
+    const roundNumber = Number(round)
+
+    if (!Number.isInteger(roundNumber)) {
+      return apiNotFound(
+        request,
+        "No race found for this round. Try with other one.",
+      )
+    }
 
     const raceData = await db
       .select()
       .from(races)
       .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
-      .innerJoin(
-        championships,
-        eq(races.championshipId, championships.championshipId)
+      .where(
+        and(
+          eq(races.championshipId, `f1_${year}`),
+          eq(races.round, roundNumber),
+        ),
       )
-      .where(and(eq(championships.year, year), eq(races.round, round)))
       .limit(1)
 
     if (raceData.length === 0) {
       return apiNotFound(
         request,
-        "No race found for this round. Try with other one."
+        "No race found for this round. Try with other one.",
       )
     }
 
@@ -63,21 +71,21 @@ export async function GET(request: Request, context: any) {
     if (resultsData.length === 0) {
       return apiNotFound(
         request,
-        "No race results found for this round. Try with other one."
+        "No race results found for this round. Try with other one.",
       )
     }
 
     const { date: localDate, time: localTime } = convertToTimezone(
       raceData[0].Races.raceDate,
       raceData[0].Races.raceTime,
-      timezone
+      timezone,
     )
 
     // Procesamos los datos de los resultados
     const processedData = resultsData.map((result) => ({
-      position: result.Results.finishingPosition,
+      position: String(result.Results.finishingPosition),
       points: result.Results.pointsObtained,
-      grid: result.Results.gridPosition,
+      grid: String(result.Results.gridPosition),
       time: result.Results.raceTime,
       fastLap: result.Results.fastLap,
       retired: result.Results.retired,
@@ -139,7 +147,7 @@ export async function GET(request: Request, context: any) {
         url: race.Races.url,
         raceId: race.Races.raceId,
         raceName: race.Races.raceName,
-        circuit: circuitData[0],
+        circuit: circuitData,
         results: processedData,
       },
     }

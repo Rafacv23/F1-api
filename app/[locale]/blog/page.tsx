@@ -16,7 +16,7 @@ const HomePage = async ({ params }: { params: { locale: string } }) => {
   const { t } = await initTranslations(params.locale, ["docs"])
 
   return (
-    <main className="max-w-5xl mx-auto p-6 mt-28 h-screen">
+    <main className="max-w-5xl mx-auto p-6 mt-28 min-h-screen">
       <header className="font-light text-6xl">
         <h1 className="text-3xl font-bold mb-4">Blog</h1>
       </header>
