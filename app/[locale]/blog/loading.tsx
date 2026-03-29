@@ -3,7 +3,7 @@ import React from "react"
 
 export default function loading() {
   return (
-    <main className="max-w-3xl mx-auto p-6 h-screen flex flex-col justify-center items-center">
+    <main className="max-w-3xl mx-auto p-6 min-h-[70vh] flex flex-col justify-center items-center">
       <Loader />
     </main>
   )

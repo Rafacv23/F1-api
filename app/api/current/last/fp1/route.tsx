@@ -28,19 +28,34 @@ export async function GET(request: Request) {
     const year = CURRENT_YEAR
     const today = getDay()
 
+    const raceData = await db
+      .select()
+      .from(races)
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
+      .where(
+        and(lte(races.fp1Date, today), eq(races.championshipId, `f1_${year}`))
+      )
+      .orderBy(desc(races.fp1Date), desc(races.round))
+      .limit(1)
+
+    if (raceData.length === 0) {
+      return apiNotFound(
+        request,
+        "No fp1 results found for this round. Try with other one."
+      )
+    }
+
+    const race = raceData[0]
+
     const fp1Data = await db
       .select()
       .from(fp1)
-      .innerJoin(races, eq(races.raceId, fp1.raceId))
-      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
       .innerJoin(drivers, eq(fp1.driverId, drivers.driverId))
       .innerJoin(teams, eq(fp1.teamId, teams.teamId))
-      .where(
-        and(lte(races.raceDate, today), eq(races.championshipId, `f1_${year}`))
-      )
+      .where(eq(fp1.raceId, race.Races.raceId))
       .limit(limit || 20)
       .offset(offset)
-      .orderBy(desc(races.fp1Date))
+      .orderBy(fp1.time)
 
     if (fp1Data.length === 0) {
       return apiNotFound(
@@ -50,8 +65,8 @@ export async function GET(request: Request) {
     }
 
     const { date: localDate, time: localTime } = convertToTimezone(
-      fp1Data[0].Races.fp1Date,
-      fp1Data[0].Races.fp1Time,
+      race.Races.fp1Date,
+      race.Races.fp1Time,
       timezone
     )
 
@@ -82,23 +97,23 @@ export async function GET(request: Request) {
       },
     }))
 
-    // Obtener el circuito correspondiente a la carrera
-    const circuitData = fp1Data.map((row) => {
-      return {
-        circuitId: row.Circuits.circuitId,
-        circuitName: row.Circuits.circuitName,
-        country: row.Circuits.country,
-        city: row.Circuits.city,
-        circuitLength: row.Circuits.circuitLength + "km",
-        lapRecord: row.Circuits.lapRecord,
-        firstParticipationYear: row.Circuits.firstParticipationYear,
-        corners: row.Circuits.numberOfCorners,
-        fastestLapDriverId: row.Circuits.fastestLapDriverId,
-        fastestLapTeamId: row.Circuits.fastestLapTeamId,
-        fastestLapYear: row.Circuits.fastestLapYear,
-        url: row.Circuits.url,
-      }
-    })
+    const circuitData = {
+      circuitId: race.Circuits.circuitId,
+      circuitName: race.Circuits.circuitName,
+      country: race.Circuits.country,
+      city: race.Circuits.city,
+      circuitLength:
+        race.Circuits.circuitLength !== null && race.Circuits.circuitLength !== undefined
+          ? `${race.Circuits.circuitLength}km`
+          : null,
+      lapRecord: race.Circuits.lapRecord,
+      firstParticipationYear: race.Circuits.firstParticipationYear,
+      corners: race.Circuits.numberOfCorners,
+      fastestLapDriverId: race.Circuits.fastestLapDriverId,
+      fastestLapTeamId: race.Circuits.fastestLapTeamId,
+      fastestLapYear: race.Circuits.fastestLapYear,
+      url: race.Circuits.url,
+    }
 
     const response: ApiResponse = {
       api: SITE_URL,
@@ -109,13 +124,13 @@ export async function GET(request: Request) {
       total: fp1Data.length,
       season: year,
       races: {
-        round: fp1Data[0].Races.round,
+        round: race.Races.round,
         fp1Date: localDate,
         fp1Time: localTime,
-        url: fp1Data[0].Races.url,
-        raceId: fp1Data[0].Races.raceId,
-        raceName: fp1Data[0].Races.raceName,
-        circuit: circuitData[0],
+        url: race.Races.url,
+        raceId: race.Races.raceId,
+        raceName: race.Races.raceName,
+        circuit: circuitData,
         fp1Results: processedData,
       },
     }

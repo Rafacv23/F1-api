@@ -31,9 +31,22 @@ export async function GET(request: Request, context: any) {
     const { driverId } = context.params
 
     const sprintResultsData = await db
-      .select()
+      .select({
+        raceId: sprintRace.raceId,
+        finishingPosition: sprintRace.finishingPosition,
+        gridPosition: sprintRace.gridPosition,
+        raceTime: sprintRace.raceTime,
+        pointsObtained: sprintRace.pointsObtained,
+        retired: sprintRace.retired,
+      })
       .from(sprintRace)
-      .where(eq(sprintRace.driverId, driverId))
+      .innerJoin(races, eq(sprintRace.raceId, races.raceId))
+      .where(
+        and(
+          eq(sprintRace.driverId, driverId),
+          eq(races.championshipId, `f1_${year}`)
+        )
+      )
 
     const resultsData = await db
       .select()
@@ -49,6 +62,7 @@ export async function GET(request: Request, context: any) {
           eq(results.driverId, driverId)
         )
       )
+      .orderBy(races.round)
       .limit(limit)
       .offset(offset)
 
@@ -84,11 +98,13 @@ export async function GET(request: Request, context: any) {
       }
     })
 
+    const sprintResultsByRaceId = new Map(
+      sprintResultsData.map((sprint) => [sprint.raceId, sprint])
+    )
+
     // Procesamos los datos
     const processedData = resultsData.map((row) => {
-      const sprintResult = sprintResultsData.find(
-        (sprint) => sprint.raceId === row.Races.raceId
-      )
+      const sprintResult = sprintResultsByRaceId.get(row.Races.raceId)
 
       return {
         race: {

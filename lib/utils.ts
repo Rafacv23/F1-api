@@ -42,8 +42,15 @@ export function getDay(): string {
 }
 
 export const getLimitAndOffset = (queryParams: URLSearchParams) => {
-  const limit = parseInt(queryParams.get("limit") || "30", 10) // Default to 30
-  const offset = parseInt(queryParams.get("offset") || "0", 10) // Default to 0
+  const rawLimit = parseInt(queryParams.get("limit") || "30", 10)
+  const rawOffset = parseInt(queryParams.get("offset") || "0", 10)
+
+  const limit = Number.isFinite(rawLimit)
+    ? Math.min(Math.max(rawLimit, 1), 100)
+    : 30
+  const offset = Number.isFinite(rawOffset)
+    ? Math.min(Math.max(rawOffset, 0), 10_000)
+    : 0
 
   return { limit, offset }
 }

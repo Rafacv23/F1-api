@@ -4,7 +4,7 @@ import { apiNotFound } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { eq, InferModel } from "drizzle-orm"
-import { results, teams } from "@/db/migrations/schema"
+import { teams } from "@/db/migrations/schema"
 
 export const revalidate = 600
 
@@ -18,11 +18,8 @@ export async function GET(request: Request, context: any) {
     const { year, teamId } = context.params
 
     const teamData = await db
-      .select({
-        Teams: teams,
-      })
+      .select()
       .from(teams)
-      .innerJoin(results, eq(teams.teamId, results.teamId))
       .where(eq(teams.teamId, teamId))
       .limit(1)
 
@@ -36,13 +33,13 @@ export async function GET(request: Request, context: any) {
     // Procesamos los datos
     const processedData = teamData.map((row) => {
       return {
-        teamId: row.Teams.teamId,
-        teamName: row.Teams.teamName,
-        teamNationality: row.Teams.teamNationality,
-        firstAppeareance: row.Teams.firstAppeareance,
-        constructorsChampionships: row.Teams.constructorsChampionships,
-        driversChampionships: row.Teams.driversChampionships,
-        url: row.Teams.url,
+        teamId: row.teamId,
+        teamName: row.teamName,
+        teamNationality: row.teamNationality,
+        firstAppeareance: row.firstAppeareance,
+        constructorsChampionships: row.constructorsChampionships,
+        driversChampionships: row.driversChampionships,
+        url: row.url,
       }
     })
 

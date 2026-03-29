@@ -12,8 +12,7 @@ import {
 } from "@/db/migrations/schema"
 import { lte, and, eq, desc } from "drizzle-orm"
 
-export const revalidate = 600
-export const dynamic = "force-dynamic"
+export const revalidate = 120
 
 interface ApiResponse extends BaseApiResponse {
   season: number | string
@@ -40,7 +39,7 @@ export async function GET(request: Request) {
     if (championshipData.length === 0) {
       return apiNotFound(
         request,
-        "No seasons found for this year, try with another one."
+        "No seasons found for this year, try with another one.",
       )
     }
 
@@ -55,8 +54,8 @@ export async function GET(request: Request) {
       .where(
         and(
           eq(races.championshipId, championship.championshipId),
-          lte(races.raceDate, today)
-        )
+          lte(races.raceDate, today),
+        ),
       )
       .limit(1)
       .orderBy(desc(races.round))
@@ -64,7 +63,7 @@ export async function GET(request: Request) {
     if (seasonData.length === 0) {
       return apiNotFound(
         request,
-        "No races found for this season, try with another one."
+        "No races found for this season, try with another one.",
       )
     }
 
@@ -76,37 +75,37 @@ export async function GET(request: Request) {
         race: convertToTimezone(
           race.Races.raceDate,
           race.Races.raceTime,
-          timezone
+          timezone,
         ),
         qualy: convertToTimezone(
           race.Races.qualyDate,
           race.Races.qualyTime,
-          timezone
+          timezone,
         ),
         fp1: convertToTimezone(
           race.Races.fp1Date,
           race.Races.fp1Time,
-          timezone
+          timezone,
         ),
         fp2: convertToTimezone(
           race.Races.fp2Date,
           race.Races.fp2Time,
-          timezone
+          timezone,
         ),
         fp3: convertToTimezone(
           race.Races.fp3Date,
           race.Races.fp3Time,
-          timezone
+          timezone,
         ),
         sprintQualy: convertToTimezone(
           race.Races.sprintQualyDate,
           race.Races.sprintQualyTime,
-          timezone
+          timezone,
         ),
         sprintRace: convertToTimezone(
           race.Races.sprintRaceDate,
           race.Races.sprintRaceTime,
-          timezone
+          timezone,
         ),
       },
       laps: race.Races.laps,
@@ -169,7 +168,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response, {
       headers: {
-        "Cache-Control": "public, max-age=600, stale-while-revalidate=60",
+        "Cache-Control":
+          "public, s-maxage=120, max-age=30, stale-while-revalidate=600, stale-if-error=86400",
       },
       status: 200,
     })

@@ -25,19 +25,39 @@ export async function GET(request: Request, context: any) {
   const { limit, offset } = getLimitAndOffset(queryParams)
   try {
     const { year, round } = context.params
+    const roundNumber = Number(round)
     const { searchParams } = new URL(request.url)
     const timezone = searchParams.get("timezone")
+
+    if (!Number.isInteger(roundNumber)) {
+      return apiNotFound(
+        request,
+        "No qualy results found for this round. Try with other one."
+      )
+    }
+
+    const raceData = await db
+      .select()
+      .from(races)
+      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
+      .where(and(eq(races.round, roundNumber), eq(races.championshipId, `f1_${year}`)))
+      .limit(1)
+
+    if (raceData.length === 0) {
+      return apiNotFound(
+        request,
+        "No qualy results found for this round. Try with other one."
+      )
+    }
+
+    const race = raceData[0]
 
     const qualyData = await db
       .select()
       .from(classifications)
-      .innerJoin(races, eq(races.raceId, classifications.raceId))
-      .innerJoin(circuits, eq(races.circuit, circuits.circuitId))
       .innerJoin(drivers, eq(classifications.driverId, drivers.driverId))
       .innerJoin(teams, eq(classifications.teamId, teams.teamId))
-      .where(
-        and(eq(races.round, round), eq(races.championshipId, `f1_${year}`))
-      )
+      .where(eq(classifications.raceId, race.Races.raceId))
       .limit(limit)
       .offset(offset)
       .orderBy(asc(classifications.gridPosition))
@@ -50,8 +70,8 @@ export async function GET(request: Request, context: any) {
     }
 
     const { date: localDate, time: localTime } = convertToTimezone(
-      qualyData[0].Races.qualyDate,
-      qualyData[0].Races.qualyTime,
+      race.Races.qualyDate,
+      race.Races.qualyTime,
       timezone
     )
 
@@ -85,23 +105,23 @@ export async function GET(request: Request, context: any) {
       },
     }))
 
-    // Obtener el circuito correspondiente a la carrera
-    const circuitData = qualyData.map((row) => {
-      return {
-        circuitId: row.Circuits.circuitId,
-        circuitName: row.Circuits.circuitName,
-        country: row.Circuits.country,
-        city: row.Circuits.city,
-        circuitLength: row.Circuits.circuitLength + "km",
-        lapRecord: row.Circuits.lapRecord,
-        firstParticipationYear: row.Circuits.firstParticipationYear,
-        corners: row.Circuits.numberOfCorners,
-        fastestLapDriverId: row.Circuits.fastestLapDriverId,
-        fastestLapTeamId: row.Circuits.fastestLapTeamId,
-        fastestLapYear: row.Circuits.fastestLapYear,
-        url: row.Circuits.url,
-      }
-    })
+    const circuitData = {
+      circuitId: race.Circuits.circuitId,
+      circuitName: race.Circuits.circuitName,
+      country: race.Circuits.country,
+      city: race.Circuits.city,
+      circuitLength:
+        race.Circuits.circuitLength !== null && race.Circuits.circuitLength !== undefined
+          ? `${race.Circuits.circuitLength}km`
+          : null,
+      lapRecord: race.Circuits.lapRecord,
+      firstParticipationYear: race.Circuits.firstParticipationYear,
+      corners: race.Circuits.numberOfCorners,
+      fastestLapDriverId: race.Circuits.fastestLapDriverId,
+      fastestLapTeamId: race.Circuits.fastestLapTeamId,
+      fastestLapYear: race.Circuits.fastestLapYear,
+      url: race.Circuits.url,
+    }
 
     const response: ApiResponse = {
       api: SITE_URL,
@@ -115,10 +135,10 @@ export async function GET(request: Request, context: any) {
         round: round,
         qualyTime: localTime,
         qualyDate: localDate,
-        url: qualyData[0].Races.url,
-        raceId: qualyData[0].Races.raceId,
-        raceName: qualyData[0].Races.raceName,
-        circuit: circuitData[0],
+        url: race.Races.url,
+        raceId: race.Races.raceId,
+        raceName: race.Races.raceName,
+        circuit: circuitData,
         qualyResults: processedData,
       },
     }
