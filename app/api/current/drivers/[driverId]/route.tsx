@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { InferModel, and, eq } from "drizzle-orm"
 import { db } from "@/db"
@@ -83,6 +83,7 @@ export async function GET(request: Request, context: any) {
         number: row.Drivers.number,
         shortName: row.Drivers.shortName,
         url: row.Drivers.url,
+        image: getDriverImageUrl(row.Drivers.driverId),
       }
     })
 

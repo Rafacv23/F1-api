@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
@@ -53,15 +53,20 @@ export async function GET(request: Request, context: any) {
       )
     }
 
+    const driversWithImages = driversData.map((driver) => ({
+      ...driver,
+      image: getDriverImageUrl(driver.driverId),
+    }))
+
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit,
       offset,
-      total: driversData.length,
+      total: driversWithImages.length,
       season: parseInt(year),
       championshipId: `f1_${year}`,
-      drivers: driversData,
+      drivers: driversWithImages,
     }
 
     return NextResponse.json(response, {

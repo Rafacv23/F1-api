@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -82,6 +82,7 @@ export async function GET(request: Request, context: any) {
         number: row.Drivers.number,
         shortName: row.Drivers.shortName,
         url: row.Drivers.url,
+        image: getDriverImageUrl(row.Drivers.driverId),
       }
     })
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import {
@@ -27,6 +27,7 @@ interface ApiResponse extends BaseApiResponse {
       number: number | null
       shortName: string | null
       url: string | null
+      image: string
     }
   }[]
 }
@@ -104,6 +105,7 @@ export async function GET(request: Request, context: any) {
           number: driver.drivers.number,
           shortName: driver.drivers.shortName,
           url: driver.drivers.url,
+          image: getDriverImageUrl(driver.drivers.driverId),
           points: driver.driverClassifications.points,
           position: driver.driverClassifications.position,
           wins: driver.driverClassifications.wins,

@@ -74,3 +74,7 @@ export function convertToTimezone(
     return { date, time } // fallback to original on error
   }
 }
+
+export function getDriverImageUrl(driverId: string): string {
+  return `https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/2024Drivers/${driverId}.jpg.img.1920.medium.jpg`;
+}

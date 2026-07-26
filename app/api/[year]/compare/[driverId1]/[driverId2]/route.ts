@@ -3,7 +3,7 @@ import { driverClassifications, drivers } from "@/db/migrations/schema"
 import { SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { executeQuery } from "@/lib/executeQuery"
-import { apiNotFound } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl } from "@/lib/utils"
 import { and, eq, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
@@ -56,6 +56,7 @@ type DriverInfo = {
   number: number | null
   shortName: string | null
   url: string | null
+  image: string
   teamId: string | null
 }
 
@@ -133,6 +134,7 @@ export async function GET(request: Request, context: any) {
         number: driversPointsData[0].Drivers.number,
         shortName: driversPointsData[0].Drivers.shortName,
         url: driversPointsData[0].Drivers.url,
+        image: getDriverImageUrl(driverId1),
         teamId: driversPointsData[0].Driver_Classifications.teamId,
       },
       {
@@ -144,6 +146,7 @@ export async function GET(request: Request, context: any) {
         number: driversPointsData[1].Drivers.number,
         shortName: driversPointsData[1].Drivers.shortName,
         url: driversPointsData[1].Drivers.url,
+        image: getDriverImageUrl(driverId2),
         teamId: driversPointsData[1].Driver_Classifications.teamId,
       },
     ]

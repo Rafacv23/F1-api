@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { CURRENT_YEAR, SITE_URL } from "@/lib/constants"
 import { BaseApiResponse } from "@/lib/definitions"
 import { InferModel, eq, asc } from "drizzle-orm"
@@ -51,15 +51,20 @@ export async function GET(request: Request) {
       )
     }
 
+    const driversWithImages = driversData.map((driver) => ({
+      ...driver,
+      image: getDriverImageUrl(driver.driverId),
+    }))
+
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit,
       offset,
-      total: driversData.length,
+      total: driversWithImages.length,
       season: year,
       championshipId: `f1_${year}`,
-      drivers: driversData,
+      drivers: driversWithImages,
     }
 
     return NextResponse.json(response, {

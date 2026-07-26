@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { drivers } from "@/db/migrations/schema"
@@ -46,6 +46,7 @@ export async function GET(request: Request) {
         number: driver.number,
         shortName: driver.shortName,
         url: driver.url,
+        image: getDriverImageUrl(driver.driverId),
       }
     })
 
@@ -56,7 +57,10 @@ export async function GET(request: Request) {
       offset: offset,
       query: queryParams.get("q") ?? "",
       total: driversData.length,
-      drivers: driversData,
+      drivers: driversData.map((driver) => ({
+        ...driver,
+        image: getDriverImageUrl(driver.driverId),
+      })),
     }
 
     return NextResponse.json(response, {

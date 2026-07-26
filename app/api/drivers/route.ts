@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { SITE_URL } from "@/lib/constants"
-import { apiNotFound, getLimitAndOffset } from "@/lib/utils"
+import { apiNotFound, getDriverImageUrl, getLimitAndOffset } from "@/lib/utils"
 import { BaseApiResponse } from "@/lib/definitions"
 import { db } from "@/db"
 import { drivers } from "@/db/migrations/schema"
@@ -29,26 +29,18 @@ export async function GET(request: Request) {
       return apiNotFound(request, "No drivers found.")
     }
 
-    driversData.forEach((driver) => {
-      return {
-        driverId: driver.driverId,
-        name: driver.name,
-        surname: driver.surname,
-        country: driver.nationality,
-        birthday: driver.birthday,
-        number: driver.number,
-        shortName: driver.shortName,
-        url: driver.url,
-      }
-    })
+    const driversWithImages = driversData.map((driver) => ({
+      ...driver,
+      image: getDriverImageUrl(driver.driverId),
+    }))
 
     const response: ApiResponse = {
       api: SITE_URL,
       url: request.url,
       limit: limit,
       offset: offset,
-      total: driversData.length,
-      drivers: driversData,
+      total: driversWithImages.length,
+      drivers: driversWithImages,
     }
 
     return NextResponse.json(response, {
