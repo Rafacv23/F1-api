@@ -1,0 +1,1223 @@
+openapi: 3.0.3
+info:
+  title: F1 API
+  description: OpenAPI specification for the F1 API endpoints.
+  version: 1.0.0
+servers:
+  - url: https://f1api.dev
+    description: Production server
+tags:
+  - name: circuits
+  - name: drivers
+  - name: races
+  - name: seasons
+  - name: standings
+  - name: teams
+paths:
+  /api/{year}/{round}/fp1:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the free practice 1 of a race based on the year and the round"
+      description: "Retrieve the information of the free practice 1 of a race based on the year and the round."
+      operationId: getYearRoundFp1
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/fp2:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the free practice 2 of a race based on the year and the round"
+      description: "Retrieve the information of the free practice 2 of a race based on the year and the round."
+      operationId: getYearRoundFp2
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/fp3:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the free practice 3 of a race based on the year and the round"
+      description: "Retrieve the information of the free practice 3 of a race based on the year and the round."
+      operationId: getYearRoundFp3
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/qualy:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the qualy of a race based on the year and the round"
+      description: "Retrieve the information of the qualy of a race based on the year and the round."
+      operationId: getYearRoundQualy
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/race:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a specific race based on the year and the round"
+      description: "Retrieve the information of a specific race based on the year and the round."
+      operationId: getYearRoundRace
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a race based on the year and the round"
+      description: "Retrieve the information of a race based on the year and the round."
+      operationId: getYearRound
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/sprint/qualy:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a sprint qualy (if exist) based on the year and the round"
+      description: "Retrieve the information of a sprint qualy (if exist) based on the year and the round."
+      operationId: getYearRoundSprintQualy
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/{round}/sprint/race:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a sprint race (if exist) based on the year and the round"
+      description: "Retrieve the information of a sprint race (if exist) based on the year and the round."
+      operationId: getYearRoundSprintRace
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: round
+          required: true
+          description: "Race round number within the season."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/circuits:
+    get:
+      tags:
+        - circuits
+      summary: "Retrieve a list of the circuits of the specific F1 season"
+      description: "Retrieve a list of the circuits of the specific F1 season."
+      operationId: getYearCircuits
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/compare/{driverId1}/{driverId2}:
+    get:
+      tags:
+        - drivers
+      summary: "Compare the head to head between two drivers in a season"
+      description: "Compare the head to head between two drivers in a season."
+      operationId: getYearCompareDriverId1DriverId2
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: driverId1
+          required: true
+          description: "Path parameter: driverId1."
+          schema:
+            type: string
+        - in: path
+          name: driverId2
+          required: true
+          description: "Path parameter: driverId2."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/constructors-championship:
+    get:
+      tags:
+        - standings
+      summary: "Retrieve the constructors championship standing of the specific season"
+      description: "Retrieve the constructors championship standing of the specific season."
+      operationId: getYearConstructorsChampionship
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/drivers-championship:
+    get:
+      tags:
+        - standings
+      summary: "Retrieve the drivers championship standing of the specific season"
+      description: "Retrieve the drivers championship standing of the specific season."
+      operationId: getYearDriversChampionship
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/drivers/{driverId}:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve the results of the specific driver of the specific year"
+      description: "Retrieve the results of the specific driver of the specific year."
+      operationId: getYearDriversDriverId
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: driverId
+          required: true
+          description: "Path parameter: driverId."
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/drivers:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve the list of the drivers of the specific year"
+      description: "Retrieve the list of the drivers of the specific year."
+      operationId: getYearDrivers
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}:
+    get:
+      tags:
+        - seasons
+      summary: "Retrieve the races of the specific year"
+      description: "Retrieve the races of the specific year."
+      operationId: getYear
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/teams/{teamId}/drivers:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve a list of all the drivers of a team based on the teamId and the specific year"
+      description: "Retrieve a list of all the drivers of a team based on the teamId and the specific year."
+      operationId: getYearTeamsTeamIdDrivers
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: teamId
+          required: true
+          description: "Path parameter: teamId."
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/teams/{teamId}:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve the data of a team based on his id and the specific year"
+      description: "Retrieve the data of a team based on his id and the specific year."
+      operationId: getYearTeamsTeamId
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - in: path
+          name: teamId
+          required: true
+          description: "Path parameter: teamId."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/{year}/teams:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve the list of the teams of the specific year"
+      description: "Retrieve the list of the teams of the specific year."
+      operationId: getYearTeams
+      parameters:
+        - in: path
+          name: year
+          required: true
+          description: "Season year (for example 2024)."
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/circuits/{circuitId}:
+    get:
+      tags:
+        - circuits
+      summary: "Retrieve data from /api/circuits/{circuitId}"
+      description: "Retrieve data from /api/circuits/{circuitId}."
+      operationId: getCircuitsCircuitId
+      parameters:
+        - in: path
+          name: circuitId
+          required: true
+          description: "Path parameter: circuitId."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/circuits:
+    get:
+      tags:
+        - circuits
+      summary: "Retrieve the list of all the F1 circuits"
+      description: "Retrieve the list of all the F1 circuits."
+      operationId: getCircuits
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/circuits/search:
+    get:
+      tags:
+        - circuits
+      summary: "Search with a q parameter for a circuit or a list of circuits"
+      description: "Search with a q parameter for a circuit or a list of circuits. Based on his name, city or country."
+      operationId: getCircuitsSearch
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/q'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/constructors-championship:
+    get:
+      tags:
+        - standings
+      summary: "Retrieve the constructors championship standing of the current season"
+      description: "Retrieve the constructors championship standing of the current season."
+      operationId: getCurrentConstructorsChampionship
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/drivers-championship:
+    get:
+      tags:
+        - standings
+      summary: "Retrieve the drivers championship standing of the current season"
+      description: "Retrieve the drivers championship standing of the current season."
+      operationId: getCurrentDriversChampionship
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/drivers/{driverId}:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve the results of the specific driver of the current year"
+      description: "Retrieve the results of the specific driver of the current year."
+      operationId: getCurrentDriversDriverId
+      parameters:
+        - in: path
+          name: driverId
+          required: true
+          description: "Path parameter: driverId."
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/drivers:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve the list of the drivers of the current year"
+      description: "Retrieve the list of the drivers of the current year."
+      operationId: getCurrentDrivers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/fp1:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the last free practice 1 of a race of the current year"
+      description: "Retrieve the information of the last free practice 1 of a race of the current year."
+      operationId: getCurrentLastFp1
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/fp2:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the last free practice 2 of a race of the current year"
+      description: "Retrieve the information of the last free practice 2 of a race of the current year."
+      operationId: getCurrentLastFp2
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/fp3:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the last free practice 3 of a race of the current year"
+      description: "Retrieve the information of the last free practice 3 of a race of the current year."
+      operationId: getCurrentLastFp3
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/qualy:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the last qualy of a race of the current year"
+      description: "Retrieve the information of the last qualy of a race of the current year."
+      operationId: getCurrentLastQualy
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/race:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the results of the last race of the current year"
+      description: "Retrieve the results of the last race of the current year."
+      operationId: getCurrentLastRace
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of the last race of the current year"
+      description: "Retrieve the information of the last race of the current year."
+      operationId: getCurrentLast
+      parameters:
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/sprint/qualy:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a sprint qualy (if exist) based on the year and the round"
+      description: "Retrieve the information of a sprint qualy (if exist) based on the year and the round."
+      operationId: getCurrentLastSprintQualy
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/last/sprint/race:
+    get:
+      tags:
+        - races
+      summary: "Retrieve the information of a sprint race (if exist) based on the year and the round"
+      description: "Retrieve the information of a sprint race (if exist) based on the year and the round."
+      operationId: getCurrentLastSprintRace
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/next:
+    get:
+      tags:
+        - seasons
+      summary: "Retrieve the information of the next race of the current year"
+      description: "Retrieve the information of the next race of the current year."
+      operationId: getCurrentNext
+      parameters:
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current:
+    get:
+      tags:
+        - seasons
+      summary: "Retrieve the races of the current year"
+      description: "Retrieve the races of the current year."
+      operationId: getCurrent
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/timezone'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/teams/{teamId}/drivers:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve a list of all the drivers of a team based on the teamId and the current year"
+      description: "Retrieve a list of all the drivers of a team based on the teamId and the current year."
+      operationId: getCurrentTeamsTeamIdDrivers
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          description: "Path parameter: teamId."
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/teams/{teamId}:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve the data of a team based on his id and the current year"
+      description: "Retrieve the data of a team based on his id and the current year."
+      operationId: getCurrentTeamsTeamId
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          description: "Path parameter: teamId."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/current/teams:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve the list of the teams of the current year"
+      description: "Retrieve the list of the teams of the current year."
+      operationId: getCurrentTeams
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/drivers/{driverId}:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve a driver using his id"
+      description: "Retrieve a driver using his id."
+      operationId: getDriversDriverId
+      parameters:
+        - in: path
+          name: driverId
+          required: true
+          description: "Path parameter: driverId."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/drivers:
+    get:
+      tags:
+        - drivers
+      summary: "Retrieve a list of all the Drivers who at least race one F1 race"
+      description: "Retrieve a list of all the Drivers who at least race one F1 race."
+      operationId: getDrivers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/drivers/search:
+    get:
+      tags:
+        - drivers
+      summary: "Search with a q parameter for a driver or a list of drivers"
+      description: "Search with a q parameter for a driver or a list of drivers. Based on his name or surname."
+      operationId: getDriversSearch
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/q'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/seasons:
+    get:
+      tags:
+        - seasons
+      summary: "Retrieve a list of all F1 Seasons, since the first one (1950) to the latest"
+      description: "Retrieve a list of all F1 Seasons, since the first one (1950) to the latest."
+      operationId: getSeasons
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/teams/{teamId}:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve a list of a team based on his id"
+      description: "Retrieve a list of a team based on his id."
+      operationId: getTeamsTeamId
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          description: "Path parameter: teamId."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/teams:
+    get:
+      tags:
+        - teams
+      summary: "Retrieve a list of all the teams that participated in Formula 1 races"
+      description: "Retrieve a list of all the teams that participated in Formula 1 races."
+      operationId: getTeams
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /api/teams/search:
+    get:
+      tags:
+        - teams
+      summary: "Search with a q parameter for a team or a list of teams"
+      description: "Search with a q parameter for a team or a list of teams. Based on his name."
+      operationId: getTeamsSearch
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/q'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+components:
+  parameters:
+    limit:
+      in: query
+      name: limit
+      required: false
+      description: Number of records to return. Min 1, max 100.
+      schema:
+        type: integer
+        default: 30
+        minimum: 1
+        maximum: 100
+    offset:
+      in: query
+      name: offset
+      required: false
+      description: Number of records to skip before collecting the response.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        maximum: 10000
+    q:
+      in: query
+      name: q
+      required: false
+      description: Search term used by search endpoints.
+      schema:
+        type: string
+    timezone:
+      in: query
+      name: timezone
+      required: false
+      description: IANA timezone identifier used to convert date/time fields (for example Europe/Madrid).
+      schema:
+        type: string
+        example: Europe/Madrid

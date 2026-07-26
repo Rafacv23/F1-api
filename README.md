@@ -17,6 +17,8 @@ Project made with Next.js and Turso to take all the data about the Formula 1 Cha
 
 You can find all the available endpoints in the [docs](https://f1api.dev/docs) section of the website.
 
+An OpenAPI YAML specification is also available in this repository at [`openapi.yaml`](openapi.yaml), so you can use tools like OpenAPI Generator directly.
+
 ## 🪄 Official SDK to use the API
 
 You can use the official SDK to use the API. This is not mandatory, you can simply use fetch to get the data.
