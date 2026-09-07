@@ -55,3 +55,4 @@ db/cache/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/.playwright-cli
